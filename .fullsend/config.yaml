@@ -4,14 +4,6 @@
 # This file configures fullsend for per-repo installation mode.
 # See ADR 0033 for details.
 version: "1"
-# The reusable workflow overlays upstream defaults onto the standard layered
-# directories before every run. Keep repo-owned agents under rhdh/ so their
-# harnesses and resources remain intact.
-agents:
-    - name: code
-      source: rhdh/harness/code.yaml
-    - name: fix
-      source: rhdh/harness/fix.yaml
 roles:
     - triage
     - coder
@@ -22,9 +14,12 @@ roles:
 allowed_remote_resources:
     - https://raw.githubusercontent.com/fullsend-ai/fullsend/
     - https://raw.githubusercontent.com/fullsend-ai/agents/
-    - https://github.com/redhat-developer/rhdh-skill/
 create_issues:
     allow_targets:
         repos:
-            - redhat-developer/rhdh-plugins
+            - rhdh-parasol/rhdh-plugins
             - fullsend-ai/fullsend
+mint_url: https://mint.fullsend.sh
+inference:
+    project: rhdh-sidekick-167988
+    wif_provider: projects/189673402608/locations/global/workloadIdentityPools/fullsend-inference/providers/gh-rhdh-parasol-rhdh-plugins
