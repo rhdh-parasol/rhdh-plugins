@@ -10,8 +10,10 @@ version: "1"
 agents:
     - name: code
       source: rhdh/harness/code.yaml
+      model: claude-opus-4-6
     - name: fix
       source: rhdh/harness/fix.yaml
+      model: claude-opus-4-6
 roles:
     - triage
     - coder
