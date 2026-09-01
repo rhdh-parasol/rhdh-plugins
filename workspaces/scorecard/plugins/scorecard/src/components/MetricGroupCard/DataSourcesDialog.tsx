@@ -16,7 +16,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { MetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { MetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { SortDescriptor } from '@backstage/ui';
 import {
   Dialog,

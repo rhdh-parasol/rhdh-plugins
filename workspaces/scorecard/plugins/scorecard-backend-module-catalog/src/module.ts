@@ -17,7 +17,7 @@ import {
   coreServices,
   createBackendModule,
 } from '@backstage/backend-plugin-api';
-import { scorecardMetricsExtensionPoint } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { scorecardMetricsExtensionPoint } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { createCatalogRequiredAttributesMetricProvider } from './metricProviders/CatalogRequiredAttributesMetricProvider';
 
 export const scorecardModuleCatalog = createBackendModule({

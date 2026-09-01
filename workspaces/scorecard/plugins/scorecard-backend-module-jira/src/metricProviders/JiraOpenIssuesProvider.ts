@@ -20,8 +20,8 @@ import type { Entity } from '@backstage/catalog-model';
 import {
   DEFAULT_NUMBER_THRESHOLDS,
   Metric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import {
   buildJqlFiltersFromEntity,
   OPEN_ISSUES_FILTER_ANNOTATIONS,

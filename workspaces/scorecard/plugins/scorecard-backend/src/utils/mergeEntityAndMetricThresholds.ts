@@ -19,12 +19,12 @@ import type {
   Metric,
   ThresholdConfig,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   validateThresholdsForMetric,
   ThresholdConfigFormatError,
   validateThresholdNumberIntervals,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { isError } from '@backstage/errors';
 
 const thresholdRulesAnnotationPrefix = (metricId: string) =>

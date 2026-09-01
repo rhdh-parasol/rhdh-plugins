@@ -30,7 +30,7 @@
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "new": "backstage-cli new --scope @red-hat-developer-hub",
+    "new": "backstage-cli new --scope @rhdh-parasol",
     "postinstall": "cd ../../ && yarn install"
   },
   "workspaces": {
@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-developer/rhdh-plugins",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
     "directory": "workspaces/scorecard"
   },
   "devDependencies": {

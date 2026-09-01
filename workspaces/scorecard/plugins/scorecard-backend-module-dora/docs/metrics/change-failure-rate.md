@@ -79,7 +79,7 @@ Available deployment collectors:
 
 For more information on the collectors above, see deployment collectors details in [scorecard-backend-module-github README](../../../scorecard-backend-module-github/README.md).
 
-**Important:** These collectors, even the default one, require that you have `@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github` installed.
+**Important:** These collectors, even the default one, require that you have `@rhdh-parasol/backstage-plugin-scorecard-backend-module-github` installed.
 
 #### Deployments collector contract
 
@@ -108,7 +108,7 @@ Available incidents collectors:
 
 For more information on the collector above, see incident collector details in [scorecard-backend-module-jira README](../../../scorecard-backend-module-jira/README.md).
 
-**Important:** This collector requires that you have `@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-jira` installed.
+**Important:** This collector requires that you have `@rhdh-parasol/backstage-plugin-scorecard-backend-module-jira` installed.
 
 Required entity annotations for the default `jira:incidents` collector:
 

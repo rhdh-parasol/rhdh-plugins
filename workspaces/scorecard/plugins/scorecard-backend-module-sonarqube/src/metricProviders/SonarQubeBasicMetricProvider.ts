@@ -17,7 +17,7 @@
 import {
   Metric,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';
 
 import { SonarQubeClient } from '../clients/SonarQubeClient';

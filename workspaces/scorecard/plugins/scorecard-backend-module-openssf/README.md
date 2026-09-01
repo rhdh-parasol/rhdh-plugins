@@ -7,7 +7,7 @@ Requires the [Scorecard backend plugin](../scorecard-backend/README.md) to be in
 ## Installation
 
 ```bash
-yarn workspace backend add @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-openssf
+yarn workspace backend add @rhdh-parasol/backstage-plugin-scorecard-backend-module-openssf
 ```
 
 ```ts
@@ -15,13 +15,9 @@ yarn workspace backend add @red-hat-developer-hub/backstage-plugin-scorecard-bac
 import { createBackend } from '@backstage/backend-defaults';
 
 const backend = createBackend();
+backend.add(import('@rhdh-parasol/backstage-plugin-scorecard-backend'));
 backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-scorecard-backend'),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-openssf'
-  ),
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-openssf'),
 );
 backend.start();
 ```

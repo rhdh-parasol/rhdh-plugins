@@ -19,7 +19,7 @@ import {
   aggregationTypes,
   ThresholdConfig,
   AggregationThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export interface Config {
   /** Configuration for scorecard plugin */

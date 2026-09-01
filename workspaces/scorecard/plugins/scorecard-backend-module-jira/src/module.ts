@@ -20,7 +20,7 @@ import {
 import {
   scorecardCollectorsExtensionPoint,
   scorecardMetricsExtensionPoint,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { JiraIncidentsCollector } from './collectors/JiraIncidentsCollector';
 import { JiraOpenIssuesProvider } from './metricProviders/JiraOpenIssuesProvider';
 import { JiraClientFactory } from './clients/JiraClientFactory';

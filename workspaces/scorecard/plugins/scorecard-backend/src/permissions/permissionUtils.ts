@@ -33,7 +33,7 @@ import type {
   PermissionsService,
 } from '@backstage/backend-plugin-api';
 
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { rules as scorecardRules } from './rules';
 

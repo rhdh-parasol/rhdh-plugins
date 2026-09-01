@@ -18,7 +18,7 @@ import { ActionsRegistryService } from '@backstage/backend-plugin-api/alpha';
 import { AuthorizeResult } from '@backstage/plugin-permission-common';
 import { catalogEntityReadPermission } from '@backstage/plugin-catalog-common/alpha';
 import { NotAllowedError } from '@backstage/errors';
-import { scorecardMetricReadPermission } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { scorecardMetricReadPermission } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { CatalogMetricService } from '../service/CatalogMetricService';
 import { authorizeConditional } from '../permissions/permissionUtils';
 

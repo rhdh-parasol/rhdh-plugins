@@ -18,7 +18,7 @@ import type { Config } from '@backstage/config';
 import {
   type ThresholdConfig,
   ScorecardThresholdRuleColors,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export type FilecheckEntry = {
   id: string;

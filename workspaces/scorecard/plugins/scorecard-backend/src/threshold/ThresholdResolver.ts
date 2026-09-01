@@ -19,11 +19,11 @@ import type { Entity } from '@backstage/catalog-model';
 import type {
   Metric,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   getThresholdsFromConfig,
   type MetricProvider,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { areThresholdAnnotationOverridesAllowed } from './thresholdAnnotations';
 import { mergeEntityAndMetricThresholds } from '../utils/mergeEntityAndMetricThresholds';
 import { resolveThresholdsConfigPath } from '../utils/metricProviderConfigKeys';

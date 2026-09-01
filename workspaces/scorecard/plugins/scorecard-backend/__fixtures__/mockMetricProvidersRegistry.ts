@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { MetricProvidersRegistry } from '../src/providers/MetricProvidersRegistry';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export const mockMetricProvidersRegistry = {
   register: jest.fn(),

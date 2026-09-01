@@ -52,7 +52,7 @@ Validation **does not** require full coverage when:
 ### 1. Metric Default Thresholds
 
 Each metric returned by `getMetrics()` must include default `thresholds` that apply to all entities using that metric.
-Plugin `@red-hat-developer-hub/backstage-plugin-scorecard-common` provides pre-defined `DEFAULT_NUMBER_THRESHOLDS` which you can import and use on your metrics.
+Plugin `@rhdh-parasol/backstage-plugin-scorecard-common` provides pre-defined `DEFAULT_NUMBER_THRESHOLDS` which you can import and use on your metrics.
 
 **Example Provider Implementation:**
 
@@ -473,7 +473,7 @@ The `ThresholdEvaluator` service processes threshold rules and determines which 
 1. **Order-dependent evaluation**: Rules are evaluated in the order they appear. If provider supports overriding defaults through [app configuration](#App-Configuration-Thresholds), you can change the evaluation order by specifying threshold keys in a different order. Entity annotations cannot alter the evaluation order, which is determined by either the [app configuration](#Provider-Default-Thresholds) or, if not specified, the [default provider configuration](#Provider-Default-Thresholds).
 2. **First-match wins**: Returns the first threshold rule whose condition the value satisfies
 3. **Type-safe**: Validates expressions against metric types
-4. **Error handling**: Thresholds from providers and custom thresholds from configuration are validated on startup (using [validateThresholdsForMetric](../../scorecard-node/src/utils/thresholds/validateThresholds.ts) from `@red-hat-developer-hub/backstage-plugin-scorecard-node`). Threshold errors caused by invalid providers or invalid configuration cause startup failures. Annotation-based threshold errors are reported in the UI at evaluation time.
+4. **Error handling**: Thresholds from providers and custom thresholds from configuration are validated on startup (using [validateThresholdsForMetric](../../scorecard-node/src/utils/thresholds/validateThresholds.ts) from `@rhdh-parasol/backstage-plugin-scorecard-node`). Threshold errors caused by invalid providers or invalid configuration cause startup failures. Annotation-based threshold errors are reported in the UI at evaluation time.
 
 ### Best Practices
 

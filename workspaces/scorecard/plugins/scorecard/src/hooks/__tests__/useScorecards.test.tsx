@@ -18,7 +18,7 @@ import useAsync from 'react-use/lib/useAsync';
 import { renderHook } from '@testing-library/react';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { useApi } from '@backstage/core-plugin-api';
-import { MetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { MetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { useScorecards } from '../useScorecards';
 

@@ -47,7 +47,7 @@ Add the module to your backend:
 ```ts
 backend.add(
   import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-code-coverage'
+    '@rhdh-parasol/backstage-plugin-scorecard-backend-module-code-coverage'
   ),
 );
 ```

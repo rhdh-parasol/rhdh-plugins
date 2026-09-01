@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { type StatusScoreAggregationOption } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { type StatusScoreAggregationOption } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { Config } from '@backstage/config';
 
 export function buildAggregationStatusScores(

@@ -1,20 +1,20 @@
-# @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-jira
+# @rhdh-parasol/backstage-plugin-scorecard-backend-module-jira
 
 ## 4.2.0
 
 ### Patch Changes
 
 - Updated dependencies [e486f80]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.2.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@4.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@4.2.0
 
 ## 4.1.0
 
 ### Patch Changes
 
 - Updated dependencies [3af0fb2]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.1.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@4.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@4.1.0
 
 ## 4.0.0
 
@@ -67,15 +67,15 @@
 ### Patch Changes
 
 - Updated dependencies [8c14679]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.0.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@4.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@4.0.0
 
 ## 3.0.1
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@3.0.1
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@3.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-common@3.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@3.0.1
 
 ## 3.0.0
 
@@ -96,16 +96,16 @@
 - Updated dependencies [c7f89e7]
 - Updated dependencies [50447ac]
 - Updated dependencies [6ea1575]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@3.0.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@3.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@3.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@3.0.0
 
 ## 2.8.1
 
 ### Patch Changes
 
 - 7ead71c: Correct default threshold documentation and add missing threshold documentation in scorecard backend module READMEs to match provider code defaults.
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.8.1
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.8.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.8.1
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.8.1
 
 ## 2.8.0
 
@@ -117,15 +117,15 @@
 
 - Updated dependencies [efb4c4f]
 - Updated dependencies [8c85bd4]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.8.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.8.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.8.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.8.0
 
 ## 2.7.9
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.9
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.9
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.9
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.9
 
 ## 2.7.8
 
@@ -137,22 +137,22 @@
   `scorecard.plugins.<providerId>.thresholds`. Provider IDs typically
   follow the format `<datasource>.<metric>`.
 - Updated dependencies [6699550]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.8
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.8
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.8
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.8
 
 ## 2.7.7
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.7
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.7
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.7
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.7
 
 ## 2.7.6
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.6
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.6
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.6
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.6
 
 ## 2.7.5
 
@@ -169,15 +169,15 @@
   Previously **`averageScore`** was a **normalized ratio in \[0, 1\]** (rounded to **three** decimal places). Any consumer that treated the old value as a fraction and multiplied by **100** for display, or compared it to thresholds on a 0–100 scale without converting, must **stop scaling**: use **`averageScore`** directly as the percentage. If you stored historical API payloads, recompute or re-fetch rather than assuming the old fractional scale.
 
 - Updated dependencies [5115044]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.5
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.5
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.5
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.5
 
 ## 2.7.4
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.4
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.4
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.4
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.4
 
 ## 2.7.3
 
@@ -185,53 +185,53 @@
 
 - 5148408: Migrated to Jest 30 as required by @backstage/cli 0.36.0.
 - Updated dependencies [5148408]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.3
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.3
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.3
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.3
 
 ## 2.7.2
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.2
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.2
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.2
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.2
 
 ## 2.7.1
 
 ### Patch Changes
 
 - Updated dependencies [91e724f]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.1
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.1
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.1
 
 ## 2.7.0
 
 ### Patch Changes
 
 - Updated dependencies [bf72ffc]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.0
 
 ## 2.6.0
 
 ### Patch Changes
 
 - Updated dependencies [4ecaacd]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.6.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.6.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.6.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.6.0
 
 ## 2.5.2
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.5.2
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.5.2
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.5.2
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.5.2
 
 ## 2.5.1
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.5.1
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.5.1
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.5.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.5.1
 
 ## 2.5.0
 
@@ -245,8 +245,8 @@
 - Updated dependencies [55226c2]
 - Updated dependencies [243ad0a]
 - Updated dependencies [c83b206]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.5.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.5.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.5.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.5.0
 
 ## 2.4.0
 
@@ -254,45 +254,45 @@
 
 - Updated dependencies [7062658]
 - Updated dependencies [dc5e31a]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.4.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.4.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.4.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.4.0
 
 ## 2.3.5
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.5
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.3.5
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.3.5
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.3.5
 
 ## 2.3.4
 
 ### Patch Changes
 
 - Updated dependencies [4a3369f]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.4
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.3.4
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.4
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.3.4
 
 ## 2.3.3
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.3
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.3.3
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.3.3
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.3.3
 
 ## 2.3.2
 
 ### Patch Changes
 
 - 1f0b3b7: Include the missing config.d.ts files under the files section defined within the package.json
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.2
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.3.2
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.2
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.3.2
 
 ## 2.3.1
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.1
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.3.1
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.3.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.3.1
 
 ## 2.3.0
 
@@ -300,8 +300,8 @@
 
 - Updated dependencies [52b60ee]
 - Updated dependencies [4e360d5]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.3.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.3.0
 
 ## 2.2.0
 
@@ -337,8 +337,8 @@
 
 - Updated dependencies [f8fb8e4]
 - Updated dependencies [4c2261f]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.2.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.2.0
 
 ## 2.1.0
 
@@ -349,15 +349,15 @@
 ### Patch Changes
 
 - Updated dependencies [54465f3]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.1.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.1.0
 
 ## 2.0.1
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.0.1
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.0.1
 
 ## 2.0.0
 
@@ -385,16 +385,16 @@
 ### Patch Changes
 
 - Updated dependencies [5d447f1]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.0.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.0.0
 
 ## 1.0.1
 
 ### Patch Changes
 
 - Updated dependencies [6709132]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@1.0.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@1.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@1.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@1.0.0
 
 ## 1.0.0
 
@@ -424,5 +424,5 @@
 ### Patch Changes
 
 - Updated dependencies [b5ec15c]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@0.1.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@0.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@0.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@0.1.0

@@ -17,7 +17,7 @@
 import type {
   EntityMetricDetail,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';

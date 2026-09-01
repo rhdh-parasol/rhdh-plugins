@@ -20,8 +20,8 @@ import {
   MockBooleanProvider,
 } from '../../__fixtures__/mockProviders';
 import { mergeEntityAndMetricThresholds } from './mergeEntityAndMetricThresholds';
-import { ThresholdConfigFormatError } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { ThresholdConfigFormatError } from '@rhdh-parasol/backstage-plugin-scorecard-node';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 const numberMetricThresholds = {
   rules: [

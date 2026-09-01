@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { AggregatedMetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { AggregatedMetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { AggregationOptions } from '../types';
 
 export interface AggregationStrategy {

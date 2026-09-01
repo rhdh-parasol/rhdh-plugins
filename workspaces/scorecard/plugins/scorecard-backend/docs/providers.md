@@ -32,10 +32,10 @@ This will then create a simple backend plugin module that is ready to be updated
 
 ## Creating the Metric Provider
 
-Add the dependencies `@red-hat-developer-hub/backstage-plugin-scorecard-node` and `@red-hat-developer-hub/backstage-plugin-scorecard-common` to your newly created backend module using:
+Add the dependencies `@rhdh-parasol/backstage-plugin-scorecard-node` and `@rhdh-parasol/backstage-plugin-scorecard-common` to your newly created backend module using:
 
 ```bash
-yarn --cwd plugins/scorecard-backend-module-my-datasource add @red-hat-developer-hub/backstage-plugin-scorecard-node @red-hat-developer-hub/backstage-plugin-scorecard-common
+yarn --cwd plugins/scorecard-backend-module-my-datasource add @rhdh-parasol/backstage-plugin-scorecard-node @rhdh-parasol/backstage-plugin-scorecard-common
 ```
 
 Create the metric provider in the newly created plugin module `/plugins/scorecard-backend-module-my-datasource/src/metricProviders/MyMetricProvider.ts` and populate it with the following:
@@ -46,8 +46,8 @@ import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';
 import {
   DEFAULT_NUMBER_THRESHOLDS,
   Metric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 export class MyMetricProvider implements MetricProvider<'number'> {
   getProviderDatasourceId(): string {
@@ -110,7 +110,7 @@ Update the module registration in `module.ts` to register your metric provider:
 
 ```typescript
 import { createBackendModule } from '@backstage/backend-plugin-api';
-import { scorecardMetricsExtensionPoint } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { scorecardMetricsExtensionPoint } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { MyMetricProvider } from './metricProviders/MyMetricProvider';
 
 export const scorecardModuleMyDatasource = createBackendModule({
@@ -136,13 +136,13 @@ Your backend module can register multiple metric providers.
 Install the provider and add it to `packages/backend/src/index.ts`:
 
 ```bash
-yarn --cwd packages/backend add @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-my-datasource
+yarn --cwd packages/backend add @rhdh-parasol/backstage-plugin-scorecard-backend-module-my-datasource
 ```
 
 ```typescript
 backend.add(
   import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-my-datasource'
+    '@rhdh-parasol/backstage-plugin-scorecard-backend-module-my-datasource'
   ),
 );
 ```

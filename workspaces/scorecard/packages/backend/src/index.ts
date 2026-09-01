@@ -59,53 +59,35 @@ backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 // kubernetes
 backend.add(import('@backstage/plugin-kubernetes-backend'));
 
+backend.add(import('@rhdh-parasol/backstage-plugin-scorecard-backend'));
 backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-scorecard-backend'),
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-github'),
+);
+backend.add(
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-jira'),
+);
+backend.add(
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-catalog'),
+);
+backend.add(
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-filecheck'),
+);
+backend.add(
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-openssf'),
+);
+backend.add(
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-dependabot'),
+);
+backend.add(
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-sonarqube'),
 );
 backend.add(
   import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github'
+    '@rhdh-parasol/backstage-plugin-scorecard-backend-module-code-coverage'
   ),
 );
 backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-jira'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-catalog'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-filecheck'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-openssf'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-dependabot'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-sonarqube'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-code-coverage'
-  ),
-);
-backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-dora'
-  ),
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-dora'),
 );
 backend.add(import('@backstage/plugin-mcp-actions-backend'));
 backend.start();

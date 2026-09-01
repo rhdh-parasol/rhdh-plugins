@@ -17,7 +17,7 @@
 import {
   ScorecardCollectorsService,
   Collector,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 export function buildMockCollectorsService(options: {
   collectors: Collector[];

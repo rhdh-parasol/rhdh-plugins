@@ -19,8 +19,8 @@ import type {
   MetricType,
   ThresholdConfig,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { SCORECARD_THRESHOLD_RULE_COLOR_VALUES } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { SCORECARD_THRESHOLD_RULE_COLOR_VALUES } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { ThresholdConfigFormatError } from '../../errors';
 import { parseThresholdExpression } from './parseThresholdExpression';
 import { validateThresholdNumberIntervals } from './intervals/validateThresholdNumberIntervals';

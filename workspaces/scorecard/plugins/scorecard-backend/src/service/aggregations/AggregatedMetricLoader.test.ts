@@ -20,7 +20,7 @@ import { AggregatedMetricMapper } from '../mappers';
 import {
   AggregatedMetric,
   ScalarAggregatedMetric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 describe('AggregatedMetricLoader', () => {
   afterEach(() => {

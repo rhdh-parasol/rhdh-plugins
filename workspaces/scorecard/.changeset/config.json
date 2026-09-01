@@ -4,12 +4,12 @@
   "commit": false,
   "fixed": [
     [
-      "@red-hat-developer-hub/backstage-plugin-scorecard",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-backend",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-jira",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-common",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-node"
+      "@rhdh-parasol/backstage-plugin-scorecard",
+      "@rhdh-parasol/backstage-plugin-scorecard-backend",
+      "@rhdh-parasol/backstage-plugin-scorecard-backend-module-github",
+      "@rhdh-parasol/backstage-plugin-scorecard-backend-module-jira",
+      "@rhdh-parasol/backstage-plugin-scorecard-common",
+      "@rhdh-parasol/backstage-plugin-scorecard-node"
     ]
   ],
   "linked": [],

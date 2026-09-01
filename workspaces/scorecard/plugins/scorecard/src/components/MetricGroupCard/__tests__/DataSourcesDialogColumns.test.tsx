@@ -16,7 +16,7 @@
 
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import type { MetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { MetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { mockT } from '../../../test-utils/mockTranslations';
 import {

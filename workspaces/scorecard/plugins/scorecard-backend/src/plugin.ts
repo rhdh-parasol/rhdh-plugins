@@ -27,11 +27,11 @@ import {
   scorecardCollectorsExtensionPoint,
   scorecardCollectorsServiceRef,
   scorecardMetricsExtensionPoint,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { MetricProvidersRegistry } from './providers/MetricProvidersRegistry';
 import { CatalogMetricService } from './service/CatalogMetricService';
 import { ThresholdEvaluator } from './threshold/ThresholdEvaluator';
-import { scorecardPermissions } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { scorecardPermissions } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   scorecardMetricPermissionResourceRef,
   rules as scorecardRules,

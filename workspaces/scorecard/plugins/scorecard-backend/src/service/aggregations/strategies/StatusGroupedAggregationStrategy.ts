@@ -18,7 +18,7 @@ import {
   aggregationTypes,
   type AggregatedMetricResult,
   type StatusGroupedAggregationResult,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { AggregatedMetricMapper } from '../../mappers';
 import type { AggregatedMetricLoader } from '../AggregatedMetricLoader';
 import type { AggregationOptions } from '../types';

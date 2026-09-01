@@ -20,7 +20,7 @@ import { useAggregatedScorecard } from '../../hooks/useAggregatedScorecard';
 import { useTranslation } from '../../hooks/useTranslation';
 import { ErrorStatePanel } from './ErrorStatePanel';
 import { EmptyStatePanel } from './EmptyStatePanel';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { useMetricDisplayLabels } from '../../hooks/useMetricDisplayLabels';
 import { CardLoading } from '../Common/CardLoading';
 

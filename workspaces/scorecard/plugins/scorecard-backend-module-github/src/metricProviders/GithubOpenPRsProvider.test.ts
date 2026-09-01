@@ -19,7 +19,7 @@ import { ConfigReader } from '@backstage/config';
 import type { Entity } from '@backstage/catalog-model';
 import { GithubOpenPRsProvider } from './GithubOpenPRsProvider';
 import { GithubClient } from '../github/GithubClient';
-import { DEFAULT_NUMBER_THRESHOLDS } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { DEFAULT_NUMBER_THRESHOLDS } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 jest.mock('@backstage/catalog-model', () => ({
   ...jest.requireActual('@backstage/catalog-model'),

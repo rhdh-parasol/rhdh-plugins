@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { createBackendModule } from '@backstage/backend-plugin-api';
-import { scorecardMetricsExtensionPoint } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { scorecardMetricsExtensionPoint } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { createOpenSSFMetricProvider } from './metricProviders/OpenSSFMetricProvider';
 
 export const scorecardOpenSFFModule = createBackendModule({

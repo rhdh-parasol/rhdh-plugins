@@ -15,12 +15,12 @@
  */
 
 import { ConflictError, NotFoundError } from '@backstage/errors';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   MetricProvider,
   ThresholdConfigFormatError,
   validateThresholdsForMetric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import {
   validateMetricId,
   validateProviderId,

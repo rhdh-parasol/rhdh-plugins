@@ -16,7 +16,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useApi } from '@backstage/core-plugin-api';
-import type { EntityMetricDetailResponse } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { EntityMetricDetailResponse } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { scorecardApiRef } from '../api';
 import { useTranslation } from './useTranslation';

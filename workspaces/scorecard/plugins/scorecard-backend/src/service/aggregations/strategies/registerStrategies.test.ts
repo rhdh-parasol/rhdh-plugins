@@ -18,7 +18,7 @@ import { mockServices } from '@backstage/backend-test-utils';
 import {
   aggregationTypes,
   scalarAggregationTypes,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { AggregatedMetricLoader } from '../AggregatedMetricLoader';
 import { createAggregationStrategyRegistry } from './registerStrategies';
 import { StatusGroupedAggregationStrategy } from './StatusGroupedAggregationStrategy';

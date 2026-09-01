@@ -1,5 +1,5 @@
 {
-  "name": "@red-hat-developer-hub/backstage-plugin-scorecard",
+  "name": "@rhdh-parasol/backstage-plugin-scorecard",
   "version": "4.2.0",
   "license": "Apache-2.0",
   "main": "src/index.ts",
@@ -32,17 +32,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-developer/rhdh-plugins",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
     "directory": "workspaces/scorecard/plugins/scorecard"
   },
   "backstage": {
     "role": "frontend-plugin",
     "pluginId": "scorecard",
     "pluginPackages": [
-      "@red-hat-developer-hub/backstage-plugin-scorecard",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-backend",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-common",
-      "@red-hat-developer-hub/backstage-plugin-scorecard-node"
+      "@rhdh-parasol/backstage-plugin-scorecard",
+      "@rhdh-parasol/backstage-plugin-scorecard-backend",
+      "@rhdh-parasol/backstage-plugin-scorecard-common",
+      "@rhdh-parasol/backstage-plugin-scorecard-node"
     ]
   },
   "sideEffects": false,
@@ -73,7 +73,7 @@
     "@mui/icons-material": "5.18.0",
     "@mui/lab": "5.0.0-alpha.177",
     "@mui/material": "5.18.0",
-    "@red-hat-developer-hub/backstage-plugin-scorecard-common": "workspace:^",
+    "@rhdh-parasol/backstage-plugin-scorecard-common": "workspace:^",
     "@tanstack/react-query": "^5.95.2",
     "date-fns": "^4.1.0",
     "react-use": "^17.2.4",
@@ -104,7 +104,7 @@
     "react-dom": "^16.13.1 || ^17.0.0 || ^18.0.0"
   },
   "scalprum": {
-    "name": "red-hat-developer-hub.backstage-plugin-scorecard",
+    "name": "rhdh-parasol.backstage-plugin-scorecard",
     "exposedModules": {
       "PluginRoot": "./src/index.ts",
       "Legacy": "./src/legacyExports.ts",

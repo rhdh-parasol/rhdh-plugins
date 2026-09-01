@@ -18,7 +18,7 @@ import type { Config } from '@backstage/config';
 import {
   aggregationTypes,
   type AggregationConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { isScalarAggregationType } from './isScalarAggregationType';
 import { buildAggregationConfigThresholds } from './buildAggregationConfigThresholds';
 import { buildAggregationStatusScores } from './buildAggregationStatusScores';

@@ -16,7 +16,7 @@
 
 import type { Config } from '@backstage/config';
 import { InputError } from '@backstage/errors';
-import { aggregationTypes } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { aggregationTypes } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { validateAggregationConfig } from './validateAggregationConfig';
 import { MetricProvidersRegistry } from '../providers/MetricProvidersRegistry';
 import { ThresholdResolver } from '../threshold/ThresholdResolver';

@@ -15,7 +15,7 @@
  */
 
 import type { Config } from '@backstage/config';
-import type { ThresholdConfig } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { ThresholdConfig } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export function buildAggregationConfigThresholds(
   config: Config,

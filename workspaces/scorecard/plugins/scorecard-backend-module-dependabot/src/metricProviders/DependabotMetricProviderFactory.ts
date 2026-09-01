@@ -17,7 +17,7 @@ import { DependabotMetricProvider } from './DependabotMetricProvider';
 import { DependabotSeverity, DEPENDABOT_SEVERITIES } from './DependabotConfig';
 import { Config } from '@backstage/config';
 import { LoggerService } from '@backstage/backend-plugin-api';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 /**
  * Creates a single Dependabot metric provider for the given severity.

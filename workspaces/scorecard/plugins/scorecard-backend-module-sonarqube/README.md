@@ -22,16 +22,14 @@ Adds SonarQube / SonarCloud metrics to the scorecard plugin.
 ## Installation
 
 ```bash
-yarn workspace backend add @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-sonarqube
+yarn workspace backend add @rhdh-parasol/backstage-plugin-scorecard-backend-module-sonarqube
 ```
 
 Then register the module in your backend:
 
 ```ts
 backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-sonarqube'
-  ),
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-sonarqube'),
 );
 ```
 

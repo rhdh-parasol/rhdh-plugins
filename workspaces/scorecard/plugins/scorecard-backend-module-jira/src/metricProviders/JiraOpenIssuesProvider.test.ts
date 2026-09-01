@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DEFAULT_NUMBER_THRESHOLDS } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { DEFAULT_NUMBER_THRESHOLDS } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   newEntityComponent,
   newMockRootConfig,

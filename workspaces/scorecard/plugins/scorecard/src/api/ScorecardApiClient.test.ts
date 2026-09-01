@@ -15,7 +15,7 @@
  */
 
 import { ScorecardApiClient } from './index';
-import type { MetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { MetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 describe('ScorecardApiClient', () => {
   const discoveryApi = {

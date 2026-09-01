@@ -20,7 +20,7 @@ import {
   type AggregatedMetricResult,
   type AggregationType,
   aggregationTypes,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { Config } from '@backstage/config';
 import { AGGREGATION_KPIS_CONFIG_PATH } from '../../constants';
 import { buildAggregationConfig } from '../../utils/aggregation/buildAggregationConfig';

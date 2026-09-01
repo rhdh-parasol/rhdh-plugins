@@ -18,7 +18,7 @@ import type {
   AggregatedMetric,
   AggregationConfigFilter,
   ScalarAggregatedMetric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { DatabaseMetricValues } from '../../database/DatabaseMetricValues';
 import type { ScalarAggregationFn } from '../../database/types';
 import { AggregatedMetricMapper } from '../mappers';

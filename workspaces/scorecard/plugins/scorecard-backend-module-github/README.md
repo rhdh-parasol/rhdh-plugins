@@ -14,7 +14,7 @@ To install this backend module:
 
 ```bash
 # From your root directory
-yarn workspace backend add @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github
+yarn workspace backend add @rhdh-parasol/backstage-plugin-scorecard-backend-module-github
 ```
 
 ```ts
@@ -24,16 +24,12 @@ import { createBackend } from '@backstage/backend-defaults';
 const backend = createBackend();
 
 // Scorecard backend plugin
-backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-scorecard-backend'),
-);
+backend.add(import('@rhdh-parasol/backstage-plugin-scorecard-backend'));
 
 // Install the GitHub module
 /* highlight-add-next-line */
 backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github'
-  ),
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-github'),
 );
 
 backend.start();

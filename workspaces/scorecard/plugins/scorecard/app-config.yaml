@@ -1,6 +1,6 @@
 dynamicPlugins:
   frontend:
-    red-hat-developer-hub.backstage-plugin-scorecard:
+    rhdh-parasol.backstage-plugin-scorecard:
       # Legacy exports require `module: Legacy` — they are not available on the default module.
       translationResources:
         - importName: scorecardTranslations

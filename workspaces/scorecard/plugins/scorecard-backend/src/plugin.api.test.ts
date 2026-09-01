@@ -21,7 +21,7 @@ import {
 } from '@backstage/backend-test-utils';
 import { createBackendModule } from '@backstage/backend-plugin-api';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';
-import { scorecardMetricsExtensionPoint } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { scorecardMetricsExtensionPoint } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { scorecardPlugin } from './plugin';
 import {
   MockNumberProvider,

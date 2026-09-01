@@ -15,7 +15,7 @@
  */
 
 import type { Entity } from '@backstage/catalog-model';
-import type { Collector } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import type { Collector } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { z } from 'zod';
 import {
   buildJqlFiltersFromEntity,

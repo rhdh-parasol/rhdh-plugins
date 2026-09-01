@@ -19,7 +19,7 @@ import {
 } from '@backstage/backend-plugin-api';
 
 const migrationsDir = resolvePackagePath(
-  '@red-hat-developer-hub/backstage-plugin-scorecard-backend',
+  '@rhdh-parasol/backstage-plugin-scorecard-backend',
   'migrations',
 );
 

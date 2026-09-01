@@ -73,7 +73,7 @@ Available deployment collectors:
 
 For more information on the collectors above, see deployment collectors details in [scorecard-backend-module-github README](../../../scorecard-backend-module-github/README.md).
 
-**Important:** These collectors, even the default one, require that you have `@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github` installed.
+**Important:** These collectors, even the default one, require that you have `@rhdh-parasol/backstage-plugin-scorecard-backend-module-github` installed.
 
 Required entity annotations for default GitHub deployment collectors:
 
@@ -110,7 +110,7 @@ Available pull request collectors:
 
 For more information on the collector above, see collector details in [scorecard-backend-module-github README](../../../scorecard-backend-module-github/README.md).
 
-**Important:** This collector requires that you have `@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github` installed.
+**Important:** This collector requires that you have `@rhdh-parasol/backstage-plugin-scorecard-backend-module-github` installed.
 
 Required entity annotations for default `github:deploymentPullRequests` collector:
 

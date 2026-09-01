@@ -15,7 +15,7 @@
  */
 
 import { Entity, stringifyEntityRef } from '@backstage/catalog-model';
-import { ThresholdConfig } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { ThresholdConfig } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export const SONARQUBE_PROJECT_KEY_ANNOTATION = 'sonarqube.org/project-key';
 

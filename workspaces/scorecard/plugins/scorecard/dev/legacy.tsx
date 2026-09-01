@@ -40,7 +40,7 @@ import type {
   Metric,
   EntityMetricDetailResponse,
   AggregationMetadata,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { CatalogEntityPage } from '@backstage/plugin-catalog';
 
 import Box from '@mui/material/Box';

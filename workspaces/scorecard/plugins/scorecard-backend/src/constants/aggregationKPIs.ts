@@ -17,7 +17,7 @@
 import {
   type ThresholdConfig,
   ScorecardThresholdRuleColors,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export const AGGREGATION_KPIS_CONFIG_PATH =
   'scorecard.aggregationKPIs' as const;

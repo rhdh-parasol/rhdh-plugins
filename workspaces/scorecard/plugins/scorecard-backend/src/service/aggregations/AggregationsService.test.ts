@@ -15,7 +15,7 @@
  */
 
 import { mockServices } from '@backstage/backend-test-utils';
-import { aggregationTypes } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { aggregationTypes } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { AggregationsService } from './AggregationsService';
 import type { DatabaseMetricValues } from '../../database/DatabaseMetricValues';
 import {

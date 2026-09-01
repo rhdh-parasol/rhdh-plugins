@@ -18,7 +18,7 @@ import { mockServices } from '@backstage/backend-test-utils';
 import {
   aggregationTypes,
   ScorecardThresholdRuleColors,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { AGGREGATION_KPIS_CONFIG_PATH } from '../../constants';
 import { buildAggregationConfigThresholds } from './buildAggregationConfigThresholds';
 

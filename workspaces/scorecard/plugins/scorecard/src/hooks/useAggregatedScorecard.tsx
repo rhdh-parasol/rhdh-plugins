@@ -19,7 +19,7 @@ import { useApi } from '@backstage/core-plugin-api';
 import { scorecardApiRef } from '../api';
 import { useTranslation } from './useTranslation';
 import { UseResponseData } from './types';
-import { AggregatedMetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { AggregatedMetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 interface UseAggregatedScorecardOptions {
   aggregationId: string;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Collector } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { Collector } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import {
   Deployment,
   deploymentsCollectorInputSchema,

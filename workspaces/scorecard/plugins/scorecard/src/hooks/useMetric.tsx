@@ -16,7 +16,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useApi } from '@backstage/core-plugin-api';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { useTranslation } from './useTranslation';
 import { scorecardApiRef } from '../api';

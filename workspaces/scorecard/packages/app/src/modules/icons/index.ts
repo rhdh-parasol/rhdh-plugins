@@ -21,7 +21,7 @@ import {
   ScorecardErrorStatusIcon,
   ScorecardSuccessStatusIcon,
   ScorecardWarningStatusIcon,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard/legacy';
+} from '@rhdh-parasol/backstage-plugin-scorecard/legacy';
 
 export const iconsModule = createFrontendModule({
   pluginId: 'app',

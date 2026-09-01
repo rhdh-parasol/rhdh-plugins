@@ -10,7 +10,7 @@ Use collectors when:
 
 ## Core APIs
 
-Collector APIs are provided by `@red-hat-developer-hub/backstage-plugin-scorecard-node`:
+Collector APIs are provided by `@rhdh-parasol/backstage-plugin-scorecard-node`:
 
 - `Collector`
 - `CollectorContract`
@@ -30,7 +30,7 @@ Implement `Collector` with an input schema, output schema, and collect function:
 
 ```ts
 import type { Entity } from '@backstage/catalog-model';
-import type { Collector } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import type { Collector } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { z } from 'zod';
 
 export class CustomDeploymentsCollector
@@ -88,7 +88,7 @@ Register collectors through `scorecardCollectorsExtensionPoint`:
 
 ```ts
 import { createBackendModule } from '@backstage/backend-plugin-api';
-import { scorecardCollectorsExtensionPoint } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { scorecardCollectorsExtensionPoint } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { CustomDeploymentsCollector } from './collectors/CustomDeploymentsCollector';
 
 export const scorecardModuleCustomDatasource = createBackendModule({
@@ -116,7 +116,7 @@ import { createBackendModule } from '@backstage/backend-plugin-api';
 import {
   scorecardCollectorsServiceRef,
   scorecardMetricsExtensionPoint,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { MyMetricProvider } from './metricProviders/MyMetricProvider';
 
 export const scorecardModuleOtherDatasource = createBackendModule({
@@ -143,7 +143,7 @@ import type { Entity } from '@backstage/catalog-model';
 import {
   type ScorecardCollectorsService,
   type MetricProvider,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { z } from 'zod';
 
 const inputSchema = z.object({

@@ -20,7 +20,7 @@ import {
 import {
   scorecardCollectorsServiceRef,
   scorecardMetricsExtensionPoint,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { DoraChangeFailureRateProvider } from './metricProviders/DoraChangeFailureRateProvider';
 import { DoraDeploymentFrequencyProvider } from './metricProviders/DoraDeploymentFrequencyProvider';
 import { DoraMedianLeadTimeForChangesProvider } from './metricProviders/DoraMedianLeadTimeForChangesProvider';

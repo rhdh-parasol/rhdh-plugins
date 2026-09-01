@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { MetricValue } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { MetricValue } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export type DbMetricValueCreate = {
   catalogEntityRef: string;
