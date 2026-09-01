@@ -18,7 +18,7 @@ import type { Config } from '@backstage/config';
 import {
   MetricType,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { validateThresholdsForMetric } from './validateThresholds';
 import { ThresholdConfigFormatError } from '../../errors';
 

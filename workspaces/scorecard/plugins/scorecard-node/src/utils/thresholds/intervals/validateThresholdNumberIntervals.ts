@@ -17,7 +17,7 @@
 import {
   MetricType,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { areAllRulesDiscreteNumberEquals } from './areAllRulesDiscreteNumberEquals';
 import { NumberInterval } from './types';
 import { parseThresholdExpression } from '../parseThresholdExpression';

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { ThresholdRule } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { ThresholdRule } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { parseThresholdExpression } from '../parseThresholdExpression';
 
 /**

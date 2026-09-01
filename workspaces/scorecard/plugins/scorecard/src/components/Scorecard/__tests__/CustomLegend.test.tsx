@@ -15,7 +15,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { ThresholdResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { ThresholdResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { useTheme } from '@mui/material/styles';
 import CustomLegend from '../CustomLegend';
 

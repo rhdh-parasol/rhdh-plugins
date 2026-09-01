@@ -16,7 +16,7 @@
 
 import { mockServices } from '@backstage/backend-test-utils';
 import { PullMetricsByProviderTask } from './PullMetricsByProviderTask';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';
 import {
   MockNumberProvider,

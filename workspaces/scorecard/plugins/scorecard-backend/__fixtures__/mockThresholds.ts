@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ThresholdConfig } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { ThresholdConfig } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 /** Success when value is >= 80; error otherwise. */
 export const mockHigherIsBetterThresholds = {

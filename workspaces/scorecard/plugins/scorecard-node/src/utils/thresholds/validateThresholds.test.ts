@@ -22,7 +22,7 @@ import { ThresholdConfigFormatError } from '../../errors';
 import {
   ScorecardThresholdRuleColors,
   type ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 describe('validateThresholds', () => {
   describe('validateThresholds - valid configs', () => {

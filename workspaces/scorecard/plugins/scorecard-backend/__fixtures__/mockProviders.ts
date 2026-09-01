@@ -21,8 +21,8 @@ import {
   MetricType,
   MetricValue,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 type CatalogFilterValue = string | symbol | (string | symbol)[];
 

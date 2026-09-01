@@ -15,7 +15,7 @@
  */
 
 import { SchedulerServiceTaskScheduleDefinitionConfig } from '@backstage/backend-plugin-api';
-import { ThresholdConfig } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { ThresholdConfig } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export interface Config {
   /** Configuration for scorecard plugin */

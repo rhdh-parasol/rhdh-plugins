@@ -38,7 +38,7 @@ import {
   Metric,
   MetricResult,
   MetricTimeSeriesResponse,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { CatalogMetricService } from './CatalogMetricService';
 import { NotFoundError } from '@backstage/errors';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';

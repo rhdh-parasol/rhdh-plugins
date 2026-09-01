@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { aggregationTypes } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { aggregationTypes } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   mockScalarAggregationConfig,
   mockStatusGroupedAggregationConfig,

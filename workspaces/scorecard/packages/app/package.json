@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-developer/rhdh-plugins",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
     "directory": "workspaces/scorecard/packages/app"
   },
   "scripts": {
@@ -36,9 +36,9 @@
     "@mui/icons-material": "^5.18.0",
     "@mui/material": "^5.18.0",
     "@red-hat-developer-hub/backstage-plugin-homepage": "1.17.1",
-    "@red-hat-developer-hub/backstage-plugin-scorecard": "workspace:^",
-    "@red-hat-developer-hub/backstage-plugin-scorecard-common": "workspace:^",
     "@red-hat-developer-hub/backstage-plugin-theme": "^0.15.0",
+    "@rhdh-parasol/backstage-plugin-scorecard": "workspace:^",
+    "@rhdh-parasol/backstage-plugin-scorecard-common": "workspace:^",
     "react": "^18.0.2",
     "react-dom": "^18.0.2"
   },

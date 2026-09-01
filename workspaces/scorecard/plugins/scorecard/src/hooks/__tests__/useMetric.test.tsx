@@ -17,7 +17,7 @@
 import { renderHook } from '@testing-library/react';
 import { useApi } from '@backstage/core-plugin-api';
 import { useQuery } from '@tanstack/react-query';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { useMetric } from '../useMetric';
 

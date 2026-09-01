@@ -1,4 +1,4 @@
-# @red-hat-developer-hub/backstage-plugin-scorecard
+# @rhdh-parasol/backstage-plugin-scorecard
 
 ## 4.2.0
 
@@ -9,7 +9,7 @@
 ### Patch Changes
 
 - Updated dependencies [e486f80]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.2.0
 
 ## 4.1.0
 
@@ -26,7 +26,7 @@
 ### Patch Changes
 
 - Updated dependencies [3af0fb2]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.1.0
 
 ## 4.0.0
 
@@ -34,14 +34,14 @@
 
 - e9b1af3: Add scalprum config and default app configuration example
 - Updated dependencies [8c14679]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.0.0
 
 ## 3.0.1
 
 ### Patch Changes
 
 - e3fb07a: Export translations module as default for NFS auto-discovery
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@3.0.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@3.0.1
 
 ## 3.0.0
 
@@ -102,13 +102,13 @@
 - 963c98c: optimized how scorecard homepage is loaded
 - Updated dependencies [50447ac]
 - Updated dependencies [6ea1575]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@3.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@3.0.0
 
 ## 2.8.1
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.8.1
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.8.1
 
 ## 2.8.0
 
@@ -123,34 +123,34 @@
 ### Patch Changes
 
 - Updated dependencies [8c85bd4]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.8.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.8.0
 
 ## 2.7.9
 
 ### Patch Changes
 
 - d86f9c6: Replace Material UI v4 imports with MUI v5 and scope JSS class names to prevent style collisions.
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.9
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.9
 
 ## 2.7.8
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.8
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.8
 
 ## 2.7.7
 
 ### Patch Changes
 
 - 8414dbe: Fixes severity threshold category translation for custom thresholds
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.7
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.7
 
 ## 2.7.6
 
 ### Patch Changes
 
 - 4b07772: Translations updated for de/es/fr/it/ja
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.6
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.6
 
 ## 2.7.5
 
@@ -167,7 +167,7 @@
   Previously **`averageScore`** was a **normalized ratio in \[0, 1\]** (rounded to **three** decimal places). Any consumer that treated the old value as a fraction and multiplied by **100** for display, or compared it to thresholds on a 0–100 scale without converting, must **stop scaling**: use **`averageScore`** directly as the percentage. If you stored historical API payloads, recompute or re-fetch rather than assuming the old fractional scale.
 
 - 942a9ae: Fix average score card donut tooltip behavior and align pie chart tooltips
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.5
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.5
 
 ## 2.7.4
 
@@ -175,7 +175,7 @@
 
 - 8c129da: Fix default layout for `AggregatedCardWithGithubFilecheckLicense`, `AggregatedCardWithGithubFilecheckCodeowners` and `AggregatedCardWithGithubOpenPrsWeighted` homepage scorecard cards at the new frontend system (NFS)
 - 367195b: Fix drilldown page header showing raw provider title instead of the translated scorecard title
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.4
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.4
 
 ## 2.7.3
 
@@ -183,7 +183,7 @@
 
 - 5148408: Migrated to Jest 30 as required by @backstage/cli 0.36.0.
 - Updated dependencies [5148408]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.3
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.3
 
 ## 2.7.2
 
@@ -191,7 +191,7 @@
 
 - 04e95fe: Add translations for new sonarqube module.
 - 04e95fe: Add tooltip to Scorecard header to show titles that are longer then one line
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.2
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.2
 
 ## 2.7.1
 
@@ -199,7 +199,7 @@
 
 - 91e724f: Expose scorecard entity calculation health on drill-down and aggregation APIs, and align the drill-down warning plus homepage subheader with those counts.
 - Updated dependencies [91e724f]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.1
 
 ## 2.7.0
 
@@ -210,7 +210,7 @@
 ### Patch Changes
 
 - Updated dependencies [bf72ffc]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.0
 
 ## 2.6.0
 
@@ -220,14 +220,14 @@
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.6.0
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.6.0
 
 ## 2.5.2
 
 ### Patch Changes
 
 - 501e099: Removed Backstage registration requirement for default Scorecard icons
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.5.2
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.5.2
 
 ## 2.5.1
 
@@ -235,7 +235,7 @@
 
 - f6f7bcf: add threshold-based status colors to entities table
 - 0fda0c7: fixed the scorecard-homepage-cards default layout for nfs
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.5.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.5.1
 
 ## 2.5.0
 
@@ -247,17 +247,17 @@
 - 0d64361: Adds a Scorecard Entities page that allows users to drill down from aggregated scorecard KPIs to view the individual entities contributing to the overall score. The page displays entity-level metric values and status, enabling users to identify services impacting the metric and investigate issues more effectively.
 - 243ad0a: Aggregated scorecards now use **aggregation IDs** and dedicated HTTP routes. The old catalog-aggregations URL still works but is **deprecated** (not removed).
 
-  **Backend (`@red-hat-developer-hub/backstage-plugin-scorecard-backend`)**
+  **Backend (`@rhdh-parasol/backstage-plugin-scorecard-backend`)**
 
   - **Deprecated:** `GET /metrics/:metricId/catalog/aggregations` — responses are unchanged, but the handler emits [RFC 8594](https://datatracker.ietf.org/doc/html/rfc8594) `Deprecation` and `Link` headers (alternate successor: `GET .../aggregations/:aggregationId`) and logs a warning. Prefer **`GET /aggregations/:aggregationId`** for new integrations.
   - **Added:** `GET /aggregations/:aggregationId` for aggregated results using configured aggregation.
   - **Added:** `GET /aggregations/:aggregationId/metadata` for KPI titles, descriptions, and aggregation metadata consumed by the UI.
 
-  **Common (`@red-hat-developer-hub/backstage-plugin-scorecard-common`)**
+  **Common (`@rhdh-parasol/backstage-plugin-scorecard-common`)**
 
   - Types and constants aligned with the aggregation config and new API shapes.
 
-  **Frontend (`@red-hat-developer-hub/backstage-plugin-scorecard`)**
+  **Frontend (`@rhdh-parasol/backstage-plugin-scorecard`)**
 
   - Homepage and aggregated flows resolve cards via **`aggregationId`**, fetch metadata from the new endpoint, and keep localized threshold and error strings where translation keys exist.
 
@@ -275,7 +275,7 @@
 - Updated dependencies [55226c2]
 - Updated dependencies [243ad0a]
 - Updated dependencies [c83b206]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.5.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.5.0
 
 ## 2.4.0
 
@@ -289,13 +289,13 @@
 - f6d5102: Translation updated for German and Spanish
 - 34fc6c4: Fix Scorecard translations not working in cluster
 - Updated dependencies [7062658]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.4.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.4.0
 
 ## 2.3.5
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.5
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.3.5
 
 ## 2.3.4
 
@@ -306,27 +306,27 @@
   Refactor the /metrics/:metricId/catalog/aggregations endpoint to return an object of aggregated metrics instead of an array containing a single object.
 
 - Updated dependencies [4a3369f]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.4
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.4
 
 ## 2.3.3
 
 ### Patch Changes
 
 - abd40c6: add missing translations for it and ja locales
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.3
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.3
 
 ## 2.3.2
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.2
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.3.2
 
 ## 2.3.1
 
 ### Patch Changes
 
 - a2c7cce: Fix MUI styling issue
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.1
 
 ## 2.3.0
 
@@ -377,7 +377,7 @@
 - 61d0c34: Updated dependency `@red-hat-developer-hub/backstage-plugin-theme` to `^0.11.0`.
 - Updated dependencies [52b60ee]
 - Updated dependencies [4e360d5]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.3.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.3.0
 
 ## 2.2.0
 
@@ -388,7 +388,7 @@
 ### Patch Changes
 
 - Updated dependencies [4c2261f]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.2.0
 
 ## 2.1.0
 
@@ -399,14 +399,14 @@
 ### Patch Changes
 
 - Updated dependencies [54465f3]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.1.0
 
 ## 2.0.1
 
 ### Patch Changes
 
 - 94050aa: Fixes scorecard conditional permissions and conditional access check for Catalog entity.
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.0.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.0.1
 
 ## 2.0.0
 
@@ -433,7 +433,7 @@
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.0.0
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.0.0
 
 ## 1.0.0
 
@@ -444,7 +444,7 @@
 ### Patch Changes
 
 - Updated dependencies [6709132]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@1.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@1.0.0
 
 ## 0.2.0
 
@@ -462,4 +462,4 @@
 ### Patch Changes
 
 - Updated dependencies [b5ec15c]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@0.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@0.1.0

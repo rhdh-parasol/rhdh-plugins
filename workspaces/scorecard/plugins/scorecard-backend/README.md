@@ -4,11 +4,11 @@ Provides customizable metrics and scoring capabilities from various data sources
 
 ## Installation
 
-This plugin is installed via the `@red-hat-developer-hub/backstage-plugin-scorecard-backend` package. To install it to your backend package, run the following command:
+This plugin is installed via the `@rhdh-parasol/backstage-plugin-scorecard-backend` package. To install it to your backend package, run the following command:
 
 ```bash
 # From your root directory
-yarn --cwd packages/backend add @red-hat-developer-hub/backstage-plugin-scorecard-backend
+yarn --cwd packages/backend add @rhdh-parasol/backstage-plugin-scorecard-backend
 ```
 
 Then add the plugin to your backend in `packages/backend/src/index.ts`:
@@ -16,9 +16,7 @@ Then add the plugin to your backend in `packages/backend/src/index.ts`:
 ```ts
 const backend = createBackend();
 // ...
-backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-scorecard-backend'),
-);
+backend.add(import('@rhdh-parasol/backstage-plugin-scorecard-backend'));
 ```
 
 ## RBAC permissions
@@ -105,12 +103,12 @@ The following metric providers are available:
 
 To use these providers, install the corresponding backend modules:
 
-- GitHub: [`@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github`](../scorecard-backend-module-github/README.md)
-- Jira: [`@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-jira`](../scorecard-backend-module-jira/README.md)
-- OpenSSF: [`@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-openssf`](../scorecard-backend-module-openssf/README.md)
-- Dependabot: [`@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-dependabot`](../scorecard-backend-module-dependabot/README.md)
-- Filecheck: [`@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-filecheck`](../scorecard-backend-module-filecheck/README.md)
-- DORA: [`@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-dora`](../scorecard-backend-module-dora/README.md)
+- GitHub: [`@rhdh-parasol/backstage-plugin-scorecard-backend-module-github`](../scorecard-backend-module-github/README.md)
+- Jira: [`@rhdh-parasol/backstage-plugin-scorecard-backend-module-jira`](../scorecard-backend-module-jira/README.md)
+- OpenSSF: [`@rhdh-parasol/backstage-plugin-scorecard-backend-module-openssf`](../scorecard-backend-module-openssf/README.md)
+- Dependabot: [`@rhdh-parasol/backstage-plugin-scorecard-backend-module-dependabot`](../scorecard-backend-module-dependabot/README.md)
+- Filecheck: [`@rhdh-parasol/backstage-plugin-scorecard-backend-module-filecheck`](../scorecard-backend-module-filecheck/README.md)
+- DORA: [`@rhdh-parasol/backstage-plugin-scorecard-backend-module-dora`](../scorecard-backend-module-dora/README.md)
 
 ### Disabling Metrics
 

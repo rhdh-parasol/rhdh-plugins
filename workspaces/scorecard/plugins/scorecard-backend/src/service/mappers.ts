@@ -21,7 +21,7 @@ import {
   Metric,
   AggregationResultByType,
   ScalarAggregatedMetric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { DbAggregatedMetric } from '../database/types';
 import type { DbScalarAggregatedMetric } from '../database/types';
 import { ValidatedAggregationConfig } from '../validation/schemas/aggregationConfigSchemas';

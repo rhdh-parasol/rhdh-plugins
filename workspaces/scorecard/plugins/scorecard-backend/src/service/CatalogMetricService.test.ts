@@ -39,7 +39,7 @@ import {
   AggregatedMetric,
   aggregationTypes,
   Metric,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { DbMetricValue, DbAggregatedMetric } from '../database/types';
 import { mockThresholdRules } from '../../__fixtures__/mockThresholdRules';
 import { MockEntityBuilder } from '../../__fixtures__/mockEntityBuilder';

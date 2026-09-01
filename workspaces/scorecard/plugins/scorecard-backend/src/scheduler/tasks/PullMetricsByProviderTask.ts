@@ -23,7 +23,7 @@ import {
 } from '@backstage/backend-plugin-api';
 import type { Config } from '@backstage/config';
 import { CatalogService } from '@backstage/plugin-catalog-node';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { isMetricIdDisabled } from '../../utils/metricUtils';
 import { randomUUID } from 'node:crypto';
 import { normalizeOwnerRef } from '../../utils/normalizeOwnerRef';
@@ -35,7 +35,7 @@ import { ThresholdEvaluator } from '../../threshold/ThresholdEvaluator';
 import {
   Metric,
   MetricValue,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { ThresholdResolver } from '../../threshold/ThresholdResolver';
 
 type Options = Pick<

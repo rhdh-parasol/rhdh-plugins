@@ -31,7 +31,7 @@ import type {
 import {
   Metric,
   scorecardMetricReadPermission,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   authorizeConditional,
   filterAuthorizedMetrics,

@@ -23,7 +23,7 @@ import { z } from 'zod';
 import {
   Metric,
   RESOURCE_TYPE_SCORECARD_METRIC,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export type ScorecardFilter = {
   key: string;

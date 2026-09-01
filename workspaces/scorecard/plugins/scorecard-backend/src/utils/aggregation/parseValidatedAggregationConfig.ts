@@ -17,8 +17,8 @@
 import { InputError } from '@backstage/errors';
 import { aggregationConfigSchema } from '../../validation/schemas/aggregationConfigSchemas';
 import type { ValidatedAggregationConfig } from '../../validation/schemas/aggregationConfigSchemas';
-import { aggregationTypes } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { validateThresholdsForAggregation } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { aggregationTypes } from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { validateThresholdsForAggregation } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 export function parseValidatedAggregationConfig(
   config: unknown,

@@ -19,7 +19,7 @@ import { ScorecardFilter } from './rules';
 import {
   Metric,
   RESOURCE_TYPE_SCORECARD_METRIC,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 /**
  * Reference to the Scorecard metric resource.

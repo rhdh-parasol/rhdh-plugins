@@ -1,5 +1,5 @@
 {
-  "name": "@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-catalog",
+  "name": "@rhdh-parasol/backstage-plugin-scorecard-backend-module-catalog",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "description": "The catalog backend module for the scorecard plugin.",
@@ -11,7 +11,7 @@
   "backstage": {
     "role": "backend-plugin-module",
     "pluginId": "scorecard",
-    "pluginPackage": "@red-hat-developer-hub/backstage-plugin-scorecard-backend"
+    "pluginPackage": "@rhdh-parasol/backstage-plugin-scorecard-backend"
   },
   "configSchema": "config.d.ts",
   "exports": {
@@ -40,8 +40,8 @@
   "dependencies": {
     "@backstage/backend-plugin-api": "^1.9.2",
     "@backstage/catalog-model": "^1.9.0",
-    "@red-hat-developer-hub/backstage-plugin-scorecard-common": "workspace:^",
-    "@red-hat-developer-hub/backstage-plugin-scorecard-node": "workspace:^"
+    "@rhdh-parasol/backstage-plugin-scorecard-common": "workspace:^",
+    "@rhdh-parasol/backstage-plugin-scorecard-node": "workspace:^"
   },
   "devDependencies": {
     "@backstage/backend-test-utils": "^1.11.4",
@@ -54,7 +54,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-developer/rhdh-plugins",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
     "directory": "workspaces/scorecard/plugins/scorecard-backend-module-catalog"
   },
   "keywords": [
@@ -62,6 +62,6 @@
     "plugin"
   ],
   "homepage": "https://red.ht/rhdh",
-  "bugs": "https://github.com/redhat-developer/rhdh-plugins/issues",
+  "bugs": "https://github.com/rhdh-parasol/rhdh-plugins/issues",
   "author": "Red Hat"
 }

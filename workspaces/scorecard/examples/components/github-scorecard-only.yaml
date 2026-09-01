@@ -4,7 +4,7 @@ metadata:
   name: github-scorecard-only
   annotations:
     github.com/project-slug: redhat-developer/rhdh-plugins
-    backstage.io/source-location: url:https://github.com/redhat-developer/rhdh-plugins
+    backstage.io/source-location: url:https://github.com/rhdh-parasol/rhdh-plugins
     # Uncomment to disable `github.openPRs` metric
     # scorecard.io/disabled-metrics: github.openPRs
     # Uncomment to customize `github.openPRs` thresholds

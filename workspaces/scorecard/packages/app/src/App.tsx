@@ -23,7 +23,7 @@ import {
 } from '@red-hat-developer-hub/backstage-plugin-homepage/alpha';
 import scorecardPlugin, {
   scorecardTranslationsModule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard';
+} from '@rhdh-parasol/backstage-plugin-scorecard';
 import { signInModule } from './modules/signIn';
 import { navModule } from './modules/nav';
 import { iconsModule } from './modules/icons';

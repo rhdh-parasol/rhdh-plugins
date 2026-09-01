@@ -19,7 +19,7 @@ import {
   Metric,
   MetricType,
   MetricValue,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 /**
  * Interface for a metric provider

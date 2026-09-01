@@ -25,16 +25,16 @@ It is only meant for local development, and the setup for it can be found inside
 
 ### Prerequisites
 
-Before installing the frontend plugin, ensure that the Scorecard backend is integrated into your Backstage instance. Follow the [Scorecard backend plugin README](https://github.com/redhat-developer/rhdh-plugins/blob/main/workspaces/scorecard/plugins/scorecard-backend/README.md) for setup instructions.
+Before installing the frontend plugin, ensure that the Scorecard backend is integrated into your Backstage instance. Follow the [Scorecard backend plugin README](https://github.com/rhdh-parasol/rhdh-plugins/blob/main/workspaces/scorecard/plugins/scorecard-backend/README.md) for setup instructions.
 
 ### Installation and usage
 
 Install the package in your frontend (use `app` for NFS or `app-legacy` for legacy):
 
 ```sh
-yarn workspace app add @red-hat-developer-hub/backstage-plugin-scorecard
+yarn workspace app add @rhdh-parasol/backstage-plugin-scorecard
 # or for the legacy frontend:
-yarn workspace app-legacy add @red-hat-developer-hub/backstage-plugin-scorecard
+yarn workspace app-legacy add @rhdh-parasol/backstage-plugin-scorecard
 ```
 
 ### Procedure
@@ -44,7 +44,7 @@ yarn workspace app-legacy add @red-hat-developer-hub/backstage-plugin-scorecard
 1. Install the Scorecard frontend plugin (see [Installation and usage](#installation-and-usage)) using `app`:
 
    ```console
-   yarn workspace app add @red-hat-developer-hub/backstage-plugin-scorecard
+   yarn workspace app add @rhdh-parasol/backstage-plugin-scorecard
    ```
 
 2. Register the plugin in `packages/app/src/App.tsx`:
@@ -54,7 +54,7 @@ yarn workspace app-legacy add @red-hat-developer-hub/backstage-plugin-scorecard
    import { createApp } from '@backstage/frontend-defaults';
    import scorecardPlugin, {
      scorecardTranslationsModule,
-   } from '@red-hat-developer-hub/backstage-plugin-scorecard';
+   } from '@rhdh-parasol/backstage-plugin-scorecard';
 
    const app = createApp({
      features: [
@@ -255,7 +255,7 @@ To align with the legacy EntityPage (Scorecard on component pages and default en
 
 ##### Modules and extensions (NFS)
 
-The following modules and extensions are available from `@red-hat-developer-hub/backstage-plugin-scorecard` for NFS apps:
+The following modules and extensions are available from `@rhdh-parasol/backstage-plugin-scorecard` for NFS apps:
 
 **Modules**
 
@@ -292,10 +292,10 @@ If you previously imported Scorecard NFS APIs from `/alpha` and registered separ
 -   scorecardCatalogModule,
 -   scorecardHomeModule,
 -   scorecardTranslationsModule,
-- } from '@red-hat-developer-hub/backstage-plugin-scorecard/alpha';
+- } from '@rhdh-parasol/backstage-plugin-scorecard/alpha';
 + import scorecardPlugin, {
 +   scorecardTranslationsModule,
-+ } from '@red-hat-developer-hub/backstage-plugin-scorecard';
++ } from '@rhdh-parasol/backstage-plugin-scorecard';
 
   features: [
     scorecardPlugin,
@@ -342,8 +342,8 @@ Homepage widget **layout** config under `home-page-layout:home/dynamic-homepage-
 OFS components, the OFS plugin, and status icons are available only from `./legacy` (not re-exported from the main entry):
 
 ```diff
-- import { EntityScorecardContent } from '@red-hat-developer-hub/backstage-plugin-scorecard';
-+ import { EntityScorecardContent } from '@red-hat-developer-hub/backstage-plugin-scorecard/legacy';
+- import { EntityScorecardContent } from '@rhdh-parasol/backstage-plugin-scorecard';
++ import { EntityScorecardContent } from '@rhdh-parasol/backstage-plugin-scorecard/legacy';
 ```
 
 #### Legacy app
@@ -351,13 +351,13 @@ OFS components, the OFS plugin, and status icons are available only from `./lega
 1. Install the Scorecard frontend plugin (see [Installation and usage](#installation-and-usage)) using `app-legacy`:
 
    ```console
-   yarn workspace app-legacy add @red-hat-developer-hub/backstage-plugin-scorecard
+   yarn workspace app-legacy add @rhdh-parasol/backstage-plugin-scorecard
    ```
 
 2. Add the Scorecard tab to the entity overview in `packages/app-legacy/src/components/catalog/EntityPage.tsx` (or your legacy app's equivalent):
 
    ```tsx
-   import { EntityScorecardContent } from '@red-hat-developer-hub/backstage-plugin-scorecard/legacy';
+   import { EntityScorecardContent } from '@rhdh-parasol/backstage-plugin-scorecard/legacy';
 
    const scorecardRoute = (
      <EntityLayout.Route path="/scorecard" title="Scorecard">
@@ -402,7 +402,7 @@ OFS components, the OFS plugin, and status icons are available only from `./lega
 3. (Optional) Add Scorecard homepage cards to your home page:
 
    ```tsx
-   import { ScorecardHomepageCard } from '@red-hat-developer-hub/backstage-plugin-scorecard/legacy';
+   import { ScorecardHomepageCard } from '@rhdh-parasol/backstage-plugin-scorecard/legacy';
 
    // GitHub open PRs
    <ScorecardHomepageCard metricId="github.openPRs" />
@@ -446,7 +446,7 @@ permission:
 
 ### Homepage scorecard cards
 
-The plugin exports **`ScorecardHomepageCard`** from `@red-hat-developer-hub/backstage-plugin-scorecard/legacy` (see [`plugin.ts`](./src/plugin.ts)) for use on customizable home pages (for example **Dynamic Home Page** mount points such as `home.page/cards`).
+The plugin exports **`ScorecardHomepageCard`** from `@rhdh-parasol/backstage-plugin-scorecard/legacy` (see [`plugin.ts`](./src/plugin.ts)) for use on customizable home pages (for example **Dynamic Home Page** mount points such as `home.page/cards`).
 
 #### Backend configuration
 
@@ -485,7 +485,7 @@ The supported model is **a single `aggregationId` string** whose value is either
 Example (Dynamic Home Page–style mount point): register **`ScorecardHomepageCard`** and pass **`props.aggregationId`** (and **`metricId`** only if you still run an older card API):
 
 ```tsx
-import { ScorecardHomepageCard } from '@red-hat-developer-hub/backstage-plugin-scorecard/legacy';
+import { ScorecardHomepageCard } from '@rhdh-parasol/backstage-plugin-scorecard/legacy';
 import { ComponentType } from 'react';
 
 // Inside your home page cards config:

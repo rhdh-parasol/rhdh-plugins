@@ -22,7 +22,7 @@ import {
   ThresholdRule,
   aggregationTypes,
   type StatusScoreAggregationOption,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { DEFAULT_WEIGHTED_STATUS_SCORE_KPI_RESULT_THRESHOLDS } from '../../../constants/aggregationKPIs';
 import { AggregatedMetricMapper } from '../../mappers';
 import type { AggregatedMetricLoader } from '../AggregatedMetricLoader';

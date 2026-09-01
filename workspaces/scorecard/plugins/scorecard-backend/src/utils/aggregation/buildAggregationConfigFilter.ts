@@ -15,7 +15,7 @@
  */
 
 import type { Config } from '@backstage/config';
-import type { AggregationConfigFilter } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { AggregationConfigFilter } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export function buildAggregationConfigFilter(
   config: Config,

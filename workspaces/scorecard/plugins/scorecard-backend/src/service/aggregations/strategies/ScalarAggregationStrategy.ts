@@ -18,7 +18,7 @@ import {
   DEFAULT_NUMBER_THRESHOLDS,
   type AggregatedMetricResult,
   type ScalarAggregationResult,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { ScalarAggregationFn } from '../../../database/types';
 import { AggregatedMetricMapper } from '../../mappers';
 import type { AggregatedMetricLoader } from '../AggregatedMetricLoader';

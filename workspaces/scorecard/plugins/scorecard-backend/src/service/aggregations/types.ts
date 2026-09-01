@@ -17,7 +17,7 @@
 import {
   type Metric,
   type ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { ValidatedAggregationConfig } from '../../validation/schemas/aggregationConfigSchemas';
 
 export type AggregationOptions = {

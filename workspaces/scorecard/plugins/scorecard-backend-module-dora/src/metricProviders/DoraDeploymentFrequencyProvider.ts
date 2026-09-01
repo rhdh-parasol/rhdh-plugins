@@ -15,11 +15,11 @@
  */
 import type { Config } from '@backstage/config';
 import type { Entity } from '@backstage/catalog-model';
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   type ScorecardCollectorsService,
   MetricProvider,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { DORA_TIME_WINDOW_DAYS } from '../constants';
 import {
   deploymentsCollectorInputSchema,

@@ -17,7 +17,7 @@
 import {
   DEFAULT_NUMBER_THRESHOLDS,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { getThresholdRuleColor, getThresholdRuleIcon } from '..';
 
 describe('thresholdUtils', () => {

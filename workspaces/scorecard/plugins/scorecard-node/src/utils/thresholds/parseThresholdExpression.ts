@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { MetricType } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { MetricType } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { ComparisonOperator, RangeOperator } from '../types';
 import { ThresholdConfigFormatError } from '../../errors';
 

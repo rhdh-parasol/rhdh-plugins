@@ -18,7 +18,7 @@ import { SchedulerServiceTaskScheduleDefinitionConfig } from '@backstage/backend
 import {
   CollectorConfig,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 export interface Config {
   /** Configuration for scorecard dora plugin */

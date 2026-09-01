@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import type { LoggerService } from '@backstage/backend-plugin-api';
 import type { Config } from '@backstage/config';
 import {

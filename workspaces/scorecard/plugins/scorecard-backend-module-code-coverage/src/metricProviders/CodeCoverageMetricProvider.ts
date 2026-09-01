@@ -17,8 +17,8 @@
 import {
   Metric,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import type { Entity } from '@backstage/catalog-model';
 import { stringifyEntityRef } from '@backstage/catalog-model';
 import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';

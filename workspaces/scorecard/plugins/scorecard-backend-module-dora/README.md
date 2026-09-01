@@ -10,8 +10,8 @@ Before installing this module, ensure that the Scorecard backend plugin is integ
 
 If you use built-in collectors from GitHub and Jira modules, install the corresponding backend modules so those collectors are registered:
 
-- `@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-github`
-- `@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-jira`
+- `@rhdh-parasol/backstage-plugin-scorecard-backend-module-github`
+- `@rhdh-parasol/backstage-plugin-scorecard-backend-module-jira`
 
 ## Installation
 
@@ -19,7 +19,7 @@ To install this backend module:
 
 ```bash
 # From your root directory
-yarn workspace backend add @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-dora
+yarn workspace backend add @rhdh-parasol/backstage-plugin-scorecard-backend-module-dora
 ```
 
 ```ts
@@ -28,14 +28,10 @@ import { createBackend } from '@backstage/backend-defaults';
 
 const backend = createBackend();
 
-backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-scorecard-backend'),
-);
+backend.add(import('@rhdh-parasol/backstage-plugin-scorecard-backend'));
 
 backend.add(
-  import(
-    '@red-hat-developer-hub/backstage-plugin-scorecard-backend-module-dora'
-  ),
+  import('@rhdh-parasol/backstage-plugin-scorecard-backend-module-dora'),
 );
 
 backend.start();

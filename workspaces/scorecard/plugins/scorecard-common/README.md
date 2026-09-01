@@ -1,4 +1,4 @@
-# @red-hat-developer-hub/backstage-plugin-scorecard-common
+# @rhdh-parasol/backstage-plugin-scorecard-common
 
 Welcome to the common package for the scorecard plugin!
 

@@ -15,7 +15,7 @@
  */
 
 import { Knex } from 'knex';
-import type { AggregationConfigFilter } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { AggregationConfigFilter } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   DbMetricValueCreate,
   DbMetricValue,

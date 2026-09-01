@@ -1,20 +1,20 @@
-# @red-hat-developer-hub/backstage-plugin-scorecard-backend-module-sonarqube
+# @rhdh-parasol/backstage-plugin-scorecard-backend-module-sonarqube
 
 ## 1.0.2
 
 ### Patch Changes
 
 - Updated dependencies [e486f80]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.2.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@4.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.2.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@4.2.0
 
 ## 1.0.1
 
 ### Patch Changes
 
 - Updated dependencies [3af0fb2]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.1.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@4.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.1.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@4.1.0
 
 ## 1.0.0
 
@@ -67,15 +67,15 @@
 ### Patch Changes
 
 - Updated dependencies [8c14679]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@4.0.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@4.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@4.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@4.0.0
 
 ## 0.3.1
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@3.0.1
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@3.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-common@3.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@3.0.1
 
 ## 0.3.0
 
@@ -93,16 +93,16 @@
 - Updated dependencies [c7f89e7]
 - Updated dependencies [50447ac]
 - Updated dependencies [6ea1575]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@3.0.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@3.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@3.0.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@3.0.0
 
 ## 0.2.1
 
 ### Patch Changes
 
 - 7ead71c: Correct default threshold documentation and add missing threshold documentation in scorecard backend module READMEs to match provider code defaults.
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.8.1
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.8.1
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.8.1
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.8.1
 
 ## 0.2.0
 
@@ -114,15 +114,15 @@
 
 - Updated dependencies [efb4c4f]
 - Updated dependencies [8c85bd4]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.8.0
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.8.0
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.8.0
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.8.0
 
 ## 0.1.8
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.9
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.9
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.9
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.9
 
 ## 0.1.7
 
@@ -134,22 +134,22 @@
   `scorecard.plugins.<providerId>.thresholds`. Provider IDs typically
   follow the format `<datasource>.<metric>`.
 - Updated dependencies [6699550]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.8
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.8
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.8
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.8
 
 ## 0.1.6
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.7
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.7
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.7
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.7
 
 ## 0.1.5
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.6
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.6
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.6
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.6
 
 ## 0.1.4
 
@@ -166,15 +166,15 @@
   Previously **`averageScore`** was a **normalized ratio in \[0, 1\]** (rounded to **three** decimal places). Any consumer that treated the old value as a fraction and multiplied by **100** for display, or compared it to thresholds on a 0–100 scale without converting, must **stop scaling**: use **`averageScore`** directly as the percentage. If you stored historical API payloads, recompute or re-fetch rather than assuming the old fractional scale.
 
 - Updated dependencies [5115044]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.5
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.5
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.5
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.5
 
 ## 0.1.3
 
 ### Patch Changes
 
-- @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.4
-- @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.4
+- @rhdh-parasol/backstage-plugin-scorecard-common@2.7.4
+- @rhdh-parasol/backstage-plugin-scorecard-node@2.7.4
 
 ## 0.1.2
 
@@ -188,8 +188,8 @@
 
 - 5148408: Migrated to Jest 30 as required by @backstage/cli 0.36.0.
 - Updated dependencies [5148408]
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.3
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.3
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.3
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.3
 
 ## 0.1.0
 
@@ -201,5 +201,5 @@
 ### Patch Changes
 
 - 04e95fe: Fix Basic auth to base64-encode apiKey with appended colon, matching the SonarQube API expectation
-  - @red-hat-developer-hub/backstage-plugin-scorecard-common@2.7.2
-  - @red-hat-developer-hub/backstage-plugin-scorecard-node@2.7.2
+  - @rhdh-parasol/backstage-plugin-scorecard-common@2.7.2
+  - @rhdh-parasol/backstage-plugin-scorecard-node@2.7.2

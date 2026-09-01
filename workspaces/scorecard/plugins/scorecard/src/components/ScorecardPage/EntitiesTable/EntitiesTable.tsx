@@ -16,7 +16,7 @@
 
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { EntityMetricDetail } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { EntityMetricDetail } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

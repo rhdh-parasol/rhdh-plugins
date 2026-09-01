@@ -17,8 +17,8 @@
 import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';
 import { type Entity } from '@backstage/catalog-model';
 
-import { Metric } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { Metric } from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 import { OpenSSFClient } from '../clients/OpenSSFClient';
 import {

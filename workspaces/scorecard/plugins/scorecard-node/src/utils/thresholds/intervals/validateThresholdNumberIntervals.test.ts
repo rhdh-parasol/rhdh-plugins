@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { ThresholdRule } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { ThresholdRule } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { ThresholdConfigFormatError } from '../../../errors';
 import { validateThresholdNumberIntervals } from './validateThresholdNumberIntervals';
 

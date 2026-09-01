@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { MetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { MetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { ResponseErrorPanel } from '@backstage/core-components';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';

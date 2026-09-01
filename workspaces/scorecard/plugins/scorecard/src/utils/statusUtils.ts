@@ -19,7 +19,7 @@ import type { TranslationFunction } from '@backstage/core-plugin-api/alpha';
 import type {
   MetricResult,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import type { ThemeConfig } from '@red-hat-developer-hub/backstage-plugin-theme';
 
 import { scorecardTranslationRef } from '../translations';

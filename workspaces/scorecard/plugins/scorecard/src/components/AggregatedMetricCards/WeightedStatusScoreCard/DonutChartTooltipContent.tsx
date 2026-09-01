@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type { AggregatedMetricValue } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import type { AggregatedMetricValue } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';

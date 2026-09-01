@@ -20,8 +20,8 @@ import {
   Metric,
   ScorecardThresholdRuleColors,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import {
   type CatalogRequiredAttributesOptions,
   type MetricConfig,

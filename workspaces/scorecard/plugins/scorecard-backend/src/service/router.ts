@@ -42,7 +42,7 @@ import { parseCommaSeparatedString } from '../utils/parseCommaSeparatedString';
 import { AggregatedMetricMapper } from './mappers';
 import { validateDrillDownMetricsSchema } from '../validation/validateDrillDownMetricsSchema';
 import { validateAggregationIdParam } from '../middlewares/validateAggregationIdParam';
-import { scorecardMetricReadPermission } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { scorecardMetricReadPermission } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { validateDatasourceQueryParams } from '../middlewares/validateDatasourceQueryParams';
 import { AggregationsService } from './aggregations/AggregationsService';
 import { ThresholdResolver } from '../threshold/ThresholdResolver';

@@ -20,7 +20,7 @@ import {
 import {
   scorecardCollectorsExtensionPoint,
   scorecardMetricsExtensionPoint,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { GithubDeploymentPullRequestsCollector } from './collectors/GithubDeploymentPullRequestsCollector';
 import { GithubDeploymentWorkflowRunsCollector } from './collectors/GithubDeploymentWorkflowRunsCollector';
 import { GithubDeploymentsCollector } from './collectors/GithubDeploymentsCollector';

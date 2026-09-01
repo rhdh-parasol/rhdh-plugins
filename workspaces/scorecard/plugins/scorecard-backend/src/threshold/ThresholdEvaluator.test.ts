@@ -15,8 +15,8 @@
  */
 
 import { ThresholdEvaluator } from './ThresholdEvaluator';
-import { ThresholdConfig } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
-import { ThresholdConfigFormatError } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { ThresholdConfig } from '@rhdh-parasol/backstage-plugin-scorecard-common';
+import { ThresholdConfigFormatError } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 describe('ThresholdEvaluator', () => {
   let evaluator: ThresholdEvaluator;

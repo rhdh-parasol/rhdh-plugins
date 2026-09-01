@@ -17,7 +17,7 @@
 import {
   ThresholdResult,
   ThresholdRule,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';

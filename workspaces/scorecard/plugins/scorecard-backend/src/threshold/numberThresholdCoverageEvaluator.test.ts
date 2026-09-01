@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { validateThresholdNumberIntervals } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { validateThresholdNumberIntervals } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 import { ThresholdEvaluator } from './ThresholdEvaluator';
 
 describe('numberThresholdCoverage vs ThresholdEvaluator', () => {

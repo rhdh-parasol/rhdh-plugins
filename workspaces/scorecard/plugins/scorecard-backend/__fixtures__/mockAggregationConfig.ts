@@ -17,7 +17,7 @@
 import {
   aggregationTypes,
   DEFAULT_NUMBER_THRESHOLDS,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { DEFAULT_WEIGHTED_STATUS_SCORE_KPI_RESULT_THRESHOLDS } from '../src/constants/aggregationKPIs';
 import type {
   ScalarAggregationConfig,

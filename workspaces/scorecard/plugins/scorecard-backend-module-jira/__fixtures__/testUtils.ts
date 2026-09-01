@@ -16,7 +16,7 @@
 
 import type { Config } from '@backstage/config';
 import type { Entity } from '@backstage/catalog-model';
-import { ThresholdConfig } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { ThresholdConfig } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { mockServices } from '@backstage/backend-test-utils';
 
 export function newEntityComponent(

@@ -18,11 +18,11 @@ import {
   MetricType,
   MetricValue,
   ThresholdConfig,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import {
   parseThresholdExpression,
   ThresholdConfigFormatError,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+} from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 /**
  * Service for evaluating metric values against threshold expressions

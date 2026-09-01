@@ -16,7 +16,7 @@
 
 import type { Config } from '@backstage/config';
 import type { LoggerService } from '@backstage/backend-plugin-api';
-import { MetricProvider } from '@red-hat-developer-hub/backstage-plugin-scorecard-node';
+import { MetricProvider } from '@rhdh-parasol/backstage-plugin-scorecard-node';
 
 import { SonarQubeBooleanMetricProvider } from './SonarQubeBooleanMetricProvider';
 import { SonarQubeNumberMetricProvider } from './SonarQubeNumberMetricProvider';

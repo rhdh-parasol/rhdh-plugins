@@ -1,4 +1,4 @@
-# @@red-hat-developer-hub/backstage-plugin-scorecard-node
+# @@rhdh-parasol/backstage-plugin-scorecard-node
 
 Welcome to the Node.js library package for the scorecard plugin!
 

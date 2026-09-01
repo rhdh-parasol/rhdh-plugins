@@ -15,7 +15,7 @@
  */
 
 import { mockServices } from '@backstage/backend-test-utils';
-import { aggregationTypes } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { aggregationTypes } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { AGGREGATION_KPIS_CONFIG_PATH } from '../../constants';
 import { buildAggregationConfig } from './buildAggregationConfig';
 import {

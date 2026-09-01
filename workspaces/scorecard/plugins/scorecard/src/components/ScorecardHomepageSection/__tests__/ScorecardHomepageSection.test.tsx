@@ -22,7 +22,7 @@ import { ScorecardHomepageCard } from '../ScorecardHomepageCard';
 import {
   DEFAULT_NUMBER_THRESHOLDS,
   type AggregatedMetricResult,
-} from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+} from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 jest.mock('@backstage/core-components', () => ({
   ResponseErrorPanel: ({ error }: { error: Error }) => (

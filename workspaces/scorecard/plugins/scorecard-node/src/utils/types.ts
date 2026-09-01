@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { type MetricValue } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { type MetricValue } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 /**
  * Type for comparison signs

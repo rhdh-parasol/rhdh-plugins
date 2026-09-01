@@ -15,7 +15,7 @@
  */
 import { PermissionsService } from '@backstage/backend-plugin-api';
 import { ActionsRegistryService } from '@backstage/backend-plugin-api/alpha';
-import { scorecardMetricReadPermission } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { scorecardMetricReadPermission } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 import { MetricProvidersRegistry } from '../providers/MetricProvidersRegistry';
 import {
   authorizeConditional,

@@ -20,7 +20,7 @@ import { useApi } from '@backstage/core-plugin-api';
 import { scorecardApiRef } from '../api';
 import { useTranslation } from './useTranslation';
 import { UseResponseData } from './types';
-import { AggregationMetadata } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { AggregationMetadata } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 interface UseAggregationMetadataOptions {
   aggregationId: string;

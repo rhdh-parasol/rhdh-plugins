@@ -19,7 +19,7 @@ import { useMemo } from 'react';
 import { useApi } from '@backstage/core-plugin-api';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import useAsync from 'react-use/lib/useAsync';
-import { MetricResult } from '@red-hat-developer-hub/backstage-plugin-scorecard-common';
+import { MetricResult } from '@rhdh-parasol/backstage-plugin-scorecard-common';
 
 import { scorecardApiRef } from '../api';
 import { useTranslation } from './useTranslation';
