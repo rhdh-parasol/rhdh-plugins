@@ -21,16 +21,21 @@ import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const baseOptions = {
-  owner: 'redhat-developer',
-  repo: 'rhdh-plugins',
-};
+function repoOptions() {
+  const repoFull = process.env.GITHUB_REPOSITORY;
+  if (!repoFull || !repoFull.includes('/')) {
+    throw new Error('GITHUB_REPOSITORY is not set');
+  }
+  const [owner, repo] = repoFull.split('/');
+  return { owner, repo };
+}
 
 async function getPackageJson(filePath) {
   return await fs.readJson(resolvePath(filePath, 'package.json'));
 }
 
 async function createGitTag(octokit, commitSha, tagName) {
+  const baseOptions = repoOptions();
   const annotatedTag = await octokit.git.createTag({
     ...baseOptions,
     tag: tagName,

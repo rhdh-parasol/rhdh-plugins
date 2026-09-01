@@ -11,7 +11,7 @@ jobs:
     name: Detect workspace changes
     runs-on: ubuntu-latest
     outputs:
-      workspaces: ${{ steps.find-changed-workspaces.outputs.workspaces }}
+      workspaces: ${{ steps.allowlist.outputs.workspaces }}
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -32,6 +32,23 @@ jobs:
         run: node ./scripts/ci/list-workspaces-with-changes.js
         env:
           COMMIT_SHA_BEFORE: '${{ github.event.before }}'
+
+      # Parasol fork: only scorecard may run the npm publish pipeline.
+      # Other workspaces stay on the tree for development; they must not publish
+      # under @red-hat-developer-hub or any Parasol scope.
+      - name: Restrict releases to scorecard
+        id: allowlist
+        env:
+          WORKSPACES: ${{ steps.find-changed-workspaces.outputs.workspaces }}
+        run: |
+          if [ -z "$WORKSPACES" ]; then
+            echo 'workspaces=[]' >> "$GITHUB_OUTPUT"
+            echo "Release allowlist: no workspace list from previous step"
+            exit 0
+          fi
+          filtered="$(jq -c '[.[] | select(. == "scorecard")]' <<<"$WORKSPACES")"
+          echo "workspaces=$filtered" >> "$GITHUB_OUTPUT"
+          echo "Release allowlist filtered workspaces: $filtered"
 
   maybe-release-workspace:
     name: Maybe release ${{ matrix.workspace }}

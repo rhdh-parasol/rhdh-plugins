@@ -19,8 +19,9 @@ permissions:
 jobs:
   changeset-feedback:
     name: Generate Changeset Feedback
-    # prevent running towards forks and version packages
-    if: github.repository == 'redhat-developer/rhdh-plugins' && github.event.pull_request.user.login != 'rhdh-bot'
+    # Enabled on this fork only after RHDH_GH_APP_* secrets exist and
+    # ENABLE_CHANGESET_FEEDBACK=true (see issue #7).
+    if: github.repository == 'rhdh-parasol/rhdh-plugins' && github.event.pull_request.user.login != 'rhdh-parasol-bot' && vars.ENABLE_CHANGESET_FEEDBACK == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -45,7 +46,7 @@ jobs:
           marker: <!-- changeset-feedback -->
           issue-number: ${{ github.event.pull_request.number }}
           app-id: ${{ secrets.RHDH_GH_APP_ID }}
-          bot-username: rhdh-gh-app[bot]
+          bot-username: rhdh-parasol-gh-app[bot]
           private-key: ${{ secrets.RHDH_GH_APP_PRIVATE_KEY }}
           installation-id: ${{ secrets.RHDH_GH_APP_INSTALLATION_ID }}
           multiple-workspaces: true
