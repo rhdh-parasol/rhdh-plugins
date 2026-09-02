@@ -14,14 +14,21 @@ policy: rhdh/policies/dependabot-risk-rater.yaml
 role: review
 slug: rhdh-plugins-dependabot-risk-rater
 
+# issue_comment on a PR is entity.kind=work_item with linked_change_proposal
+# from the webhook. state.change_proposal is filled only if GetPullRequestInfo
+# succeeds; requiring it made /fullsend-risk-rating a silent no-op. Skip only
+# when the API did populate a real fork (empty head/base repos are fail-closed
+# is_fork=true in fullsend — do not treat that as a fork).
 trigger: >
   event.transition.kind == "comment_added"
     && has(event.transition.comment.command)
     && event.transition.comment.command == "/fullsend-risk-rating"
     && event.entity.kind == "work_item"
-    && has(event.state.change_proposal)
-    && !event.state.change_proposal.is_fork
+    && has(event.entity.linked_change_proposal)
     && event.actor.kind != "bot"
+    && (!has(event.state.change_proposal)
+        || event.state.change_proposal.head_repo == ""
+        || event.state.change_proposal.head_repo == event.state.change_proposal.base_repo)
 
 skills:
 # TODO: replace the zero sha256 below with ComputeTreeHash of
