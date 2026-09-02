@@ -7,9 +7,12 @@
 # .claude/skills/dependency-update-risk-rating at commit
 # 3ce2d475c6041fcf930241e5bdd43bb8122692c1 before the first real run.
 agent: rhdh/agents/dependabot-risk-rater.md
-model: opus
+model: claude-opus-4-6opus
 image: ghcr.io/fullsend-ai/fullsend-code:latest
 policy: rhdh/policies/dependabot-risk-rater.yaml
+
+providers:
+  - vertex-ai
 
 role: review
 slug: rhdh-plugins-dependabot-risk-rater
