@@ -25,7 +25,7 @@ trigger: >
 
 skills:
 # TODO: replace the zero sha256 below with ComputeTreeHash of
-  - https://github.com/christoph-jerolimov/dependency-update-risk-rating/tree/3ce2d475c6041fcf930241e5bdd43bb8122692c1/.claude/skills/dependency-update-risk-rating#sha256=0000000000000000000000000000000000000000000000000000000000000000
+  - https://github.com/christoph-jerolimov/dependency-update-risk-rating/tree/3ce2d475c6041fcf930241e5bdd43bb8122692c1/.claude/skills/dependency-update-risk-rating#sha256=ef7f0b8d740085493b49cfa6e3f52f3e112d398a5c678520e677bd0aca088cff
 
 # Harness-level allowlist required for URL skills (not inherited from
 # config.yaml). Must also be covered by config.yaml allowed_remote_resources.
