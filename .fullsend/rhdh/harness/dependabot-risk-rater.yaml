@@ -81,3 +81,4 @@ overlays:
         ISSUE_URL: "${GITHUB_ISSUE_URL}"
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
         NODE_USE_ENV_PROXY: "1"
+        FULLSEND_OUTPUT_FILE: agent-result.json

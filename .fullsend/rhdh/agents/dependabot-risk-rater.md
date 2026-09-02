@@ -32,6 +32,9 @@ Set by the pre-script / harness:
 - `REPO_FULL_NAME` — `owner/repo`
 - `TARGET_REPO_DIR` — checkout of the repository
 - `FULLSEND_OUTPUT_DIR` — directory for your result file
+- `FULLSEND_OUTPUT_FILE` — result filename (`agent-result.json`). Do not write
+  `code-result.json`; that name is the code agent's, and this image would
+  otherwise default to it.
 - `/sandbox/workspace/pr-context.json` — PR metadata fetched on the runner
   (number, url, title, body, base/head SHAs, changed file names)
 - `/sandbox/workspace/pr-data.tar` — base/head manifest blobs plus optional
@@ -100,7 +103,9 @@ change.
 
 Write **only** this file, with no markdown fences around it:
 
-`$FULLSEND_OUTPUT_DIR/agent-result.json`
+`$FULLSEND_OUTPUT_DIR/${FULLSEND_OUTPUT_FILE:-agent-result.json}`
+
+That resolves to `agent-result.json`. Never `code-result.json`.
 
 Success:
 
@@ -139,7 +144,7 @@ Error (missing `ISSUE_URL`, skill/tool failure):
 After writing the file:
 
 ```bash
-fullsend-check-output "${FULLSEND_OUTPUT_DIR}/agent-result.json"
+fullsend-check-output "${FULLSEND_OUTPUT_DIR}/${FULLSEND_OUTPUT_FILE:-agent-result.json}"
 ```
 
 If validation fails, fix the JSON and re-run the check. If it still fails

@@ -32,24 +32,28 @@ fi
 CLEANUP_FILES=()
 trap 'rm -f "${CLEANUP_FILES[@]}"' EXIT
 
+# Same name as the agent prompt and sandbox FULLSEND_OUTPUT_FILE. The code
+# image defaults this to code-result.json; do not fall back to that name.
+OUTPUT_FILE="${FULLSEND_OUTPUT_FILE:-agent-result.json}"
+
 if [[ -n "${FULLSEND_VALIDATED_ITERATION_DIR:-}" ]]; then
-  RESULT_FILE="${FULLSEND_VALIDATED_ITERATION_DIR}/agent-result.json"
+  RESULT_FILE="${FULLSEND_VALIDATED_ITERATION_DIR}/${OUTPUT_FILE}"
 else
   RESULT_FILE=""
   for dir in iteration-*/output; do
-    if [[ -f "${dir}/agent-result.json" ]]; then
-      RESULT_FILE="${dir}/agent-result.json"
+    if [[ -f "${dir}/${OUTPUT_FILE}" ]]; then
+      RESULT_FILE="${dir}/${OUTPUT_FILE}"
     fi
   done
 fi
 
 if [[ -z "${RESULT_FILE}" || ! -f "${RESULT_FILE}" ]]; then
-  echo "::error::agent-result.json not found"
+  echo "::error::${OUTPUT_FILE} not found"
   exit 1
 fi
 
 if ! jq empty "${RESULT_FILE}" 2>/dev/null; then
-  echo "::error::agent-result.json is not valid JSON"
+  echo "::error::${OUTPUT_FILE} is not valid JSON"
   exit 1
 fi
 
