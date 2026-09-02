@@ -92,7 +92,8 @@ if [[ "${PR_STATE}" != "OPEN" ]]; then
   exit 78
 fi
 
-# Filenames only — never the lockfile patch (can be multiple MB).
+# Filenames only in JSON — never the lockfile patch (can be multiple MB).
+# Manifest blobs are fetched below so the sandbox never calls GitHub.
 jq '{
   number,
   url,
@@ -105,7 +106,70 @@ jq '{
   labels: [.labels[].name]
 }' <<<"${PR_JSON}" > "${WORKSPACE}/pr-context.json"
 
-echo "Wrote ${WORKSPACE}/pr-context.json"
+BASE_SHA="$(jq -r '.base_sha' "${WORKSPACE}/pr-context.json")"
+HEAD_SHA="$(jq -r '.head_sha' "${WORKSPACE}/pr-context.json")"
+
+# Skill Mode C would fetch these via raw.githubusercontent.com from the
+# sandbox. OpenShell has no DNS; do it here instead (same blobs, same skill
+# scripts — compare-manifests.ts / collect-metrics.ts — no skill fork).
+PR_DATA="${WORKSPACE}/pr-data"
+mkdir -p "${PR_DATA}/base" "${PR_DATA}/head"
+cp "${WORKSPACE}/pr-context.json" "${PR_DATA}/pr-context.json"
+
+is_manifest_path() {
+  case "$(basename "$1")" in
+    package.json|yarn.lock|package-lock.json|npm-shrinkwrap.json) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+fetch_raw() {
+  local ref="$1" relpath="$2" dest="$3"
+  mkdir -p "$(dirname "${dest}")"
+  if gh api -H "Accept: application/vnd.github.raw" \
+    "/repos/${REPO_FULL_NAME}/contents/${relpath}?ref=${ref}" \
+    > "${dest}" 2>/dev/null; then
+    return 0
+  fi
+  rm -f "${dest}"
+  return 1
+}
+
+CHANGED_FILES=()
+while IFS= read -r _f; do
+  [[ -n "${_f}" ]] && CHANGED_FILES+=("${_f}")
+done < <(jq -r '.files[]?' "${WORKSPACE}/pr-context.json")
+
+FETCHED=0
+declare -A PATHS=()
+for relpath in "${CHANGED_FILES[@]+"${CHANGED_FILES[@]}"}"; do
+  [[ -z "${relpath}" ]] && continue
+  if is_manifest_path "${relpath}"; then
+    PATHS["${relpath}"]=1
+  fi
+  case "$(basename "${relpath}")" in
+    yarn.lock|package-lock.json|npm-shrinkwrap.json)
+      PATHS["$(dirname "${relpath}")/package.json"]=1
+      ;;
+  esac
+done
+
+if ((${#PATHS[@]} > 0)); then
+  for relpath in "${!PATHS[@]}"; do
+    if fetch_raw "${BASE_SHA}" "${relpath}" "${PR_DATA}/base/${relpath}"; then
+      FETCHED=$((FETCHED + 1))
+    fi
+    if fetch_raw "${HEAD_SHA}" "${relpath}" "${PR_DATA}/head/${relpath}"; then
+      FETCHED=$((FETCHED + 1))
+    fi
+  done
+fi
+
+fetch_raw "${HEAD_SHA}" ".dependency-risk.yaml" "${PR_DATA}/target-config.yaml" || true
+fetch_raw "${HEAD_SHA}" "backstage.json" "${PR_DATA}/backstage.json" || true
+
+tar -C "${PR_DATA}" -cf "${WORKSPACE}/pr-data.tar" .
+echo "Wrote ${WORKSPACE}/pr-context.json and pr-data.tar (${FETCHED} manifest blobs)"
 echo "PR_NUMBER=${PR_NUMBER}"
 echo "REPO_FULL_NAME=${REPO_FULL_NAME}"
 echo "ISSUE_URL=${ISSUE_URL}"
