@@ -8,7 +8,7 @@ Plugins in this repository will be published to the `@red-hat-developer-hub` pub
 
 ## Contributing a plugin
 
-Contributions are welcome! To get started, see [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes and open pull requests.
+Contributions are welcome! To get started, see [CONTRIBUTING.md](./CONTRIBUTING.md) for how to propose changes and open pull requests.
 
 ## Plugins Workflow
 
