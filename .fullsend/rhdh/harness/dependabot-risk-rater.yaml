@@ -66,15 +66,11 @@ overlays:
         GH_TOKEN: "${GH_TOKEN}"
         REVIEW_TOKEN: "${REVIEW_TOKEN}"
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
-        PR_NUMBER: "${PR_NUMBER}"
         ISSUE_NUMBER: "${ISSUE_NUMBER}"
-        ISSUE_URL: "${ISSUE_URL}"
-        GITHUB_PR_URL: "${GITHUB_PR_URL}"
+        ISSUE_URL: "${GITHUB_ISSUE_URL}"
         GITHUB_ISSUE_URL: "${GITHUB_ISSUE_URL}"
         FULLSEND_OUTPUT_FILE: agent-result.json
       sandbox:
-        ISSUE_URL: "${ISSUE_URL}"
-        GITHUB_PR_URL: "${GITHUB_PR_URL}"
-        PR_NUMBER: "${PR_NUMBER}"
+        ISSUE_URL: "${GITHUB_ISSUE_URL}"
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
         GH_TOKEN: "${GH_TOKEN}"
