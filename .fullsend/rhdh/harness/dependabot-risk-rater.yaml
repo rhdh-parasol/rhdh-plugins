@@ -45,8 +45,13 @@ host_files:
     dest: /sandbox/workspace/bin/yarn
   - src: rhdh/env/yarn-proxy.env
     dest: /sandbox/workspace/.env.d/yarn-proxy.env
+  - src: rhdh/env/node-proxy.env
+    dest: /sandbox/workspace/.env.d/node-proxy.env
   - src: /tmp/workspace/pr-context.json
     dest: /sandbox/workspace/pr-context.json
+    optional: true
+  - src: /tmp/workspace/pr-data.tar
+    dest: /sandbox/workspace/pr-data.tar
     optional: true
 
 pre_script: rhdh/scripts/pre-dependabot-risk-rater.sh
@@ -73,4 +78,4 @@ overlays:
       sandbox:
         ISSUE_URL: "${GITHUB_ISSUE_URL}"
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
-        GH_TOKEN: "${GH_TOKEN}"
+        NODE_USE_ENV_PROXY: "1"
