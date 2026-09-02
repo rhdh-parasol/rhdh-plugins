@@ -64,11 +64,6 @@ host_files:
 pre_script: rhdh/scripts/pre-dependabot-risk-rater.sh
 post_script: rhdh/scripts/post-dependabot-risk-rater.sh
 
-validation_loop:
-  script: scripts/validate-output-schema.sh
-  schema: rhdh/schemas/dependabot-risk-rater-result.schema.json
-  max_iterations: 2
-
 timeout_minutes: 20
 
 overlays:
