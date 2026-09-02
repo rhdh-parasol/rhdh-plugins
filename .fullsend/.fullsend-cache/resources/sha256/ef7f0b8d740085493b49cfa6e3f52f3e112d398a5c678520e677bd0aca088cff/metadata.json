@@ -1,0 +1,84 @@
+{
+  "url": "https://github.com/christoph-jerolimov/dependency-update-risk-rating/tree/3ce2d475c6041fcf930241e5bdd43bb8122692c1/.claude/skills/dependency-update-risk-rating",
+  "fetch_time": "2026-09-02T10:50:47.361747Z",
+  "sha256": "ef7f0b8d740085493b49cfa6e3f52f3e112d398a5c678520e677bd0aca088cff",
+  "type": "directory",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "8656621efea0cd87530b38f679a0b03b394ac7cae9785cebba1d10cf4af4a119"
+    },
+    {
+      "path": "references/changelog-analysis.md",
+      "sha256": "45f6bc9126cbd76e9ae665d5fcfb8d5c6dd561fdd359787e4791670e674b5ccb"
+    },
+    {
+      "path": "references/config.md",
+      "sha256": "afa87e48094c5be456c36e1e58139e08b83fcaa4652792471eb80d79c5e954f9"
+    },
+    {
+      "path": "references/report-template.md",
+      "sha256": "895546079bc17948d918672480f3b0f28a2feb0faf1cf54aeab1c390555fd15b"
+    },
+    {
+      "path": "references/scoring.md",
+      "sha256": "0affdbae415fe59e21db13818814524123ea99a97691fdc6a647bc7b47995ccc"
+    },
+    {
+      "path": "scripts/check-backstage.ts",
+      "sha256": "08c050aeb51bd232cb35d201c31aad5e3f3e65d2926dec5baa3941ca6468df74"
+    },
+    {
+      "path": "scripts/collect-metrics.ts",
+      "sha256": "2f592587a8abbf05fa539bf4e8752b463ccef37edf277818b2dea929d194c965"
+    },
+    {
+      "path": "scripts/compare-manifests.ts",
+      "sha256": "2547278330b4ff96fe14e4dec0383b39157a4667f6fe9371bfde6a2087d218ee"
+    },
+    {
+      "path": "scripts/data/support-levels.yaml",
+      "sha256": "9eb7193c15ab58f64601ae0fa6e0d916361968168b6be558693028af06c377e4"
+    },
+    {
+      "path": "scripts/detect-changes.ts",
+      "sha256": "7630c100dd777df77700ec10bde305b36abe15319c077daa9f8b721c2b888911"
+    },
+    {
+      "path": "scripts/fetch-codecov.ts",
+      "sha256": "a4fb6b3bb1c1a588fd3629c37c58042a8d82f475bd778403c8dac1d7cd45c571"
+    },
+    {
+      "path": "scripts/lib/cli.ts",
+      "sha256": "f54f1fd10f4925f569959f1c88122fdabf78e3aa1292e439f7dc975fd1f2f8ed"
+    },
+    {
+      "path": "scripts/lib/github-raw.ts",
+      "sha256": "0811e9d00a2e61b10566068ac844e322671e4d236d98aea7886e466eb7f14923"
+    },
+    {
+      "path": "scripts/lib/http.ts",
+      "sha256": "8cc0d705d374a9765a82c0629efb02bd0793ceed97d0d891ce86aec50d638058"
+    },
+    {
+      "path": "scripts/lib/match.ts",
+      "sha256": "d5d5f644edc79cf1fdac5f07675f8342f0f50b5665f90faa0dd6c165e7ee7fe5"
+    },
+    {
+      "path": "scripts/lib/semver.ts",
+      "sha256": "07b9fd83d2d1cdb7e9bc46cc6ed3bc5adde6b8131787ddd3acc6e208e9393e60"
+    },
+    {
+      "path": "scripts/lib/support.ts",
+      "sha256": "1e460353061984d370a6872f40008b6890e18fbf76a0f3c3dda98a3e1124dc39"
+    },
+    {
+      "path": "scripts/lib/yaml.ts",
+      "sha256": "f5150e304bbf3d2700037959ff45738e1b991759ddc8c81552e1d1f78e0d2bde"
+    },
+    {
+      "path": "scripts/score.ts",
+      "sha256": "7403def7ab134df54e4a665b03d60988a793d93229674b9679b5886612fba553"
+    }
+  ]
+}

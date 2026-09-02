@@ -16,7 +16,7 @@ agents:
       model: claude-opus-4-6
     - name: dependabot-risk-rater
       source: rhdh/harness/dependabot-risk-rater.yaml
-      model: claude-opus-4-6
+      model: claude-haiku-4-5@20251001
 roles:
     - triage
     - coder

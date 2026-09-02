@@ -84,7 +84,7 @@ if ! gh pr view "${PR_NUMBER}" --repo "${REPO_FULL_NAME}" --json number >/dev/nu
 fi
 
 PR_JSON="$(gh pr view "${PR_NUMBER}" --repo "${REPO_FULL_NAME}" \
-  --json number,url,title,body,state,baseRefOid,headRefOid,files,labels)"
+  --json number,url,title,body,state,baseRefName,headRefOid,files,labels)"
 
 PR_STATE="$(jq -r '.state' <<<"${PR_JSON}")"
 if [[ "${PR_STATE}" != "OPEN" ]]; then
@@ -99,7 +99,7 @@ jq '{
   title,
   body,
   state,
-  base_sha: .baseRefOid,
+  base_ref: .baseRefName,
   head_sha: .headRefOid,
   files: [.files[].path],
   labels: [.labels[].name]
