@@ -1,6 +1,6 @@
 # Contributing to rhdh-parasol/rhdh-plugins
 
-This is the **rhdh-parasol** playground for experimenting with RHDH plugins. Contributions, fixes, and new ideas are all welcome.
+This repository hosts [Red Hat Developer Hub](https://developers.redhat.com/rhdh) plugins maintained by the **rhdh-parasol** team. Contributions, fixes, and new ideas are all welcome.
 
 ## Proposing a change
 
