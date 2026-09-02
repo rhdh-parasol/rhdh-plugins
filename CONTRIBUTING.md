@@ -16,11 +16,11 @@ This is the **rhdh-parasol** playground for experimenting with RHDH plugins. Con
 
 ## Creating changesets
 
-Each workspace uses its own `.changesets` directory for release tracking.
+Each workspace uses its own `.changeset` directory for release tracking.
 When your change affects a published plugin, add a changeset so the release
 pipeline can version and publish it automatically:
 
-1. Run `npx changeset` inside the workspace directory.
+1. Run `yarn changeset` inside the workspace directory.
 2. Select the affected package(s) and the appropriate bump level (`patch`,
    `minor`, or `major`).
 3. Write a short summary of the change and commit the generated file with
