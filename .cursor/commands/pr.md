@@ -129,7 +129,7 @@ gh pr create --repo redhat-developer/rhdh-plugins --base main --title "<pr-title
 - <Jira link — ask the user for the Jira ticket URL, or leave as TODO if not provided>
 
 ## ✔️ Checklist
-- [x] A changeset describing the change and affected packages. ([more info](./CONTRIBUTING.md))
+- [x] A changeset describing the change and affected packages. ([more info](./CONTRIBUTING.md#creating-changesets))
 - [ ] Added or Updated documentation
 - [ ] Tests for new functionality and regression tests for bug fixes
 - [ ] Screenshots attached (for UI changes)
