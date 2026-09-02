@@ -1,0 +1,80 @@
+# Standalone custom agent: dependency-update risk rating on /fullsend-risk-rating.
+# Reuses the code sandbox (image, yarn, node→GitHub/npm) and the review mint
+# role so the post-script can comment. Does not inherit review/code pre/post
+# scripts or skills (those assume a different job).
+#
+# TODO: replace the zero sha256 below with ComputeTreeHash of
+# .claude/skills/dependency-update-risk-rating at commit
+# 3ce2d475c6041fcf930241e5bdd43bb8122692c1 before the first real run.
+agent: rhdh/agents/dependabot-risk-rater.md
+model: opus
+image: ghcr.io/fullsend-ai/fullsend-code:latest
+policy: rhdh/policies/dependabot-risk-rater.yaml
+
+role: review
+slug: rhdh-plugins-dependabot-risk-rater
+
+trigger: >
+  event.transition.kind == "comment_added"
+    && has(event.transition.comment.command)
+    && event.transition.comment.command == "/fullsend-risk-rating"
+    && event.entity.kind == "work_item"
+    && has(event.state.change_proposal)
+    && !event.state.change_proposal.is_fork
+    && event.actor.kind != "bot"
+
+skills:
+# TODO: replace the zero sha256 below with ComputeTreeHash of
+  - https://github.com/christoph-jerolimov/dependency-update-risk-rating/tree/3ce2d475c6041fcf930241e5bdd43bb8122692c1/.claude/skills/dependency-update-risk-rating#sha256=0000000000000000000000000000000000000000000000000000000000000000
+
+# Harness-level allowlist required for URL skills (not inherited from
+# config.yaml). Must also be covered by config.yaml allowed_remote_resources.
+allowed_remote_resources:
+  - https://github.com/christoph-jerolimov/dependency-update-risk-rating/
+
+host_files:
+  - src: common/env/gcp-vertex.env
+    dest: /sandbox/workspace/.env.d/gcp-vertex.env
+    expand: true
+  - src: ${GOOGLE_APPLICATION_CREDENTIALS}
+    dest: /tmp/.gcp-credentials.json
+  - src: ${GCP_OIDC_TOKEN_FILE}
+    dest: /sandbox/workspace/.gcp-oidc-token
+    optional: true
+  - src: rhdh/bin/yarn
+    dest: /sandbox/workspace/bin/yarn
+  - src: rhdh/env/yarn-proxy.env
+    dest: /sandbox/workspace/.env.d/yarn-proxy.env
+  - src: /tmp/workspace/pr-context.json
+    dest: /sandbox/workspace/pr-context.json
+    optional: true
+
+pre_script: rhdh/scripts/pre-dependabot-risk-rater.sh
+post_script: rhdh/scripts/post-dependabot-risk-rater.sh
+
+validation_loop:
+  script: scripts/validate-output-schema.sh
+  schema: rhdh/schemas/dependabot-risk-rater-result.schema.json
+  max_iterations: 2
+
+timeout_minutes: 20
+
+overlays:
+  - when: 'runtime.forge == "github"'
+    env:
+      runner:
+        GH_TOKEN: "${GH_TOKEN}"
+        REVIEW_TOKEN: "${REVIEW_TOKEN}"
+        REPO_FULL_NAME: "${REPO_FULL_NAME}"
+        PR_NUMBER: "${PR_NUMBER}"
+        ISSUE_NUMBER: "${ISSUE_NUMBER}"
+        ISSUE_URL: "${ISSUE_URL}"
+        GITHUB_PR_URL: "${GITHUB_PR_URL}"
+        GITHUB_ISSUE_URL: "${GITHUB_ISSUE_URL}"
+        FULLSEND_OUTPUT_FILE: agent-result.json
+      sandbox:
+        ISSUE_URL: "${ISSUE_URL}"
+        GITHUB_PR_URL: "${GITHUB_PR_URL}"
+        PR_NUMBER: "${PR_NUMBER}"
+        REPO_FULL_NAME: "${REPO_FULL_NAME}"
+        GH_TOKEN: "${GH_TOKEN}"
