@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import {
@@ -23,6 +23,9 @@ import {
 } from '@backstage/frontend-plugin-api';
 import { AppRootWrapperBlueprint } from '@backstage/plugin-app-react';
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
+
+import Box from '@mui/material/Box';
+import GlobalStyles from '@mui/material/GlobalStyles';
 
 import { GlobalHeaderProvider } from './GlobalHeaderContext';
 import { GlobalHeader } from '../components/GlobalHeader';
@@ -37,7 +40,43 @@ import type {
 import { readConfigMenuItems } from '../utils/readConfigMenuItems';
 import { readConfigComponents } from '../utils/readConfigComponents';
 
-function GlobalHeaderWrapper({
+/**
+ * Fallback height in px used before the header is measured at runtime.
+ * Matches the MUI Toolbar default `minHeight` at `@media (min-width: 600px)`.
+ * The wrapper dynamically measures the actual rendered height so the sidebar
+ * offset stays correct regardless of theme or viewport.
+ * @internal
+ */
+export const HEADER_HEIGHT = 64;
+
+/**
+ * CSS custom property name set on `document.documentElement` so that global
+ * style overrides can reference the measured header height reactively.
+ */
+const HEADER_HEIGHT_VAR = '--global-header-height';
+
+/**
+ * Global CSS override that pushes the Backstage sidebar drawer below the
+ * header. Uses a global selector (not a descendant selector) with
+ * `!important` so the rule wins regardless of CSS specificity, cascade
+ * ordering, or whether the sidebar drawer is rendered via a React portal
+ * outside the wrapper's DOM subtree.
+ *
+ * Defined as a module-level constant to avoid re-creating the object on
+ * every render.
+ */
+const sidebarDrawerStyles = {
+  'div[class*="BackstageSidebar-drawer"]': {
+    top: `var(${HEADER_HEIGHT_VAR}, ${HEADER_HEIGHT}px) !important`,
+  },
+} as const;
+
+/**
+ * Wrapper component that renders the global header above the app content
+ * and applies layout offsets so the sidebar is not obscured.
+ * @internal Exported for testing only.
+ */
+export function GlobalHeaderWrapper({
   extensionComponents,
   extensionMenuItems,
   children,
@@ -68,10 +107,83 @@ function GlobalHeaderWrapper({
       ),
     [extensionMenuItems, configMenuItems],
   );
+  const [headerEl, setHeaderEl] = useState<HTMLElement | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(HEADER_HEIGHT);
+
+  /**
+   * Callback ref that fires every time the header DOM node is
+   * attached or detached, guaranteeing measurement runs on mount
+   * even if the element is not yet available during the first render
+   * commit (unlike useRef + useEffect with an empty dep array).
+   */
+  const headerCallbackRef = useCallback(
+    (node: HTMLElement | null) => setHeaderEl(node),
+    [],
+  );
+
+  useEffect(() => {
+    const setVar = (h: number) =>
+      document.documentElement.style.setProperty(HEADER_HEIGHT_VAR, `${h}px`);
+
+    if (!headerEl) {
+      // Publish fallback so the sidebar is offset even before the
+      // header element mounts.
+      setVar(HEADER_HEIGHT);
+      return undefined;
+    }
+
+    const update = () => {
+      const h = headerEl.getBoundingClientRect().height;
+      if (h > 0) {
+        setHeaderHeight(h);
+        setVar(h);
+      }
+    };
+
+    // Publish the fallback immediately, then measure the real height.
+    setVar(HEADER_HEIGHT);
+    update();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(update);
+      observer.observe(headerEl);
+      return () => {
+        observer.disconnect();
+        document.documentElement.style.removeProperty(HEADER_HEIGHT_VAR);
+      };
+    }
+
+    return () => {
+      document.documentElement.style.removeProperty(HEADER_HEIGHT_VAR);
+    };
+  }, [headerEl]);
+
   return (
     <GlobalHeaderProvider components={allComponents} menuItems={allMenuItems}>
-      <GlobalHeader />
-      {children}
+      <GlobalStyles styles={sidebarDrawerStyles} />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          '.techdocs-reader-page > main': {
+            height: 'unset',
+          },
+        }}
+      >
+        <Box ref={headerCallbackRef} sx={{ flexShrink: 0 }}>
+          <GlobalHeader />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 1,
+            maxHeight: `calc(100vh - ${headerHeight}px)`,
+          }}
+        >
+          {children}
+        </Box>
+      </Box>
     </GlobalHeaderProvider>
   );
 }
