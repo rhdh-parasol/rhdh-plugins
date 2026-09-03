@@ -79,4 +79,15 @@ describe('GlobalHeaderWrapper', () => {
   it('exports HEADER_HEIGHT as the fallback matching the MUI Toolbar default', () => {
     expect(HEADER_HEIGHT).toBe(64);
   });
+
+  it('sets the --global-header-height CSS variable on documentElement', () => {
+    renderWrapper(<div data-testid="app-content">App content</div>);
+
+    const value = document.documentElement.style.getPropertyValue(
+      '--global-header-height',
+    );
+    // JSDOM returns 0 from getBoundingClientRect, so the fallback (64px)
+    // is published by the effect rather than a measured value.
+    expect(value).toBe('64px');
+  });
 });

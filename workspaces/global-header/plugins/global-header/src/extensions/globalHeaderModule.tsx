@@ -25,6 +25,7 @@ import { AppRootWrapperBlueprint } from '@backstage/plugin-app-react';
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
 
 import Box from '@mui/material/Box';
+import GlobalStyles from '@mui/material/GlobalStyles';
 
 import { GlobalHeaderProvider } from './GlobalHeaderContext';
 import { GlobalHeader } from '../components/GlobalHeader';
@@ -47,6 +48,28 @@ import { readConfigComponents } from '../utils/readConfigComponents';
  * @internal
  */
 export const HEADER_HEIGHT = 64;
+
+/**
+ * CSS custom property name set on `document.documentElement` so that global
+ * style overrides can reference the measured header height reactively.
+ */
+const HEADER_HEIGHT_VAR = '--global-header-height';
+
+/**
+ * Global CSS override that pushes the Backstage sidebar drawer below the
+ * header. Uses a global selector (not a descendant selector) with
+ * `!important` so the rule wins regardless of CSS specificity, cascade
+ * ordering, or whether the sidebar drawer is rendered via a React portal
+ * outside the wrapper's DOM subtree.
+ *
+ * Defined as a module-level constant to avoid re-creating the object on
+ * every render.
+ */
+const sidebarDrawerStyles = {
+  'div[class*="BackstageSidebar-drawer"]': {
+    top: `var(${HEADER_HEIGHT_VAR}, ${HEADER_HEIGHT}px) !important`,
+  },
+} as const;
 
 /**
  * Wrapper component that renders the global header above the app content
@@ -91,12 +114,20 @@ export function GlobalHeaderWrapper({
     const el = headerRef.current;
     if (!el) return undefined;
 
+    const setVar = (h: number) =>
+      document.documentElement.style.setProperty(HEADER_HEIGHT_VAR, `${h}px`);
+
     const update = () => {
       const h = el.getBoundingClientRect().height;
       if (h > 0) {
         setHeaderHeight(h);
+        setVar(h);
       }
     };
+
+    // Publish the fallback immediately so the sidebar is offset even
+    // before the first measurement resolves.
+    setVar(HEADER_HEIGHT);
 
     // Measure immediately, then track resize changes.
     update();
@@ -104,24 +135,25 @@ export function GlobalHeaderWrapper({
     if (typeof ResizeObserver !== 'undefined') {
       const observer = new ResizeObserver(update);
       observer.observe(el);
-      return () => observer.disconnect();
+      return () => {
+        observer.disconnect();
+        document.documentElement.style.removeProperty(HEADER_HEIGHT_VAR);
+      };
     }
 
-    return undefined;
+    return () => {
+      document.documentElement.style.removeProperty(HEADER_HEIGHT_VAR);
+    };
   }, []);
 
   return (
     <GlobalHeaderProvider components={allComponents} menuItems={allMenuItems}>
+      <GlobalStyles styles={sidebarDrawerStyles} />
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           height: '100vh',
-          // Push the Backstage sidebar drawer below the header so the
-          // first navigation item is not obscured.
-          '& div[class*="BackstageSidebar-drawer"]': {
-            top: `max(0px, ${headerHeight}px)`,
-          },
           '.techdocs-reader-page > main': {
             height: 'unset',
           },
