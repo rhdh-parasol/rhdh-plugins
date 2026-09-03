@@ -63,7 +63,6 @@ host_files:
     optional: true
   - src: /tmp/workspace/pr-data.tar
     dest: /sandbox/workspace/pr-data.tar
-    optional: true
 
 pre_script: rhdh/scripts/pre-dependabot-risk-rater.sh
 post_script: rhdh/scripts/post-dependabot-risk-rater.sh
@@ -85,7 +84,9 @@ overlays:
         ISSUE_URL: "${GITHUB_ISSUE_URL}"
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
         NODE_USE_ENV_PROXY: "1"
-        FULLSEND_OUTPUT_FILE: agent-result.json
+        # FULLSEND_OUTPUT_FILE removed — the runner treats it as a reserved
+        # key and silently drops the override. env.runner (line 83) already
+        # sets it; the agent definition falls back to agent-result.json.
         # Vertex AI env vars (ADR 0055) — forwarded from runner env set by
         # setup-gcp + setup-agent-env in the reusable workflow.
         CLAUDE_CODE_USE_VERTEX: "1"
