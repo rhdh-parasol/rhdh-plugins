@@ -38,6 +38,10 @@ function renderWrapper(children?: React.ReactNode) {
 }
 
 describe('GlobalHeaderWrapper', () => {
+  afterEach(() => {
+    document.documentElement.style.removeProperty('--global-header-height');
+  });
+
   it('renders the global header and children', () => {
     renderWrapper(<div data-testid="app-content">App content</div>);
 
@@ -89,5 +93,34 @@ describe('GlobalHeaderWrapper', () => {
     // JSDOM returns 0 from getBoundingClientRect, so the fallback (64px)
     // is published by the effect rather than a measured value.
     expect(value).toBe('64px');
+  });
+
+  it('publishes measured height when getBoundingClientRect returns non-zero', () => {
+    const originalGetBCR = HTMLElement.prototype.getBoundingClientRect;
+    HTMLElement.prototype.getBoundingClientRect = jest.fn(
+      () =>
+        ({
+          height: 72,
+          width: 1024,
+          top: 0,
+          left: 0,
+          bottom: 72,
+          right: 1024,
+          x: 0,
+          y: 0,
+          toJSON: () => ({}),
+        } as DOMRect),
+    );
+
+    try {
+      renderWrapper(<div data-testid="app-content">App content</div>);
+
+      const value = document.documentElement.style.getPropertyValue(
+        '--global-header-height',
+      );
+      expect(value).toBe('72px');
+    } finally {
+      HTMLElement.prototype.getBoundingClientRect = originalGetBCR;
+    }
   });
 });

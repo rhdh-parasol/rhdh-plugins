@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import {
@@ -107,34 +107,46 @@ export function GlobalHeaderWrapper({
       ),
     [extensionMenuItems, configMenuItems],
   );
-  const headerRef = useRef<HTMLElement>(null);
+  const [headerEl, setHeaderEl] = useState<HTMLElement | null>(null);
   const [headerHeight, setHeaderHeight] = useState(HEADER_HEIGHT);
 
-  useEffect(() => {
-    const el = headerRef.current;
-    if (!el) return undefined;
+  /**
+   * Callback ref that fires every time the header DOM node is
+   * attached or detached, guaranteeing measurement runs on mount
+   * even if the element is not yet available during the first render
+   * commit (unlike useRef + useEffect with an empty dep array).
+   */
+  const headerCallbackRef = useCallback(
+    (node: HTMLElement | null) => setHeaderEl(node),
+    [],
+  );
 
+  useEffect(() => {
     const setVar = (h: number) =>
       document.documentElement.style.setProperty(HEADER_HEIGHT_VAR, `${h}px`);
 
+    if (!headerEl) {
+      // Publish fallback so the sidebar is offset even before the
+      // header element mounts.
+      setVar(HEADER_HEIGHT);
+      return undefined;
+    }
+
     const update = () => {
-      const h = el.getBoundingClientRect().height;
+      const h = headerEl.getBoundingClientRect().height;
       if (h > 0) {
         setHeaderHeight(h);
         setVar(h);
       }
     };
 
-    // Publish the fallback immediately so the sidebar is offset even
-    // before the first measurement resolves.
+    // Publish the fallback immediately, then measure the real height.
     setVar(HEADER_HEIGHT);
-
-    // Measure immediately, then track resize changes.
     update();
 
     if (typeof ResizeObserver !== 'undefined') {
       const observer = new ResizeObserver(update);
-      observer.observe(el);
+      observer.observe(headerEl);
       return () => {
         observer.disconnect();
         document.documentElement.style.removeProperty(HEADER_HEIGHT_VAR);
@@ -144,7 +156,7 @@ export function GlobalHeaderWrapper({
     return () => {
       document.documentElement.style.removeProperty(HEADER_HEIGHT_VAR);
     };
-  }, []);
+  }, [headerEl]);
 
   return (
     <GlobalHeaderProvider components={allComponents} menuItems={allMenuItems}>
@@ -159,7 +171,7 @@ export function GlobalHeaderWrapper({
           },
         }}
       >
-        <Box ref={headerRef} sx={{ flexShrink: 0 }}>
+        <Box ref={headerCallbackRef} sx={{ flexShrink: 0 }}>
           <GlobalHeader />
         </Box>
         <Box
