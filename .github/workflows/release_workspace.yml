@@ -38,7 +38,7 @@ concurrency:
 jobs:
   changesets-pr:
     name: Update Version Packages PR for ${{ inputs.workspace }} on branch ${{ inputs.branch }}
-    if: inputs.workspace == 'scorecard'
+    if: inputs.workspace == 'scorecard' || inputs.workspace == 'adoption-insights'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -118,7 +118,7 @@ jobs:
     name: Release workspace ${{ inputs.workspace }} on branch ${{ inputs.branch }}
     runs-on: ubuntu-latest
     needs: changesets-pr
-    if: inputs.workspace == 'scorecard' && (needs.changesets-pr.outputs.needs_release == 'true' || inputs.force_release == true)
+    if: (inputs.workspace == 'scorecard' || inputs.workspace == 'adoption-insights') && (needs.changesets-pr.outputs.needs_release == 'true' || inputs.force_release == true)
     defaults:
       run:
         working-directory: ./workspaces/${{ inputs.workspace }}
