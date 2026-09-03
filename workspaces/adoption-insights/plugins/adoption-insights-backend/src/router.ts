@@ -19,7 +19,7 @@ import {
 } from '@backstage/backend-plugin-api';
 import { NotAllowedError } from '@backstage/errors';
 import { AuthorizeResult } from '@backstage/plugin-permission-common';
-import { adoptionInsightsEventsReadPermission } from '@red-hat-developer-hub/backstage-plugin-adoption-insights-common';
+import { adoptionInsightsEventsReadPermission } from '@rhdh-parasol/backstage-plugin-adoption-insights-common';
 import express, { Request, Response } from 'express';
 import Router from 'express-promise-router';
 

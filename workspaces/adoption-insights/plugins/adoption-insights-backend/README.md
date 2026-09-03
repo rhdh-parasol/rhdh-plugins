@@ -4,11 +4,11 @@ This plugin builds the backend for Adoption Insights Plugin. It helps store anal
 
 ## Installation
 
-This plugin is installed via the `@red-hat-developer-hub/backstage-plugin-adoption-insights-backend` package. To install it to your backend package, run the following command:
+This plugin is installed via the `@rhdh-parasol/backstage-plugin-adoption-insights-backend` package. To install it to your backend package, run the following command:
 
 ```bash
 # From your root directory
-yarn --cwd packages/backend add @red-hat-developer-hub/backstage-plugin-adoption-insights-backend
+yarn --cwd packages/backend add @rhdh-parasol/backstage-plugin-adoption-insights-backend
 ```
 
 Then add the plugin to your backend in `packages/backend/src/index.ts`:
@@ -17,7 +17,7 @@ Then add the plugin to your backend in `packages/backend/src/index.ts`:
 const backend = createBackend();
 // ...
 backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-adoption-insights-backend'),
+  import('@rhdh-parasol/backstage-plugin-adoption-insights-backend'),
 );
 ```
 

@@ -18,8 +18,8 @@ import catalogPlugin from '@backstage/plugin-catalog/alpha';
 import userSettingsPlugin from '@backstage/plugin-user-settings/alpha';
 import adoptionInsightsPlugin, {
   adoptionInsightsTranslationsModule,
-} from '@red-hat-developer-hub/backstage-plugin-adoption-insights/alpha';
-import adoptionInsightsAnalyticsPlugin from '@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights/alpha';
+} from '@rhdh-parasol/backstage-plugin-adoption-insights/alpha';
+import adoptionInsightsAnalyticsPlugin from '@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights/alpha';
 import { navModule } from './modules/nav';
 import { signInModule } from './modules/signIn';
 

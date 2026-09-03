@@ -1,5 +1,5 @@
 {
-  "name": "@red-hat-developer-hub/backstage-plugin-adoption-insights",
+  "name": "@rhdh-parasol/backstage-plugin-adoption-insights",
   "version": "0.9.1",
   "license": "Apache-2.0",
   "main": "src/index.ts",
@@ -39,9 +39,9 @@
     "role": "frontend-plugin",
     "pluginId": "adoption-insights",
     "pluginPackages": [
-      "@red-hat-developer-hub/backstage-plugin-adoption-insights",
-      "@red-hat-developer-hub/backstage-plugin-adoption-insights-backend",
-      "@red-hat-developer-hub/backstage-plugin-adoption-insights-common"
+      "@rhdh-parasol/backstage-plugin-adoption-insights",
+      "@rhdh-parasol/backstage-plugin-adoption-insights-backend",
+      "@rhdh-parasol/backstage-plugin-adoption-insights-common"
     ]
   },
   "sideEffects": false,
@@ -67,7 +67,7 @@
     "@mui/lab": "5.0.0-alpha.177",
     "@mui/material": "5.18.0",
     "@mui/x-date-pickers": "5.0.20",
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights-common": "workspace:^",
+    "@rhdh-parasol/backstage-plugin-adoption-insights-common": "workspace:^",
     "date-fns": "2.30.0",
     "date-fns-tz": "^2.0.1",
     "react-use": "^17.2.4",
@@ -96,7 +96,7 @@
     "dist-scalprum"
   ],
   "scalprum": {
-    "name": "red-hat-developer-hub.backstage-plugin-adoption-insights",
+    "name": "rhdh-parasol.backstage-plugin-adoption-insights",
     "exposedModules": {
       "PluginRoot": "./src/index.ts",
       "Alpha": "./src/alpha.tsx"
