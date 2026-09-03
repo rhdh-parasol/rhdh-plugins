@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: plugin-lifecycle
+  title: RHDH Plugin Lifecycle
+  description: Durable lifecycle context for RHDH plugin delivery changes.
+  annotations:
+    github.com/project-slug: rhdh-parasol/rhdh-plugins
+    rhdh.io/source-repository: https://github.com/rhdh-parasol/rhdh-plugins
+spec:
+  type: backstage-plugin
+  owner: rhdh-team
+  lifecycle: experimental
+  subcomponentOf: component:default/rhdh-plugins
