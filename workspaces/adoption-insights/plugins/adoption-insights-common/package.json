@@ -1,5 +1,5 @@
 {
-  "name": "@red-hat-developer-hub/backstage-plugin-adoption-insights-common",
+  "name": "@rhdh-parasol/backstage-plugin-adoption-insights-common",
   "version": "0.9.1",
   "license": "Apache-2.0",
   "description": "Common functionalities for the adoption-insights plugin",
@@ -14,11 +14,11 @@
   "backstage": {
     "role": "common-library",
     "pluginId": "adoption-insights",
-    "pluginPackage": "@red-hat-developer-hub/backstage-plugin-adoption-insights-common",
+    "pluginPackage": "@rhdh-parasol/backstage-plugin-adoption-insights-common",
     "pluginPackages": [
-      "@red-hat-developer-hub/backstage-plugin-adoption-insights",
-      "@red-hat-developer-hub/backstage-plugin-adoption-insights-backend",
-      "@red-hat-developer-hub/backstage-plugin-adoption-insights-common"
+      "@rhdh-parasol/backstage-plugin-adoption-insights",
+      "@rhdh-parasol/backstage-plugin-adoption-insights-backend",
+      "@rhdh-parasol/backstage-plugin-adoption-insights-common"
     ]
   },
   "sideEffects": false,

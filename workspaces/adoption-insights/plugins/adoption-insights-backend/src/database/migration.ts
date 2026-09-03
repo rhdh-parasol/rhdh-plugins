@@ -19,7 +19,7 @@ import {
 } from '@backstage/backend-plugin-api';
 
 const migrationsDir = resolvePackagePath(
-  '@red-hat-developer-hub/backstage-plugin-adoption-insights-backend',
+  '@rhdh-parasol/backstage-plugin-adoption-insights-backend',
   'migrations',
 );
 

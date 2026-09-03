@@ -25,7 +25,7 @@ import {
   PolicyQueryUser,
 } from '@backstage/plugin-permission-node';
 import { policyExtensionPoint } from '@backstage/plugin-permission-node/alpha';
-import { adoptionInsightsEventsReadPermission } from '@red-hat-developer-hub/backstage-plugin-adoption-insights-common';
+import { adoptionInsightsEventsReadPermission } from '@rhdh-parasol/backstage-plugin-adoption-insights-common';
 
 class AdoptionInsightsTestPermissionPolicy implements PermissionPolicy {
   async handle(

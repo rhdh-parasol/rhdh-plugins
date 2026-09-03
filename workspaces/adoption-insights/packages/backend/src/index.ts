@@ -61,7 +61,7 @@ backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 backend.add(import('@backstage/plugin-kubernetes-backend'));
 
 backend.add(
-  import('@red-hat-developer-hub/backstage-plugin-adoption-insights-backend'),
+  import('@rhdh-parasol/backstage-plugin-adoption-insights-backend'),
 );
 
 backend.add(import('@backstage/plugin-auth-backend-module-github-provider'));

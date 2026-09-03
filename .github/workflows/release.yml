@@ -33,10 +33,10 @@ jobs:
         env:
           COMMIT_SHA_BEFORE: '${{ github.event.before }}'
 
-      # Parasol fork: only scorecard may run the npm publish pipeline.
+      # Parasol fork: only allowed workspaces may run the npm publish pipeline.
       # Other workspaces stay on the tree for development; they must not publish
       # under @red-hat-developer-hub or any Parasol scope.
-      - name: Restrict releases to scorecard
+      - name: Restrict releases to allowed workspaces
         id: allowlist
         env:
           WORKSPACES: ${{ steps.find-changed-workspaces.outputs.workspaces }}
@@ -46,7 +46,7 @@ jobs:
             echo "Release allowlist: no workspace list from previous step"
             exit 0
           fi
-          filtered="$(jq -c '[.[] | select(. == "scorecard")]' <<<"$WORKSPACES")"
+          filtered="$(jq -c '[.[] | select(. == "scorecard" or . == "adoption-insights")]' <<<"$WORKSPACES")"
           echo "workspaces=$filtered" >> "$GITHUB_OUTPUT"
           echo "Release allowlist filtered workspaces: $filtered"
 

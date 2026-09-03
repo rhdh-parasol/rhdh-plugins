@@ -50,8 +50,8 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import { AdoptionInsightsPage } from '@red-hat-developer-hub/backstage-plugin-adoption-insights';
-import { adoptionInsightsTranslations } from '@red-hat-developer-hub/backstage-plugin-adoption-insights/alpha';
+import { AdoptionInsightsPage } from '@rhdh-parasol/backstage-plugin-adoption-insights';
+import { adoptionInsightsTranslations } from '@rhdh-parasol/backstage-plugin-adoption-insights/alpha';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 
 const app = createApp({

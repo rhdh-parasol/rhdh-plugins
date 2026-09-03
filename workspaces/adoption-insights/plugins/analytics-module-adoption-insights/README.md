@@ -10,7 +10,7 @@ This plugin contains no other functionality.
 
 ```sh
 # From your Backstage root directory
-yarn --cwd packages/app add @red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights
+yarn --cwd packages/app add @rhdh-parasol/backstage-plugin-analytics-module-adoption-insights
 ```
 
 2. **Wire up the API implementation to your App:**
@@ -22,7 +22,7 @@ import {
   configApiRef,
   identityApiRef,
 } from '@backstage/core-plugin-api';
-import { AdoptionInsightsAnalyticsApi } from '@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights';
+import { AdoptionInsightsAnalyticsApi } from '@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights';
 
 export const apis: AnyApiFactory[] = [
   createApiFactory({
@@ -40,7 +40,7 @@ export const apis: AnyApiFactory[] = [
 
 ```tsx
 // packages/app/src/apis.ts
-import { AdoptionInsightsAnalyticsApiFactory } from '@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights';
+import { AdoptionInsightsAnalyticsApiFactory } from '@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights';
 
 export const apis: AnyApiFactory[] = [AdoptionInsightsAnalyticsApiFactory];
 ```
@@ -72,7 +72,7 @@ import {
   configApiRef,
   identityApiRef,
 } from '@backstage/core-plugin-api';
-import { AdoptionInsightsAnalyticsApi } from '@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights';
+import { AdoptionInsightsAnalyticsApi } from '@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights';
 
 export const apis: AnyApiFactory[] = [
   createApiFactory({

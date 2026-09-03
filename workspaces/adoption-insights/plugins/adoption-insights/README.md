@@ -21,7 +21,7 @@ Before installing the frontend plugin, ensure that the Adoption Insights backend
 To install the Adoption Insights plugin, run the following command:
 
 ```sh
-yarn workspace app add @red-hat-developer-hub/backstage-plugin-adoption-insights
+yarn workspace app add @rhdh-parasol/backstage-plugin-adoption-insights
 ```
 
 **Note**
@@ -53,7 +53,7 @@ permission:
 1. Add the **Adoption Insights** page to your Backstage application by modifying `packages/app/src/App.tsx`:
 
    ```tsx
-   import { AdoptionInsightsPage } from '@red-hat-developer-hub/backstage-plugin-adoption-insights';
+   import { AdoptionInsightsPage } from '@rhdh-parasol/backstage-plugin-adoption-insights';
 
    <Route path="/adoption-insights" element={<AdoptionInsightsPage />} />;
    ```

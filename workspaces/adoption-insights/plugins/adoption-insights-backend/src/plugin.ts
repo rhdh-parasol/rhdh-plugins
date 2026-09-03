@@ -17,7 +17,7 @@ import {
   coreServices,
   createBackendPlugin,
 } from '@backstage/backend-plugin-api';
-import { adoptionInsightsEventsReadPermission } from '@red-hat-developer-hub/backstage-plugin-adoption-insights-common';
+import { adoptionInsightsEventsReadPermission } from '@rhdh-parasol/backstage-plugin-adoption-insights-common';
 import { createRouter } from './router';
 import { migrate } from './database/migration';
 import { DatabaseFactory } from './database/DatabaseFactory';

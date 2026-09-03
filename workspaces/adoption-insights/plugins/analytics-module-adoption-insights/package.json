@@ -1,5 +1,5 @@
 {
-  "name": "@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights",
+  "name": "@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights",
   "version": "0.9.1",
   "license": "Apache-2.0",
   "main": "src/index.ts",

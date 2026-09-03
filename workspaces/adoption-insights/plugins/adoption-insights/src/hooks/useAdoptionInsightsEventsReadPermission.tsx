@@ -15,7 +15,7 @@
  */
 import { usePermission } from '@backstage/plugin-permission-react';
 
-import { adoptionInsightsEventsReadPermission } from '@red-hat-developer-hub/backstage-plugin-adoption-insights-common';
+import { adoptionInsightsEventsReadPermission } from '@rhdh-parasol/backstage-plugin-adoption-insights-common';
 
 export const useAdoptionInsightsEventsReadPermission = () => {
   const canReadInsightsEvents = usePermission({
