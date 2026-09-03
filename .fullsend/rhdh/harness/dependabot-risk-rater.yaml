@@ -85,8 +85,8 @@ overlays:
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
         NODE_USE_ENV_PROXY: "1"
         # FULLSEND_OUTPUT_FILE removed — the runner treats it as a reserved
-        # key and silently drops the override. env.runner (line 83) already
-        # sets it; the agent definition falls back to agent-result.json.
+        # key and silently drops the override. env.runner already sets it;
+        # the agent definition falls back to agent-result.json.
         # Vertex AI env vars (ADR 0055) — forwarded from runner env set by
         # setup-gcp + setup-agent-env in the reusable workflow.
         CLAUDE_CODE_USE_VERTEX: "1"
