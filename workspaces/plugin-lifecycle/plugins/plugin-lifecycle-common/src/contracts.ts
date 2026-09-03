@@ -15,6 +15,7 @@
  */
 import { z } from 'zod/v3';
 
+/** @public */
 export const API_SCHEMA_VERSION = 2 as const;
 
 const externalIdSchema = z.string().min(1).max(300);
@@ -23,6 +24,7 @@ const summarySchema = z.string().min(1).max(4000);
 const urlSchema = z.string().url().max(2048);
 const entityRefSchema = z.string().min(1).max(512);
 
+/** @public */
 export const lifecyclePhaseSchema = z.enum([
   'intent',
   'implementation',
@@ -31,6 +33,7 @@ export const lifecyclePhaseSchema = z.enum([
   'publication',
 ]);
 
+/** @public */
 export const lifecycleStateSchema = z.enum([
   'pending',
   'running',
@@ -41,6 +44,7 @@ export const lifecycleStateSchema = z.enum([
   'superseded',
 ]);
 
+/** @public */
 export const entityRoleSchema = z.enum([
   'subject',
   'source',
@@ -49,6 +53,7 @@ export const entityRoleSchema = z.enum([
   'package',
 ]);
 
+/** @public */
 export const lifecycleTargetSchema = z
   .object({
     rhdhVersion: shortTextSchema.optional(),
@@ -57,6 +62,7 @@ export const lifecycleTargetSchema = z
   })
   .strict();
 
+/** @public */
 export const lifecycleReferenceSchema = z
   .object({
     type: z.enum([
@@ -80,6 +86,7 @@ export const lifecycleReferenceSchema = z
   })
   .strict();
 
+/** @public */
 export const ciRunSchema = z
   .object({
     provider: shortTextSchema,
@@ -156,6 +163,7 @@ export const ciRunSchema = z
     }
   });
 
+/** @public */
 export const verificationSchema = z
   .object({
     method: z.enum(['playwright', 'smoke', 'manual', 'other']),
@@ -166,6 +174,7 @@ export const verificationSchema = z
   })
   .strict();
 
+/** @public */
 export const artifactSchema = z
   .object({
     artifactType: z.enum([
@@ -190,6 +199,7 @@ export const artifactSchema = z
   })
   .strict();
 
+/** @public */
 export const agentAttemptSchema = z
   .object({
     agent: shortTextSchema,
@@ -200,6 +210,7 @@ export const agentAttemptSchema = z
   })
   .strict();
 
+/** @public */
 export const changeCreatedEventSchema = z
   .object({
     kind: z.literal('change.created'),
@@ -210,6 +221,7 @@ export const changeCreatedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const phaseUpdatedEventSchema = z
   .object({
     kind: z.literal('phase.updated'),
@@ -222,6 +234,7 @@ export const phaseUpdatedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const referenceLinkedEventSchema = z
   .object({
     kind: z.literal('reference.linked'),
@@ -229,6 +242,7 @@ export const referenceLinkedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const ciRunRecordedEventSchema = z
   .object({
     kind: z.literal('ci.run.recorded'),
@@ -236,6 +250,7 @@ export const ciRunRecordedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const verificationRecordedEventSchema = z
   .object({
     kind: z.literal('verification.recorded'),
@@ -243,6 +258,7 @@ export const verificationRecordedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const artifactRecordedEventSchema = z
   .object({
     kind: z.literal('artifact.recorded'),
@@ -250,6 +266,7 @@ export const artifactRecordedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const agentAttemptRecordedEventSchema = z
   .object({
     kind: z.literal('agent.attempt.recorded'),
@@ -257,6 +274,7 @@ export const agentAttemptRecordedEventSchema = z
   })
   .strict();
 
+/** @public */
 export const changeSupersededEventSchema = z
   .object({
     kind: z.literal('change.superseded'),
@@ -265,6 +283,7 @@ export const changeSupersededEventSchema = z
   })
   .strict();
 
+/** @public */
 export const recordableLifecycleEventSchema = z.discriminatedUnion('kind', [
   phaseUpdatedEventSchema,
   referenceLinkedEventSchema,
@@ -275,6 +294,7 @@ export const recordableLifecycleEventSchema = z.discriminatedUnion('kind', [
   changeSupersededEventSchema,
 ]);
 
+/** @public */
 export const lifecycleEventPayloadSchema = z.discriminatedUnion('kind', [
   changeCreatedEventSchema,
   phaseUpdatedEventSchema,
@@ -286,6 +306,7 @@ export const lifecycleEventPayloadSchema = z.discriminatedUnion('kind', [
   changeSupersededEventSchema,
 ]);
 
+/** @public */
 export const lifecycleEventSchema = z
   .object({
     eventId: z.string().min(1).max(200),
@@ -300,6 +321,7 @@ export const lifecycleEventSchema = z
   })
   .strict();
 
+/** @public */
 export const lifecycleProjectionSchema = z
   .object({
     phase: lifecyclePhaseSchema,
@@ -333,6 +355,7 @@ export const lifecycleProjectionSchema = z
   })
   .strict();
 
+/** @public */
 export const lifecycleChangeSummarySchema = z
   .object({
     changeId: z.string().uuid(),
@@ -354,6 +377,7 @@ export const lifecycleChangeSummarySchema = z
   })
   .strict();
 
+/** @public */
 export const lifecycleSuccessfulPublicationSchema = z
   .object({
     change: lifecycleChangeSummarySchema,
@@ -362,6 +386,7 @@ export const lifecycleSuccessfulPublicationSchema = z
   })
   .strict();
 
+/** @public */
 export const createChangeInputSchema = z
   .object({
     requestId: z.string().min(1).max(200),
@@ -373,6 +398,7 @@ export const createChangeInputSchema = z
   })
   .strict();
 
+/** @public */
 export const createChangeOutputSchema = z
   .object({
     change: lifecycleChangeSummarySchema,
@@ -380,6 +406,7 @@ export const createChangeOutputSchema = z
   })
   .strict();
 
+/** @public */
 export const recordEventInputSchema = z
   .object({
     eventId: z.string().min(1).max(200),
@@ -390,6 +417,7 @@ export const recordEventInputSchema = z
   })
   .strict();
 
+/** @public */
 export const recordEventOutputSchema = z
   .object({
     event: lifecycleEventSchema,
@@ -397,6 +425,7 @@ export const recordEventOutputSchema = z
   })
   .strict();
 
+/** @public */
 export const getContextInputSchema = z
   .object({
     entityRef: entityRefSchema,
@@ -407,13 +436,16 @@ export const getContextInputSchema = z
   })
   .strict();
 
+/** @public */
 export const refreshInputSchema = z
   .object({ entityRef: entityRefSchema })
   .strict();
+/** @public */
 export const getContextActionInputSchema = getContextInputSchema.extend({
   refreshPolicy: z.enum(['if_stale', 'never']).default('if_stale'),
 });
 
+/** @public */
 export const catalogEntitySummarySchema = z
   .object({
     entityRef: entityRefSchema,
@@ -434,6 +466,7 @@ export const catalogEntitySummarySchema = z
   })
   .strict();
 
+/** @public */
 export const deliveryStatusSchema = z.enum([
   'stable',
   'attention_required',
@@ -443,7 +476,8 @@ export const deliveryStatusSchema = z.enum([
   'unknown',
 ]);
 
-const deliveryBuildSchema = z
+/** @public */
+export const deliveryBuildSchema = z
   .object({
     runId: externalIdSchema,
     runNumber: z.number().int().positive().optional(),
@@ -460,7 +494,8 @@ const deliveryBuildSchema = z
   })
   .strict();
 
-const deliveryCandidateSchema = z
+/** @public */
+export const deliveryCandidateSchema = z
   .object({
     changeId: z.string().uuid(),
     title: shortTextSchema,
@@ -505,7 +540,8 @@ const deliveryCandidateSchema = z
   })
   .strict();
 
-const deliveryPackageSchema = z
+/** @public */
+export const deliveryPackageSchema = z
   .object({
     entityRef: entityRefSchema,
     packageName: z.string().optional(),
@@ -517,6 +553,7 @@ const deliveryPackageSchema = z
   })
   .strict();
 
+/** @public */
 export const deliverySchema = z
   .object({
     status: deliveryStatusSchema,
@@ -544,12 +581,18 @@ export const deliverySchema = z
   })
   .strict();
 
+/** @public */
 export type DeliveryStatus = z.infer<typeof deliveryStatusSchema>;
+/** @public */
 export type DeliveryBuild = z.infer<typeof deliveryBuildSchema>;
+/** @public */
 export type DeliveryCandidate = z.infer<typeof deliveryCandidateSchema>;
+/** @public */
 export type DeliveryPackage = z.infer<typeof deliveryPackageSchema>;
+/** @public */
 export type Delivery = z.infer<typeof deliverySchema>;
 
+/** @public */
 export const lifecycleWarningSchema = z
   .object({
     code: z.string().min(1).max(100),
@@ -558,6 +601,7 @@ export const lifecycleWarningSchema = z
   })
   .strict();
 
+/** @public */
 export const lifecycleContextSchema = z
   .object({
     schemaVersion: z.literal(API_SCHEMA_VERSION),
@@ -609,36 +653,62 @@ export const lifecycleContextSchema = z
   })
   .strict();
 
+/** @public */
 export const getContextOutputSchema = lifecycleContextSchema;
+/** @public */
 export const refreshOutputSchema = lifecycleContextSchema;
 
+/** @public */
 export type LifecyclePhase = z.infer<typeof lifecyclePhaseSchema>;
+/** @public */
 export type LifecycleState = z.infer<typeof lifecycleStateSchema>;
+/** @public */
 export type EntityRole = z.infer<typeof entityRoleSchema>;
+/** @public */
 export type LifecycleTarget = z.infer<typeof lifecycleTargetSchema>;
+/** @public */
 export type LifecycleReference = z.infer<typeof lifecycleReferenceSchema>;
+/** @public */
 export type CiRun = z.infer<typeof ciRunSchema>;
+/** @public */
 export type Verification = z.infer<typeof verificationSchema>;
+/** @public */
 export type Artifact = z.infer<typeof artifactSchema>;
+/** @public */
 export type AgentAttempt = z.infer<typeof agentAttemptSchema>;
+/** @public */
 export type LifecycleEventPayload = z.infer<typeof lifecycleEventPayloadSchema>;
+/** @public */
 export type RecordableLifecycleEvent = z.infer<
   typeof recordableLifecycleEventSchema
 >;
+/** @public */
 export type LifecycleEvent = z.infer<typeof lifecycleEventSchema>;
+/** @public */
 export type LifecycleProjection = z.infer<typeof lifecycleProjectionSchema>;
+/** @public */
 export type LifecycleChangeSummary = z.infer<
   typeof lifecycleChangeSummarySchema
 >;
+/** @public */
 export type LifecycleSuccessfulPublication = z.infer<
   typeof lifecycleSuccessfulPublicationSchema
 >;
+/** @public */
 export type CreateChangeInput = z.infer<typeof createChangeInputSchema>;
+/** @public */
 export type CreateChangeOutput = z.infer<typeof createChangeOutputSchema>;
+/** @public */
 export type RecordEventInput = z.infer<typeof recordEventInputSchema>;
+/** @public */
 export type RecordEventOutput = z.infer<typeof recordEventOutputSchema>;
+/** @public */
 export type GetContextInput = z.infer<typeof getContextInputSchema>;
+/** @public */
 export type RefreshInput = z.infer<typeof refreshInputSchema>;
+/** @public */
 export type GetContextActionInput = z.infer<typeof getContextActionInputSchema>;
+/** @public */
 export type CatalogEntitySummary = z.infer<typeof catalogEntitySummarySchema>;
+/** @public */
 export type LifecycleContext = z.infer<typeof lifecycleContextSchema>;

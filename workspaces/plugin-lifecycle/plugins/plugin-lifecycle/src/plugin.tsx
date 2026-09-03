@@ -26,6 +26,7 @@ import {
 } from './api/PluginLifecycleApi';
 import { isLifecycleEntity } from './lifecycleEntity';
 
+/** @public */
 export const pluginLifecycleApi = ApiBlueprint.make({
   name: 'service',
   params: defineParams =>
@@ -37,6 +38,7 @@ export const pluginLifecycleApi = ApiBlueprint.make({
     }),
 });
 
+/** @public */
 export const entityPluginLifecycleContent = EntityContentBlueprint.make({
   name: 'lifecycle',
   params: {
@@ -50,6 +52,7 @@ export const entityPluginLifecycleContent = EntityContentBlueprint.make({
   },
 });
 
+/** @public */
 export const pluginLifecyclePlugin = createFrontendPlugin({
   pluginId: 'plugin-lifecycle',
   extensions: [pluginLifecycleApi, entityPluginLifecycleContent],

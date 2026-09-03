@@ -15,26 +15,31 @@
  */
 import { createPermission } from '@backstage/plugin-permission-common';
 
+/** @public */
 export const pluginLifecycleChangeReadPermission = createPermission({
   name: 'plugin-lifecycle.change.read',
   attributes: { action: 'read' },
 });
 
+/** @public */
 export const pluginLifecycleChangeCreatePermission = createPermission({
   name: 'plugin-lifecycle.change.create',
   attributes: { action: 'create' },
 });
 
+/** @public */
 export const pluginLifecycleEventCreatePermission = createPermission({
   name: 'plugin-lifecycle.event.create',
   attributes: { action: 'create' },
 });
 
+/** @public */
 export const pluginLifecycleSyncRunPermission = createPermission({
   name: 'plugin-lifecycle.sync.run',
   attributes: { action: 'create' },
 });
 
+/** @public */
 export const pluginLifecyclePermissions = [
   pluginLifecycleChangeReadPermission,
   pluginLifecycleChangeCreatePermission,

@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "bundled": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
+    "directory": "workspaces/plugin-lifecycle/packages/app"
+  },
   "backstage": {
     "role": "frontend"
   },

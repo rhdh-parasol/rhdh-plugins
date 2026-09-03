@@ -10,6 +10,11 @@
     "main": "dist/index.cjs.js",
     "types": "dist/index.d.ts"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
+    "directory": "workspaces/plugin-lifecycle/plugins/plugin-lifecycle-backend"
+  },
   "backstage": {
     "role": "backend-plugin",
     "pluginId": "plugin-lifecycle",
@@ -43,7 +48,7 @@
     "express": "^4.21.2",
     "express-promise-router": "^4.1.1",
     "jszip": "^3.10.1",
-    "knex": "3.1.0",
+    "knex": "^3.0.0",
     "zod": "^3.25.76 || ^4.0.0"
   },
   "devDependencies": {

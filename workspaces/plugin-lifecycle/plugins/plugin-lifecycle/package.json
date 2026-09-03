@@ -23,6 +23,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
+    "directory": "workspaces/plugin-lifecycle/plugins/plugin-lifecycle"
+  },
   "backstage": {
     "role": "frontend-plugin",
     "pluginId": "plugin-lifecycle",

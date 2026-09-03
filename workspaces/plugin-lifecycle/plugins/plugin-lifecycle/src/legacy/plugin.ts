@@ -22,6 +22,7 @@ import {
   discoveryApiRef,
   fetchApiRef,
 } from '@backstage/core-plugin-api';
+import type { ComponentType } from 'react';
 
 import { PluginLifecycleClient, pluginLifecycleApiRef } from '../api';
 
@@ -54,14 +55,15 @@ export const pluginLifecyclePlugin = createPlugin({
  *
  * @public
  */
-export const EntityPluginLifecycleContent = pluginLifecyclePlugin.provide(
-  createComponentExtension({
-    name: 'EntityPluginLifecycleContent',
-    component: {
-      lazy: () =>
-        import('../components/EntityPluginLifecycleContent').then(
-          m => m.EntityPluginLifecycleContent,
-        ),
-    },
-  }),
-);
+export const EntityPluginLifecycleContent: ComponentType =
+  pluginLifecyclePlugin.provide(
+    createComponentExtension({
+      name: 'EntityPluginLifecycleContent',
+      component: {
+        lazy: () =>
+          import('../components/EntityPluginLifecycleContent').then(
+            m => m.EntityPluginLifecycleContent,
+          ),
+      },
+    }),
+  );

@@ -52,6 +52,7 @@ function mergeReferences(
   ];
 }
 
+/** @public */
 export function reduceLifecycleEvents(
   events: LifecycleEvent[],
 ): LifecycleProjection {

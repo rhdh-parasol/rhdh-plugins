@@ -4,6 +4,11 @@
   "main": "dist/index.cjs.js",
   "types": "src/index.ts",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
+    "directory": "workspaces/plugin-lifecycle/packages/backend"
+  },
   "backstage": {
     "role": "backend"
   },

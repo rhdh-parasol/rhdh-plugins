@@ -38,6 +38,7 @@ import {
   MAX_REFRESH_WAIT_TIMEOUT_MS,
 } from './service/LifecycleService';
 
+/** @public */
 export const pluginLifecyclePlugin = createBackendPlugin({
   pluginId: 'plugin-lifecycle',
   register(env) {

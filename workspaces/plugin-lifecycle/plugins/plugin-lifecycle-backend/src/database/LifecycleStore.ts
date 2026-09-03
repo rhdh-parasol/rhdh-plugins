@@ -285,6 +285,7 @@ function diagnosticId(input: {
     .digest('hex');
 }
 
+/** @public */
 export class LifecycleStore {
   static async create(database: DatabaseService): Promise<LifecycleStore> {
     await migrate(database);

@@ -18,3 +18,12 @@ export { pluginLifecyclePlugin } from './plugin';
 export { LifecycleStore } from './database/LifecycleStore';
 export { reduceLifecycleEvents } from './database/projection';
 export { LifecycleService } from './service/LifecycleService';
+export type {
+  ChangeAssociation,
+  CreateChangeOptions,
+  LifecycleSubject,
+  LifecycleSubjectBinding,
+  LifecycleSyncState,
+  StoredChange,
+  StoredContext,
+} from './database/types';

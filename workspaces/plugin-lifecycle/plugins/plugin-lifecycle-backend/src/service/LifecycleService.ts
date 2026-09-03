@@ -319,9 +319,12 @@ function packageRefsForPlugin(entity?: Entity): Set<string> | undefined {
  * hold the browser connection indefinitely. The backend clamps configured
  * values before constructing this service.
  */
+/** @public */
 export const DEFAULT_REFRESH_WAIT_TIMEOUT_MS = 30_000;
+/** @public */
 export const MAX_REFRESH_WAIT_TIMEOUT_MS = 60_000;
 
+/** @public */
 export class LifecycleService {
   private refresher?: (entityRef: string) => Promise<void>;
   private bootstrapKey?: string;

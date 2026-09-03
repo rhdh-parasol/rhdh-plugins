@@ -21,12 +21,14 @@ import type {
   LifecycleSuccessfulPublication,
 } from '@red-hat-developer-hub/backstage-plugin-lifecycle-common';
 
+/** @public */
 export interface ChangeAssociation {
   entityRef: string;
   role: EntityRole;
   relationSource: 'subject' | 'catalog-relation' | 'catalog-annotation';
 }
 
+/** @public */
 export interface CreateChangeOptions {
   origin?: 'action' | 'github-actions' | 'fixture';
   externalChangeKey?: string;
@@ -37,6 +39,7 @@ export interface CreateChangeOptions {
   occurredAt?: string;
 }
 
+/** @public */
 export interface LifecycleSubject {
   id: string;
   overlayEntityRef: string;
@@ -50,6 +53,7 @@ export interface LifecycleSubject {
   lastObservedAt: string;
 }
 
+/** @public */
 export interface LifecycleSubjectBinding {
   subjectId: string;
   entityRef: string;
@@ -60,6 +64,7 @@ export interface LifecycleSubjectBinding {
   lastObservedAt: string;
 }
 
+/** @public */
 export interface LifecycleSyncState {
   status:
     | 'never'
@@ -76,13 +81,13 @@ export interface LifecycleSyncState {
   rateLimitResetAt?: string;
 }
 
+/** @public */
 export interface StoredChange {
   summary: LifecycleChangeSummary;
   projection: LifecycleProjection;
 }
 
-export interface StoredChangeDetails extends StoredChange {}
-
+/** @public */
 export interface StoredContext {
   changes: LifecycleChangeSummary[];
   selectedChange?: LifecycleChangeSummary;
