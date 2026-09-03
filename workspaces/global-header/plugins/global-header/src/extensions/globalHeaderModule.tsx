@@ -24,6 +24,8 @@ import {
 import { AppRootWrapperBlueprint } from '@backstage/plugin-app-react';
 import { configApiRef, useApi } from '@backstage/core-plugin-api';
 
+import Box from '@mui/material/Box';
+
 import { GlobalHeaderProvider } from './GlobalHeaderContext';
 import { GlobalHeader } from '../components/GlobalHeader';
 import {
@@ -37,7 +39,19 @@ import type {
 import { readConfigMenuItems } from '../utils/readConfigMenuItems';
 import { readConfigComponents } from '../utils/readConfigComponents';
 
-function GlobalHeaderWrapper({
+/**
+ * Default height in px of the MUI Toolbar rendered by GlobalHeader.
+ * Matches the MUI default `minHeight` at `@media (min-width: 600px)`.
+ * @internal
+ */
+export const HEADER_HEIGHT = 64;
+
+/**
+ * Wrapper component that renders the global header above the app content
+ * and applies layout offsets so the sidebar is not obscured.
+ * @internal Exported for testing only.
+ */
+export function GlobalHeaderWrapper({
   extensionComponents,
   extensionMenuItems,
   children,
@@ -70,8 +84,32 @@ function GlobalHeaderWrapper({
   );
   return (
     <GlobalHeaderProvider components={allComponents} menuItems={allMenuItems}>
-      <GlobalHeader />
-      {children}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          // Push the Backstage sidebar drawer below the header so the
+          // first navigation item is not obscured.
+          '& div[class*="BackstageSidebar-drawer"]': {
+            top: `max(0px, ${HEADER_HEIGHT}px)`,
+          },
+          '.techdocs-reader-page > main': {
+            height: 'unset',
+          },
+        }}
+      >
+        <GlobalHeader />
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 1,
+            maxHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
+          }}
+        >
+          {children}
+        </Box>
+      </Box>
     </GlobalHeaderProvider>
   );
 }
