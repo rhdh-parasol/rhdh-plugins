@@ -48,7 +48,20 @@ else
 fi
 
 if [[ -z "${RESULT_FILE}" || ! -f "${RESULT_FILE}" ]]; then
+  # Fallback: search recursively for the file (agent may have written it
+  # to an unexpected sub-path inside the iteration output tree).
+  RESULT_FILE="$(find . -name "${OUTPUT_FILE}" -type f 2>/dev/null | head -1)"
+fi
+
+if [[ -z "${RESULT_FILE}" || ! -f "${RESULT_FILE}" ]]; then
   echo "::error::${OUTPUT_FILE} not found"
+  echo "--- diagnostic: iteration output contents ---"
+  for dir in iteration-*/output; do
+    [[ -d "${dir}" ]] && ls -laR "${dir}" 2>/dev/null
+  done
+  echo "--- diagnostic: all iteration dirs ---"
+  ls -la iteration-*/ 2>/dev/null || echo "(no iteration-* dirs)"
+  echo "--- end diagnostic ---"
   exit 1
 fi
 
