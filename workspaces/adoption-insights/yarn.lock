@@ -8829,104 +8829,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@red-hat-developer-hub/backstage-plugin-adoption-insights-backend@workspace:^, @red-hat-developer-hub/backstage-plugin-adoption-insights-backend@workspace:plugins/adoption-insights-backend":
-  version: 0.0.0-use.local
-  resolution: "@red-hat-developer-hub/backstage-plugin-adoption-insights-backend@workspace:plugins/adoption-insights-backend"
-  dependencies:
-    "@backstage/backend-defaults": "npm:^0.17.3"
-    "@backstage/backend-plugin-api": "npm:^1.9.2"
-    "@backstage/backend-test-utils": "npm:^1.11.4"
-    "@backstage/cli": "npm:^0.36.3"
-    "@backstage/core-plugin-api": "npm:^1.12.7"
-    "@backstage/errors": "npm:^1.3.1"
-    "@backstage/plugin-catalog-node": "npm:^2.2.2"
-    "@backstage/plugin-permission-common": "npm:^0.9.9"
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights-common": "workspace:^"
-    "@types/express": "npm:^4.17.6"
-    "@types/luxon": "npm:^3.5.0"
-    "@types/supertest": "npm:^2.0.12"
-    express: "npm:^4.17.1"
-    express-promise-router: "npm:^4.1.0"
-    json-2-csv: "npm:^5.5.11"
-    knex: "npm:^3.1.0"
-    luxon: "npm:^3.5.0"
-    supertest: "npm:^6.2.4"
-    uuid: "npm:^11.1.0"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
-
-"@red-hat-developer-hub/backstage-plugin-adoption-insights-common@workspace:^, @red-hat-developer-hub/backstage-plugin-adoption-insights-common@workspace:plugins/adoption-insights-common":
-  version: 0.0.0-use.local
-  resolution: "@red-hat-developer-hub/backstage-plugin-adoption-insights-common@workspace:plugins/adoption-insights-common"
-  dependencies:
-    "@backstage/cli": "npm:^0.36.3"
-  peerDependencies:
-    "@backstage/plugin-permission-common": ^0.9.9
-  languageName: unknown
-  linkType: soft
-
-"@red-hat-developer-hub/backstage-plugin-adoption-insights@workspace:^, @red-hat-developer-hub/backstage-plugin-adoption-insights@workspace:plugins/adoption-insights":
-  version: 0.0.0-use.local
-  resolution: "@red-hat-developer-hub/backstage-plugin-adoption-insights@workspace:plugins/adoption-insights"
-  dependencies:
-    "@backstage/catalog-model": "npm:^1.9.0"
-    "@backstage/cli": "npm:^0.36.3"
-    "@backstage/config": "npm:^1.3.8"
-    "@backstage/core-app-api": "npm:^1.20.2"
-    "@backstage/core-components": "npm:^0.18.11"
-    "@backstage/core-plugin-api": "npm:^1.12.7"
-    "@backstage/dev-utils": "npm:^1.1.24"
-    "@backstage/frontend-plugin-api": "npm:^0.17.2"
-    "@backstage/plugin-app-react": "npm:^0.2.4"
-    "@backstage/plugin-catalog": "npm:^2.0.6"
-    "@backstage/plugin-catalog-react": "npm:^3.1.0"
-    "@backstage/plugin-permission-react": "npm:^0.5.2"
-    "@backstage/test-utils": "npm:^1.7.19"
-    "@backstage/theme": "npm:^0.7.3"
-    "@mui/icons-material": "npm:5.18.0"
-    "@mui/lab": "npm:5.0.0-alpha.177"
-    "@mui/material": "npm:5.18.0"
-    "@mui/x-date-pickers": "npm:5.0.20"
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights-common": "workspace:^"
-    "@red-hat-developer-hub/backstage-plugin-theme": "npm:^0.14.11"
-    "@testing-library/jest-dom": "npm:^6.0.0"
-    "@testing-library/react": "npm:^14.0.0"
-    "@testing-library/user-event": "npm:^14.0.0"
-    date-fns: "npm:2.30.0"
-    date-fns-tz: "npm:^2.0.1"
-    msw: "npm:^1.0.0"
-    react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
-    react-use: "npm:^17.2.4"
-    recharts: "npm:^2.15.1"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0
-  languageName: unknown
-  linkType: soft
-
-"@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights@workspace:^, @red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights@workspace:plugins/analytics-module-adoption-insights":
-  version: 0.0.0-use.local
-  resolution: "@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights@workspace:plugins/analytics-module-adoption-insights"
-  dependencies:
-    "@backstage/cli": "npm:^0.36.3"
-    "@backstage/core-app-api": "npm:^1.20.2"
-    "@backstage/core-components": "npm:^0.18.11"
-    "@backstage/core-plugin-api": "npm:^1.12.7"
-    "@backstage/dev-utils": "npm:^1.1.24"
-    "@backstage/frontend-plugin-api": "npm:^0.17.2"
-    "@backstage/test-utils": "npm:^1.7.19"
-    "@backstage/theme": "npm:^0.7.3"
-    "@testing-library/jest-dom": "npm:^6.0.0"
-    "@testing-library/react": "npm:^14.0.0"
-    "@testing-library/user-event": "npm:^14.0.0"
-    msw: "npm:^1.0.0"
-    react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
-    react-use: "npm:^17.2.4"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0
-  languageName: unknown
-  linkType: soft
-
 "@red-hat-developer-hub/backstage-plugin-theme@npm:^0.14.11":
   version: 0.14.11
   resolution: "@red-hat-developer-hub/backstage-plugin-theme@npm:0.14.11"
@@ -9016,6 +8918,104 @@ __metadata:
   checksum: 10c0/edf4bb4f600e13ee24dac2cecb389b4bfe83764a5168b553b726b41d6b76bc8c24212f2e4f7d89abae395ba8479082646a122a2a066cd5c743e4e372e0a3c345
   languageName: node
   linkType: hard
+
+"@rhdh-parasol/backstage-plugin-adoption-insights-backend@workspace:^, @rhdh-parasol/backstage-plugin-adoption-insights-backend@workspace:plugins/adoption-insights-backend":
+  version: 0.0.0-use.local
+  resolution: "@rhdh-parasol/backstage-plugin-adoption-insights-backend@workspace:plugins/adoption-insights-backend"
+  dependencies:
+    "@backstage/backend-defaults": "npm:^0.17.3"
+    "@backstage/backend-plugin-api": "npm:^1.9.2"
+    "@backstage/backend-test-utils": "npm:^1.11.4"
+    "@backstage/cli": "npm:^0.36.3"
+    "@backstage/core-plugin-api": "npm:^1.12.7"
+    "@backstage/errors": "npm:^1.3.1"
+    "@backstage/plugin-catalog-node": "npm:^2.2.2"
+    "@backstage/plugin-permission-common": "npm:^0.9.9"
+    "@rhdh-parasol/backstage-plugin-adoption-insights-common": "workspace:^"
+    "@types/express": "npm:^4.17.6"
+    "@types/luxon": "npm:^3.5.0"
+    "@types/supertest": "npm:^2.0.12"
+    express: "npm:^4.17.1"
+    express-promise-router: "npm:^4.1.0"
+    json-2-csv: "npm:^5.5.11"
+    knex: "npm:^3.1.0"
+    luxon: "npm:^3.5.0"
+    supertest: "npm:^6.2.4"
+    uuid: "npm:^11.1.0"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
+"@rhdh-parasol/backstage-plugin-adoption-insights-common@workspace:^, @rhdh-parasol/backstage-plugin-adoption-insights-common@workspace:plugins/adoption-insights-common":
+  version: 0.0.0-use.local
+  resolution: "@rhdh-parasol/backstage-plugin-adoption-insights-common@workspace:plugins/adoption-insights-common"
+  dependencies:
+    "@backstage/cli": "npm:^0.36.3"
+  peerDependencies:
+    "@backstage/plugin-permission-common": ^0.9.9
+  languageName: unknown
+  linkType: soft
+
+"@rhdh-parasol/backstage-plugin-adoption-insights@workspace:^, @rhdh-parasol/backstage-plugin-adoption-insights@workspace:plugins/adoption-insights":
+  version: 0.0.0-use.local
+  resolution: "@rhdh-parasol/backstage-plugin-adoption-insights@workspace:plugins/adoption-insights"
+  dependencies:
+    "@backstage/catalog-model": "npm:^1.9.0"
+    "@backstage/cli": "npm:^0.36.3"
+    "@backstage/config": "npm:^1.3.8"
+    "@backstage/core-app-api": "npm:^1.20.2"
+    "@backstage/core-components": "npm:^0.18.11"
+    "@backstage/core-plugin-api": "npm:^1.12.7"
+    "@backstage/dev-utils": "npm:^1.1.24"
+    "@backstage/frontend-plugin-api": "npm:^0.17.2"
+    "@backstage/plugin-app-react": "npm:^0.2.4"
+    "@backstage/plugin-catalog": "npm:^2.0.6"
+    "@backstage/plugin-catalog-react": "npm:^3.1.0"
+    "@backstage/plugin-permission-react": "npm:^0.5.2"
+    "@backstage/test-utils": "npm:^1.7.19"
+    "@backstage/theme": "npm:^0.7.3"
+    "@mui/icons-material": "npm:5.18.0"
+    "@mui/lab": "npm:5.0.0-alpha.177"
+    "@mui/material": "npm:5.18.0"
+    "@mui/x-date-pickers": "npm:5.0.20"
+    "@red-hat-developer-hub/backstage-plugin-theme": "npm:^0.14.11"
+    "@rhdh-parasol/backstage-plugin-adoption-insights-common": "workspace:^"
+    "@testing-library/jest-dom": "npm:^6.0.0"
+    "@testing-library/react": "npm:^14.0.0"
+    "@testing-library/user-event": "npm:^14.0.0"
+    date-fns: "npm:2.30.0"
+    date-fns-tz: "npm:^2.0.1"
+    msw: "npm:^1.0.0"
+    react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
+    react-use: "npm:^17.2.4"
+    recharts: "npm:^2.15.1"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+  languageName: unknown
+  linkType: soft
+
+"@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights@workspace:^, @rhdh-parasol/backstage-plugin-analytics-module-adoption-insights@workspace:plugins/analytics-module-adoption-insights":
+  version: 0.0.0-use.local
+  resolution: "@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights@workspace:plugins/analytics-module-adoption-insights"
+  dependencies:
+    "@backstage/cli": "npm:^0.36.3"
+    "@backstage/core-app-api": "npm:^1.20.2"
+    "@backstage/core-components": "npm:^0.18.11"
+    "@backstage/core-plugin-api": "npm:^1.12.7"
+    "@backstage/dev-utils": "npm:^1.1.24"
+    "@backstage/frontend-plugin-api": "npm:^0.17.2"
+    "@backstage/test-utils": "npm:^1.7.19"
+    "@backstage/theme": "npm:^0.7.3"
+    "@testing-library/jest-dom": "npm:^6.0.0"
+    "@testing-library/react": "npm:^14.0.0"
+    "@testing-library/user-event": "npm:^14.0.0"
+    msw: "npm:^1.0.0"
+    react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
+    react-use: "npm:^17.2.4"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+  languageName: unknown
+  linkType: soft
 
 "@rjsf/core@npm:5.24.13":
   version: 5.24.13
@@ -13461,9 +13461,9 @@ __metadata:
     "@mui/material": "npm:5.18.0"
     "@mui/styles": "npm:5.18.0"
     "@playwright/test": "npm:1.61.1"
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights": "workspace:^"
-    "@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights": "workspace:^"
     "@red-hat-developer-hub/backstage-plugin-theme": "npm:^0.14.11"
+    "@rhdh-parasol/backstage-plugin-adoption-insights": "workspace:^"
+    "@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights": "workspace:^"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
@@ -13503,9 +13503,9 @@ __metadata:
     "@mui/icons-material": "npm:^5.18.0"
     "@mui/material": "npm:^5.18.0"
     "@playwright/test": "npm:1.61.1"
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights": "workspace:^"
-    "@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights": "workspace:^"
     "@red-hat-developer-hub/backstage-plugin-theme": "npm:^0.14.11"
+    "@rhdh-parasol/backstage-plugin-adoption-insights": "workspace:^"
+    "@rhdh-parasol/backstage-plugin-analytics-module-adoption-insights": "workspace:^"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
@@ -14148,8 +14148,8 @@ __metadata:
     "@backstage/plugin-search-backend-module-techdocs": "npm:^0.4.15"
     "@backstage/plugin-search-backend-node": "npm:^1.4.5"
     "@backstage/plugin-techdocs-backend": "npm:^2.2.1"
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights-backend": "workspace:^"
-    "@red-hat-developer-hub/backstage-plugin-adoption-insights-common": "workspace:^"
+    "@rhdh-parasol/backstage-plugin-adoption-insights-backend": "workspace:^"
+    "@rhdh-parasol/backstage-plugin-adoption-insights-common": "workspace:^"
     app: "link:../app"
     better-sqlite3: "npm:^12.0.0"
     node-gyp: "npm:^10.0.0"
