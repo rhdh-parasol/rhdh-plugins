@@ -11,8 +11,14 @@ model: claude-opus-4-6
 image: ghcr.io/fullsend-ai/fullsend-code:latest
 policy: rhdh/policies/dependabot-risk-rater.yaml
 
+# Bare `providers: [vertex-ai]` creates OpenShell type fullsend-vertex-ai
+# without importing the profile (this repo does not vendor .fullsend/profiles/).
+# Point at the copies under rhdh/ so the profile is imported before create.
+openshell:
+  profiles:
+    - rhdh/profiles/fullsend-vertex-ai.yaml
 providers:
-  - vertex-ai
+  - rhdh/providers/vertex-ai.yaml
 
 role: review
 slug: rhdh-plugins-dependabot-risk-rater
