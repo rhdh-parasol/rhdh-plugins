@@ -11,8 +11,9 @@ model: claude-opus-4-6
 image: ghcr.io/fullsend-ai/fullsend-code:latest
 policy: rhdh/policies/dependabot-risk-rater.yaml
 
-providers:
-  - vertex-ai.yaml
+# providers: vertex-ai.yaml removed — the fullsend-vertex-ai provider type is
+# unsupported in per-repo mode. Vertex AI env vars are passed via env.sandbox
+# (ADR 0055), same fix as rhdh-plugin-export-overlays#3527.
 
 role: review
 slug: rhdh-plugins-dependabot-risk-rater
@@ -43,9 +44,9 @@ allowed_remote_resources:
   - https://github.com/christoph-jerolimov/dependency-update-risk-rating/
 
 host_files:
-  - src: common/env/gcp-vertex.env
-    dest: /sandbox/workspace/.env.d/gcp-vertex.env
-    expand: true
+  # common/env/gcp-vertex.env removed — Vertex env vars passed via env.sandbox
+  # (ADR 0055). The reusable workflow sets them on the runner; OpenShell does
+  # not inherit them, so they must be forwarded explicitly.
   - src: ${GOOGLE_APPLICATION_CREDENTIALS}
     dest: /tmp/.gcp-credentials.json
   - src: ${GCP_OIDC_TOKEN_FILE}
@@ -85,3 +86,10 @@ overlays:
         REPO_FULL_NAME: "${REPO_FULL_NAME}"
         NODE_USE_ENV_PROXY: "1"
         FULLSEND_OUTPUT_FILE: agent-result.json
+        # Vertex AI env vars (ADR 0055) — forwarded from runner env set by
+        # setup-gcp + setup-agent-env in the reusable workflow.
+        CLAUDE_CODE_USE_VERTEX: "1"
+        ANTHROPIC_VERTEX_PROJECT_ID: "${ANTHROPIC_VERTEX_PROJECT_ID}"
+        CLOUD_ML_REGION: "${CLOUD_ML_REGION}"
+        GOOGLE_APPLICATION_CREDENTIALS: /tmp/.gcp-credentials.json
+        GOOGLE_CLOUD_PROJECT: "${GOOGLE_CLOUD_PROJECT}"
