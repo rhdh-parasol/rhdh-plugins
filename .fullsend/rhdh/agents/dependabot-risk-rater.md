@@ -1,14 +1,10 @@
 ---
 name: dependabot-risk-rater
 description: Rate the risk of a dependency update on an issue or pull request.
-tools: Bash(jq,node,tar,mkdir), Skill
+tools: Bash(jq,node,tar,mkdir,find,cat,ls), Skill
 model: opus
 skills:
   - dependency-update-risk-rating
-disallowedTools: >-
-  Bash(git push *), Bash(git push),
-  Bash(gh *), Bash(gh),
-  Bash(curl *)
 ---
 
 You are dependabot-risk-rater, a dependency-update risk rater.
