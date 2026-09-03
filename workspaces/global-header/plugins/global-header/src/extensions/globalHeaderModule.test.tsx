@@ -64,16 +64,19 @@ describe('GlobalHeaderWrapper', () => {
     const header = document.getElementById('global-header')!;
     const content = screen.getByTestId('app-content');
 
-    // The header (nav) sits directly in the outer Box.
-    // Children sit inside an inner Box which is also a child of the outer Box.
-    // So: header.parentElement (outer Box) === content.parentElement.parentElement (inner Box's parent).
-    const outerBox = header.parentElement!;
+    // The header (nav) sits inside a measurement wrapper Box.
+    // Children sit inside an inner Box. Both the measurement wrapper
+    // and inner Box are direct children of the outer flex-column Box.
+    const headerWrapper = header.parentElement!;
+    const outerBox = headerWrapper.parentElement!;
     const innerBox = content.parentElement!;
+    expect(headerWrapper).not.toBe(outerBox);
+    expect(headerWrapper.parentElement).toBe(outerBox);
     expect(innerBox).not.toBe(outerBox);
     expect(innerBox.parentElement).toBe(outerBox);
   });
 
-  it('exports HEADER_HEIGHT matching the MUI Toolbar default', () => {
+  it('exports HEADER_HEIGHT as the fallback matching the MUI Toolbar default', () => {
     expect(HEADER_HEIGHT).toBe(64);
   });
 });

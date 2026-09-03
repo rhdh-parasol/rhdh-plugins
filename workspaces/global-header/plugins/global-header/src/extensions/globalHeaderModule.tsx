@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import {
@@ -40,8 +40,10 @@ import { readConfigMenuItems } from '../utils/readConfigMenuItems';
 import { readConfigComponents } from '../utils/readConfigComponents';
 
 /**
- * Default height in px of the MUI Toolbar rendered by GlobalHeader.
- * Matches the MUI default `minHeight` at `@media (min-width: 600px)`.
+ * Fallback height in px used before the header is measured at runtime.
+ * Matches the MUI Toolbar default `minHeight` at `@media (min-width: 600px)`.
+ * The wrapper dynamically measures the actual rendered height so the sidebar
+ * offset stays correct regardless of theme or viewport.
  * @internal
  */
 export const HEADER_HEIGHT = 64;
@@ -82,6 +84,32 @@ export function GlobalHeaderWrapper({
       ),
     [extensionMenuItems, configMenuItems],
   );
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(HEADER_HEIGHT);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return undefined;
+
+    const update = () => {
+      const h = el.getBoundingClientRect().height;
+      if (h > 0) {
+        setHeaderHeight(h);
+      }
+    };
+
+    // Measure immediately, then track resize changes.
+    update();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(update);
+      observer.observe(el);
+      return () => observer.disconnect();
+    }
+
+    return undefined;
+  }, []);
+
   return (
     <GlobalHeaderProvider components={allComponents} menuItems={allMenuItems}>
       <Box
@@ -92,19 +120,21 @@ export function GlobalHeaderWrapper({
           // Push the Backstage sidebar drawer below the header so the
           // first navigation item is not obscured.
           '& div[class*="BackstageSidebar-drawer"]': {
-            top: `max(0px, ${HEADER_HEIGHT}px)`,
+            top: `max(0px, ${headerHeight}px)`,
           },
           '.techdocs-reader-page > main': {
             height: 'unset',
           },
         }}
       >
-        <GlobalHeader />
+        <Box ref={headerRef} sx={{ flexShrink: 0 }}>
+          <GlobalHeader />
+        </Box>
         <Box
           sx={{
             display: 'flex',
             flexGrow: 1,
-            maxHeight: `calc(100vh - ${HEADER_HEIGHT}px)`,
+            maxHeight: `calc(100vh - ${headerHeight}px)`,
           }}
         >
           {children}
