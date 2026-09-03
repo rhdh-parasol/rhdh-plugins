@@ -1,5 +1,11 @@
 # @red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights
 
+## 0.9.2
+
+### Patch Changes
+
+- cfc65bf: Migrate package scope from @red-hat-developer-hub to @rhdh-parasol for Parasol fork publishing.
+
 ## 0.9.1
 
 ### Patch Changes
