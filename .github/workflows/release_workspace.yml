@@ -53,6 +53,10 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ inputs.branch }}
+          # Org disables GITHUB_TOKEN write. Persist the bot PAT so
+          # backstage/changesets-action can push changesets-release/*.
+          token: ${{ secrets.RHDH_BOT_TOKEN }}
+          fetch-depth: 0
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -77,7 +81,10 @@ jobs:
       - name: Fetch previous commit for release check
         env:
           COMMIT_SHA_BEFORE: ${{ github.event.before }}
-        run: git fetch origin "$COMMIT_SHA_BEFORE"
+        run: |
+          if [ -n "$COMMIT_SHA_BEFORE" ] && [ "$COMMIT_SHA_BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            git fetch origin "$COMMIT_SHA_BEFORE"
+          fi
 
       - name: Fetch the commit that triggered the workflow (used by backstage/changesets-action)
         env:
@@ -124,6 +131,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ inputs.branch }}
+          token: ${{ secrets.RHDH_BOT_TOKEN }}
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
