@@ -1,5 +1,13 @@
 # @rhdh-parasol/backstage-plugin-scorecard-backend
 
+## 5.0.1
+
+### Patch Changes
+
+- 5e3fe26: Use string literals in `config.d.ts` so Backstage schema extraction can run during `yarn npm publish`.
+  - @rhdh-parasol/backstage-plugin-scorecard-common@5.0.1
+  - @rhdh-parasol/backstage-plugin-scorecard-node@5.0.1
+
 ## 5.0.0
 
 ### Major Changes

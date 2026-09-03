@@ -1,6 +1,6 @@
 {
   "name": "@rhdh-parasol/backstage-plugin-scorecard-backend-module-dependabot",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "Apache-2.0",
   "description": "The dependabot backend module for the scorecard plugin.",
   "main": "src/index.ts",

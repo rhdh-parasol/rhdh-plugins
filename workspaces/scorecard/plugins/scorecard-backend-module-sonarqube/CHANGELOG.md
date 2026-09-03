@@ -1,5 +1,12 @@
 # @rhdh-parasol/backstage-plugin-scorecard-backend-module-sonarqube
 
+## 2.0.1
+
+### Patch Changes
+
+- @rhdh-parasol/backstage-plugin-scorecard-common@5.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@5.0.1
+
 ## 2.0.0
 
 ### Major Changes

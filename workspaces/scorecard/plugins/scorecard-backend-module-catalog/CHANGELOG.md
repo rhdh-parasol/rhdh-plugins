@@ -1,5 +1,12 @@
 # @rhdh-parasol/backstage-plugin-scorecard-backend-module-catalog
 
+## 1.0.1
+
+### Patch Changes
+
+- @rhdh-parasol/backstage-plugin-scorecard-common@5.0.1
+- @rhdh-parasol/backstage-plugin-scorecard-node@5.0.1
+
 ## 1.0.0
 
 ### Major Changes
