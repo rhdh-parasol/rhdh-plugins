@@ -1,5 +1,7 @@
 # @rhdh-parasol/backstage-plugin-scorecard-common
 
+## 5.0.1
+
 ## 5.0.0
 
 ### Major Changes
