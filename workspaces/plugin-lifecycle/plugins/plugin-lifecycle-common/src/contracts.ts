@@ -88,7 +88,7 @@ export const ciRunSchema = z
     workflowId: externalIdSchema.optional(),
     workflowFile: shortTextSchema.optional(),
     runId: externalIdSchema,
-    /** GitHub run number. `attempt` is accepted for fixtures written by v1. */
+    /** GitHub run number. Commit-status observations use runAttempt instead. */
     runNumber: z.number().int().positive().optional(),
     attempt: z.number().int().positive().optional(),
     runAttempt: z.number().int().positive().optional(),
@@ -123,11 +123,11 @@ export const ciRunSchema = z
   })
   .strict()
   .superRefine((run, context) => {
-    if (!run.runNumber && !run.attempt) {
+    if (!run.runNumber && !run.runAttempt && !run.attempt) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['runNumber'],
-        message: 'A CI run requires runNumber',
+        message: 'A CI run requires runNumber or runAttempt',
       });
     }
     if (run.status === 'completed' && !run.conclusion) {

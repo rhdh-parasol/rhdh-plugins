@@ -52,7 +52,14 @@ export function useLifecycleContext(options: {
     let timer: ReturnType<typeof setTimeout> | undefined;
     const load = async (background = false) => {
       if (!background) {
-        setState({ loading: true });
+        // Keep the current context visible while a selected change or
+        // historical cursor is loading. Clearing it makes a local selector
+        // change look like a full page reload and hides useful context.
+        setState(previous => ({
+          ...previous,
+          loading: true,
+          error: undefined,
+        }));
       }
       try {
         const data = await api.getContext({

@@ -95,6 +95,45 @@ describe('GitHubActionsCollector', () => {
     }
   });
 
+  it('queries closed pull requests through the bounded recent-history endpoint', async () => {
+    const fetchMock = jest.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => [
+        {
+          number: 42,
+          state: 'closed',
+          merged_at: '2026-09-02T10:00:00.000Z',
+        },
+      ],
+      headers: new Headers(),
+    } as unknown as Response);
+
+    try {
+      await expect(
+        new GitHubRestActionsReader('test-token').listClosedPullRequests(
+          'redhat-developer/rhdh-plugin-export-overlays',
+        ),
+      ).resolves.toEqual([
+        {
+          number: 42,
+          state: 'closed',
+          merged_at: '2026-09-02T10:00:00.000Z',
+        },
+      ]);
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        'https://api.github.com/repos/redhat-developer/rhdh-plugin-export-overlays/pulls?state=closed&sort=updated&direction=desc&per_page=100&page=1',
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: 'Bearer test-token',
+          }),
+        }),
+      );
+    } finally {
+      fetchMock.mockRestore();
+    }
+  });
+
   it('reads the source repository and revision from the PR head source.json', async () => {
     const source = Buffer.from(
       JSON.stringify({
@@ -522,11 +561,10 @@ describe('GitHubActionsCollector', () => {
           head: { sha: 'cccccccccccccccccccccccccccccccccccccccc' },
         },
       ]),
-      listPullRequestFiles: jest.fn(async (_repository, number) =>
-        number === 3099
-          ? ['workspaces/global-header/source.json']
-          : ['workspaces/adoption-insights/source.json'],
-      ),
+      listPullRequestFiles: jest
+        .fn()
+        .mockResolvedValueOnce(['workspaces/global-header/source.json'])
+        .mockResolvedValueOnce(['workspaces/adoption-insights/source.json']),
       getCommitStatuses: jest.fn().mockResolvedValue([
         {
           context: 'publish',
@@ -624,6 +662,118 @@ describe('GitHubActionsCollector', () => {
           }),
         }),
       }),
+    );
+  });
+
+  it('imports recent merged PRs as completed, inactive lifecycle changes', async () => {
+    const service = {
+      createSystemChange: jest.fn().mockResolvedValue({
+        change: { changeId: '18163e4e-b0a5-431b-80f1-4913362d9926' },
+      }),
+      updateSystemChangeStatus: jest.fn().mockResolvedValue(undefined),
+      associationsForEntity: jest.fn().mockResolvedValue([]),
+      recordSystemEvent: jest.fn().mockResolvedValue(undefined),
+      recordSystemDiagnostic: jest.fn().mockResolvedValue(undefined),
+    } as unknown as LifecycleService;
+    const catalog = {
+      queryEntities: jest.fn().mockResolvedValue({ items: [overlay] }),
+    } as unknown as jest.Mocked<CatalogService>;
+    const reader: GitHubActionsReader = {
+      listRuns: jest.fn().mockResolvedValue([]),
+      listJobs: jest.fn(),
+      listOpenPullRequests: jest.fn().mockResolvedValue([]),
+      listClosedPullRequests: jest.fn().mockResolvedValue([
+        {
+          number: 3098,
+          title: 'Merge the Adoption Insights export fix',
+          state: 'closed',
+          merged_at: '2026-09-02T10:00:00.000Z',
+          closed_at: '2026-09-02T10:00:00.000Z',
+          html_url:
+            'https://github.com/rhdh-parasol/rhdh-plugin-export-overlays/pull/3098',
+          user: { login: 'plugin-author' },
+          head: { sha: 'aabb85ef001ddae5af621ecf17e02f7bac9175e3' },
+          created_at: '2026-09-01T09:00:00.000Z',
+          updated_at: '2026-09-02T10:00:00.000Z',
+        },
+        {
+          number: 3097,
+          title: 'Earlier merged Adoption Insights fix',
+          state: 'closed',
+          merged_at: '2026-08-30T10:00:00.000Z',
+          closed_at: '2026-08-30T10:00:00.000Z',
+          head: { sha: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb' },
+          created_at: '2026-08-29T09:00:00.000Z',
+          updated_at: '2026-08-30T10:00:00.000Z',
+        },
+        {
+          number: 4000,
+          title: 'Unrelated merged change',
+          state: 'closed',
+          merged_at: '2026-09-02T11:00:00.000Z',
+          updated_at: '2026-08-01T11:00:00.000Z',
+          head: { sha: 'cccccccccccccccccccccccccccccccccccccccc' },
+        },
+      ]),
+      listPullRequestFiles: jest.fn(async (_repository, number) =>
+        number === 4000
+          ? ['workspaces/adoption-insights/source.json']
+          : ['workspaces/global-header/source.json'],
+      ),
+      getCommitStatuses: jest.fn().mockResolvedValue([
+        {
+          context: 'publish',
+          state: 'success',
+          description: 'Published candidate images',
+          target_url:
+            'https://github.com/rhdh-parasol/rhdh-plugin-export-overlays/actions/runs/3098',
+          updated_at: '2026-09-02T10:01:00.000Z',
+        },
+        {
+          context: 'smoketest',
+          state: 'success',
+          description: 'Smoke tests passed',
+          target_url:
+            'https://github.com/rhdh-parasol/rhdh-plugin-export-overlays/actions/runs/3098',
+          updated_at: '2026-09-02T10:02:00.000Z',
+        },
+      ]),
+    };
+    const auth = {
+      getOwnServiceCredentials: jest
+        .fn()
+        .mockResolvedValue(mockCredentials.service('collector')),
+    } as unknown as AuthService;
+
+    const result = await new GitHubActionsCollector(
+      service,
+      catalog,
+      auth,
+      reader,
+      { warn: jest.fn() } as unknown as LoggerService,
+      'publish-workspace-plugins.yaml',
+      false,
+      undefined,
+      1,
+    ).collect();
+
+    expect(result).toMatchObject({ overlays: 1, changes: 1 });
+    expect(reader.listClosedPullRequests).toHaveBeenCalledWith(
+      'rhdh-parasol/rhdh-plugin-export-overlays',
+    );
+    expect(reader.listPullRequestFiles).toHaveBeenCalledTimes(3);
+    expect(service.createSystemChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        requestId:
+          'github:rhdh-parasol/rhdh-plugin-export-overlays:pr:3098:workspace:global-header',
+      }),
+      expect.objectContaining({
+        externalStatus: 'merged',
+      }),
+    );
+    expect(service.updateSystemChangeStatus).toHaveBeenCalledWith(
+      '18163e4e-b0a5-431b-80f1-4913362d9926',
+      'merged',
     );
   });
 

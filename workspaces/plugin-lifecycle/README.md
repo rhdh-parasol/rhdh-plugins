@@ -96,6 +96,9 @@ See [`docs/deployment.md`](docs/deployment.md) for the current dynamic-plugin
 and RBAC configuration. The backend performs one bounded initial collection
 when configured and then refreshes a single subject only on demand. Context
 reads use PostgreSQL and the Catalog API; they never call GitHub or a registry.
+Refresh requests wait up to 30 seconds by default, then return the persisted
+context while a longer collection continues in the background. Tune this with
+`pluginLifecycle.refreshWaitTimeoutMs`; the backend caps the value at 60 seconds.
 OCI publication and external deployment remain gated on the complete RHDH Local
 acceptance suite.
 
@@ -103,4 +106,10 @@ When GitHub collection is enabled, configure overlay repositories under
 `pluginLifecycle.githubActions.repositories` (or the backwards-compatible
 single `repository` key). Repository identity is otherwise taken from each
 overlay Component's `github.com/project-slug` annotation; the plugin contains
-no built-in repository or plugin allowlist.
+no built-in repository or plugin allowlist. Each collection also imports a
+bounded recent window of closed pull requests (up to three per workspace by
+default) so a new RHDH instance can show completed/merged changes. Tune this
+with `pluginLifecycle.githubActions.closedPullRequestsPerWorkspace` or set it
+to `0` to disable the closed-PR lookup. The repository-wide scan is capped at
+100 recent PRs. Closed changes remain in history and are never shown as active
+candidates.

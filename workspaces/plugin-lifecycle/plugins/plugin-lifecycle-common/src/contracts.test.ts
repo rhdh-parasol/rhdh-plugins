@@ -141,4 +141,18 @@ describe('Plugin Lifecycle contracts', () => {
       }),
     ).toThrow();
   });
+  it('accepts commit-status observations without a workflow run number', () => {
+    expect(
+      ciRunSchema.parse({
+        provider: 'github-commit-status',
+        workflow: 'GitHub commit status',
+        runId: 'abc123:publish',
+        runAttempt: 1,
+        status: 'completed',
+        conclusion: 'success',
+        winning: false,
+        fixture: false,
+      }),
+    ).toMatchObject({ runAttempt: 1 });
+  });
 });

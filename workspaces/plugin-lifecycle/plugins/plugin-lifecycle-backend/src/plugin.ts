@@ -32,7 +32,11 @@ import {
 } from './collector/GitHubActionsCollector';
 import { LifecycleStore } from './database/LifecycleStore';
 import { createRouter } from './router';
-import { LifecycleService } from './service/LifecycleService';
+import {
+  DEFAULT_REFRESH_WAIT_TIMEOUT_MS,
+  LifecycleService,
+  MAX_REFRESH_WAIT_TIMEOUT_MS,
+} from './service/LifecycleService';
 
 export const pluginLifecyclePlugin = createBackendPlugin({
   pluginId: 'plugin-lifecycle',
@@ -64,7 +68,23 @@ export const pluginLifecyclePlugin = createBackendPlugin({
       }) {
         permissionsRegistry.addPermissions(pluginLifecyclePermissions);
         const store = await LifecycleStore.create(database);
-        const service = new LifecycleService(store, catalog, permissions);
+        const configuredRefreshWaitTimeoutMs =
+          rootConfig.getOptionalNumber(
+            'pluginLifecycle.refreshWaitTimeoutMs',
+          ) ?? DEFAULT_REFRESH_WAIT_TIMEOUT_MS;
+        const refreshWaitTimeoutMs = Math.max(
+          1_000,
+          Math.min(
+            MAX_REFRESH_WAIT_TIMEOUT_MS,
+            Math.floor(configuredRefreshWaitTimeoutMs),
+          ),
+        );
+        const service = new LifecycleService(
+          store,
+          catalog,
+          permissions,
+          refreshWaitTimeoutMs,
+        );
         createPluginLifecycleActions({ actionsRegistry, service });
         const githubIntegrations = ScmIntegrations.fromConfig(rootConfig);
         const githubActionsEnabled =
@@ -97,6 +117,10 @@ export const pluginLifecyclePlugin = createBackendPlugin({
           rootConfig.getOptionalBoolean(
             'pluginLifecycle.githubActions.requireManifest',
           ) ?? false;
+        const closedPullRequestsPerWorkspace =
+          rootConfig.getOptionalNumber(
+            'pluginLifecycle.githubActions.closedPullRequestsPerWorkspace',
+          ) ?? 3;
         let initialCollector: GitHubActionsCollector | undefined;
         if (
           githubActionsEnabled &&
@@ -115,6 +139,7 @@ export const pluginLifecyclePlugin = createBackendPlugin({
             githubWorkflow,
             requireManifest,
             githubRepositories,
+            closedPullRequestsPerWorkspace,
           );
           service.setRefresher(async entityRef =>
             collector.refreshSubject(entityRef),

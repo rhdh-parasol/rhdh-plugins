@@ -215,14 +215,18 @@ configured workflow runs and jobs, extracts an exact
 `workspaces/<workspace>` segment from each matrix job name, and resolves the
 corresponding overlay Component.
 
-For a processable job, it:
+For an on-demand refresh, PR evidence is collected before the more expensive
+workflow-job scan so the response can expose open and recently closed changes
+even when mainline history is still being fetched. For a processable job, it:
 
 1. creates or retrieves the lifecycle change using the deterministic external
    key;
 2. records PR, source, workflow, run, and job references;
 3. records a CI snapshot and explicit build phase;
-4. for open PRs, reads the exact `published-exports-pr-<number>` artifact after
-   a successful publish check and stores its candidate image references;
+4. discovers open PRs plus a bounded recent window of closed PRs, reads the
+   exact `published-exports-pr-<number>` artifact after a successful publish
+   check when it is still retained, and classifies each PR as open, merged, or
+   closed;
 5. reads Extensions Catalog Package entities as the released customer-
    installable baseline.
 
@@ -281,8 +285,8 @@ overlay subject.
 The page shows:
 
 - a delivery summary with current status, owner, next action, released
-  Extensions Catalog packages, open PR candidates, candidate OCI images, and
-  latest/latest-successful mainline builds;
+  Extensions Catalog packages, open PR candidates, recent merged/closed PR
+  history, candidate OCI images, and latest/latest-successful mainline builds;
 - current phase and state;
 - all changes for the workspace;
 - event evidence and producers;

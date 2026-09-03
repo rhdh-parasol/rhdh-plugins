@@ -85,6 +85,27 @@ const stateLabels: Record<LifecycleState, string> = {
   superseded: 'Superseded',
 };
 
+type ChangeExternalStatus = NonNullable<
+  LifecycleContext['changes'][number]['externalStatus']
+>;
+
+function externalStatusLabel(
+  status?: ChangeExternalStatus,
+): string | undefined {
+  switch (status) {
+    case 'open':
+      return 'Open';
+    case 'merged':
+      return 'Merged';
+    case 'closed':
+      return 'Closed';
+    case 'published':
+      return 'Published';
+    default:
+      return undefined;
+  }
+}
+
 function catalogEntityHref(entityRef: string): string {
   const parsed = parseEntityRef(entityRef);
   return `/catalog/${parsed.namespace}/${parsed.kind}/${parsed.name}`;
@@ -1543,10 +1564,21 @@ export function LifecycleDashboard(props: {
   refreshError?: Error;
   refreshResult?: LifecycleRefreshResult;
   loading?: boolean;
+  selectionLoading?: boolean;
   onRetry?: () => void;
   onRefresh?: () => void;
 }) {
   const { context } = props;
+  // Mainline branch observations are retained for delivery health, but they
+  // are not user-facing lifecycle changes. A selector full of every CI run
+  // obscures the PR/manual changes a person can actually act on.
+  const selectableChanges = context.changes.filter(
+    change => change.scope !== 'branch',
+  );
+  const selectedChange =
+    context.selectedChange?.scope === 'branch'
+      ? undefined
+      : context.selectedChange;
   const syncStatus = context.sync?.status;
   const bootstrapRunning = context.sync?.bootstrapStatus === 'running';
   const subjectCollectionActive =
@@ -1557,6 +1589,10 @@ export function LifecycleDashboard(props: {
   const refreshLabel = subjectCollectionActive
     ? 'Load this plugin now'
     : 'Refresh from GitHub';
+  let refreshButtonLabel = refreshLabel;
+  if (props.loading) {
+    refreshButtonLabel = props.selectionLoading ? 'Loading…' : 'Refreshing…';
+  }
   const refreshAction =
     props.onRefresh &&
     !context.asOf &&
@@ -1568,7 +1604,7 @@ export function LifecycleDashboard(props: {
         isDisabled={props.loading}
         onPress={props.onRefresh}
       >
-        {props.loading ? 'Refreshing…' : refreshLabel}
+        {refreshButtonLabel}
       </Button>
     ) : undefined;
   let emptyDescription =
@@ -1581,9 +1617,7 @@ export function LifecycleDashboard(props: {
   }
   if (
     context.delivery &&
-    (context.changes.length === 0 ||
-      !context.selectedChange ||
-      !context.projection)
+    (selectableChanges.length === 0 || !selectedChange || !context.projection)
   ) {
     return (
       <Flex direction="column" gap="5">
@@ -1602,7 +1636,7 @@ export function LifecycleDashboard(props: {
       </Flex>
     );
   }
-  if (context.changes.length === 0 || !context.selectedChange) {
+  if (selectableChanges.length === 0 || !selectedChange) {
     return (
       <EmptyPanel
         title={
@@ -1635,7 +1669,6 @@ export function LifecycleDashboard(props: {
     );
   }
   const projection = context.projection;
-  const selectedChange = context.selectedChange;
 
   return (
     <Flex direction="column" gap="5">
@@ -1647,12 +1680,20 @@ export function LifecycleDashboard(props: {
           refreshResult={props.refreshResult}
         />
       )}
-      {props.loading && context.changes.length > 0 && (
+      {props.loading && selectableChanges.length > 0 && (
         <Alert
           status="info"
           icon
-          title="Fetching fresh evidence from GitHub"
-          description="Checking workflow jobs, pull requests, and candidate images. The stored lifecycle remains visible."
+          title={
+            props.selectionLoading
+              ? 'Loading the selected change'
+              : 'Fetching fresh evidence from GitHub'
+          }
+          description={
+            props.selectionLoading
+              ? 'Loading the stored evidence for this change. The current page remains visible.'
+              : 'Checking workflow jobs, pull requests, and candidate images. The stored lifecycle remains visible.'
+          }
           aria-live="polite"
         />
       )}
@@ -1765,22 +1806,24 @@ export function LifecycleDashboard(props: {
                   </Flex>
                   <Select
                     label="Change"
-                    items={context.changes.map(change => ({
+                    items={selectableChanges.map(change => ({
                       id: change.changeId,
                       title: change.title,
-                      description: `${
+                      description: [
+                        externalStatusLabel(change.externalStatus),
                         stateLabels[
                           context.asOf &&
                           change.changeId === selectedChange.changeId
                             ? projection.state
                             : change.currentState
-                        ]
-                      }${
+                        ],
                         context.asOf &&
                         change.changeId === selectedChange.changeId
-                          ? ' at this time'
-                          : ''
-                      }`,
+                          ? 'at this time'
+                          : undefined,
+                      ]
+                        .filter(Boolean)
+                        .join(' · '),
                     }))}
                     selectedKey={
                       props.selectedChangeId ?? selectedChange.changeId
@@ -1848,6 +1891,12 @@ export function EntityPluginLifecycleContent() {
       asOf,
       asOfEventId,
     });
+  const selectionLoading = Boolean(
+    loading &&
+      data &&
+      selectedChangeId &&
+      selectedChangeId !== data.selectedChange?.changeId,
+  );
 
   useEffect(() => {
     if (!data) return;
@@ -1856,16 +1905,23 @@ export function EntityPluginLifecycleContent() {
     // starts with fixture data and the first live GitHub refresh creates a
     // different change). Do not keep sending a removed changeId on later
     // historical requests.
+    const selectableChanges = data.changes.filter(
+      change => change.scope !== 'branch',
+    );
     const selectedChangeStillExists = selectedChangeId
-      ? data.changes.some(change => change.changeId === selectedChangeId)
+      ? selectableChanges.some(change => change.changeId === selectedChangeId)
       : false;
     if (selectedChangeId && !selectedChangeStillExists) {
-      setSelectedChangeId(data.selectedChange?.changeId);
+      setSelectedChangeId(selectableChanges[0]?.changeId);
       setAsOf(undefined);
       setAsOfEventId(undefined);
       return;
     }
-    if (!selectedChangeId && data.selectedChange) {
+    if (
+      !selectedChangeId &&
+      data.selectedChange &&
+      data.selectedChange.scope !== 'branch'
+    ) {
       setSelectedChangeId(data.selectedChange.changeId);
     }
   }, [data, selectedChangeId]);
@@ -1921,6 +1977,7 @@ export function EntityPluginLifecycleContent() {
       refreshError={error}
       refreshResult={refreshResult}
       loading={loading}
+      selectionLoading={selectionLoading}
       onRetry={reload}
       onRefresh={() => void refresh()}
     />

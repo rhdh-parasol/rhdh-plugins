@@ -644,27 +644,28 @@ refresh.
 
 During the one-time bootstrap, and for a later explicit subject refresh:
 
-1. list the latest workflow runs, following pagination up to the configured
-   maximum;
-2. list every job and attempt for each run;
-3. extract a workspace only from an exact `workspaces/<workspace>` segment in
-   the job name;
-4. resolve exactly one Catalog Component with
+1. resolve exactly one Catalog Component with
    `rhdh.io/overlay-workspace=<workspace>` and the matching project slug;
-5. derive the external change key;
-6. group evidence by the stable PR or branch/SHA change key;
-7. create or retrieve each lifecycle change idempotently;
-8. append reference, CI snapshot, and phase events using deterministic event
-   IDs;
-9. for open PRs, match exact workspace files, commit statuses, and the
-   `published-exports-pr-<number>` artifact;
-10. collect exact workspace jobs for main/release runs;
-11. mark prior diagnostics resolved when the same external record becomes
-    processable.
+2. list open PRs and a bounded recent window of closed PRs;
+3. match exact workspace files and read commit statuses with bounded
+   concurrency;
+4. derive each external change key, then create or retrieve lifecycle changes
+   idempotently;
+5. append PR, source, status, and phase events using deterministic event IDs;
+6. for PRs with a successful publish check, read the exact
+   `published-exports-pr-<number>` artifact when it is still retained;
+7. collect the latest workflow runs and exact workspace jobs for main/release
+   runs using bounded concurrency;
+8. mark prior diagnostics resolved when the same external record becomes
+   processable.
 
 Bootstrap fetches each repository/workflow run list once and processes a bounded
-queue. After bootstrap, GitHub is contacted only by an explicit refresh (or the
-agent action's `refreshPolicy: if_stale` path).
+queue. PR discovery fetches open PRs plus the most recently updated closed PRs,
+limited by `pluginLifecycle.githubActions.closedPullRequestsPerWorkspace` (3
+per workspace by default, with a repository-wide scan cap of 100). Closed and
+merged changes remain available for history but are not active candidates.
+After bootstrap, GitHub is contacted only by an explicit refresh (or the agent
+action's `refreshPolicy: if_stale` path).
 
 ### 10.4 Change correlation
 
@@ -724,13 +725,14 @@ cannot be inferred safely from generic workflow job metadata.
 
 ### 10.7 Artifact resolution
 
-For an open PR, read the exact `published-exports-pr-<number>` artifact after a
-successful `publish` check. Validate its archive, metadata, workspace, PR
-revision, and image references, then emit compact candidate-image artifact
-events. Expired or missing artifacts are reported as unavailable; image names
-are never guessed. The Extensions Catalog Package `dynamicArtifact` remains a
-separate released-baseline fact and is never written into a PR change as run
-evidence. The POC does not call a registry directly.
+For an open or recently closed PR, read the exact
+`published-exports-pr-<number>` artifact after a successful `publish` check.
+Validate its archive, metadata, workspace, PR revision, and image references,
+then emit compact candidate-image artifact events. Expired or missing artifacts
+are reported as unavailable; image names are never guessed. The Extensions
+Catalog Package `dynamicArtifact` remains a separate released-baseline fact and
+is never written into a PR change as run evidence. The POC does not call a
+registry directly.
 
 ## 11. Projection rules
 

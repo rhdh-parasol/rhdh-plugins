@@ -230,3 +230,9 @@ pluginLifecycle:
     enabled: false
     workflow: publish-workspace-plugins.yaml
     requireManifest: false
+    # Import up to three recent closed PRs per workspace. The collector still
+    # caps the repository-wide scan at 100 PRs.
+    closedPullRequestsPerWorkspace: 3
+  # Maximum time a refresh request waits for live GitHub evidence before it
+  # returns the persisted context with sync.status=running.
+  refreshWaitTimeoutMs: 30000

@@ -11,6 +11,8 @@ pluginLifecycle:
       - rhdh-parasol/rhdh-plugin-export-overlays
       - redhat-developer/rhdh-plugin-export-overlays
     workflow: publish-workspace-plugins.yaml
+    closedPullRequestsPerWorkspace: 3
+  refreshWaitTimeoutMs: 30000
 
 catalog:
   locations:

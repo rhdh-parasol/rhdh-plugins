@@ -335,6 +335,13 @@ describe('LifecycleDashboard', () => {
           changeId: 'e0068ad4-8f88-4b5c-813b-caad42248010',
           title: 'Second plugin change',
         },
+        {
+          ...context.changes[0],
+          changeId: 'c2e26748-683e-42f8-3856-665fd7cd6c2d',
+          origin: 'github-actions',
+          scope: 'branch',
+          title: 'adoption-insights mainline export',
+        },
       ],
       relatedEntities: [
         {
@@ -396,6 +403,11 @@ describe('LifecycleDashboard', () => {
     await userEvent.click(
       screen.getByRole('button', { name: /Upgrade example plugin Change/ }),
     );
+    expect(
+      screen.queryByRole('option', {
+        name: /adoption-insights mainline export/,
+      }),
+    ).not.toBeInTheDocument();
     await userEvent.click(
       screen.getByRole('option', { name: /Second plugin change/ }),
     );

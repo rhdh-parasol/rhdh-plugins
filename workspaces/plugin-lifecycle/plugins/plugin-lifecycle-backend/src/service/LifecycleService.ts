@@ -312,7 +312,15 @@ function packageRefsForPlugin(entity?: Entity): Set<string> | undefined {
   );
 }
 
-const DEFAULT_REFRESH_WAIT_TIMEOUT_MS = 15_000;
+/**
+ * The refresh endpoint returns a useful persisted snapshot while the live
+ * collection continues in the background. Thirty seconds gives the fast PR
+ * stage a reasonable chance to complete without making a hung GitHub request
+ * hold the browser connection indefinitely. The backend clamps configured
+ * values before constructing this service.
+ */
+export const DEFAULT_REFRESH_WAIT_TIMEOUT_MS = 30_000;
+export const MAX_REFRESH_WAIT_TIMEOUT_MS = 60_000;
 
 export class LifecycleService {
   private refresher?: (entityRef: string) => Promise<void>;

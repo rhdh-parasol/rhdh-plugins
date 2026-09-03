@@ -33,6 +33,7 @@ const LEGACY_SOURCE_SHA = 'rhdh.io/source-commit-sha';
 const SOURCE_REPOSITORY = 'rhdh.io/source-repository';
 const PACKAGE_REFS = 'rhdh.io/extensions-package-refs';
 const PUBLISHED_EXPORTS_ARTIFACT = /^published-exports-pr-(\d+)$/;
+const GITHUB_REQUEST_CONCURRENCY = 8;
 
 export interface GitHubWorkflowRun {
   id: number;
@@ -65,11 +66,14 @@ export interface GitHubWorkflowJob {
 export interface GitHubPullRequest {
   number: number;
   title: string;
+  state?: 'open' | 'closed';
   html_url?: string;
   user?: { login?: string };
   head?: { sha?: string; ref?: string };
   created_at?: string;
   updated_at?: string;
+  closed_at?: string | null;
+  merged_at?: string | null;
 }
 
 export interface GitHubCommitStatus {
@@ -110,6 +114,8 @@ export interface GitHubActionsReader {
     runAttempt: number,
   ): Promise<LifecycleManifest | undefined>;
   listOpenPullRequests?(repository: string): Promise<GitHubPullRequest[]>;
+  /** Returns a bounded, most-recent-first list of closed pull requests. */
+  listClosedPullRequests?(repository: string): Promise<GitHubPullRequest[]>;
   listPullRequestFiles?(
     repository: string,
     pullRequestNumber: number,
@@ -228,10 +234,23 @@ export class GitHubRestActionsReader implements GitHubActionsReader {
   }
 
   async listOpenPullRequests(repository: string): Promise<GitHubPullRequest[]> {
+    return this.listPullRequests(repository, 'open');
+  }
+
+  async listClosedPullRequests(
+    repository: string,
+  ): Promise<GitHubPullRequest[]> {
+    return this.listPullRequests(repository, 'closed');
+  }
+
+  private async listPullRequests(
+    repository: string,
+    state: 'open' | 'closed',
+  ): Promise<GitHubPullRequest[]> {
     const pullRequests: GitHubPullRequest[] = [];
     for (let page = 1; page <= 5 && pullRequests.length < 100; page += 1) {
       const response = await this.fetch(
-        `${this.apiBase}/repos/${repository}/pulls?state=open&sort=updated&direction=desc&per_page=100&page=${page}`,
+        `${this.apiBase}/repos/${repository}/pulls?state=${state}&sort=updated&direction=desc&per_page=100&page=${page}`,
         repository,
       );
       const pagePullRequests = (await response.json()) as GitHubPullRequest[];
@@ -638,6 +657,14 @@ function eventId(parts: string[]): string {
     .digest('hex')}`;
 }
 
+function pullRequestExternalStatus(
+  pullRequest: GitHubPullRequest,
+): 'open' | 'merged' | 'closed' {
+  if (pullRequest.merged_at) return 'merged';
+  if (pullRequest.state === 'closed' || pullRequest.closed_at) return 'closed';
+  return 'open';
+}
+
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -647,6 +674,29 @@ function touchesWorkspace(files: string[], workspaceName: string): boolean {
   return files.some(
     file => file === `workspaces/${workspaceName}` || file.startsWith(prefix),
   );
+}
+
+/** Run independent GitHub reads in parallel without creating an unbounded burst. */
+async function mapWithConcurrency<T, R>(
+  values: T[],
+  concurrency: number,
+  map: (value: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  if (values.length === 0) return [];
+  const results = new Array<R>(values.length);
+  let nextIndex = 0;
+  const worker = async (): Promise<void> => {
+    while (nextIndex < values.length) {
+      const index = nextIndex++;
+      results[index] = await map(values[index], index);
+    }
+  };
+  const workerCount = Math.min(
+    Math.max(1, Math.floor(concurrency)),
+    values.length,
+  );
+  await Promise.all(Array.from({ length: workerCount }, () => worker()));
+  return results;
 }
 
 function isImageReference(value: string): boolean {
@@ -830,6 +880,8 @@ async function recordArtifactEvent(
 }
 
 export class GitHubActionsCollector {
+  private static readonly DEFAULT_CLOSED_PULL_REQUESTS_PER_WORKSPACE = 3;
+  private static readonly MAX_CLOSED_PULL_REQUESTS_PER_REPOSITORY = 100;
   private readonly inFlight = new Map<string, Promise<void>>();
   private readonly refreshedAt = new Map<string, number>();
   private readonly rateLimitUntil = new Map<string, number>();
@@ -852,6 +904,7 @@ export class GitHubActionsCollector {
     private readonly workflowFile = 'publish-workspace-plugins.yaml',
     private readonly requireManifest = false,
     private readonly allowedRepository?: string | readonly string[],
+    private readonly closedPullRequestsPerWorkspace = GitHubActionsCollector.DEFAULT_CLOSED_PULL_REQUESTS_PER_WORKSPACE,
   ) {}
 
   async collect(): Promise<CollectorResult> {
@@ -1084,7 +1137,8 @@ export class GitHubActionsCollector {
     cache: CollectionCache,
   ): Promise<{ changes: number; events: number }> {
     if (
-      !this.reader.listOpenPullRequests ||
+      (!this.reader.listOpenPullRequests &&
+        !this.reader.listClosedPullRequests) ||
       !this.reader.listPullRequestFiles ||
       !this.reader.getCommitStatuses
     ) {
@@ -1093,32 +1147,147 @@ export class GitHubActionsCollector {
     const repository = slug(overlay);
     if (!repository) return { changes: 0, events: 0 };
     const workspaceName = workspace(overlay);
-    let pullRequests = cache.pullRequests.get(repository);
-    if (!pullRequests) {
-      pullRequests = await this.reader.listOpenPullRequests(repository);
-      cache.pullRequests.set(repository, pullRequests);
+    const closedPullRequestQuota = Math.max(
+      0,
+      Math.min(100, Math.floor(this.closedPullRequestsPerWorkspace)),
+    );
+    const openPullRequestsKey = `${repository}:open`;
+    let openPullRequests = cache.pullRequests.get(openPullRequestsKey);
+    if (!openPullRequests) {
+      openPullRequests = this.reader.listOpenPullRequests
+        ? await this.reader.listOpenPullRequests(repository)
+        : [];
+      cache.pullRequests.set(openPullRequestsKey, openPullRequests);
     }
-    const matchingPullRequests: GitHubPullRequest[] = [];
-    for (const pullRequest of pullRequests) {
-      const filesKey = `${repository}:${pullRequest.number}`;
-      let files = cache.pullRequestFiles.get(filesKey);
-      if (!files) {
-        files = await this.reader.listPullRequestFiles(
-          repository,
-          pullRequest.number,
+    const closedPullRequestsKey = `${repository}:closed`;
+    let closedPullRequests: GitHubPullRequest[] = [];
+    if (closedPullRequestQuota > 0) {
+      closedPullRequests = cache.pullRequests.get(closedPullRequestsKey) ?? [];
+      if (!cache.pullRequests.has(closedPullRequestsKey)) {
+        closedPullRequests = this.reader.listClosedPullRequests
+          ? await this.reader.listClosedPullRequests(repository)
+          : [];
+        cache.pullRequests.set(
+          closedPullRequestsKey,
+          closedPullRequests
+            .slice()
+            .sort(
+              (left, right) =>
+                (Date.parse(right.updated_at ?? '') || 0) -
+                (Date.parse(left.updated_at ?? '') || 0),
+            )
+            .slice(
+              0,
+              GitHubActionsCollector.MAX_CLOSED_PULL_REQUESTS_PER_REPOSITORY,
+            ),
         );
-        cache.pullRequestFiles.set(filesKey, files);
+        closedPullRequests =
+          cache.pullRequests.get(closedPullRequestsKey) ?? [];
       }
-      if (touchesWorkspace(files, workspaceName)) {
-        matchingPullRequests.push(pullRequest);
+    }
+    // A PR can only be in one state at a time, but keeping the open response
+    // first makes the merge deterministic if GitHub changes state between
+    // the two repository-level requests.
+    const pullRequestsByNumber = new Map<number, GitHubPullRequest>();
+    for (const pullRequest of openPullRequests) {
+      pullRequestsByNumber.set(pullRequest.number, pullRequest);
+    }
+    for (const pullRequest of closedPullRequests) {
+      if (!pullRequestsByNumber.has(pullRequest.number)) {
+        pullRequestsByNumber.set(pullRequest.number, pullRequest);
       }
+    }
+    const pullRequests = [...pullRequestsByNumber.values()];
+    const openPullRequestNumbers = new Set(
+      openPullRequests.map(pullRequest => pullRequest.number),
+    );
+    const findMatchingPullRequests = async (
+      candidates: GitHubPullRequest[],
+      limit = Number.POSITIVE_INFINITY,
+    ): Promise<GitHubPullRequest[]> => {
+      const matching: GitHubPullRequest[] = [];
+      // Closed PRs are already sorted most-recent-first. Stop after the
+      // workspace quota so a sparse workspace does not require file requests
+      // for the entire repository history. Open PRs use Infinity and are all
+      // checked so every active candidate remains visible.
+      for (
+        let offset = 0;
+        offset < candidates.length && matching.length < limit;
+        offset += GITHUB_REQUEST_CONCURRENCY
+      ) {
+        const batch = candidates.slice(
+          offset,
+          offset + GITHUB_REQUEST_CONCURRENCY,
+        );
+        const batchMatches = await mapWithConcurrency(
+          batch,
+          GITHUB_REQUEST_CONCURRENCY,
+          async pullRequest => {
+            const filesKey = `${repository}:${pullRequest.number}`;
+            let files = cache.pullRequestFiles.get(filesKey);
+            if (!files) {
+              files = await this.reader.listPullRequestFiles!(
+                repository,
+                pullRequest.number,
+              );
+              cache.pullRequestFiles.set(filesKey, files);
+            }
+            return touchesWorkspace(files, workspaceName)
+              ? pullRequest
+              : undefined;
+          },
+        );
+        matching.push(
+          ...batchMatches.filter(
+            (pullRequest): pullRequest is GitHubPullRequest =>
+              Boolean(pullRequest),
+          ),
+        );
+      }
+      return matching.slice(0, limit);
+    };
+    const matchingClosedPullRequests =
+      closedPullRequestQuota > 0
+        ? await findMatchingPullRequests(
+            closedPullRequests.filter(
+              pullRequest => !openPullRequestNumbers.has(pullRequest.number),
+            ),
+            closedPullRequestQuota,
+          )
+        : [];
+    const matchingOpenPullRequests = await findMatchingPullRequests(
+      pullRequests.filter(
+        pullRequest => pullRequestExternalStatus(pullRequest) === 'open',
+      ),
+    );
+    const matchingPullRequests = [
+      ...matchingOpenPullRequests,
+      ...matchingClosedPullRequests.slice(0, closedPullRequestQuota),
+    ];
+    if (
+      closedPullRequestQuota > 0 &&
+      closedPullRequests.length >=
+        GitHubActionsCollector.MAX_CLOSED_PULL_REQUESTS_PER_REPOSITORY &&
+      matchingClosedPullRequests.length < closedPullRequestQuota
+    ) {
+      await this.service.recordSystemDiagnostic({
+        source: 'github-actions',
+        subjectEntityRef: catalogEntityRef(overlay),
+        externalId: `${repository}:${workspaceName}:closed-pr-cap`,
+        reasonCode: 'closed-pr-history-cap',
+        summary: `Closed PR history scan reached the repository cap before finding ${closedPullRequestQuota} PRs for workspace ${workspaceName}`,
+        details: {
+          repository,
+          workspace: workspaceName,
+          repositoryCap:
+            GitHubActionsCollector.MAX_CLOSED_PULL_REQUESTS_PER_REPOSITORY,
+          matchingClosedPullRequests: matchingClosedPullRequests.length,
+        },
+      });
     }
     const associations = await this.service.associationsForEntity(overlay);
     let changes = 0;
     let events = 0;
-    const openPullRequestNumbers = new Set(
-      matchingPullRequests.map(pullRequest => pullRequest.number),
-    );
     const lifecycleService = this.service as LifecycleService & {
       getChangeDetails?: LifecycleService['getChangeDetails'];
       updateSystemChangeStatus?: LifecycleService['updateSystemChangeStatus'];
@@ -1197,6 +1366,7 @@ export class GitHubActionsCollector {
         smoke?.updated_at ??
         new Date().toISOString();
       const externalChangeKey = `github:${repository}:pr:${pullRequest.number}:workspace:${workspaceName}`;
+      const externalStatus = pullRequestExternalStatus(pullRequest);
       const change = await this.service.createSystemChange(
         {
           requestId: externalChangeKey,
@@ -1210,14 +1380,14 @@ export class GitHubActionsCollector {
           externalChangeKey,
           associations,
           scope: 'pull_request',
-          externalStatus: 'open',
+          externalStatus,
           occurredAt: pullRequest.created_at ?? occurredAt,
         },
       );
       if (lifecycleService.updateSystemChangeStatus) {
         await lifecycleService.updateSystemChangeStatus(
           change.change.changeId,
-          'open',
+          externalStatus,
         );
       }
       changes += 1;
@@ -1413,6 +1583,11 @@ export class GitHubActionsCollector {
       lastAttemptAt: new Date().toISOString(),
     });
     const repository = slug(overlay)!;
+    // PR evidence is the most useful result of an on-demand refresh and is
+    // independent of the mainline workflow scan. Collect it first so open and
+    // closed changes are persisted even when the larger job scan exceeds the
+    // HTTP wait budget.
+    const pullRequestResult = await this.collectPullRequests(overlay, cache);
     const runsKey = `${repository}:${this.workflowFile}`;
     let runs = cache.runs.get(runsKey);
     if (!runs) {
@@ -1425,15 +1600,22 @@ export class GitHubActionsCollector {
       runs[0]?.head_sha ??
       'unknown';
     const workspaceName = workspace(overlay);
+    const runJobs = await mapWithConcurrency(
+      runs,
+      GITHUB_REQUEST_CONCURRENCY,
+      async run => {
+        const runAttempt = run.run_attempt ?? 1;
+        const jobsKey = `${repository}:${run.id}:${runAttempt}`;
+        let jobs = cache.jobs.get(jobsKey);
+        if (!jobs) {
+          jobs = await this.reader.listJobs(repository, run.id, runAttempt);
+          cache.jobs.set(jobsKey, jobs);
+        }
+        return { run, jobs };
+      },
+    );
     const matchingJobs: MatchingJob[] = [];
-    for (const run of runs) {
-      const runAttempt = run.run_attempt ?? 1;
-      const jobsKey = `${repository}:${run.id}:${runAttempt}`;
-      let jobs = cache.jobs.get(jobsKey);
-      if (!jobs) {
-        jobs = await this.reader.listJobs(repository, run.id, runAttempt);
-        cache.jobs.set(jobsKey, jobs);
-      }
+    for (const { run, jobs } of runJobs) {
       for (const job of jobs) {
         if (
           new RegExp(
@@ -1444,7 +1626,6 @@ export class GitHubActionsCollector {
         }
       }
     }
-    const pullRequestResult = await this.collectPullRequests(overlay, cache);
     if (matchingJobs.length === 0) {
       await this.service.recordSystemDiagnostic({
         source: 'github-actions',
@@ -1495,9 +1676,15 @@ export class GitHubActionsCollector {
       const pullRequestNumber = firstRun.pull_requests?.[0]?.number;
       const pullRequest = pullRequestNumber
         ? cache.pullRequests
-            .get(repository)
+            .get(`${repository}:open`)
+            ?.find(candidate => candidate.number === pullRequestNumber) ??
+          cache.pullRequests
+            .get(`${repository}:closed`)
             ?.find(candidate => candidate.number === pullRequestNumber)
         : undefined;
+      const externalStatus = pullRequest
+        ? pullRequestExternalStatus(pullRequest)
+        : 'open';
       const change = await this.service.createSystemChange(
         {
           requestId: externalChangeKey,
@@ -1522,7 +1709,7 @@ export class GitHubActionsCollector {
           externalChangeKey,
           associations,
           scope: pullRequestNumber ? 'pull_request' : 'branch',
-          externalStatus: 'open',
+          externalStatus,
           occurredAt:
             group
               .map(item => item.run.created_at)

@@ -141,7 +141,7 @@ describe('useLifecycleContext', () => {
     });
   });
 
-  it('does not show stale state while a selected change is loading', async () => {
+  it('keeps the current page visible while a selected change is loading', async () => {
     let resolveSelection: (value: LifecycleContext) => void = () => {};
     const selection = new Promise<LifecycleContext>(resolve => {
       resolveSelection = resolve;
@@ -166,7 +166,7 @@ describe('useLifecycleContext', () => {
 
     rerender({ changeId: '18163e4e-b0a5-431b-80f1-4913362d9926' });
     expect(result.current.loading).toBe(true);
-    expect(result.current.data).toBeUndefined();
+    expect(result.current.data).toEqual(context);
 
     await act(async () => resolveSelection(context));
     await waitFor(() => expect(result.current.loading).toBe(false));
