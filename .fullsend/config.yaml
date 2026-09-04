@@ -20,6 +20,9 @@ agents:
     - name: plugins-package-impact
       source: rhdh/harness/plugins-package-impact.yaml
       model: claude-opus-4-6
+    - name: cve-bump
+      source: rhdh/harness/cve-bump.yaml
+      model: claude-opus-4-6
 roles:
     - triage
     - coder

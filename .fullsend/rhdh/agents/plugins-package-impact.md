@@ -3,7 +3,8 @@ name: plugins-package-impact
 description: >-
   Classify npm Dependabot/CVE impact for a plugins workspace (PLUGIN_PROD,
   PLUGIN_DEV, RUNNER, WORKSPACE_DEV) and comment a markdown table. Triggered
-  by /fullsend-package-impact. Does not bump lockfiles or dismiss alerts.
+  by the Fullsend CVE schedule workflow only. Does not bump lockfiles or
+  dismiss alerts.
 tools: Bash(jq,node,yarn,mkdir,find,cat,ls), Skill
 model: opus
 skills:
@@ -34,8 +35,9 @@ Set by the pre-script / harness:
 
 - `ISSUE_URL` — HTML URL of the issue or pull request
 - `REPO_FULL_NAME` / `GITHUB_REPOSITORY` — `owner/repo`
-- `WORKSPACE` — workspace name when the pre-script resolved one
-- `HUMAN_INSTRUCTION` — text after `/fullsend-package-impact` (may be empty)
+- `WORKSPACE` — workspace name (see `package-impact-context.json`)
+- `HUMAN_INSTRUCTION` — workspace and optional package names from the dispatch
+  payload (see `package-impact-context.json`)
 - `TARGET_REPO_DIR` / `FULLSEND_TARGET_REPO_DIR` — checkout of this repo
 - `FULLSEND_OUTPUT_DIR` — directory for your result file
 - `FULLSEND_OUTPUT_FILE` — result filename (`agent-result.json`). Do not write
@@ -43,8 +45,9 @@ Set by the pre-script / harness:
 - `/sandbox/workspace/package-impact-context.json` — repo, issue, workspace,
   packages from the comment, Dependabot fetch status, `alerts_json` path
 - `/sandbox/workspace/dependabot-alerts.json` — raw GitHub Dependabot
-  list-alerts array fetched on the runner. May be `[]` if the API 403'd or
-  no workspace was resolved.
+  list-alerts array. CVE schedule runs receive workspace-filtered alerts
+  embedded in the dispatch payload (`dependabot_source: embedded`). May be
+  `[]` if the API 403'd or no workspace was resolved.
 
 If `ISSUE_URL` is missing, write an error result and stop.
 
@@ -76,7 +79,7 @@ Overwrite this placeholder with the real result once classification completes.
    the first token of `HUMAN_INSTRUCTION` (`homepage` or
    `workspaces/homepage`). If you still cannot tell which
    `workspaces/<name>/` to assess, write `status: "needs_input"` asking for
-   `/fullsend-package-impact <workspace>` (and optional package names).
+   the workspace name (and optional package names).
 
 4. **Load the skill** — resolve `SKILL_DIR` to the mounted
    `plugins-package-impact` directory (the folder that contains `SKILL.md`).
@@ -88,12 +91,11 @@ Overwrite this placeholder with the real result once classification completes.
    <workspace>`. Do not fetch or checkout.
 
 7. **Alerts** — if `dependabot_fetch` is `forbidden` or `missing_token` and
-   the comment did not name packages, write `status: "needs_input"`
-   explaining that Dependabot alerts could not be listed (missing or
-   insufficient `DEPENDABOT_TOKEN`) and asking for package names. If fetch
-   is `ok` and `alert_count` is 0 and no named packages, write `status:
-   "complete"` with a comment that there are no open alerts under that
-   workspace.
+   context did not name packages, write `status: "needs_input"` explaining
+   that Dependabot alerts were unavailable. `embedded` and `ok` mean alerts
+   are in `alerts_json`. If fetch is `embedded`/`ok` and `alert_count` is 0
+   and no named packages, write `status: "complete"` with a comment that
+   there are no open alerts under that workspace.
 
 8. **Classify** — prefer `yarn install` in `workspaces/<workspace>/` first
    when the lockfile exists (use the sandbox `yarn` wrapper). Never paste

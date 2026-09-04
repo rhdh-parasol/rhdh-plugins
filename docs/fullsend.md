@@ -14,7 +14,7 @@
 | Coder | `/fs-code` slash command, or `ready-to-code` label | Post on a triaged issue |
 | Review | Auto-triggers on PR open/update | Automatic for `workspaces/scorecard/` PRs |
 | Fix | `/fs-fix` slash command, or `changes_requested` review | Post on a PR, or request changes on a fullsend PR |
-| Package impact | `/fullsend-package-impact` slash command, Monday cron, or **Actions → Fullsend CVE schedule** | Post on an issue or same-repo PR; or run the workflow |
+| Package impact / CVE bump | Monday cron or **Actions → Fullsend CVE schedule** | Run the workflow (opens `chore/<workspace>-cve-bumps` PRs) |
 
 ### Auto-trigger vs. manual trigger
 
@@ -58,13 +58,11 @@ Available commands:
 | `/fs-fix` | Fix issues flagged in a review |
 | `/fs-fix-stop` | Disable fix agent for a PR (adds `fullsend-no-fix` label) |
 | `/fullsend-risk-rating` | Rate dependency-update risk on a PR (custom agent) |
-| `/fullsend-package-impact [workspace] [packages…]` | Classify Dependabot/CVE impact for a workspace and comment a table. Does not bump or dismiss. |
 
 **Scheduled / Actions fan-out** (`.github/workflows/fullsend-cve-schedule.yml`)
 follows the CVE schedule plan: a deterministic **plan** job, then one Fullsend
-`plugins-package-impact` cell per workspace (**max_parallel** from config),
-then a **summary** comment. It does not go through the managed `fullsend.yaml`
-shim.
+`cve-bump` cell per workspace (**max_parallel** from config), then a **summary**
+comment. It does not go through the managed `fullsend.yaml` shim.
 
 - **Config:** `.fullsend/rhdh/cve-schedule.yaml` — allowlisted `workspaces`,
   `skip`, and `max_parallel`.
@@ -73,42 +71,37 @@ shim.
   `issue_number`, and `dry_run` (plan + summary only).
 - **Skips:** no open Dependabot alerts under that workspace; open PR on
   `chore/<workspace>-cve-bumps`; or open PR labeled `fullsend-cve-failed`.
-- **v1 cell:** classify + comment (no lockfile bump / PR yet). Slash-command
-  `/fullsend-package-impact` still works on any issue/PR and is not gated by
-  the schedule allowlist.
+- **Cell:** classify + lockfile bump + PR (`chore/<workspace>-cve-bumps`).
+  Gated by the schedule allowlist.
 
 **Secret:** set repo Actions secret `DEPENDABOT_TOKEN` (Settings → Secrets
 and variables → Actions) to a PAT or GitHub App token with **Dependabot
-alerts: read**. The plan job uses it to list alerts (required unless you
-pass `workspace=`). The `/fullsend-package-impact` pre-script expects the
-same env var on the Fullsend runner (mapped in the harness; never into the
-sandbox). Issue/PR APIs still use the minted `REVIEW_TOKEN` / `GH_TOKEN`.
+alerts: read**. The plan job uses it to list and embed alerts in each matrix
+cell (required unless you pass `workspace=`). Agent runs consume the embedded
+snapshot — no Dependabot token on the Fullsend runner. PR push uses the
+minted **coder** token on the post-script.
 
 ### CVE / Dependabot lockfile bumps
 
 `plugins-package-impact` from
 [kim-tsao/rhdh-security-skills](https://github.com/kim-tsao/rhdh-security-skills)
-is loaded two ways:
+is loaded three ways:
 
-- **Custom agent** (`/fullsend-package-impact`) — classify + patch-status,
-  then comment. Pass a workspace (`homepage` or `workspaces/homepage`) and
-  optional package names. If omitted, the pre-script uses a single
-  `workspace/<name>` label or a PR that only touches one workspace.
-  The runner dumps the raw Dependabot list-alerts JSON with
-  `DEPENDABOT_TOKEN`; the sandbox runs
-  `check-dependabot-patch-status.js --alerts-json` (no Dependabot token in
-  the sandbox).
+- **CVE schedule agent (`cve-bump`)** — classify, `bump-workspace-packages.js`,
+  commit, then post-script opens a PR on `chore/<workspace>-cve-bumps`.
+  Triggered only via **Fullsend CVE schedule**. Plan job embeds
+  workspace-filtered `dependabot_alerts` in the dispatch payload.
+- **Assess-only agent (`plugins-package-impact`)** — registered but not
+  scheduled; classify + comment only (no slash command).
 - **Code / fix agents** — same pinned URL skill on `/fs-code` and `/fs-fix`
-  so CVE lockfile bumps can follow the skill. Fullsend never dismisses
-  alerts.
+  for manual CVE work. Fullsend never dismisses alerts.
 
 When the catalog changes, retarget the skill URL in
-`.fullsend/rhdh/harness/plugins-package-impact.yaml`, `code.yaml`, and
-`fix.yaml` (and the matching `allowed_remote_resources` prefixes).
+`.fullsend/rhdh/harness/cve-bump.yaml`, `plugins-package-impact.yaml`,
+`code.yaml`, and `fix.yaml` (and the matching `allowed_remote_resources`
+prefixes).
 
-If `DEPENDABOT_TOKEN` is missing or cannot list alerts, name packages on
-the `/fullsend-package-impact` comment. Classification via `yarn why` still
-runs without that API. Fullsend never dismisses alerts.
+Fullsend never dismisses alerts.
 
 ## Coexistence with PR Agent
 

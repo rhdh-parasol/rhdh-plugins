@@ -3,10 +3,14 @@
 # Runs on the trusted runner before the sandbox starts. Writes the raw
 # GitHub list-alerts JSON for --alerts-json (no token in the sandbox).
 #
+# Dependabot alerts (two paths):
+#   1. CVE schedule — plan job embeds workspace-filtered dependabot_alerts in
+#      .fullsend/dispatch/event-payload.json; copy to dependabot-alerts.json
+#      (no API call; agent runner does not need DEPENDABOT_TOKEN).
+#   2. Fallback — DEPENDABOT_TOKEN or GH_TOKEN API fetch (local / legacy).
+#
 # Tokens:
-#   REVIEW_TOKEN / GH_TOKEN  — issue/PR metadata and commenting (minted)
-#   DEPENDABOT_TOKEN         — required to list Dependabot alerts (repo
-#                              Actions secret; never passed into sandbox)
+#   REVIEW_TOKEN / GH_TOKEN — issue/PR metadata and commenting (minted)
 set -euo pipefail
 
 WORKSPACE_DIR="/tmp/workspace"
@@ -49,6 +53,7 @@ if [[ -f "${EVENT_FILE}" ]]; then
     if [[ -n "${FROM_PAYLOAD}" ]]; then
       HUMAN_INSTRUCTION="$(printf '%s' "${FROM_PAYLOAD}" \
         | sed -E 's|^[[:space:]]*/fullsend-package-impact[[:space:]]*||' \
+        | sed -E 's|^[[:space:]]*cve-bump[[:space:]]*||' \
         | sed -E 's|^[[:space:]]+||; s|[[:space:]]+$||')"
     fi
   fi
@@ -160,31 +165,42 @@ for candidate in target-repo .; do
 done
 
 DEPENDABOT_STATUS="skipped"
+DEPENDABOT_SOURCE="none"
 printf '%s\n' '[]' > "${WORKSPACE_DIR}/dependabot-alerts.json"
 if [[ -n "${WS}" ]]; then
-  if [[ -z "${DEPENDABOT_TOKEN:-}" ]]; then
-    DEPENDABOT_STATUS="missing_token"
-    echo "::warning::DEPENDABOT_TOKEN is expected for Dependabot alerts. Set repo Actions secret DEPENDABOT_TOKEN (Dependabot alerts: read) and ensure it is available on the runner. Continuing without alerts; name packages on the slash command if needed."
+  # CVE schedule: plan job embeds workspace-filtered alerts in the payload.
+  if [[ -f "${EVENT_FILE}" ]] \
+    && jq -e '.dependabot_alerts | type == "array"' "${EVENT_FILE}" >/dev/null 2>&1; then
+    jq -c '.dependabot_alerts' "${EVENT_FILE}" > "${WORKSPACE_DIR}/dependabot-alerts.json"
+    DEPENDABOT_STATUS="embedded"
+    DEPENDABOT_SOURCE="embedded"
   else
-    ERRFILE="$(mktemp)"
-    # Use DEPENDABOT_TOKEN only for this call — do not overwrite GH_TOKEN used for issue/PR APIs.
-    if ALERTS_RAW="$(GH_TOKEN="${DEPENDABOT_TOKEN}" gh api --paginate \
-      "repos/${REPO_FULL_NAME}/dependabot/alerts?state=open" 2>"${ERRFILE}")"; then
-      jq -c '
-        if type == "array" then
-          if length == 0 then []
-          elif (.[0] | type) == "array" then add
-          else .
-          end
-        else []
-        end
-      ' <<<"${ALERTS_RAW}" > "${WORKSPACE_DIR}/dependabot-alerts.json"
-      DEPENDABOT_STATUS="ok"
+    # Fallback: API fetch (local testing; not used by CVE schedule).
+    _ALERT_TOKEN="${DEPENDABOT_TOKEN:-${GH_TOKEN:-}}"
+    if [[ -z "${_ALERT_TOKEN}" ]]; then
+      DEPENDABOT_STATUS="missing_token"
+      echo "::warning::No embedded dependabot_alerts in dispatch payload and no DEPENDABOT_TOKEN/GH_TOKEN for API fetch."
     else
-      DEPENDABOT_STATUS="forbidden"
-      echo "::warning::Dependabot alerts fetch failed (DEPENDABOT_TOKEN): $(tr '\n' ' ' < "${ERRFILE}")"
+      ERRFILE="$(mktemp)"
+      if ALERTS_RAW="$(GH_TOKEN="${_ALERT_TOKEN}" gh api --paginate \
+        "repos/${REPO_FULL_NAME}/dependabot/alerts?state=open" 2>"${ERRFILE}")"; then
+        jq -c '
+          if type == "array" then
+            if length == 0 then []
+            elif (.[0] | type) == "array" then add
+            else .
+            end
+          else []
+          end
+        ' <<<"${ALERTS_RAW}" > "${WORKSPACE_DIR}/dependabot-alerts.json"
+        DEPENDABOT_STATUS="ok"
+        DEPENDABOT_SOURCE="api"
+      else
+        DEPENDABOT_STATUS="forbidden"
+        echo "::warning::Dependabot alerts fetch failed: $(tr '\n' ' ' < "${ERRFILE}")"
+      fi
+      rm -f "${ERRFILE}"
     fi
-    rm -f "${ERRFILE}"
   fi
 fi
 
@@ -216,6 +232,7 @@ CONTEXT_JSON="$(jq -n \
   --argjson is_pr "${IS_PR}" \
   --arg workspace "${WS}" \
   --arg dependabot_fetch "${DEPENDABOT_STATUS}" \
+  --arg dependabot_source "${DEPENDABOT_SOURCE}" \
   --arg checkout "${CHECKOUT}" \
   --arg instruction "${HUMAN_INSTRUCTION}" \
   --arg alerts_json "/sandbox/workspace/dependabot-alerts.json" \
@@ -229,6 +246,7 @@ CONTEXT_JSON="$(jq -n \
     is_pull_request: $is_pr,
     workspace: (if $workspace == "" then null else $workspace end),
     dependabot_fetch: $dependabot_fetch,
+    dependabot_source: $dependabot_source,
     checkout: $checkout,
     human_instruction: $instruction,
     alerts_json: $alerts_json,
@@ -251,7 +269,7 @@ if [[ -n "${GITHUB_ENV:-}" ]]; then
   } >> "${GITHUB_ENV}"
 fi
 
-echo "::notice::package-impact target=${ISSUE_URL} workspace=${WS:-unset} dependabot=${DEPENDABOT_STATUS}"
+echo "::notice::package-impact target=${ISSUE_URL} workspace=${WS:-unset} dependabot=${DEPENDABOT_STATUS} source=${DEPENDABOT_SOURCE}"
 echo "ISSUE_URL=${ISSUE_URL}"
 echo "REPO_FULL_NAME=${REPO_FULL_NAME}"
 echo "WORKSPACE=${WS}"
