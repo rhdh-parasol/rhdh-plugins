@@ -133,12 +133,15 @@ export class GitHubActionsCollector {
         this.bootstrapPriority.delete(overlayRef);
         const pending = this.bootstrapPending.get(overlayRef);
         if (!pending) continue;
+        // Track bootstrap work in the same in-flight map used by on-demand
+        // refreshes. A user request that arrives after this loop has selected
+        // the subject must await the current collection instead of starting a
+        // second set of GitHub requests for the same repository/run data.
+        const collection = this.collectOverlay(pending.overlay, cache, true);
+        const tracked = collection.then(() => undefined);
+        this.inFlight.set(overlayRef, tracked);
         try {
-          const outcome = await this.collectOverlay(
-            pending.overlay,
-            cache,
-            true,
-          );
+          const outcome = await collection;
           result.changes += outcome.changes;
           result.events += outcome.events;
           pending.completion.resolve(true);
@@ -159,6 +162,9 @@ export class GitHubActionsCollector {
             error as Error,
           );
         } finally {
+          if (this.inFlight.get(overlayRef) === tracked) {
+            this.inFlight.delete(overlayRef);
+          }
           this.bootstrapPending.delete(overlayRef);
         }
       }

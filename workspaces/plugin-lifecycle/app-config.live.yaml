@@ -1,6 +1,12 @@
 # Opt the example backend into live, read-only GitHub evidence collection.
 # The collector uses the configured GitHub integration/App credentials; the
 # normal context endpoint still serves persisted data and never calls GitHub.
+auth:
+  # This file is loaded only by the local development command. Production
+  # deployments must provide a real identity provider instead.
+  providers:
+    guest: {}
+
 pluginLifecycle:
   githubActions:
     enabled: true

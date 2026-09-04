@@ -27,6 +27,7 @@ import {
   type GitHubWorkflowRun,
 } from './GitHubActionsCollector';
 import type { LifecycleService } from '../service/LifecycleService';
+import { slug } from './collectorHelpers';
 
 const overlay: Entity = {
   apiVersion: 'backstage.io/v1alpha1',
@@ -71,6 +72,21 @@ const packageEntity: Entity = {
 };
 
 describe('GitHubActionsCollector', () => {
+  it('rejects malformed repository annotations before building GitHub URLs', () => {
+    expect(
+      slug({
+        ...overlay,
+        metadata: {
+          ...overlay.metadata,
+          annotations: {
+            ...overlay.metadata.annotations,
+            'github.com/project-slug': 'trusted/repo?path=/actions/runs',
+          },
+        },
+      }),
+    ).toBeUndefined();
+  });
+
   it('distinguishes GitHub permission failures from rate limiting', () => {
     expect(isGitHubRateLimited(new GitHubRequestError('forbidden', 403))).toBe(
       false,
@@ -214,6 +230,26 @@ describe('GitHubActionsCollector', () => {
           }),
         }),
       );
+    } finally {
+      fetchMock.mockRestore();
+    }
+  });
+
+  it('treats a missing source.json as optional workspace metadata', async () => {
+    const fetchMock = jest.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: false,
+      status: 404,
+      headers: new Headers(),
+    } as unknown as Response);
+
+    try {
+      await expect(
+        new GitHubRestActionsReader('test-token').getWorkspaceSource(
+          'rhdh-parasol/rhdh-plugin-export-overlays',
+          'workspace-without-source',
+          'main',
+        ),
+      ).resolves.toBeUndefined();
     } finally {
       fetchMock.mockRestore();
     }

@@ -115,4 +115,40 @@ describe('Plugin Lifecycle router', () => {
     expect(response.status).toBe(403);
     expect(service.getContext).not.toHaveBeenCalled();
   });
+
+  it('refreshes a subject and returns the refreshed context', async () => {
+    service.refresh = jest.fn().mockResolvedValue(testContext);
+
+    const response = await request(app)
+      .post('/refresh')
+      .send({ entityRef: 'component:default/overlay-example' });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(testContext);
+    expect(service.refresh).toHaveBeenCalledWith(
+      'component:default/overlay-example',
+      expect.anything(),
+    );
+  });
+
+  it('rejects a refresh request without an entity reference', async () => {
+    service.refresh = jest.fn();
+
+    const response = await request(app).post('/refresh').send({});
+
+    expect(response.status).toBe(400);
+    expect(service.refresh).not.toHaveBeenCalled();
+  });
+
+  it('requires an authenticated principal for refresh', async () => {
+    service.refresh = jest.fn();
+
+    const response = await request(app)
+      .post('/refresh')
+      .set('Authorization', mockCredentials.none.header())
+      .send({ entityRef: 'component:default/overlay-example' });
+
+    expect(response.status).toBe(401);
+    expect(service.refresh).not.toHaveBeenCalled();
+  });
 });

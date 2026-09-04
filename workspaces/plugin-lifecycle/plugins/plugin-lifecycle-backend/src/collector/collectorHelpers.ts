@@ -24,6 +24,7 @@ import type {
 
 const PROJECT_SLUG = 'github.com/project-slug';
 const WORKSPACE = 'rhdh.io/overlay-workspace';
+const REPOSITORY_SLUG = /^[a-zA-Z0-9._-]+\/[a-zA-Z0-9._-]+$/;
 
 export interface CollectionCache {
   runs: Map<string, GitHubWorkflowRun[]>;
@@ -113,7 +114,8 @@ export function deferred(): Deferred {
 
 export function slug(entity: Entity): string | undefined {
   const value = entity.metadata.annotations?.[PROJECT_SLUG];
-  return value?.trim() || undefined;
+  const slugValue = value?.trim();
+  return slugValue && REPOSITORY_SLUG.test(slugValue) ? slugValue : undefined;
 }
 
 export function isOverlay(entity: Entity): boolean {

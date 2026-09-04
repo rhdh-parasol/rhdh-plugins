@@ -28,10 +28,8 @@ backend:
       #   ca: # if you have a CA file and want to verify it you can uncomment this section
       #     $file: <file-path>/ca/server.crt
 
-auth:
-  providers:
-    guest: {}
-
+# Production deployments must configure a real identity provider. Guest
+# authentication is intentionally kept in app-config.yaml for local use only.
 catalog:
   locations:
     # Local example template

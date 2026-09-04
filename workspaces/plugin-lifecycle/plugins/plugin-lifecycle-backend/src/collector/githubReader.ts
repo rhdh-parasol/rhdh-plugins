@@ -11,7 +11,7 @@ import {
   type LifecycleManifest,
   type PublishedExports,
 } from './artifactValidation';
-import { GitHubRequestClient } from './githubClient';
+import { GitHubRequestClient, GitHubRequestError } from './githubClient';
 
 export { GitHubRequestError, isGitHubRateLimited } from './githubClient';
 export type { LifecycleManifest, PublishedExports } from './artifactValidation';
@@ -300,14 +300,24 @@ export class GitHubRestActionsReader implements GitHubActionsReader {
     workspaceName: string,
     ref: string,
   ): Promise<GitHubWorkspaceSource | undefined> {
-    const response = await this.client.get(
-      this.client.url(
-        `/repos/${repository}/contents/workspaces/${encodeURIComponent(
-          workspaceName,
-        )}/source.json?ref=${encodeURIComponent(ref)}`,
-      ),
-      repository,
-    );
+    let response: Response;
+    try {
+      response = await this.client.get(
+        this.client.url(
+          `/repos/${repository}/contents/workspaces/${encodeURIComponent(
+            workspaceName,
+          )}/source.json?ref=${encodeURIComponent(ref)}`,
+        ),
+        repository,
+      );
+    } catch (error) {
+      // Older or non-publishing workspaces may not have source.json. Treat
+      // that as missing optional metadata rather than a collection failure.
+      if (error instanceof GitHubRequestError && error.status === 404) {
+        return undefined;
+      }
+      throw error;
+    }
     const body = (await response.json()) as {
       content?: string;
       encoding?: string;

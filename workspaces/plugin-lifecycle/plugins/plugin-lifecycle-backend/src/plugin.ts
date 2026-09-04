@@ -174,6 +174,7 @@ export const pluginLifecyclePlugin = createBackendPlugin({
           .digest('hex');
         service.setBootstrapKey(bootstrapKey);
         void (async () => {
+          let lastError: unknown;
           for (let attempt = 0; attempt < 3; attempt += 1) {
             try {
               await service.reconcileCatalog(ownCredentials);
@@ -206,6 +207,7 @@ export const pluginLifecyclePlugin = createBackendPlugin({
               }
               return;
             } catch (error) {
+              lastError = error;
               logger.warn(
                 `Plugin lifecycle catalog reconciliation attempt ${
                   attempt + 1
@@ -215,6 +217,43 @@ export const pluginLifecyclePlugin = createBackendPlugin({
               if (attempt < 2)
                 await new Promise(resolve => setTimeout(resolve, 10_000));
             }
+          }
+
+          const errorSummary =
+            lastError instanceof Error ? lastError.message : String(lastError);
+          logger.error(
+            'Plugin lifecycle catalog reconciliation failed after 3 attempts',
+            lastError instanceof Error ? lastError : undefined,
+          );
+          try {
+            await store.recordDiagnostic({
+              source: 'plugin-lifecycle',
+              externalId: `bootstrap:${bootstrapKey}`,
+              reasonCode: 'catalog-reconciliation-failed',
+              summary: errorSummary,
+              details: { attempts: 3 },
+            });
+            if (
+              initialCollector &&
+              (await store.claimBootstrap(
+                bootstrapKey,
+                githubRepositories?.join(',') ?? '*',
+                githubWorkflow,
+              ))
+            ) {
+              await store.completeBootstrap(
+                bootstrapKey,
+                'failed',
+                0,
+                0,
+                errorSummary,
+              );
+            }
+          } catch (diagnosticError) {
+            logger.error(
+              'Failed to persist plugin lifecycle bootstrap diagnostics',
+              diagnosticError as Error,
+            );
           }
         })();
         httpRouter.use(await createRouter({ httpAuth, service }));

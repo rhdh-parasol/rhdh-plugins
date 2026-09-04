@@ -51,6 +51,9 @@ backend.add(import('@backstage/plugin-catalog-backend-module-logs'));
 // permission plugin
 backend.add(import('@backstage/plugin-permission-backend'));
 // See https://backstage.io/docs/permissions/getting-started for how to create your own permission policy
+// WARNING: this allow-all policy is for the local example app only. Replace
+// it with an identity-aware permission policy and remove guest authentication
+// before deploying this backend to a shared or production environment.
 backend.add(
   import('@backstage/plugin-permission-backend-module-allow-all-policy'),
 );
