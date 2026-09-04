@@ -9,7 +9,7 @@
     "start": "backstage-cli repo start --config ../../app-config.yaml --config ../../app-config.live.yaml packages/app packages/backend",
     "start:plugins": "backstage-cli repo start plugins/plugin-lifecycle plugins/plugin-lifecycle-backend",
     "tsc": "tsc",
-    "tsc:full": "tsc --skipLibCheck true --incremental false",
+    "tsc:full": "tsc --skipLibCheck false --incremental false",
     "build:all": "backstage-cli repo build --all",
     "export-dynamic": "yarn workspaces foreach --all --topological-dev --include '@red-hat-developer-hub/backstage-plugin-lifecycle' --include '@red-hat-developer-hub/backstage-plugin-lifecycle-backend' run export-dynamic",
     "package-dynamic": "yarn workspaces foreach --all --topological-dev --include '@red-hat-developer-hub/backstage-plugin-lifecycle' --include '@red-hat-developer-hub/backstage-plugin-lifecycle-backend' run package-dynamic",
