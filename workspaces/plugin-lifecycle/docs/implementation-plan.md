@@ -770,11 +770,16 @@ deployment and verify it by reading the role back. Do not depend on an
 undocumented manual click sequence.
 
 Use the global `@backstage/plugin-mcp-actions-backend` server. Add
-`plugin-lifecycle` to `backend.actions.pluginSources`. Expected MCP tools:
+`plugin-lifecycle` to `backend.actions.pluginSources` and filter the shared
+Actions service so the agent-facing MCP surface exposes only:
 
-- `plugin-lifecycle.create-change`;
-- `plugin-lifecycle.record-event`;
 - `plugin-lifecycle.get-context`.
+
+`create-change` and `record-event` remain optional producer-side Actions
+Registry contracts for trusted adapters and replay tooling. They are not
+registered by default. `refresh` is an opt-in explicit operator action; stale
+agent reads use `get-context` with `refreshPolicy: if_stale` instead of
+requiring a separate refresh call.
 
 MCP clients authenticate with RHDH OAuth/CIMD and act as a signed-in human.
 Unattended service-principal access remains out of scope.

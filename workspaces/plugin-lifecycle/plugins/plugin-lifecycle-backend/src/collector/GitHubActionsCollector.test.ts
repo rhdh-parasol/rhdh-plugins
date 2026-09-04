@@ -19,7 +19,9 @@ import type { CatalogService } from '@backstage/plugin-catalog-node';
 import type { AuthService, LoggerService } from '@backstage/backend-plugin-api';
 import {
   GitHubActionsCollector,
+  GitHubRequestError,
   GitHubRestActionsReader,
+  isGitHubRateLimited,
   type LifecycleManifest,
   type GitHubActionsReader,
   type GitHubWorkflowRun,
@@ -69,6 +71,26 @@ const packageEntity: Entity = {
 };
 
 describe('GitHubActionsCollector', () => {
+  it('distinguishes GitHub permission failures from rate limiting', () => {
+    expect(isGitHubRateLimited(new GitHubRequestError('forbidden', 403))).toBe(
+      false,
+    );
+    expect(
+      isGitHubRateLimited(
+        new GitHubRequestError(
+          'rate limited',
+          403,
+          undefined,
+          '2000000000',
+          '0',
+        ),
+      ),
+    ).toBe(true);
+    expect(
+      isGitHubRateLimited(new GitHubRequestError('rate limited', 429)),
+    ).toBe(true);
+  });
+
   it('uses the GitHub Actions workflow-runs endpoint when a workflow file is configured', async () => {
     const fetchMock = jest.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
@@ -88,10 +110,36 @@ describe('GitHubActionsCollector', () => {
           headers: expect.objectContaining({
             Authorization: 'Bearer test-token',
           }),
+          signal: expect.any(AbortSignal),
         }),
       );
     } finally {
       fetchMock.mockRestore();
+    }
+  });
+
+  it('aborts a hung GitHub request and reports a bounded timeout', async () => {
+    jest.useFakeTimers();
+    const fetchMock = jest.spyOn(globalThis, 'fetch').mockImplementation(
+      async (_input, init) =>
+        new Promise<Response>((_resolve, reject) => {
+          init?.signal?.addEventListener('abort', () =>
+            reject(new DOMException('aborted', 'AbortError')),
+          );
+        }),
+    );
+    try {
+      const request = new GitHubRestActionsReader(
+        'test-token',
+        'https://api.github.com',
+        1_000,
+      ).listRuns('example/overlays', 'publish.yaml');
+      jest.advanceTimersByTime(1_000);
+      await expect(request).rejects.toThrow('timed out');
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    } finally {
+      fetchMock.mockRestore();
+      jest.useRealTimers();
     }
   });
 
@@ -907,10 +955,10 @@ describe('GitHubActionsCollector', () => {
       { warn: jest.fn() } as unknown as LoggerService,
     );
 
-    await collector.refreshSubject('component:default/overlay-global-header');
-    await collector.refreshSubject(
-      'component:default/overlay-adoption-insights',
-    );
+    await Promise.all([
+      collector.refreshSubject('component:default/overlay-global-header'),
+      collector.refreshSubject('component:default/overlay-adoption-insights'),
+    ]);
 
     expect(catalog.queryEntities).not.toHaveBeenCalled();
     expect(reader.listRuns).toHaveBeenCalledTimes(1);
@@ -963,12 +1011,56 @@ describe('GitHubActionsCollector', () => {
 
     const bootstrap = collector.collect();
     await started;
-    await expect(
-      collector.refreshSubject('component:default/overlay-demo'),
-    ).resolves.toBeUndefined();
-    expect(reader.listRuns).toHaveBeenCalledTimes(2);
-
+    const prioritized = collector.refreshSubject(
+      'component:default/overlay-demo',
+    );
+    // The priority path shares the bootstrap cache. Let the currently
+    // executing run-list request finish, then both paths reuse its result.
     releaseBootstrapRuns();
+    await expect(prioritized).resolves.toBeUndefined();
+    expect(reader.listRuns).toHaveBeenCalledTimes(1);
     await bootstrap;
+  });
+
+  it('honors a persisted rate-limit cooldown before querying GitHub', async () => {
+    const service = {
+      getSubjectForEntity: jest.fn().mockResolvedValue({
+        id: 'subject-id',
+        overlayEntityRef: 'component:default/overlay-demo',
+      }),
+      reconcileSubject: jest.fn().mockResolvedValue(undefined),
+      getSyncStateForEntity: jest.fn().mockResolvedValue({
+        status: 'rate_limited',
+        rateLimitResetAt: new Date(Date.now() + 60_000).toISOString(),
+      }),
+      updateSyncState: jest.fn().mockResolvedValue(undefined),
+    } as unknown as LifecycleService;
+    const catalog = {
+      getEntityByRef: jest.fn().mockResolvedValue(overlay),
+    } as unknown as jest.Mocked<CatalogService>;
+    const reader: GitHubActionsReader = {
+      listRuns: jest.fn().mockResolvedValue([]),
+      listJobs: jest.fn(),
+    };
+    const auth = {
+      getOwnServiceCredentials: jest
+        .fn()
+        .mockResolvedValue(mockCredentials.service('collector')),
+    } as unknown as AuthService;
+    const collector = new GitHubActionsCollector(
+      service,
+      catalog,
+      auth,
+      reader,
+      { warn: jest.fn() } as unknown as LoggerService,
+    );
+
+    await collector.refreshSubject('component:default/overlay-demo');
+
+    expect(reader.listRuns).not.toHaveBeenCalled();
+    expect(service.updateSyncState).toHaveBeenCalledWith(
+      'component:default/overlay-demo',
+      expect.objectContaining({ status: 'rate_limited' }),
+    );
   });
 });

@@ -24,7 +24,7 @@ import {
   PluginLifecycleClient,
   pluginLifecycleApiRef,
 } from './api/PluginLifecycleApi';
-import { isLifecycleEntity } from './lifecycleEntity';
+import { isLifecycleEntity } from './utils/isLifecycleEntity';
 
 /** @public */
 export const pluginLifecycleApi = ApiBlueprint.make({

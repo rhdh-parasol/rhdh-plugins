@@ -124,6 +124,12 @@ backend:
       - catalog
       - scaffolder
       - plugin-lifecycle
+    # Keep write actions available to trusted producers and replay/CLI
+    # tooling, but expose only the read entry point through shared consumers
+    # such as MCP agents.
+    filter:
+      include:
+        - id: 'plugin-lifecycle:get-context'
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -226,6 +232,12 @@ mcpActions:
 # uses the current Extensions Catalog artifact metadata; manifest attestation
 # is a later, optional mode.
 pluginLifecycle:
+  actions:
+    # Lifecycle collection writes through the internal service. Keep write
+    # actions disabled in the normal app; enable them only for trusted replay
+    # or producer integrations.
+    exposeProducerActions: false
+    exposeRefreshAction: false
   githubActions:
     enabled: false
     workflow: publish-workspace-plugins.yaml

@@ -86,7 +86,24 @@ export const pluginLifecyclePlugin = createBackendPlugin({
           permissions,
           refreshWaitTimeoutMs,
         );
-        createPluginLifecycleActions({ actionsRegistry, service });
+        // Keep the public runtime action surface read-only by default. The
+        // producer and explicit refresh actions are compatibility hooks for
+        // trusted replay/integration environments and must be enabled
+        // deliberately in configuration.
+        const exposeProducerActions =
+          rootConfig.getOptionalBoolean(
+            'pluginLifecycle.actions.exposeProducerActions',
+          ) ?? false;
+        const exposeRefreshAction =
+          rootConfig.getOptionalBoolean(
+            'pluginLifecycle.actions.exposeRefreshAction',
+          ) ?? false;
+        createPluginLifecycleActions({
+          actionsRegistry,
+          service,
+          exposeProducerActions,
+          exposeRefreshAction,
+        });
         const githubIntegrations = ScmIntegrations.fromConfig(rootConfig);
         const githubActionsEnabled =
           rootConfig.getOptionalBoolean(

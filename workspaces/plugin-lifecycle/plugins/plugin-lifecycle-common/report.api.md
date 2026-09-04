@@ -185,9 +185,9 @@ export const artifactRecordedEventSchema: z.ZodObject<
         url?: string | undefined;
         version?: string | undefined;
         runId?: string | undefined;
+        packageEntityRef?: string | undefined;
         jobId?: string | undefined;
         digest?: string | undefined;
-        packageEntityRef?: string | undefined;
       },
       {
         reference: string;
@@ -196,9 +196,9 @@ export const artifactRecordedEventSchema: z.ZodObject<
         url?: string | undefined;
         version?: string | undefined;
         runId?: string | undefined;
+        packageEntityRef?: string | undefined;
         jobId?: string | undefined;
         digest?: string | undefined;
-        packageEntityRef?: string | undefined;
       }
     >;
   },
@@ -213,9 +213,9 @@ export const artifactRecordedEventSchema: z.ZodObject<
       url?: string | undefined;
       version?: string | undefined;
       runId?: string | undefined;
+      packageEntityRef?: string | undefined;
       jobId?: string | undefined;
       digest?: string | undefined;
-      packageEntityRef?: string | undefined;
     };
   },
   {
@@ -227,9 +227,9 @@ export const artifactRecordedEventSchema: z.ZodObject<
       url?: string | undefined;
       version?: string | undefined;
       runId?: string | undefined;
+      packageEntityRef?: string | undefined;
       jobId?: string | undefined;
       digest?: string | undefined;
-      packageEntityRef?: string | undefined;
     };
   }
 >;
@@ -258,9 +258,9 @@ export const artifactSchema: z.ZodObject<
     url?: string | undefined;
     version?: string | undefined;
     runId?: string | undefined;
+    packageEntityRef?: string | undefined;
     jobId?: string | undefined;
     digest?: string | undefined;
-    packageEntityRef?: string | undefined;
   },
   {
     reference: string;
@@ -269,9 +269,9 @@ export const artifactSchema: z.ZodObject<
     url?: string | undefined;
     version?: string | undefined;
     runId?: string | undefined;
+    packageEntityRef?: string | undefined;
     jobId?: string | undefined;
     digest?: string | undefined;
-    packageEntityRef?: string | undefined;
   }
 >;
 
@@ -595,20 +595,20 @@ export const ciRunRecordedEventSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         },
@@ -630,20 +630,20 @@ export const ciRunRecordedEventSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -670,20 +670,20 @@ export const ciRunRecordedEventSchema: z.ZodObject<
           | 'action_required'
           | undefined;
         updatedAt?: string | undefined;
+        runNumber?: number | undefined;
+        runAttempt?: number | undefined;
+        commitSha?: string | undefined;
+        jobName?: string | undefined;
+        pullRequestNumber?: number | undefined;
+        workspace?: string | undefined;
         workflowId?: string | undefined;
         workflowFile?: string | undefined;
-        runNumber?: number | undefined;
         attempt?: number | undefined;
-        runAttempt?: number | undefined;
         jobId?: string | undefined;
-        jobName?: string | undefined;
-        workspace?: string | undefined;
         eventName?: string | undefined;
-        pullRequestNumber?: number | undefined;
         overlayCommitSha?: string | undefined;
         sourceRepository?: string | undefined;
         sourceCommitSha?: string | undefined;
-        commitSha?: string | undefined;
         startedAt?: string | undefined;
         completedAt?: string | undefined;
       },
@@ -705,20 +705,20 @@ export const ciRunRecordedEventSchema: z.ZodObject<
           | 'action_required'
           | undefined;
         updatedAt?: string | undefined;
+        runNumber?: number | undefined;
+        runAttempt?: number | undefined;
+        commitSha?: string | undefined;
+        jobName?: string | undefined;
+        pullRequestNumber?: number | undefined;
+        workspace?: string | undefined;
         workflowId?: string | undefined;
         workflowFile?: string | undefined;
-        runNumber?: number | undefined;
         attempt?: number | undefined;
-        runAttempt?: number | undefined;
         jobId?: string | undefined;
-        jobName?: string | undefined;
-        workspace?: string | undefined;
         eventName?: string | undefined;
-        pullRequestNumber?: number | undefined;
         overlayCommitSha?: string | undefined;
         sourceRepository?: string | undefined;
         sourceCommitSha?: string | undefined;
-        commitSha?: string | undefined;
         startedAt?: string | undefined;
         completedAt?: string | undefined;
         winning?: boolean | undefined;
@@ -750,20 +750,20 @@ export const ciRunRecordedEventSchema: z.ZodObject<
         | 'action_required'
         | undefined;
       updatedAt?: string | undefined;
+      runNumber?: number | undefined;
+      runAttempt?: number | undefined;
+      commitSha?: string | undefined;
+      jobName?: string | undefined;
+      pullRequestNumber?: number | undefined;
+      workspace?: string | undefined;
       workflowId?: string | undefined;
       workflowFile?: string | undefined;
-      runNumber?: number | undefined;
       attempt?: number | undefined;
-      runAttempt?: number | undefined;
       jobId?: string | undefined;
-      jobName?: string | undefined;
-      workspace?: string | undefined;
       eventName?: string | undefined;
-      pullRequestNumber?: number | undefined;
       overlayCommitSha?: string | undefined;
       sourceRepository?: string | undefined;
       sourceCommitSha?: string | undefined;
-      commitSha?: string | undefined;
       startedAt?: string | undefined;
       completedAt?: string | undefined;
     };
@@ -788,20 +788,20 @@ export const ciRunRecordedEventSchema: z.ZodObject<
         | 'action_required'
         | undefined;
       updatedAt?: string | undefined;
+      runNumber?: number | undefined;
+      runAttempt?: number | undefined;
+      commitSha?: string | undefined;
+      jobName?: string | undefined;
+      pullRequestNumber?: number | undefined;
+      workspace?: string | undefined;
       workflowId?: string | undefined;
       workflowFile?: string | undefined;
-      runNumber?: number | undefined;
       attempt?: number | undefined;
-      runAttempt?: number | undefined;
       jobId?: string | undefined;
-      jobName?: string | undefined;
-      workspace?: string | undefined;
       eventName?: string | undefined;
-      pullRequestNumber?: number | undefined;
       overlayCommitSha?: string | undefined;
       sourceRepository?: string | undefined;
       sourceCommitSha?: string | undefined;
-      commitSha?: string | undefined;
       startedAt?: string | undefined;
       completedAt?: string | undefined;
       winning?: boolean | undefined;
@@ -876,20 +876,20 @@ export const ciRunSchema: z.ZodEffects<
         | 'action_required'
         | undefined;
       updatedAt?: string | undefined;
+      runNumber?: number | undefined;
+      runAttempt?: number | undefined;
+      commitSha?: string | undefined;
+      jobName?: string | undefined;
+      pullRequestNumber?: number | undefined;
+      workspace?: string | undefined;
       workflowId?: string | undefined;
       workflowFile?: string | undefined;
-      runNumber?: number | undefined;
       attempt?: number | undefined;
-      runAttempt?: number | undefined;
       jobId?: string | undefined;
-      jobName?: string | undefined;
-      workspace?: string | undefined;
       eventName?: string | undefined;
-      pullRequestNumber?: number | undefined;
       overlayCommitSha?: string | undefined;
       sourceRepository?: string | undefined;
       sourceCommitSha?: string | undefined;
-      commitSha?: string | undefined;
       startedAt?: string | undefined;
       completedAt?: string | undefined;
     },
@@ -911,20 +911,20 @@ export const ciRunSchema: z.ZodEffects<
         | 'action_required'
         | undefined;
       updatedAt?: string | undefined;
+      runNumber?: number | undefined;
+      runAttempt?: number | undefined;
+      commitSha?: string | undefined;
+      jobName?: string | undefined;
+      pullRequestNumber?: number | undefined;
+      workspace?: string | undefined;
       workflowId?: string | undefined;
       workflowFile?: string | undefined;
-      runNumber?: number | undefined;
       attempt?: number | undefined;
-      runAttempt?: number | undefined;
       jobId?: string | undefined;
-      jobName?: string | undefined;
-      workspace?: string | undefined;
       eventName?: string | undefined;
-      pullRequestNumber?: number | undefined;
       overlayCommitSha?: string | undefined;
       sourceRepository?: string | undefined;
       sourceCommitSha?: string | undefined;
-      commitSha?: string | undefined;
       startedAt?: string | undefined;
       completedAt?: string | undefined;
       winning?: boolean | undefined;
@@ -951,20 +951,20 @@ export const ciRunSchema: z.ZodEffects<
       | 'action_required'
       | undefined;
     updatedAt?: string | undefined;
+    runNumber?: number | undefined;
+    runAttempt?: number | undefined;
+    commitSha?: string | undefined;
+    jobName?: string | undefined;
+    pullRequestNumber?: number | undefined;
+    workspace?: string | undefined;
     workflowId?: string | undefined;
     workflowFile?: string | undefined;
-    runNumber?: number | undefined;
     attempt?: number | undefined;
-    runAttempt?: number | undefined;
     jobId?: string | undefined;
-    jobName?: string | undefined;
-    workspace?: string | undefined;
     eventName?: string | undefined;
-    pullRequestNumber?: number | undefined;
     overlayCommitSha?: string | undefined;
     sourceRepository?: string | undefined;
     sourceCommitSha?: string | undefined;
-    commitSha?: string | undefined;
     startedAt?: string | undefined;
     completedAt?: string | undefined;
   },
@@ -986,20 +986,20 @@ export const ciRunSchema: z.ZodEffects<
       | 'action_required'
       | undefined;
     updatedAt?: string | undefined;
+    runNumber?: number | undefined;
+    runAttempt?: number | undefined;
+    commitSha?: string | undefined;
+    jobName?: string | undefined;
+    pullRequestNumber?: number | undefined;
+    workspace?: string | undefined;
     workflowId?: string | undefined;
     workflowFile?: string | undefined;
-    runNumber?: number | undefined;
     attempt?: number | undefined;
-    runAttempt?: number | undefined;
     jobId?: string | undefined;
-    jobName?: string | undefined;
-    workspace?: string | undefined;
     eventName?: string | undefined;
-    pullRequestNumber?: number | undefined;
     overlayCommitSha?: string | undefined;
     sourceRepository?: string | undefined;
     sourceCommitSha?: string | undefined;
-    commitSha?: string | undefined;
     startedAt?: string | undefined;
     completedAt?: string | undefined;
     winning?: boolean | undefined;
@@ -1449,20 +1449,20 @@ export const createChangeOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -1484,20 +1484,20 @@ export const createChangeOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -1524,20 +1524,20 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             },
@@ -1559,20 +1559,20 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -1647,20 +1647,20 @@ export const createChangeOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -1682,20 +1682,20 @@ export const createChangeOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -1722,20 +1722,20 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             },
@@ -1757,20 +1757,20 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -1860,9 +1860,9 @@ export const createChangeOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             },
             {
               reference: string;
@@ -1877,9 +1877,9 @@ export const createChangeOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             }
           >,
           'many'
@@ -1985,8 +1985,8 @@ export const createChangeOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               },
               {
                 state:
@@ -2005,8 +2005,8 @@ export const createChangeOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             >,
             'many'
@@ -2039,9 +2039,9 @@ export const createChangeOutputSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         }[];
         updatedAt: string;
         phase:
@@ -2089,20 +2089,20 @@ export const createChangeOutputSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         }[];
@@ -2141,8 +2141,8 @@ export const createChangeOutputSchema: z.ZodObject<
               pluginVersion?: string | undefined;
             }
           | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
         winningRun?:
           | {
               status: 'completed' | 'in_progress' | 'queued';
@@ -2164,20 +2164,20 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             }
@@ -2201,8 +2201,8 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'implementation'
                 | 'build'
                 | 'publication';
-              evidenceUrl?: string | undefined;
               blocker?: string | undefined;
+              evidenceUrl?: string | undefined;
             }[]
           | undefined;
       },
@@ -2229,9 +2229,9 @@ export const createChangeOutputSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         }[];
         updatedAt: string;
         phase:
@@ -2277,20 +2277,20 @@ export const createChangeOutputSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -2331,8 +2331,8 @@ export const createChangeOutputSchema: z.ZodObject<
               pluginVersion?: string | undefined;
             }
           | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
         winningRun?:
           | {
               status: 'completed' | 'in_progress' | 'queued';
@@ -2352,20 +2352,20 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -2391,8 +2391,8 @@ export const createChangeOutputSchema: z.ZodObject<
                 | 'implementation'
                 | 'build'
                 | 'publication';
-              evidenceUrl?: string | undefined;
               blocker?: string | undefined;
+              evidenceUrl?: string | undefined;
             }[]
           | undefined;
       }
@@ -2446,9 +2446,9 @@ export const createChangeOutputSchema: z.ZodObject<
         url?: string | undefined;
         version?: string | undefined;
         runId?: string | undefined;
+        packageEntityRef?: string | undefined;
         jobId?: string | undefined;
         digest?: string | undefined;
-        packageEntityRef?: string | undefined;
       }[];
       updatedAt: string;
       phase:
@@ -2496,20 +2496,20 @@ export const createChangeOutputSchema: z.ZodObject<
           | 'action_required'
           | undefined;
         updatedAt?: string | undefined;
+        runNumber?: number | undefined;
+        runAttempt?: number | undefined;
+        commitSha?: string | undefined;
+        jobName?: string | undefined;
+        pullRequestNumber?: number | undefined;
+        workspace?: string | undefined;
         workflowId?: string | undefined;
         workflowFile?: string | undefined;
-        runNumber?: number | undefined;
         attempt?: number | undefined;
-        runAttempt?: number | undefined;
         jobId?: string | undefined;
-        jobName?: string | undefined;
-        workspace?: string | undefined;
         eventName?: string | undefined;
-        pullRequestNumber?: number | undefined;
         overlayCommitSha?: string | undefined;
         sourceRepository?: string | undefined;
         sourceCommitSha?: string | undefined;
-        commitSha?: string | undefined;
         startedAt?: string | undefined;
         completedAt?: string | undefined;
       }[];
@@ -2548,8 +2548,8 @@ export const createChangeOutputSchema: z.ZodObject<
             pluginVersion?: string | undefined;
           }
         | undefined;
-      blocker?: string | undefined;
       ownerRef?: string | undefined;
+      blocker?: string | undefined;
       winningRun?:
         | {
             status: 'completed' | 'in_progress' | 'queued';
@@ -2571,20 +2571,20 @@ export const createChangeOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }
@@ -2608,8 +2608,8 @@ export const createChangeOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
             blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }[]
         | undefined;
     };
@@ -2660,9 +2660,9 @@ export const createChangeOutputSchema: z.ZodObject<
         url?: string | undefined;
         version?: string | undefined;
         runId?: string | undefined;
+        packageEntityRef?: string | undefined;
         jobId?: string | undefined;
         digest?: string | undefined;
-        packageEntityRef?: string | undefined;
       }[];
       updatedAt: string;
       phase:
@@ -2708,20 +2708,20 @@ export const createChangeOutputSchema: z.ZodObject<
           | 'action_required'
           | undefined;
         updatedAt?: string | undefined;
+        runNumber?: number | undefined;
+        runAttempt?: number | undefined;
+        commitSha?: string | undefined;
+        jobName?: string | undefined;
+        pullRequestNumber?: number | undefined;
+        workspace?: string | undefined;
         workflowId?: string | undefined;
         workflowFile?: string | undefined;
-        runNumber?: number | undefined;
         attempt?: number | undefined;
-        runAttempt?: number | undefined;
         jobId?: string | undefined;
-        jobName?: string | undefined;
-        workspace?: string | undefined;
         eventName?: string | undefined;
-        pullRequestNumber?: number | undefined;
         overlayCommitSha?: string | undefined;
         sourceRepository?: string | undefined;
         sourceCommitSha?: string | undefined;
-        commitSha?: string | undefined;
         startedAt?: string | undefined;
         completedAt?: string | undefined;
         winning?: boolean | undefined;
@@ -2762,8 +2762,8 @@ export const createChangeOutputSchema: z.ZodObject<
             pluginVersion?: string | undefined;
           }
         | undefined;
-      blocker?: string | undefined;
       ownerRef?: string | undefined;
+      blocker?: string | undefined;
       winningRun?:
         | {
             status: 'completed' | 'in_progress' | 'queued';
@@ -2783,20 +2783,20 @@ export const createChangeOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -2822,8 +2822,8 @@ export const createChangeOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
             blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }[]
         | undefined;
     };
@@ -2864,9 +2864,9 @@ export const deliveryBuildSchema: z.ZodObject<
     updatedAt?: string | undefined;
     runNumber?: number | undefined;
     runAttempt?: number | undefined;
-    jobName?: string | undefined;
     commitSha?: string | undefined;
     commitUrl?: string | undefined;
+    jobName?: string | undefined;
   },
   {
     status: 'completed' | 'in_progress' | 'queued';
@@ -2878,9 +2878,9 @@ export const deliveryBuildSchema: z.ZodObject<
     updatedAt?: string | undefined;
     runNumber?: number | undefined;
     runAttempt?: number | undefined;
-    jobName?: string | undefined;
     commitSha?: string | undefined;
     commitUrl?: string | undefined;
+    jobName?: string | undefined;
   }
 >;
 
@@ -2954,12 +2954,12 @@ export const deliveryCandidateSchema: z.ZodObject<
     }[];
     author?: string | undefined;
     pullRequestNumber?: number | undefined;
-    blocker?: string | undefined;
     pullRequestUrl?: string | undefined;
     sourceRevision?: string | undefined;
     sourceUrl?: string | undefined;
     publishUrl?: string | undefined;
     smokeTestUrl?: string | undefined;
+    blocker?: string | undefined;
     nextAction?: string | undefined;
     nextActionUrl?: string | undefined;
     nextActionLabel?: string | undefined;
@@ -2972,7 +2972,6 @@ export const deliveryCandidateSchema: z.ZodObject<
     smokeTestStatus: 'running' | 'pending' | 'success' | 'failure' | 'not_run';
     author?: string | undefined;
     pullRequestNumber?: number | undefined;
-    blocker?: string | undefined;
     pullRequestUrl?: string | undefined;
     sourceRevision?: string | undefined;
     sourceUrl?: string | undefined;
@@ -2986,6 +2985,7 @@ export const deliveryCandidateSchema: z.ZodObject<
           packageEntityRef?: string | undefined;
         }[]
       | undefined;
+    blocker?: string | undefined;
     nextAction?: string | undefined;
     nextActionUrl?: string | undefined;
     nextActionLabel?: string | undefined;
@@ -2999,6 +2999,7 @@ export type DeliveryPackage = z.infer<typeof deliveryPackageSchema>;
 export const deliveryPackageSchema: z.ZodObject<
   {
     entityRef: z.ZodString;
+    pluginEntityRef: z.ZodOptional<z.ZodString>;
     packageName: z.ZodOptional<z.ZodString>;
     version: z.ZodOptional<z.ZodString>;
     ociReference: z.ZodOptional<z.ZodString>;
@@ -3015,6 +3016,7 @@ export const deliveryPackageSchema: z.ZodObject<
     version?: string | undefined;
     packageName?: string | undefined;
     support?: string | undefined;
+    pluginEntityRef?: string | undefined;
     ociReference?: string | undefined;
   },
   {
@@ -3024,6 +3026,7 @@ export const deliveryPackageSchema: z.ZodObject<
     version?: string | undefined;
     packageName?: string | undefined;
     support?: string | undefined;
+    pluginEntityRef?: string | undefined;
     ociReference?: string | undefined;
   }
 >;
@@ -3048,6 +3051,7 @@ export const deliverySchema: z.ZodObject<
       z.ZodObject<
         {
           entityRef: z.ZodString;
+          pluginEntityRef: z.ZodOptional<z.ZodString>;
           packageName: z.ZodOptional<z.ZodString>;
           version: z.ZodOptional<z.ZodString>;
           ociReference: z.ZodOptional<z.ZodString>;
@@ -3064,6 +3068,7 @@ export const deliverySchema: z.ZodObject<
           version?: string | undefined;
           packageName?: string | undefined;
           support?: string | undefined;
+          pluginEntityRef?: string | undefined;
           ociReference?: string | undefined;
         },
         {
@@ -3073,6 +3078,7 @@ export const deliverySchema: z.ZodObject<
           version?: string | undefined;
           packageName?: string | undefined;
           support?: string | undefined;
+          pluginEntityRef?: string | undefined;
           ociReference?: string | undefined;
         }
       >,
@@ -3155,12 +3161,12 @@ export const deliverySchema: z.ZodObject<
           }[];
           author?: string | undefined;
           pullRequestNumber?: number | undefined;
-          blocker?: string | undefined;
           pullRequestUrl?: string | undefined;
           sourceRevision?: string | undefined;
           sourceUrl?: string | undefined;
           publishUrl?: string | undefined;
           smokeTestUrl?: string | undefined;
+          blocker?: string | undefined;
           nextAction?: string | undefined;
           nextActionUrl?: string | undefined;
           nextActionLabel?: string | undefined;
@@ -3183,7 +3189,6 @@ export const deliverySchema: z.ZodObject<
             | 'not_run';
           author?: string | undefined;
           pullRequestNumber?: number | undefined;
-          blocker?: string | undefined;
           pullRequestUrl?: string | undefined;
           sourceRevision?: string | undefined;
           sourceUrl?: string | undefined;
@@ -3197,6 +3202,7 @@ export const deliverySchema: z.ZodObject<
                 packageEntityRef?: string | undefined;
               }[]
             | undefined;
+          blocker?: string | undefined;
           nextAction?: string | undefined;
           nextActionUrl?: string | undefined;
           nextActionLabel?: string | undefined;
@@ -3234,9 +3240,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             },
             {
               status: 'completed' | 'in_progress' | 'queued';
@@ -3248,9 +3254,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             }
           >
         >;
@@ -3282,9 +3288,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             },
             {
               status: 'completed' | 'in_progress' | 'queued';
@@ -3296,9 +3302,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             }
           >
         >;
@@ -3317,9 +3323,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             }
           | undefined;
         latestSuccessfulBuild?:
@@ -3333,9 +3339,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             }
           | undefined;
       },
@@ -3351,9 +3357,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             }
           | undefined;
         latestSuccessfulBuild?:
@@ -3367,9 +3373,9 @@ export const deliverySchema: z.ZodObject<
               updatedAt?: string | undefined;
               runNumber?: number | undefined;
               runAttempt?: number | undefined;
-              jobName?: string | undefined;
               commitSha?: string | undefined;
               commitUrl?: string | undefined;
+              jobName?: string | undefined;
             }
           | undefined;
       }
@@ -3407,8 +3413,8 @@ export const deliverySchema: z.ZodObject<
       | 'attention_required'
       | 'ready_to_test'
       | 'ready_to_merge';
-    workspace: string;
     statusReason: string;
+    workspace: string;
     releasedPackages: {
       entityRef: string;
       supportedVersions: string[];
@@ -3416,6 +3422,7 @@ export const deliverySchema: z.ZodObject<
       version?: string | undefined;
       packageName?: string | undefined;
       support?: string | undefined;
+      pluginEntityRef?: string | undefined;
       ociReference?: string | undefined;
     }[];
     activeCandidates: {
@@ -3437,12 +3444,12 @@ export const deliverySchema: z.ZodObject<
       }[];
       author?: string | undefined;
       pullRequestNumber?: number | undefined;
-      blocker?: string | undefined;
       pullRequestUrl?: string | undefined;
       sourceRevision?: string | undefined;
       sourceUrl?: string | undefined;
       publishUrl?: string | undefined;
       smokeTestUrl?: string | undefined;
+      blocker?: string | undefined;
       nextAction?: string | undefined;
       nextActionUrl?: string | undefined;
       nextActionLabel?: string | undefined;
@@ -3459,9 +3466,9 @@ export const deliverySchema: z.ZodObject<
             updatedAt?: string | undefined;
             runNumber?: number | undefined;
             runAttempt?: number | undefined;
-            jobName?: string | undefined;
             commitSha?: string | undefined;
             commitUrl?: string | undefined;
+            jobName?: string | undefined;
           }
         | undefined;
       latestSuccessfulBuild?:
@@ -3475,9 +3482,9 @@ export const deliverySchema: z.ZodObject<
             updatedAt?: string | undefined;
             runNumber?: number | undefined;
             runAttempt?: number | undefined;
-            jobName?: string | undefined;
             commitSha?: string | undefined;
             commitUrl?: string | undefined;
+            jobName?: string | undefined;
           }
         | undefined;
     };
@@ -3499,8 +3506,8 @@ export const deliverySchema: z.ZodObject<
       | 'attention_required'
       | 'ready_to_test'
       | 'ready_to_merge';
-    workspace: string;
     statusReason: string;
+    workspace: string;
     releasedPackages: {
       entityRef: string;
       supportedVersions: string[];
@@ -3508,6 +3515,7 @@ export const deliverySchema: z.ZodObject<
       version?: string | undefined;
       packageName?: string | undefined;
       support?: string | undefined;
+      pluginEntityRef?: string | undefined;
       ociReference?: string | undefined;
     }[];
     activeCandidates: {
@@ -3523,7 +3531,6 @@ export const deliverySchema: z.ZodObject<
         | 'not_run';
       author?: string | undefined;
       pullRequestNumber?: number | undefined;
-      blocker?: string | undefined;
       pullRequestUrl?: string | undefined;
       sourceRevision?: string | undefined;
       sourceUrl?: string | undefined;
@@ -3537,6 +3544,7 @@ export const deliverySchema: z.ZodObject<
             packageEntityRef?: string | undefined;
           }[]
         | undefined;
+      blocker?: string | undefined;
       nextAction?: string | undefined;
       nextActionUrl?: string | undefined;
       nextActionLabel?: string | undefined;
@@ -3553,9 +3561,9 @@ export const deliverySchema: z.ZodObject<
             updatedAt?: string | undefined;
             runNumber?: number | undefined;
             runAttempt?: number | undefined;
-            jobName?: string | undefined;
             commitSha?: string | undefined;
             commitUrl?: string | undefined;
+            jobName?: string | undefined;
           }
         | undefined;
       latestSuccessfulBuild?:
@@ -3569,9 +3577,9 @@ export const deliverySchema: z.ZodObject<
             updatedAt?: string | undefined;
             runNumber?: number | undefined;
             runAttempt?: number | undefined;
-            jobName?: string | undefined;
             commitSha?: string | undefined;
             commitUrl?: string | undefined;
+            jobName?: string | undefined;
           }
         | undefined;
     };
@@ -4211,20 +4219,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -4246,20 +4254,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -4286,20 +4294,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -4321,20 +4329,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -4409,20 +4417,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -4444,20 +4452,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -4484,20 +4492,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -4519,20 +4527,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -4622,9 +4630,9 @@ export const getContextOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -4639,9 +4647,9 @@ export const getContextOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >,
             'many'
@@ -4747,8 +4755,8 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
                   blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 },
                 {
                   state:
@@ -4767,8 +4775,8 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
                   blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 }
               >,
               'many'
@@ -4801,9 +4809,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -4851,20 +4859,20 @@ export const getContextOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }[];
@@ -4903,8 +4911,8 @@ export const getContextOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -4926,20 +4934,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -4963,8 +4971,8 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         },
@@ -4991,9 +4999,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -5039,20 +5047,20 @@ export const getContextOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -5093,8 +5101,8 @@ export const getContextOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -5114,20 +5122,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -5153,8 +5161,8 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -5339,20 +5347,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -5374,20 +5382,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -5414,20 +5422,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -5449,20 +5457,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -5500,9 +5508,9 @@ export const getContextOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -5517,9 +5525,9 @@ export const getContextOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >,
             'many'
@@ -5574,9 +5582,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -5599,20 +5607,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -5665,9 +5673,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -5688,20 +5696,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -5935,9 +5943,9 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
-                  blocker?: string | undefined;
                   ownerRef?: string | undefined;
+                  blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 },
                 {
                   state:
@@ -5956,9 +5964,9 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
-                  blocker?: string | undefined;
                   ownerRef?: string | undefined;
+                  blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 }
               >,
               z.ZodObject<
@@ -6146,20 +6154,20 @@ export const getContextOutputSchema: z.ZodObject<
                           | 'action_required'
                           | undefined;
                         updatedAt?: string | undefined;
+                        runNumber?: number | undefined;
+                        runAttempt?: number | undefined;
+                        commitSha?: string | undefined;
+                        jobName?: string | undefined;
+                        pullRequestNumber?: number | undefined;
+                        workspace?: string | undefined;
                         workflowId?: string | undefined;
                         workflowFile?: string | undefined;
-                        runNumber?: number | undefined;
                         attempt?: number | undefined;
-                        runAttempt?: number | undefined;
                         jobId?: string | undefined;
-                        jobName?: string | undefined;
-                        workspace?: string | undefined;
                         eventName?: string | undefined;
-                        pullRequestNumber?: number | undefined;
                         overlayCommitSha?: string | undefined;
                         sourceRepository?: string | undefined;
                         sourceCommitSha?: string | undefined;
-                        commitSha?: string | undefined;
                         startedAt?: string | undefined;
                         completedAt?: string | undefined;
                       },
@@ -6181,20 +6189,20 @@ export const getContextOutputSchema: z.ZodObject<
                           | 'action_required'
                           | undefined;
                         updatedAt?: string | undefined;
+                        runNumber?: number | undefined;
+                        runAttempt?: number | undefined;
+                        commitSha?: string | undefined;
+                        jobName?: string | undefined;
+                        pullRequestNumber?: number | undefined;
+                        workspace?: string | undefined;
                         workflowId?: string | undefined;
                         workflowFile?: string | undefined;
-                        runNumber?: number | undefined;
                         attempt?: number | undefined;
-                        runAttempt?: number | undefined;
                         jobId?: string | undefined;
-                        jobName?: string | undefined;
-                        workspace?: string | undefined;
                         eventName?: string | undefined;
-                        pullRequestNumber?: number | undefined;
                         overlayCommitSha?: string | undefined;
                         sourceRepository?: string | undefined;
                         sourceCommitSha?: string | undefined;
-                        commitSha?: string | undefined;
                         startedAt?: string | undefined;
                         completedAt?: string | undefined;
                         winning?: boolean | undefined;
@@ -6221,20 +6229,20 @@ export const getContextOutputSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                     },
@@ -6256,20 +6264,20 @@ export const getContextOutputSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                       winning?: boolean | undefined;
@@ -6301,20 +6309,20 @@ export const getContextOutputSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                   };
@@ -6339,20 +6347,20 @@ export const getContextOutputSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                     winning?: boolean | undefined;
@@ -6484,9 +6492,9 @@ export const getContextOutputSchema: z.ZodObject<
                       url?: string | undefined;
                       version?: string | undefined;
                       runId?: string | undefined;
+                      packageEntityRef?: string | undefined;
                       jobId?: string | undefined;
                       digest?: string | undefined;
-                      packageEntityRef?: string | undefined;
                     },
                     {
                       reference: string;
@@ -6501,9 +6509,9 @@ export const getContextOutputSchema: z.ZodObject<
                       url?: string | undefined;
                       version?: string | undefined;
                       runId?: string | undefined;
+                      packageEntityRef?: string | undefined;
                       jobId?: string | undefined;
                       digest?: string | undefined;
-                      packageEntityRef?: string | undefined;
                     }
                   >;
                 },
@@ -6524,9 +6532,9 @@ export const getContextOutputSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   };
                 },
                 {
@@ -6544,9 +6552,9 @@ export const getContextOutputSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   };
                 }
               >,
@@ -6715,9 +6723,9 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             | {
                 kind: 'reference.linked';
@@ -6763,20 +6771,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 };
@@ -6813,9 +6821,9 @@ export const getContextOutputSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             | {
@@ -6840,8 +6848,8 @@ export const getContextOutputSchema: z.ZodObject<
                 kind: 'change.superseded';
                 replacementChangeId?: string | undefined;
               };
-          eventId: string;
           changeId: string;
+          eventId: string;
           schemaVersion: 2;
           occurredAt: string;
           ingestedAt: string;
@@ -6901,9 +6909,9 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             | {
                 kind: 'reference.linked';
@@ -6947,20 +6955,20 @@ export const getContextOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -6999,9 +7007,9 @@ export const getContextOutputSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             | {
@@ -7026,8 +7034,8 @@ export const getContextOutputSchema: z.ZodObject<
                 kind: 'change.superseded';
                 replacementChangeId?: string | undefined;
               };
-          eventId: string;
           changeId: string;
+          eventId: string;
           schemaVersion: 2;
           occurredAt: string;
           ingestedAt: string;
@@ -7057,6 +7065,7 @@ export const getContextOutputSchema: z.ZodObject<
             z.ZodObject<
               {
                 entityRef: z.ZodString;
+                pluginEntityRef: z.ZodOptional<z.ZodString>;
                 packageName: z.ZodOptional<z.ZodString>;
                 version: z.ZodOptional<z.ZodString>;
                 ociReference: z.ZodOptional<z.ZodString>;
@@ -7073,6 +7082,7 @@ export const getContextOutputSchema: z.ZodObject<
                 version?: string | undefined;
                 packageName?: string | undefined;
                 support?: string | undefined;
+                pluginEntityRef?: string | undefined;
                 ociReference?: string | undefined;
               },
               {
@@ -7082,6 +7092,7 @@ export const getContextOutputSchema: z.ZodObject<
                 version?: string | undefined;
                 packageName?: string | undefined;
                 support?: string | undefined;
+                pluginEntityRef?: string | undefined;
                 ociReference?: string | undefined;
               }
             >,
@@ -7164,12 +7175,12 @@ export const getContextOutputSchema: z.ZodObject<
                 }[];
                 author?: string | undefined;
                 pullRequestNumber?: number | undefined;
-                blocker?: string | undefined;
                 pullRequestUrl?: string | undefined;
                 sourceRevision?: string | undefined;
                 sourceUrl?: string | undefined;
                 publishUrl?: string | undefined;
                 smokeTestUrl?: string | undefined;
+                blocker?: string | undefined;
                 nextAction?: string | undefined;
                 nextActionUrl?: string | undefined;
                 nextActionLabel?: string | undefined;
@@ -7192,7 +7203,6 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'not_run';
                 author?: string | undefined;
                 pullRequestNumber?: number | undefined;
-                blocker?: string | undefined;
                 pullRequestUrl?: string | undefined;
                 sourceRevision?: string | undefined;
                 sourceUrl?: string | undefined;
@@ -7206,6 +7216,7 @@ export const getContextOutputSchema: z.ZodObject<
                       packageEntityRef?: string | undefined;
                     }[]
                   | undefined;
+                blocker?: string | undefined;
                 nextAction?: string | undefined;
                 nextActionUrl?: string | undefined;
                 nextActionLabel?: string | undefined;
@@ -7243,9 +7254,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   },
                   {
                     status: 'completed' | 'in_progress' | 'queued';
@@ -7257,9 +7268,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 >
               >;
@@ -7291,9 +7302,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   },
                   {
                     status: 'completed' | 'in_progress' | 'queued';
@@ -7305,9 +7316,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 >
               >;
@@ -7326,9 +7337,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
               latestSuccessfulBuild?:
@@ -7342,9 +7353,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
             },
@@ -7360,9 +7371,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
               latestSuccessfulBuild?:
@@ -7376,9 +7387,9 @@ export const getContextOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
             }
@@ -7416,8 +7427,8 @@ export const getContextOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -7425,6 +7436,7 @@ export const getContextOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -7451,12 +7463,12 @@ export const getContextOutputSchema: z.ZodObject<
             }[];
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
             publishUrl?: string | undefined;
             smokeTestUrl?: string | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -7473,9 +7485,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -7489,9 +7501,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -7513,8 +7525,8 @@ export const getContextOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -7522,6 +7534,7 @@ export const getContextOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -7542,7 +7555,6 @@ export const getContextOutputSchema: z.ZodObject<
               | 'not_run';
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
@@ -7556,6 +7568,7 @@ export const getContextOutputSchema: z.ZodObject<
                   packageEntityRef?: string | undefined;
                 }[]
               | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -7572,9 +7585,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -7588,9 +7601,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -7791,9 +7804,9 @@ export const getContextOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -7839,20 +7852,20 @@ export const getContextOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             };
@@ -7889,9 +7902,9 @@ export const getContextOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -7916,8 +7929,8 @@ export const getContextOutputSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -7998,8 +8011,8 @@ export const getContextOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -8007,6 +8020,7 @@ export const getContextOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -8033,12 +8047,12 @@ export const getContextOutputSchema: z.ZodObject<
             }[];
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
             publishUrl?: string | undefined;
             smokeTestUrl?: string | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -8055,9 +8069,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -8071,9 +8085,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -8137,9 +8151,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -8187,20 +8201,20 @@ export const getContextOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }[];
@@ -8239,8 +8253,8 @@ export const getContextOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -8262,20 +8276,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -8299,8 +8313,8 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -8390,9 +8404,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -8415,20 +8429,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -8507,9 +8521,9 @@ export const getContextOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -8553,20 +8567,20 @@ export const getContextOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -8605,9 +8619,9 @@ export const getContextOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -8632,8 +8646,8 @@ export const getContextOutputSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -8714,8 +8728,8 @@ export const getContextOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -8723,6 +8737,7 @@ export const getContextOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -8743,7 +8758,6 @@ export const getContextOutputSchema: z.ZodObject<
               | 'not_run';
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
@@ -8757,6 +8771,7 @@ export const getContextOutputSchema: z.ZodObject<
                   packageEntityRef?: string | undefined;
                 }[]
               | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -8773,9 +8788,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -8789,9 +8804,9 @@ export const getContextOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -8855,9 +8870,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -8903,20 +8918,20 @@ export const getContextOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -8957,8 +8972,8 @@ export const getContextOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -8978,20 +8993,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -9017,8 +9032,8 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -9108,9 +9123,9 @@ export const getContextOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -9131,20 +9146,20 @@ export const getContextOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -9793,20 +9808,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -9828,20 +9843,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -9868,20 +9883,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -9903,20 +9918,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -9991,20 +10006,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -10026,20 +10041,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -10066,20 +10081,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -10101,20 +10116,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -10204,9 +10219,9 @@ export const lifecycleContextSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -10221,9 +10236,9 @@ export const lifecycleContextSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >,
             'many'
@@ -10329,8 +10344,8 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
                   blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 },
                 {
                   state:
@@ -10349,8 +10364,8 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
                   blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 }
               >,
               'many'
@@ -10383,9 +10398,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -10433,20 +10448,20 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }[];
@@ -10485,8 +10500,8 @@ export const lifecycleContextSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -10508,20 +10523,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -10545,8 +10560,8 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         },
@@ -10573,9 +10588,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -10621,20 +10636,20 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -10675,8 +10690,8 @@ export const lifecycleContextSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -10696,20 +10711,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -10735,8 +10750,8 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -10921,20 +10936,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -10956,20 +10971,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -10996,20 +11011,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -11031,20 +11046,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -11082,9 +11097,9 @@ export const lifecycleContextSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -11099,9 +11114,9 @@ export const lifecycleContextSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >,
             'many'
@@ -11156,9 +11171,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -11181,20 +11196,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -11247,9 +11262,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -11270,20 +11285,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -11517,9 +11532,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
-                  blocker?: string | undefined;
                   ownerRef?: string | undefined;
+                  blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 },
                 {
                   state:
@@ -11538,9 +11553,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
-                  blocker?: string | undefined;
                   ownerRef?: string | undefined;
+                  blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 }
               >,
               z.ZodObject<
@@ -11728,20 +11743,20 @@ export const lifecycleContextSchema: z.ZodObject<
                           | 'action_required'
                           | undefined;
                         updatedAt?: string | undefined;
+                        runNumber?: number | undefined;
+                        runAttempt?: number | undefined;
+                        commitSha?: string | undefined;
+                        jobName?: string | undefined;
+                        pullRequestNumber?: number | undefined;
+                        workspace?: string | undefined;
                         workflowId?: string | undefined;
                         workflowFile?: string | undefined;
-                        runNumber?: number | undefined;
                         attempt?: number | undefined;
-                        runAttempt?: number | undefined;
                         jobId?: string | undefined;
-                        jobName?: string | undefined;
-                        workspace?: string | undefined;
                         eventName?: string | undefined;
-                        pullRequestNumber?: number | undefined;
                         overlayCommitSha?: string | undefined;
                         sourceRepository?: string | undefined;
                         sourceCommitSha?: string | undefined;
-                        commitSha?: string | undefined;
                         startedAt?: string | undefined;
                         completedAt?: string | undefined;
                       },
@@ -11763,20 +11778,20 @@ export const lifecycleContextSchema: z.ZodObject<
                           | 'action_required'
                           | undefined;
                         updatedAt?: string | undefined;
+                        runNumber?: number | undefined;
+                        runAttempt?: number | undefined;
+                        commitSha?: string | undefined;
+                        jobName?: string | undefined;
+                        pullRequestNumber?: number | undefined;
+                        workspace?: string | undefined;
                         workflowId?: string | undefined;
                         workflowFile?: string | undefined;
-                        runNumber?: number | undefined;
                         attempt?: number | undefined;
-                        runAttempt?: number | undefined;
                         jobId?: string | undefined;
-                        jobName?: string | undefined;
-                        workspace?: string | undefined;
                         eventName?: string | undefined;
-                        pullRequestNumber?: number | undefined;
                         overlayCommitSha?: string | undefined;
                         sourceRepository?: string | undefined;
                         sourceCommitSha?: string | undefined;
-                        commitSha?: string | undefined;
                         startedAt?: string | undefined;
                         completedAt?: string | undefined;
                         winning?: boolean | undefined;
@@ -11803,20 +11818,20 @@ export const lifecycleContextSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                     },
@@ -11838,20 +11853,20 @@ export const lifecycleContextSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                       winning?: boolean | undefined;
@@ -11883,20 +11898,20 @@ export const lifecycleContextSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                   };
@@ -11921,20 +11936,20 @@ export const lifecycleContextSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                     winning?: boolean | undefined;
@@ -12066,9 +12081,9 @@ export const lifecycleContextSchema: z.ZodObject<
                       url?: string | undefined;
                       version?: string | undefined;
                       runId?: string | undefined;
+                      packageEntityRef?: string | undefined;
                       jobId?: string | undefined;
                       digest?: string | undefined;
-                      packageEntityRef?: string | undefined;
                     },
                     {
                       reference: string;
@@ -12083,9 +12098,9 @@ export const lifecycleContextSchema: z.ZodObject<
                       url?: string | undefined;
                       version?: string | undefined;
                       runId?: string | undefined;
+                      packageEntityRef?: string | undefined;
                       jobId?: string | undefined;
                       digest?: string | undefined;
-                      packageEntityRef?: string | undefined;
                     }
                   >;
                 },
@@ -12106,9 +12121,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   };
                 },
                 {
@@ -12126,9 +12141,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   };
                 }
               >,
@@ -12297,9 +12312,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             | {
                 kind: 'reference.linked';
@@ -12345,20 +12360,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 };
@@ -12395,9 +12410,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             | {
@@ -12422,8 +12437,8 @@ export const lifecycleContextSchema: z.ZodObject<
                 kind: 'change.superseded';
                 replacementChangeId?: string | undefined;
               };
-          eventId: string;
           changeId: string;
+          eventId: string;
           schemaVersion: 2;
           occurredAt: string;
           ingestedAt: string;
@@ -12483,9 +12498,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             | {
                 kind: 'reference.linked';
@@ -12529,20 +12544,20 @@ export const lifecycleContextSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -12581,9 +12596,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             | {
@@ -12608,8 +12623,8 @@ export const lifecycleContextSchema: z.ZodObject<
                 kind: 'change.superseded';
                 replacementChangeId?: string | undefined;
               };
-          eventId: string;
           changeId: string;
+          eventId: string;
           schemaVersion: 2;
           occurredAt: string;
           ingestedAt: string;
@@ -12639,6 +12654,7 @@ export const lifecycleContextSchema: z.ZodObject<
             z.ZodObject<
               {
                 entityRef: z.ZodString;
+                pluginEntityRef: z.ZodOptional<z.ZodString>;
                 packageName: z.ZodOptional<z.ZodString>;
                 version: z.ZodOptional<z.ZodString>;
                 ociReference: z.ZodOptional<z.ZodString>;
@@ -12655,6 +12671,7 @@ export const lifecycleContextSchema: z.ZodObject<
                 version?: string | undefined;
                 packageName?: string | undefined;
                 support?: string | undefined;
+                pluginEntityRef?: string | undefined;
                 ociReference?: string | undefined;
               },
               {
@@ -12664,6 +12681,7 @@ export const lifecycleContextSchema: z.ZodObject<
                 version?: string | undefined;
                 packageName?: string | undefined;
                 support?: string | undefined;
+                pluginEntityRef?: string | undefined;
                 ociReference?: string | undefined;
               }
             >,
@@ -12746,12 +12764,12 @@ export const lifecycleContextSchema: z.ZodObject<
                 }[];
                 author?: string | undefined;
                 pullRequestNumber?: number | undefined;
-                blocker?: string | undefined;
                 pullRequestUrl?: string | undefined;
                 sourceRevision?: string | undefined;
                 sourceUrl?: string | undefined;
                 publishUrl?: string | undefined;
                 smokeTestUrl?: string | undefined;
+                blocker?: string | undefined;
                 nextAction?: string | undefined;
                 nextActionUrl?: string | undefined;
                 nextActionLabel?: string | undefined;
@@ -12774,7 +12792,6 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'not_run';
                 author?: string | undefined;
                 pullRequestNumber?: number | undefined;
-                blocker?: string | undefined;
                 pullRequestUrl?: string | undefined;
                 sourceRevision?: string | undefined;
                 sourceUrl?: string | undefined;
@@ -12788,6 +12805,7 @@ export const lifecycleContextSchema: z.ZodObject<
                       packageEntityRef?: string | undefined;
                     }[]
                   | undefined;
+                blocker?: string | undefined;
                 nextAction?: string | undefined;
                 nextActionUrl?: string | undefined;
                 nextActionLabel?: string | undefined;
@@ -12825,9 +12843,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   },
                   {
                     status: 'completed' | 'in_progress' | 'queued';
@@ -12839,9 +12857,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 >
               >;
@@ -12873,9 +12891,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   },
                   {
                     status: 'completed' | 'in_progress' | 'queued';
@@ -12887,9 +12905,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 >
               >;
@@ -12908,9 +12926,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
               latestSuccessfulBuild?:
@@ -12924,9 +12942,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
             },
@@ -12942,9 +12960,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
               latestSuccessfulBuild?:
@@ -12958,9 +12976,9 @@ export const lifecycleContextSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
             }
@@ -12998,8 +13016,8 @@ export const lifecycleContextSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -13007,6 +13025,7 @@ export const lifecycleContextSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -13033,12 +13052,12 @@ export const lifecycleContextSchema: z.ZodObject<
             }[];
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
             publishUrl?: string | undefined;
             smokeTestUrl?: string | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -13055,9 +13074,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -13071,9 +13090,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -13095,8 +13114,8 @@ export const lifecycleContextSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -13104,6 +13123,7 @@ export const lifecycleContextSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -13124,7 +13144,6 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'not_run';
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
@@ -13138,6 +13157,7 @@ export const lifecycleContextSchema: z.ZodObject<
                   packageEntityRef?: string | undefined;
                 }[]
               | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -13154,9 +13174,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -13170,9 +13190,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -13373,9 +13393,9 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -13421,20 +13441,20 @@ export const lifecycleContextSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             };
@@ -13471,9 +13491,9 @@ export const lifecycleContextSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -13498,8 +13518,8 @@ export const lifecycleContextSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -13580,8 +13600,8 @@ export const lifecycleContextSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -13589,6 +13609,7 @@ export const lifecycleContextSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -13615,12 +13636,12 @@ export const lifecycleContextSchema: z.ZodObject<
             }[];
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
             publishUrl?: string | undefined;
             smokeTestUrl?: string | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -13637,9 +13658,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -13653,9 +13674,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -13719,9 +13740,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -13769,20 +13790,20 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }[];
@@ -13821,8 +13842,8 @@ export const lifecycleContextSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -13844,20 +13865,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -13881,8 +13902,8 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -13972,9 +13993,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -13997,20 +14018,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -14089,9 +14110,9 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -14135,20 +14156,20 @@ export const lifecycleContextSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -14187,9 +14208,9 @@ export const lifecycleContextSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -14214,8 +14235,8 @@ export const lifecycleContextSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -14296,8 +14317,8 @@ export const lifecycleContextSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -14305,6 +14326,7 @@ export const lifecycleContextSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -14325,7 +14347,6 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'not_run';
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
@@ -14339,6 +14360,7 @@ export const lifecycleContextSchema: z.ZodObject<
                   packageEntityRef?: string | undefined;
                 }[]
               | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -14355,9 +14377,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -14371,9 +14393,9 @@ export const lifecycleContextSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -14437,9 +14459,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -14485,20 +14507,20 @@ export const lifecycleContextSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -14539,8 +14561,8 @@ export const lifecycleContextSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -14560,20 +14582,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -14599,8 +14621,8 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -14690,9 +14712,9 @@ export const lifecycleContextSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -14713,20 +14735,20 @@ export const lifecycleContextSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -14952,9 +14974,9 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
           | 'implementation'
           | 'build'
           | 'publication';
-        evidenceUrl?: string | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
+        evidenceUrl?: string | undefined;
       },
       {
         state:
@@ -14973,9 +14995,9 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
           | 'implementation'
           | 'build'
           | 'publication';
-        evidenceUrl?: string | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
+        evidenceUrl?: string | undefined;
       }
     >,
     z.ZodObject<
@@ -15161,20 +15183,20 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             },
@@ -15196,20 +15218,20 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -15236,20 +15258,20 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           },
@@ -15271,20 +15293,20 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -15316,20 +15338,20 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         };
@@ -15354,20 +15376,20 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -15497,9 +15519,9 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           },
           {
             reference: string;
@@ -15514,9 +15536,9 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }
         >;
       },
@@ -15537,9 +15559,9 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         };
       },
       {
@@ -15557,9 +15579,9 @@ export const lifecycleEventPayloadSchema: z.ZodDiscriminatedUnion<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         };
       }
     >,
@@ -15899,9 +15921,9 @@ export const lifecycleEventSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           },
           {
             state:
@@ -15920,9 +15942,9 @@ export const lifecycleEventSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         >,
         z.ZodObject<
@@ -16108,20 +16130,20 @@ export const lifecycleEventSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -16143,20 +16165,20 @@ export const lifecycleEventSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -16183,20 +16205,20 @@ export const lifecycleEventSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -16218,20 +16240,20 @@ export const lifecycleEventSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -16263,20 +16285,20 @@ export const lifecycleEventSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             };
@@ -16301,20 +16323,20 @@ export const lifecycleEventSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -16444,9 +16466,9 @@ export const lifecycleEventSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -16461,9 +16483,9 @@ export const lifecycleEventSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >;
           },
@@ -16484,9 +16506,9 @@ export const lifecycleEventSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           },
           {
@@ -16504,9 +16526,9 @@ export const lifecycleEventSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         >,
@@ -16675,9 +16697,9 @@ export const lifecycleEventSchema: z.ZodObject<
             | 'implementation'
             | 'build'
             | 'publication';
-          evidenceUrl?: string | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
+          evidenceUrl?: string | undefined;
         }
       | {
           kind: 'reference.linked';
@@ -16723,20 +16745,20 @@ export const lifecycleEventSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           };
@@ -16773,9 +16795,9 @@ export const lifecycleEventSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           };
         }
       | {
@@ -16800,8 +16822,8 @@ export const lifecycleEventSchema: z.ZodObject<
           kind: 'change.superseded';
           replacementChangeId?: string | undefined;
         };
-    eventId: string;
     changeId: string;
+    eventId: string;
     schemaVersion: 2;
     occurredAt: string;
     ingestedAt: string;
@@ -16861,9 +16883,9 @@ export const lifecycleEventSchema: z.ZodObject<
             | 'implementation'
             | 'build'
             | 'publication';
-          evidenceUrl?: string | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
+          evidenceUrl?: string | undefined;
         }
       | {
           kind: 'reference.linked';
@@ -16907,20 +16929,20 @@ export const lifecycleEventSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -16959,9 +16981,9 @@ export const lifecycleEventSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           };
         }
       | {
@@ -16986,8 +17008,8 @@ export const lifecycleEventSchema: z.ZodObject<
           kind: 'change.superseded';
           replacementChangeId?: string | undefined;
         };
-    eventId: string;
     changeId: string;
+    eventId: string;
     schemaVersion: 2;
     occurredAt: string;
     ingestedAt: string;
@@ -17181,20 +17203,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           },
@@ -17216,20 +17238,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -17256,20 +17278,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         },
@@ -17291,20 +17313,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -17379,20 +17401,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           },
@@ -17414,20 +17436,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -17454,20 +17476,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         },
@@ -17489,20 +17511,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -17592,9 +17614,9 @@ export const lifecycleProjectionSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         },
         {
           reference: string;
@@ -17609,9 +17631,9 @@ export const lifecycleProjectionSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         }
       >,
       'many'
@@ -17717,8 +17739,8 @@ export const lifecycleProjectionSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
             blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           },
           {
             state:
@@ -17737,8 +17759,8 @@ export const lifecycleProjectionSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
             blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         >,
         'many'
@@ -17765,9 +17787,9 @@ export const lifecycleProjectionSchema: z.ZodObject<
       url?: string | undefined;
       version?: string | undefined;
       runId?: string | undefined;
+      packageEntityRef?: string | undefined;
       jobId?: string | undefined;
       digest?: string | undefined;
-      packageEntityRef?: string | undefined;
     }[];
     updatedAt: string;
     phase:
@@ -17815,20 +17837,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
         | 'action_required'
         | undefined;
       updatedAt?: string | undefined;
+      runNumber?: number | undefined;
+      runAttempt?: number | undefined;
+      commitSha?: string | undefined;
+      jobName?: string | undefined;
+      pullRequestNumber?: number | undefined;
+      workspace?: string | undefined;
       workflowId?: string | undefined;
       workflowFile?: string | undefined;
-      runNumber?: number | undefined;
       attempt?: number | undefined;
-      runAttempt?: number | undefined;
       jobId?: string | undefined;
-      jobName?: string | undefined;
-      workspace?: string | undefined;
       eventName?: string | undefined;
-      pullRequestNumber?: number | undefined;
       overlayCommitSha?: string | undefined;
       sourceRepository?: string | undefined;
       sourceCommitSha?: string | undefined;
-      commitSha?: string | undefined;
       startedAt?: string | undefined;
       completedAt?: string | undefined;
     }[];
@@ -17867,8 +17889,8 @@ export const lifecycleProjectionSchema: z.ZodObject<
           pluginVersion?: string | undefined;
         }
       | undefined;
-    blocker?: string | undefined;
     ownerRef?: string | undefined;
+    blocker?: string | undefined;
     winningRun?:
       | {
           status: 'completed' | 'in_progress' | 'queued';
@@ -17890,20 +17912,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         }
@@ -17927,8 +17949,8 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'implementation'
             | 'build'
             | 'publication';
-          evidenceUrl?: string | undefined;
           blocker?: string | undefined;
+          evidenceUrl?: string | undefined;
         }[]
       | undefined;
   },
@@ -17949,9 +17971,9 @@ export const lifecycleProjectionSchema: z.ZodObject<
       url?: string | undefined;
       version?: string | undefined;
       runId?: string | undefined;
+      packageEntityRef?: string | undefined;
       jobId?: string | undefined;
       digest?: string | undefined;
-      packageEntityRef?: string | undefined;
     }[];
     updatedAt: string;
     phase:
@@ -17997,20 +18019,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
         | 'action_required'
         | undefined;
       updatedAt?: string | undefined;
+      runNumber?: number | undefined;
+      runAttempt?: number | undefined;
+      commitSha?: string | undefined;
+      jobName?: string | undefined;
+      pullRequestNumber?: number | undefined;
+      workspace?: string | undefined;
       workflowId?: string | undefined;
       workflowFile?: string | undefined;
-      runNumber?: number | undefined;
       attempt?: number | undefined;
-      runAttempt?: number | undefined;
       jobId?: string | undefined;
-      jobName?: string | undefined;
-      workspace?: string | undefined;
       eventName?: string | undefined;
-      pullRequestNumber?: number | undefined;
       overlayCommitSha?: string | undefined;
       sourceRepository?: string | undefined;
       sourceCommitSha?: string | undefined;
-      commitSha?: string | undefined;
       startedAt?: string | undefined;
       completedAt?: string | undefined;
       winning?: boolean | undefined;
@@ -18051,8 +18073,8 @@ export const lifecycleProjectionSchema: z.ZodObject<
           pluginVersion?: string | undefined;
         }
       | undefined;
-    blocker?: string | undefined;
     ownerRef?: string | undefined;
+    blocker?: string | undefined;
     winningRun?:
       | {
           status: 'completed' | 'in_progress' | 'queued';
@@ -18072,20 +18094,20 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -18111,8 +18133,8 @@ export const lifecycleProjectionSchema: z.ZodObject<
             | 'implementation'
             | 'build'
             | 'publication';
-          evidenceUrl?: string | undefined;
           blocker?: string | undefined;
+          evidenceUrl?: string | undefined;
         }[]
       | undefined;
   }
@@ -18369,20 +18391,20 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           },
@@ -18404,20 +18426,20 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -18444,20 +18466,20 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         },
@@ -18479,20 +18501,20 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -18530,9 +18552,9 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         },
         {
           reference: string;
@@ -18547,9 +18569,9 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         }
       >,
       'many'
@@ -18593,9 +18615,9 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
       url?: string | undefined;
       version?: string | undefined;
       runId?: string | undefined;
+      packageEntityRef?: string | undefined;
       jobId?: string | undefined;
       digest?: string | undefined;
-      packageEntityRef?: string | undefined;
     }[];
     run?:
       | {
@@ -18618,20 +18640,20 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         }
@@ -18673,9 +18695,9 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
       url?: string | undefined;
       version?: string | undefined;
       runId?: string | undefined;
+      packageEntityRef?: string | undefined;
       jobId?: string | undefined;
       digest?: string | undefined;
-      packageEntityRef?: string | undefined;
     }[];
     run?:
       | {
@@ -18696,20 +18718,20 @@ export const lifecycleSuccessfulPublicationSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -18806,9 +18828,9 @@ export const phaseUpdatedEventSchema: z.ZodObject<
       | 'implementation'
       | 'build'
       | 'publication';
-    evidenceUrl?: string | undefined;
-    blocker?: string | undefined;
     ownerRef?: string | undefined;
+    blocker?: string | undefined;
+    evidenceUrl?: string | undefined;
   },
   {
     state:
@@ -18827,9 +18849,9 @@ export const phaseUpdatedEventSchema: z.ZodObject<
       | 'implementation'
       | 'build'
       | 'publication';
-    evidenceUrl?: string | undefined;
-    blocker?: string | undefined;
     ownerRef?: string | undefined;
+    blocker?: string | undefined;
+    evidenceUrl?: string | undefined;
   }
 >;
 
@@ -18898,9 +18920,9 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
           | 'implementation'
           | 'build'
           | 'publication';
-        evidenceUrl?: string | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
+        evidenceUrl?: string | undefined;
       },
       {
         state:
@@ -18919,9 +18941,9 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
           | 'implementation'
           | 'build'
           | 'publication';
-        evidenceUrl?: string | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
+        evidenceUrl?: string | undefined;
       }
     >,
     z.ZodObject<
@@ -19107,20 +19129,20 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             },
@@ -19142,20 +19164,20 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -19182,20 +19204,20 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           },
@@ -19217,20 +19239,20 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -19262,20 +19284,20 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         };
@@ -19300,20 +19322,20 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -19443,9 +19465,9 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           },
           {
             reference: string;
@@ -19460,9 +19482,9 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }
         >;
       },
@@ -19483,9 +19505,9 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         };
       },
       {
@@ -19503,9 +19525,9 @@ export const recordableLifecycleEventSchema: z.ZodDiscriminatedUnion<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         };
       }
     >,
@@ -19681,9 +19703,9 @@ export const recordEventInputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           },
           {
             state:
@@ -19702,9 +19724,9 @@ export const recordEventInputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         >,
         z.ZodObject<
@@ -19890,20 +19912,20 @@ export const recordEventInputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -19925,20 +19947,20 @@ export const recordEventInputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -19965,20 +19987,20 @@ export const recordEventInputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -20000,20 +20022,20 @@ export const recordEventInputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -20045,20 +20067,20 @@ export const recordEventInputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             };
@@ -20083,20 +20105,20 @@ export const recordEventInputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -20226,9 +20248,9 @@ export const recordEventInputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -20243,9 +20265,9 @@ export const recordEventInputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >;
           },
@@ -20266,9 +20288,9 @@ export const recordEventInputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           },
           {
@@ -20286,9 +20308,9 @@ export const recordEventInputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         >,
@@ -20425,9 +20447,9 @@ export const recordEventInputSchema: z.ZodObject<
             | 'implementation'
             | 'build'
             | 'publication';
-          evidenceUrl?: string | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
+          evidenceUrl?: string | undefined;
         }
       | {
           kind: 'reference.linked';
@@ -20473,20 +20495,20 @@ export const recordEventInputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           };
@@ -20523,9 +20545,9 @@ export const recordEventInputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           };
         }
       | {
@@ -20551,8 +20573,8 @@ export const recordEventInputSchema: z.ZodObject<
           replacementChangeId?: string | undefined;
         };
     producer: string;
-    eventId: string;
     changeId: string;
+    eventId: string;
     occurredAt: string;
   },
   {
@@ -20574,9 +20596,9 @@ export const recordEventInputSchema: z.ZodObject<
             | 'implementation'
             | 'build'
             | 'publication';
-          evidenceUrl?: string | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
+          evidenceUrl?: string | undefined;
         }
       | {
           kind: 'reference.linked';
@@ -20620,20 +20642,20 @@ export const recordEventInputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -20672,9 +20694,9 @@ export const recordEventInputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           };
         }
       | {
@@ -20700,8 +20722,8 @@ export const recordEventInputSchema: z.ZodObject<
           replacementChangeId?: string | undefined;
         };
     producer: string;
-    eventId: string;
     changeId: string;
+    eventId: string;
     occurredAt: string;
   }
 >;
@@ -20935,9 +20957,9 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               },
               {
                 state:
@@ -20956,9 +20978,9 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             >,
             z.ZodObject<
@@ -21144,20 +21166,20 @@ export const recordEventOutputSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                     },
@@ -21179,20 +21201,20 @@ export const recordEventOutputSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                       winning?: boolean | undefined;
@@ -21219,20 +21241,20 @@ export const recordEventOutputSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                   },
@@ -21254,20 +21276,20 @@ export const recordEventOutputSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                     winning?: boolean | undefined;
@@ -21299,20 +21321,20 @@ export const recordEventOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 };
@@ -21337,20 +21359,20 @@ export const recordEventOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -21482,9 +21504,9 @@ export const recordEventOutputSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   },
                   {
                     reference: string;
@@ -21499,9 +21521,9 @@ export const recordEventOutputSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   }
                 >;
               },
@@ -21522,9 +21544,9 @@ export const recordEventOutputSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               },
               {
@@ -21542,9 +21564,9 @@ export const recordEventOutputSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             >,
@@ -21713,9 +21735,9 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'implementation'
                 | 'build'
                 | 'publication';
-              evidenceUrl?: string | undefined;
-              blocker?: string | undefined;
               ownerRef?: string | undefined;
+              blocker?: string | undefined;
+              evidenceUrl?: string | undefined;
             }
           | {
               kind: 'reference.linked';
@@ -21761,20 +21783,20 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               };
@@ -21811,9 +21833,9 @@ export const recordEventOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               };
             }
           | {
@@ -21838,8 +21860,8 @@ export const recordEventOutputSchema: z.ZodObject<
               kind: 'change.superseded';
               replacementChangeId?: string | undefined;
             };
-        eventId: string;
         changeId: string;
+        eventId: string;
         schemaVersion: 2;
         occurredAt: string;
         ingestedAt: string;
@@ -21899,9 +21921,9 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'implementation'
                 | 'build'
                 | 'publication';
-              evidenceUrl?: string | undefined;
-              blocker?: string | undefined;
               ownerRef?: string | undefined;
+              blocker?: string | undefined;
+              evidenceUrl?: string | undefined;
             }
           | {
               kind: 'reference.linked';
@@ -21945,20 +21967,20 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -21997,9 +22019,9 @@ export const recordEventOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               };
             }
           | {
@@ -22024,8 +22046,8 @@ export const recordEventOutputSchema: z.ZodObject<
               kind: 'change.superseded';
               replacementChangeId?: string | undefined;
             };
-        eventId: string;
         changeId: string;
+        eventId: string;
         schemaVersion: 2;
         occurredAt: string;
         ingestedAt: string;
@@ -22206,20 +22228,20 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -22241,20 +22263,20 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -22281,20 +22303,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             },
@@ -22316,20 +22338,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -22404,20 +22426,20 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -22439,20 +22461,20 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -22479,20 +22501,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             },
@@ -22514,20 +22536,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -22617,9 +22639,9 @@ export const recordEventOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             },
             {
               reference: string;
@@ -22634,9 +22656,9 @@ export const recordEventOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             }
           >,
           'many'
@@ -22742,8 +22764,8 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               },
               {
                 state:
@@ -22762,8 +22784,8 @@ export const recordEventOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             >,
             'many'
@@ -22796,9 +22818,9 @@ export const recordEventOutputSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         }[];
         updatedAt: string;
         phase:
@@ -22846,20 +22868,20 @@ export const recordEventOutputSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
         }[];
@@ -22898,8 +22920,8 @@ export const recordEventOutputSchema: z.ZodObject<
               pluginVersion?: string | undefined;
             }
           | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
         winningRun?:
           | {
               status: 'completed' | 'in_progress' | 'queued';
@@ -22921,20 +22943,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             }
@@ -22958,8 +22980,8 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'implementation'
                 | 'build'
                 | 'publication';
-              evidenceUrl?: string | undefined;
               blocker?: string | undefined;
+              evidenceUrl?: string | undefined;
             }[]
           | undefined;
       },
@@ -22986,9 +23008,9 @@ export const recordEventOutputSchema: z.ZodObject<
           url?: string | undefined;
           version?: string | undefined;
           runId?: string | undefined;
+          packageEntityRef?: string | undefined;
           jobId?: string | undefined;
           digest?: string | undefined;
-          packageEntityRef?: string | undefined;
         }[];
         updatedAt: string;
         phase:
@@ -23034,20 +23056,20 @@ export const recordEventOutputSchema: z.ZodObject<
             | 'action_required'
             | undefined;
           updatedAt?: string | undefined;
+          runNumber?: number | undefined;
+          runAttempt?: number | undefined;
+          commitSha?: string | undefined;
+          jobName?: string | undefined;
+          pullRequestNumber?: number | undefined;
+          workspace?: string | undefined;
           workflowId?: string | undefined;
           workflowFile?: string | undefined;
-          runNumber?: number | undefined;
           attempt?: number | undefined;
-          runAttempt?: number | undefined;
           jobId?: string | undefined;
-          jobName?: string | undefined;
-          workspace?: string | undefined;
           eventName?: string | undefined;
-          pullRequestNumber?: number | undefined;
           overlayCommitSha?: string | undefined;
           sourceRepository?: string | undefined;
           sourceCommitSha?: string | undefined;
-          commitSha?: string | undefined;
           startedAt?: string | undefined;
           completedAt?: string | undefined;
           winning?: boolean | undefined;
@@ -23088,8 +23110,8 @@ export const recordEventOutputSchema: z.ZodObject<
               pluginVersion?: string | undefined;
             }
           | undefined;
-        blocker?: string | undefined;
         ownerRef?: string | undefined;
+        blocker?: string | undefined;
         winningRun?:
           | {
               status: 'completed' | 'in_progress' | 'queued';
@@ -23109,20 +23131,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -23148,8 +23170,8 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'implementation'
                 | 'build'
                 | 'publication';
-              evidenceUrl?: string | undefined;
               blocker?: string | undefined;
+              evidenceUrl?: string | undefined;
             }[]
           | undefined;
       }
@@ -23209,9 +23231,9 @@ export const recordEventOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -23257,20 +23279,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             };
@@ -23307,9 +23329,9 @@ export const recordEventOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -23334,8 +23356,8 @@ export const recordEventOutputSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -23359,9 +23381,9 @@ export const recordEventOutputSchema: z.ZodObject<
         url?: string | undefined;
         version?: string | undefined;
         runId?: string | undefined;
+        packageEntityRef?: string | undefined;
         jobId?: string | undefined;
         digest?: string | undefined;
-        packageEntityRef?: string | undefined;
       }[];
       updatedAt: string;
       phase:
@@ -23409,20 +23431,20 @@ export const recordEventOutputSchema: z.ZodObject<
           | 'action_required'
           | undefined;
         updatedAt?: string | undefined;
+        runNumber?: number | undefined;
+        runAttempt?: number | undefined;
+        commitSha?: string | undefined;
+        jobName?: string | undefined;
+        pullRequestNumber?: number | undefined;
+        workspace?: string | undefined;
         workflowId?: string | undefined;
         workflowFile?: string | undefined;
-        runNumber?: number | undefined;
         attempt?: number | undefined;
-        runAttempt?: number | undefined;
         jobId?: string | undefined;
-        jobName?: string | undefined;
-        workspace?: string | undefined;
         eventName?: string | undefined;
-        pullRequestNumber?: number | undefined;
         overlayCommitSha?: string | undefined;
         sourceRepository?: string | undefined;
         sourceCommitSha?: string | undefined;
-        commitSha?: string | undefined;
         startedAt?: string | undefined;
         completedAt?: string | undefined;
       }[];
@@ -23461,8 +23483,8 @@ export const recordEventOutputSchema: z.ZodObject<
             pluginVersion?: string | undefined;
           }
         | undefined;
-      blocker?: string | undefined;
       ownerRef?: string | undefined;
+      blocker?: string | undefined;
       winningRun?:
         | {
             status: 'completed' | 'in_progress' | 'queued';
@@ -23484,20 +23506,20 @@ export const recordEventOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }
@@ -23521,8 +23543,8 @@ export const recordEventOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
             blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }[]
         | undefined;
     };
@@ -23581,9 +23603,9 @@ export const recordEventOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -23627,20 +23649,20 @@ export const recordEventOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -23679,9 +23701,9 @@ export const recordEventOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -23706,8 +23728,8 @@ export const recordEventOutputSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -23731,9 +23753,9 @@ export const recordEventOutputSchema: z.ZodObject<
         url?: string | undefined;
         version?: string | undefined;
         runId?: string | undefined;
+        packageEntityRef?: string | undefined;
         jobId?: string | undefined;
         digest?: string | undefined;
-        packageEntityRef?: string | undefined;
       }[];
       updatedAt: string;
       phase:
@@ -23779,20 +23801,20 @@ export const recordEventOutputSchema: z.ZodObject<
           | 'action_required'
           | undefined;
         updatedAt?: string | undefined;
+        runNumber?: number | undefined;
+        runAttempt?: number | undefined;
+        commitSha?: string | undefined;
+        jobName?: string | undefined;
+        pullRequestNumber?: number | undefined;
+        workspace?: string | undefined;
         workflowId?: string | undefined;
         workflowFile?: string | undefined;
-        runNumber?: number | undefined;
         attempt?: number | undefined;
-        runAttempt?: number | undefined;
         jobId?: string | undefined;
-        jobName?: string | undefined;
-        workspace?: string | undefined;
         eventName?: string | undefined;
-        pullRequestNumber?: number | undefined;
         overlayCommitSha?: string | undefined;
         sourceRepository?: string | undefined;
         sourceCommitSha?: string | undefined;
-        commitSha?: string | undefined;
         startedAt?: string | undefined;
         completedAt?: string | undefined;
         winning?: boolean | undefined;
@@ -23833,8 +23855,8 @@ export const recordEventOutputSchema: z.ZodObject<
             pluginVersion?: string | undefined;
           }
         | undefined;
-      blocker?: string | undefined;
       ownerRef?: string | undefined;
+      blocker?: string | undefined;
       winningRun?:
         | {
             status: 'completed' | 'in_progress' | 'queued';
@@ -23854,20 +23876,20 @@ export const recordEventOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -23893,8 +23915,8 @@ export const recordEventOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
             blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }[]
         | undefined;
     };
@@ -24573,20 +24595,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -24608,20 +24630,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -24648,20 +24670,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -24683,20 +24705,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -24771,20 +24793,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -24806,20 +24828,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -24846,20 +24868,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -24881,20 +24903,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -24984,9 +25006,9 @@ export const refreshOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -25001,9 +25023,9 @@ export const refreshOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >,
             'many'
@@ -25109,8 +25131,8 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
                   blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 },
                 {
                   state:
@@ -25129,8 +25151,8 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
                   blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 }
               >,
               'many'
@@ -25163,9 +25185,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -25213,20 +25235,20 @@ export const refreshOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }[];
@@ -25265,8 +25287,8 @@ export const refreshOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -25288,20 +25310,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -25325,8 +25347,8 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         },
@@ -25353,9 +25375,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -25401,20 +25423,20 @@ export const refreshOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -25455,8 +25477,8 @@ export const refreshOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -25476,20 +25498,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -25515,8 +25537,8 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -25701,20 +25723,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 },
@@ -25736,20 +25758,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -25776,20 +25798,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               },
@@ -25811,20 +25833,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -25862,9 +25884,9 @@ export const refreshOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               },
               {
                 reference: string;
@@ -25879,9 +25901,9 @@ export const refreshOutputSchema: z.ZodObject<
                 url?: string | undefined;
                 version?: string | undefined;
                 runId?: string | undefined;
+                packageEntityRef?: string | undefined;
                 jobId?: string | undefined;
                 digest?: string | undefined;
-                packageEntityRef?: string | undefined;
               }
             >,
             'many'
@@ -25936,9 +25958,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -25961,20 +25983,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -26027,9 +26049,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -26050,20 +26072,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -26297,9 +26319,9 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
-                  blocker?: string | undefined;
                   ownerRef?: string | undefined;
+                  blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 },
                 {
                   state:
@@ -26318,9 +26340,9 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'implementation'
                     | 'build'
                     | 'publication';
-                  evidenceUrl?: string | undefined;
-                  blocker?: string | undefined;
                   ownerRef?: string | undefined;
+                  blocker?: string | undefined;
+                  evidenceUrl?: string | undefined;
                 }
               >,
               z.ZodObject<
@@ -26508,20 +26530,20 @@ export const refreshOutputSchema: z.ZodObject<
                           | 'action_required'
                           | undefined;
                         updatedAt?: string | undefined;
+                        runNumber?: number | undefined;
+                        runAttempt?: number | undefined;
+                        commitSha?: string | undefined;
+                        jobName?: string | undefined;
+                        pullRequestNumber?: number | undefined;
+                        workspace?: string | undefined;
                         workflowId?: string | undefined;
                         workflowFile?: string | undefined;
-                        runNumber?: number | undefined;
                         attempt?: number | undefined;
-                        runAttempt?: number | undefined;
                         jobId?: string | undefined;
-                        jobName?: string | undefined;
-                        workspace?: string | undefined;
                         eventName?: string | undefined;
-                        pullRequestNumber?: number | undefined;
                         overlayCommitSha?: string | undefined;
                         sourceRepository?: string | undefined;
                         sourceCommitSha?: string | undefined;
-                        commitSha?: string | undefined;
                         startedAt?: string | undefined;
                         completedAt?: string | undefined;
                       },
@@ -26543,20 +26565,20 @@ export const refreshOutputSchema: z.ZodObject<
                           | 'action_required'
                           | undefined;
                         updatedAt?: string | undefined;
+                        runNumber?: number | undefined;
+                        runAttempt?: number | undefined;
+                        commitSha?: string | undefined;
+                        jobName?: string | undefined;
+                        pullRequestNumber?: number | undefined;
+                        workspace?: string | undefined;
                         workflowId?: string | undefined;
                         workflowFile?: string | undefined;
-                        runNumber?: number | undefined;
                         attempt?: number | undefined;
-                        runAttempt?: number | undefined;
                         jobId?: string | undefined;
-                        jobName?: string | undefined;
-                        workspace?: string | undefined;
                         eventName?: string | undefined;
-                        pullRequestNumber?: number | undefined;
                         overlayCommitSha?: string | undefined;
                         sourceRepository?: string | undefined;
                         sourceCommitSha?: string | undefined;
-                        commitSha?: string | undefined;
                         startedAt?: string | undefined;
                         completedAt?: string | undefined;
                         winning?: boolean | undefined;
@@ -26583,20 +26605,20 @@ export const refreshOutputSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                     },
@@ -26618,20 +26640,20 @@ export const refreshOutputSchema: z.ZodObject<
                         | 'action_required'
                         | undefined;
                       updatedAt?: string | undefined;
+                      runNumber?: number | undefined;
+                      runAttempt?: number | undefined;
+                      commitSha?: string | undefined;
+                      jobName?: string | undefined;
+                      pullRequestNumber?: number | undefined;
+                      workspace?: string | undefined;
                       workflowId?: string | undefined;
                       workflowFile?: string | undefined;
-                      runNumber?: number | undefined;
                       attempt?: number | undefined;
-                      runAttempt?: number | undefined;
                       jobId?: string | undefined;
-                      jobName?: string | undefined;
-                      workspace?: string | undefined;
                       eventName?: string | undefined;
-                      pullRequestNumber?: number | undefined;
                       overlayCommitSha?: string | undefined;
                       sourceRepository?: string | undefined;
                       sourceCommitSha?: string | undefined;
-                      commitSha?: string | undefined;
                       startedAt?: string | undefined;
                       completedAt?: string | undefined;
                       winning?: boolean | undefined;
@@ -26663,20 +26685,20 @@ export const refreshOutputSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                   };
@@ -26701,20 +26723,20 @@ export const refreshOutputSchema: z.ZodObject<
                       | 'action_required'
                       | undefined;
                     updatedAt?: string | undefined;
+                    runNumber?: number | undefined;
+                    runAttempt?: number | undefined;
+                    commitSha?: string | undefined;
+                    jobName?: string | undefined;
+                    pullRequestNumber?: number | undefined;
+                    workspace?: string | undefined;
                     workflowId?: string | undefined;
                     workflowFile?: string | undefined;
-                    runNumber?: number | undefined;
                     attempt?: number | undefined;
-                    runAttempt?: number | undefined;
                     jobId?: string | undefined;
-                    jobName?: string | undefined;
-                    workspace?: string | undefined;
                     eventName?: string | undefined;
-                    pullRequestNumber?: number | undefined;
                     overlayCommitSha?: string | undefined;
                     sourceRepository?: string | undefined;
                     sourceCommitSha?: string | undefined;
-                    commitSha?: string | undefined;
                     startedAt?: string | undefined;
                     completedAt?: string | undefined;
                     winning?: boolean | undefined;
@@ -26846,9 +26868,9 @@ export const refreshOutputSchema: z.ZodObject<
                       url?: string | undefined;
                       version?: string | undefined;
                       runId?: string | undefined;
+                      packageEntityRef?: string | undefined;
                       jobId?: string | undefined;
                       digest?: string | undefined;
-                      packageEntityRef?: string | undefined;
                     },
                     {
                       reference: string;
@@ -26863,9 +26885,9 @@ export const refreshOutputSchema: z.ZodObject<
                       url?: string | undefined;
                       version?: string | undefined;
                       runId?: string | undefined;
+                      packageEntityRef?: string | undefined;
                       jobId?: string | undefined;
                       digest?: string | undefined;
-                      packageEntityRef?: string | undefined;
                     }
                   >;
                 },
@@ -26886,9 +26908,9 @@ export const refreshOutputSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   };
                 },
                 {
@@ -26906,9 +26928,9 @@ export const refreshOutputSchema: z.ZodObject<
                     url?: string | undefined;
                     version?: string | undefined;
                     runId?: string | undefined;
+                    packageEntityRef?: string | undefined;
                     jobId?: string | undefined;
                     digest?: string | undefined;
-                    packageEntityRef?: string | undefined;
                   };
                 }
               >,
@@ -27077,9 +27099,9 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             | {
                 kind: 'reference.linked';
@@ -27125,20 +27147,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                 };
@@ -27175,9 +27197,9 @@ export const refreshOutputSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             | {
@@ -27202,8 +27224,8 @@ export const refreshOutputSchema: z.ZodObject<
                 kind: 'change.superseded';
                 replacementChangeId?: string | undefined;
               };
-          eventId: string;
           changeId: string;
+          eventId: string;
           schemaVersion: 2;
           occurredAt: string;
           ingestedAt: string;
@@ -27263,9 +27285,9 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
-                blocker?: string | undefined;
                 ownerRef?: string | undefined;
+                blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }
             | {
                 kind: 'reference.linked';
@@ -27309,20 +27331,20 @@ export const refreshOutputSchema: z.ZodObject<
                     | 'action_required'
                     | undefined;
                   updatedAt?: string | undefined;
+                  runNumber?: number | undefined;
+                  runAttempt?: number | undefined;
+                  commitSha?: string | undefined;
+                  jobName?: string | undefined;
+                  pullRequestNumber?: number | undefined;
+                  workspace?: string | undefined;
                   workflowId?: string | undefined;
                   workflowFile?: string | undefined;
-                  runNumber?: number | undefined;
                   attempt?: number | undefined;
-                  runAttempt?: number | undefined;
                   jobId?: string | undefined;
-                  jobName?: string | undefined;
-                  workspace?: string | undefined;
                   eventName?: string | undefined;
-                  pullRequestNumber?: number | undefined;
                   overlayCommitSha?: string | undefined;
                   sourceRepository?: string | undefined;
                   sourceCommitSha?: string | undefined;
-                  commitSha?: string | undefined;
                   startedAt?: string | undefined;
                   completedAt?: string | undefined;
                   winning?: boolean | undefined;
@@ -27361,9 +27383,9 @@ export const refreshOutputSchema: z.ZodObject<
                   url?: string | undefined;
                   version?: string | undefined;
                   runId?: string | undefined;
+                  packageEntityRef?: string | undefined;
                   jobId?: string | undefined;
                   digest?: string | undefined;
-                  packageEntityRef?: string | undefined;
                 };
               }
             | {
@@ -27388,8 +27410,8 @@ export const refreshOutputSchema: z.ZodObject<
                 kind: 'change.superseded';
                 replacementChangeId?: string | undefined;
               };
-          eventId: string;
           changeId: string;
+          eventId: string;
           schemaVersion: 2;
           occurredAt: string;
           ingestedAt: string;
@@ -27419,6 +27441,7 @@ export const refreshOutputSchema: z.ZodObject<
             z.ZodObject<
               {
                 entityRef: z.ZodString;
+                pluginEntityRef: z.ZodOptional<z.ZodString>;
                 packageName: z.ZodOptional<z.ZodString>;
                 version: z.ZodOptional<z.ZodString>;
                 ociReference: z.ZodOptional<z.ZodString>;
@@ -27435,6 +27458,7 @@ export const refreshOutputSchema: z.ZodObject<
                 version?: string | undefined;
                 packageName?: string | undefined;
                 support?: string | undefined;
+                pluginEntityRef?: string | undefined;
                 ociReference?: string | undefined;
               },
               {
@@ -27444,6 +27468,7 @@ export const refreshOutputSchema: z.ZodObject<
                 version?: string | undefined;
                 packageName?: string | undefined;
                 support?: string | undefined;
+                pluginEntityRef?: string | undefined;
                 ociReference?: string | undefined;
               }
             >,
@@ -27526,12 +27551,12 @@ export const refreshOutputSchema: z.ZodObject<
                 }[];
                 author?: string | undefined;
                 pullRequestNumber?: number | undefined;
-                blocker?: string | undefined;
                 pullRequestUrl?: string | undefined;
                 sourceRevision?: string | undefined;
                 sourceUrl?: string | undefined;
                 publishUrl?: string | undefined;
                 smokeTestUrl?: string | undefined;
+                blocker?: string | undefined;
                 nextAction?: string | undefined;
                 nextActionUrl?: string | undefined;
                 nextActionLabel?: string | undefined;
@@ -27554,7 +27579,6 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'not_run';
                 author?: string | undefined;
                 pullRequestNumber?: number | undefined;
-                blocker?: string | undefined;
                 pullRequestUrl?: string | undefined;
                 sourceRevision?: string | undefined;
                 sourceUrl?: string | undefined;
@@ -27568,6 +27592,7 @@ export const refreshOutputSchema: z.ZodObject<
                       packageEntityRef?: string | undefined;
                     }[]
                   | undefined;
+                blocker?: string | undefined;
                 nextAction?: string | undefined;
                 nextActionUrl?: string | undefined;
                 nextActionLabel?: string | undefined;
@@ -27605,9 +27630,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   },
                   {
                     status: 'completed' | 'in_progress' | 'queued';
@@ -27619,9 +27644,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 >
               >;
@@ -27653,9 +27678,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   },
                   {
                     status: 'completed' | 'in_progress' | 'queued';
@@ -27667,9 +27692,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 >
               >;
@@ -27688,9 +27713,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
               latestSuccessfulBuild?:
@@ -27704,9 +27729,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
             },
@@ -27722,9 +27747,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
               latestSuccessfulBuild?:
@@ -27738,9 +27763,9 @@ export const refreshOutputSchema: z.ZodObject<
                     updatedAt?: string | undefined;
                     runNumber?: number | undefined;
                     runAttempt?: number | undefined;
-                    jobName?: string | undefined;
                     commitSha?: string | undefined;
                     commitUrl?: string | undefined;
+                    jobName?: string | undefined;
                   }
                 | undefined;
             }
@@ -27778,8 +27803,8 @@ export const refreshOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -27787,6 +27812,7 @@ export const refreshOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -27813,12 +27839,12 @@ export const refreshOutputSchema: z.ZodObject<
             }[];
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
             publishUrl?: string | undefined;
             smokeTestUrl?: string | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -27835,9 +27861,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -27851,9 +27877,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -27875,8 +27901,8 @@ export const refreshOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -27884,6 +27910,7 @@ export const refreshOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -27904,7 +27931,6 @@ export const refreshOutputSchema: z.ZodObject<
               | 'not_run';
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
@@ -27918,6 +27944,7 @@ export const refreshOutputSchema: z.ZodObject<
                   packageEntityRef?: string | undefined;
                 }[]
               | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -27934,9 +27961,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -27950,9 +27977,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -28153,9 +28180,9 @@ export const refreshOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -28201,20 +28228,20 @@ export const refreshOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
             };
@@ -28251,9 +28278,9 @@ export const refreshOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -28278,8 +28305,8 @@ export const refreshOutputSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -28360,8 +28387,8 @@ export const refreshOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -28369,6 +28396,7 @@ export const refreshOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -28395,12 +28423,12 @@ export const refreshOutputSchema: z.ZodObject<
             }[];
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
             publishUrl?: string | undefined;
             smokeTestUrl?: string | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -28417,9 +28445,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -28433,9 +28461,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -28499,9 +28527,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -28549,20 +28577,20 @@ export const refreshOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
           }[];
@@ -28601,8 +28629,8 @@ export const refreshOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -28624,20 +28652,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -28661,8 +28689,8 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -28752,9 +28780,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -28777,20 +28805,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
               }
@@ -28869,9 +28897,9 @@ export const refreshOutputSchema: z.ZodObject<
               | 'implementation'
               | 'build'
               | 'publication';
-            evidenceUrl?: string | undefined;
-            blocker?: string | undefined;
             ownerRef?: string | undefined;
+            blocker?: string | undefined;
+            evidenceUrl?: string | undefined;
           }
         | {
             kind: 'reference.linked';
@@ -28915,20 +28943,20 @@ export const refreshOutputSchema: z.ZodObject<
                 | 'action_required'
                 | undefined;
               updatedAt?: string | undefined;
+              runNumber?: number | undefined;
+              runAttempt?: number | undefined;
+              commitSha?: string | undefined;
+              jobName?: string | undefined;
+              pullRequestNumber?: number | undefined;
+              workspace?: string | undefined;
               workflowId?: string | undefined;
               workflowFile?: string | undefined;
-              runNumber?: number | undefined;
               attempt?: number | undefined;
-              runAttempt?: number | undefined;
               jobId?: string | undefined;
-              jobName?: string | undefined;
-              workspace?: string | undefined;
               eventName?: string | undefined;
-              pullRequestNumber?: number | undefined;
               overlayCommitSha?: string | undefined;
               sourceRepository?: string | undefined;
               sourceCommitSha?: string | undefined;
-              commitSha?: string | undefined;
               startedAt?: string | undefined;
               completedAt?: string | undefined;
               winning?: boolean | undefined;
@@ -28967,9 +28995,9 @@ export const refreshOutputSchema: z.ZodObject<
               url?: string | undefined;
               version?: string | undefined;
               runId?: string | undefined;
+              packageEntityRef?: string | undefined;
               jobId?: string | undefined;
               digest?: string | undefined;
-              packageEntityRef?: string | undefined;
             };
           }
         | {
@@ -28994,8 +29022,8 @@ export const refreshOutputSchema: z.ZodObject<
             kind: 'change.superseded';
             replacementChangeId?: string | undefined;
           };
-      eventId: string;
       changeId: string;
+      eventId: string;
       schemaVersion: 2;
       occurredAt: string;
       ingestedAt: string;
@@ -29076,8 +29104,8 @@ export const refreshOutputSchema: z.ZodObject<
             | 'attention_required'
             | 'ready_to_test'
             | 'ready_to_merge';
-          workspace: string;
           statusReason: string;
+          workspace: string;
           releasedPackages: {
             entityRef: string;
             supportedVersions: string[];
@@ -29085,6 +29113,7 @@ export const refreshOutputSchema: z.ZodObject<
             version?: string | undefined;
             packageName?: string | undefined;
             support?: string | undefined;
+            pluginEntityRef?: string | undefined;
             ociReference?: string | undefined;
           }[];
           activeCandidates: {
@@ -29105,7 +29134,6 @@ export const refreshOutputSchema: z.ZodObject<
               | 'not_run';
             author?: string | undefined;
             pullRequestNumber?: number | undefined;
-            blocker?: string | undefined;
             pullRequestUrl?: string | undefined;
             sourceRevision?: string | undefined;
             sourceUrl?: string | undefined;
@@ -29119,6 +29147,7 @@ export const refreshOutputSchema: z.ZodObject<
                   packageEntityRef?: string | undefined;
                 }[]
               | undefined;
+            blocker?: string | undefined;
             nextAction?: string | undefined;
             nextActionUrl?: string | undefined;
             nextActionLabel?: string | undefined;
@@ -29135,9 +29164,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
             latestSuccessfulBuild?:
@@ -29151,9 +29180,9 @@ export const refreshOutputSchema: z.ZodObject<
                   updatedAt?: string | undefined;
                   runNumber?: number | undefined;
                   runAttempt?: number | undefined;
-                  jobName?: string | undefined;
                   commitSha?: string | undefined;
                   commitUrl?: string | undefined;
+                  jobName?: string | undefined;
                 }
               | undefined;
           };
@@ -29217,9 +29246,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           updatedAt: string;
           phase:
@@ -29265,20 +29294,20 @@ export const refreshOutputSchema: z.ZodObject<
               | 'action_required'
               | undefined;
             updatedAt?: string | undefined;
+            runNumber?: number | undefined;
+            runAttempt?: number | undefined;
+            commitSha?: string | undefined;
+            jobName?: string | undefined;
+            pullRequestNumber?: number | undefined;
+            workspace?: string | undefined;
             workflowId?: string | undefined;
             workflowFile?: string | undefined;
-            runNumber?: number | undefined;
             attempt?: number | undefined;
-            runAttempt?: number | undefined;
             jobId?: string | undefined;
-            jobName?: string | undefined;
-            workspace?: string | undefined;
             eventName?: string | undefined;
-            pullRequestNumber?: number | undefined;
             overlayCommitSha?: string | undefined;
             sourceRepository?: string | undefined;
             sourceCommitSha?: string | undefined;
-            commitSha?: string | undefined;
             startedAt?: string | undefined;
             completedAt?: string | undefined;
             winning?: boolean | undefined;
@@ -29319,8 +29348,8 @@ export const refreshOutputSchema: z.ZodObject<
                 pluginVersion?: string | undefined;
               }
             | undefined;
-          blocker?: string | undefined;
           ownerRef?: string | undefined;
+          blocker?: string | undefined;
           winningRun?:
             | {
                 status: 'completed' | 'in_progress' | 'queued';
@@ -29340,20 +29369,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;
@@ -29379,8 +29408,8 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'implementation'
                   | 'build'
                   | 'publication';
-                evidenceUrl?: string | undefined;
                 blocker?: string | undefined;
+                evidenceUrl?: string | undefined;
               }[]
             | undefined;
         }
@@ -29470,9 +29499,9 @@ export const refreshOutputSchema: z.ZodObject<
             url?: string | undefined;
             version?: string | undefined;
             runId?: string | undefined;
+            packageEntityRef?: string | undefined;
             jobId?: string | undefined;
             digest?: string | undefined;
-            packageEntityRef?: string | undefined;
           }[];
           run?:
             | {
@@ -29493,20 +29522,20 @@ export const refreshOutputSchema: z.ZodObject<
                   | 'action_required'
                   | undefined;
                 updatedAt?: string | undefined;
+                runNumber?: number | undefined;
+                runAttempt?: number | undefined;
+                commitSha?: string | undefined;
+                jobName?: string | undefined;
+                pullRequestNumber?: number | undefined;
+                workspace?: string | undefined;
                 workflowId?: string | undefined;
                 workflowFile?: string | undefined;
-                runNumber?: number | undefined;
                 attempt?: number | undefined;
-                runAttempt?: number | undefined;
                 jobId?: string | undefined;
-                jobName?: string | undefined;
-                workspace?: string | undefined;
                 eventName?: string | undefined;
-                pullRequestNumber?: number | undefined;
                 overlayCommitSha?: string | undefined;
                 sourceRepository?: string | undefined;
                 sourceCommitSha?: string | undefined;
-                commitSha?: string | undefined;
                 startedAt?: string | undefined;
                 completedAt?: string | undefined;
                 winning?: boolean | undefined;

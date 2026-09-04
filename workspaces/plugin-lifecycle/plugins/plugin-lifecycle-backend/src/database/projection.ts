@@ -52,6 +52,32 @@ function mergeReferences(
   ];
 }
 
+function mergeArtifacts(
+  existing: LifecycleProjection['artifacts'],
+  incoming: LifecycleProjection['artifacts'][number],
+): LifecycleProjection['artifacts'] {
+  const key = [
+    incoming.artifactType,
+    incoming.packageEntityRef ?? '',
+    incoming.reference,
+    incoming.digest ?? '',
+    incoming.runId ?? '',
+    incoming.jobId ?? '',
+  ].join(':');
+  const filtered = existing.filter(artifact => {
+    const artifactKey = [
+      artifact.artifactType,
+      artifact.packageEntityRef ?? '',
+      artifact.reference,
+      artifact.digest ?? '',
+      artifact.runId ?? '',
+      artifact.jobId ?? '',
+    ].join(':');
+    return artifactKey !== key;
+  });
+  return [...filtered, incoming];
+}
+
 /** @public */
 export function reduceLifecycleEvents(
   events: LifecycleEvent[],
@@ -170,7 +196,7 @@ export function reduceLifecycleEvents(
       case 'artifact.recorded':
         projection = {
           ...projection,
-          artifacts: [...projection.artifacts, payload.artifact],
+          artifacts: mergeArtifacts(projection.artifacts, payload.artifact),
         };
         break;
       case 'agent.attempt.recorded':

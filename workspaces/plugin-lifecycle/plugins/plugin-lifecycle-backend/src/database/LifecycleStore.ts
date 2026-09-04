@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { createHash, randomUUID } from 'crypto';
+import { randomUUID } from 'crypto';
 import type { DatabaseService } from '@backstage/backend-plugin-api';
 import { ConflictError, NotFoundError } from '@backstage/errors';
 import type { Knex } from 'knex';
 import {
   API_SCHEMA_VERSION,
   type CreateChangeInput,
-  type LifecycleChangeSummary,
   type LifecycleEvent,
   type LifecycleProjection,
-  type LifecycleSuccessfulPublication,
   type RecordEventInput,
   createChangeInputSchema,
   lifecycleEventSchema,
@@ -41,248 +39,34 @@ import type {
   StoredChange,
   StoredContext,
 } from './types';
+import type { ChangeRow, DiagnosticRow, EventRow } from './rows';
+import {
+  canonicalJson,
+  diagnosticId,
+  eventIdentity,
+  parseJson,
+  storedEvent,
+} from './serialization';
+import {
+  MAX_CONTEXT_PR_CHANGES,
+  changeSummary,
+  hasSuccessfulMainlineBuild,
+  lastSuccessfulPublication,
+} from './changeReadModel';
+import { SubjectRepository } from './subjectRepository';
 
-interface ChangeRow {
-  id: string;
-  request_id: string;
-  request_payload_json: string;
-  subject_entity_ref: string;
-  origin: string;
-  external_change_key: string | null;
-  scope: string;
-  external_status: string;
-  last_occurred_at: string | Date | null;
-  title: string;
-  summary: string | null;
-  current_phase: string;
-  current_state: string;
-  projection_json: string;
-  created_by: string;
-  created_at: string | Date;
-  updated_at: string | Date;
-  projected_at: string | Date;
-}
-
-interface EventRow {
-  id: number | string;
-  event_id: string;
-  change_id: string;
-  schema_version: number;
-  kind: string;
-  occurred_at: string | Date;
-  ingested_at: string | Date;
-  actor_ref: string;
-  producer: string;
-  payload_json: string;
-}
-
-interface DiagnosticRow {
-  diagnostic_id: string;
-  source: string;
-  subject_entity_ref: string | null;
-  external_id: string | null;
-  reason_code: string;
-  summary: string;
-  details_json: string;
-  first_seen_at: string | Date;
-  last_seen_at: string | Date;
-  resolved_at: string | Date | null;
-}
-
-function jsonValue(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(jsonValue);
-  if (value && typeof value === 'object') {
-    return Object.fromEntries(
-      Object.entries(value as Record<string, unknown>)
-        .filter(([, entry]) => entry !== undefined)
-        .sort(([left], [right]) => left.localeCompare(right))
-        .map(([key, entry]) => [key, jsonValue(entry)]),
-    );
-  }
-  return value;
-}
-
-function canonicalJson(value: unknown): string {
-  return JSON.stringify(jsonValue(value));
-}
-
-function parseJson<T>(value: string | T): T {
-  return typeof value === 'string' ? (JSON.parse(value) as T) : value;
-}
-
-function toIso(value: string | Date): string {
-  return new Date(value).toISOString();
-}
-
-function changeSummary(row: ChangeRow): LifecycleChangeSummary {
-  return lifecycleChangeSummary(row);
-}
-
-function lifecycleChangeSummary(row: ChangeRow): LifecycleChangeSummary {
-  return {
-    changeId: row.id,
-    subjectEntityRef: row.subject_entity_ref,
-    origin: row.origin as LifecycleChangeSummary['origin'],
-    externalChangeKey: row.external_change_key ?? undefined,
-    scope: (row.scope ?? 'manual') as LifecycleChangeSummary['scope'],
-    externalStatus: (row.external_status ??
-      'open') as LifecycleChangeSummary['externalStatus'],
-    lastOccurredAt: row.last_occurred_at
-      ? toIso(row.last_occurred_at)
-      : undefined,
-    title: row.title,
-    summary: row.summary ?? undefined,
-    currentPhase: row.current_phase as LifecycleChangeSummary['currentPhase'],
-    currentState: row.current_state as LifecycleChangeSummary['currentState'],
-    createdBy: row.created_by,
-    createdAt: toIso(row.created_at),
-    updatedAt: toIso(row.updated_at),
-  };
-}
-
-function runTimestamp(
-  run: LifecycleProjection['ciRuns'][number],
-  change: LifecycleChangeSummary,
-): number {
-  return Date.parse(
-    run.updatedAt ??
-      run.completedAt ??
-      change.lastOccurredAt ??
-      change.updatedAt,
-  );
-}
-
-function isMainlineBranch(branch?: string): boolean {
+function isSystemIdentityMatch(
+  row: ChangeRow | undefined,
+  origin: string,
+  externalChangeKey: string | undefined,
+): boolean {
   return Boolean(
-    branch &&
-      (branch === 'main' ||
-        branch === 'master' ||
-        branch.startsWith('release-') ||
-        branch.startsWith('release/')),
+    row &&
+      origin === 'github-actions' &&
+      externalChangeKey &&
+      row.origin === 'github-actions' &&
+      row.external_change_key === externalChangeKey,
   );
-}
-
-function hasSuccessfulMainlineBuild(row: ChangeRow): boolean {
-  if (row.scope !== 'branch') return false;
-  const projection = lifecycleProjectionSchema.parse(
-    parseJson(row.projection_json),
-  );
-  return projection.ciRuns.some(
-    run =>
-      isMainlineBranch(run.branch) &&
-      run.status === 'completed' &&
-      run.conclusion === 'success',
-  );
-}
-
-function lastSuccessfulPublication(
-  rows: ChangeRow[],
-): LifecycleSuccessfulPublication | undefined {
-  const candidates: Array<{
-    change: LifecycleChangeSummary;
-    run?: LifecycleProjection['ciRuns'][number];
-    artifacts: LifecycleProjection['artifacts'];
-    timestamp: number;
-  }> = [];
-
-  for (const row of rows) {
-    // Offline replay fixtures are regression data only. They must never be
-    // promoted into the current live publication summary when a local
-    // database is reused for the live profile.
-    if (row.origin === 'fixture') continue;
-    const change = changeSummary(row);
-    const projection = lifecycleProjectionSchema.parse(
-      parseJson(row.projection_json),
-    );
-    const successfulRuns = projection.ciRuns.filter(
-      run => run.status === 'completed' && run.conclusion === 'success',
-    );
-    const winningRun =
-      projection.winningRun?.conclusion === 'success'
-        ? projection.winningRun
-        : undefined;
-    const run =
-      winningRun ??
-      successfulRuns.sort(
-        (left, right) =>
-          runTimestamp(right, change) - runTimestamp(left, change),
-      )[0];
-    const artifacts = projection.artifacts.filter(
-      artifact =>
-        artifact.artifactType === 'npm' ||
-        (artifact.artifactType === 'oci' && Boolean(artifact.digest)),
-    );
-    // A package/image is only a successful publication when it is backed by a
-    // completed successful CI run. Never promote an orphaned artifact record
-    // to the "last successful" summary.
-    if (!run) continue;
-    candidates.push({
-      change,
-      run,
-      artifacts,
-      timestamp: run ? runTimestamp(run, change) : Date.parse(change.updatedAt),
-    });
-  }
-
-  const latest = candidates.sort((left, right) => {
-    return (
-      right.timestamp - left.timestamp ||
-      Date.parse(right.change.updatedAt) - Date.parse(left.change.updatedAt)
-    );
-  })[0];
-  return latest
-    ? {
-        change: latest.change,
-        run: latest.run,
-        artifacts: latest.artifacts,
-      }
-    : undefined;
-}
-
-function storedEvent(row: EventRow): LifecycleEvent {
-  return lifecycleEventSchema.parse({
-    eventId: row.event_id,
-    eventCursor: String(row.id),
-    changeId: row.change_id,
-    schemaVersion: row.schema_version,
-    occurredAt: toIso(row.occurred_at),
-    ingestedAt: toIso(row.ingested_at),
-    actorRef: row.actor_ref,
-    producer: row.producer,
-    payload: parseJson(row.payload_json),
-  });
-}
-
-function eventIdentity(event: LifecycleEvent): string {
-  return canonicalJson({
-    eventId: event.eventId,
-    changeId: event.changeId,
-    schemaVersion: event.schemaVersion,
-    // Database drivers normalize timestamps to ISO strings with millisecond
-    // precision. Normalize the incoming value as well so equivalent GitHub
-    // timestamps (`...Z` and `....000Z`) remain idempotent on retry.
-    occurredAt: toIso(event.occurredAt),
-    producer: event.producer,
-    payload: event.payload,
-  });
-}
-
-function diagnosticId(input: {
-  source: string;
-  subjectEntityRef?: string;
-  externalId?: string;
-  reasonCode: string;
-}): string {
-  return createHash('sha256')
-    .update(
-      canonicalJson({
-        source: input.source,
-        subjectEntityRef: input.subjectEntityRef ?? '',
-        externalId: input.externalId ?? '',
-        reasonCode: input.reasonCode,
-      }),
-    )
-    .digest('hex');
 }
 
 /** @public */
@@ -292,7 +76,11 @@ export class LifecycleStore {
     return new LifecycleStore(await database.getClient());
   }
 
-  constructor(private readonly db: Knex) {}
+  private readonly subjects: SubjectRepository;
+
+  constructor(private readonly db: Knex) {
+    this.subjects = new SubjectRepository(db);
+  }
 
   async createChange(
     rawInput: CreateChangeInput,
@@ -317,10 +105,43 @@ export class LifecycleStore {
           .first();
       }
       if (existing) {
-        if (existing.request_payload_json !== requestPayload) {
+        const isSystemIdentity = isSystemIdentityMatch(
+          existing,
+          origin,
+          options.externalChangeKey,
+        );
+        if (
+          !isSystemIdentity &&
+          existing.request_payload_json !== requestPayload
+        ) {
           throw new ConflictError(
             `Lifecycle identifier was already used with different input`,
           );
+        }
+        if (isSystemIdentity) {
+          // GitHub display fields are mutable (for example, a PR title can be
+          // edited). Stable external identity is the idempotency key for
+          // imported changes; keep the projection metadata current without
+          // creating a second change or weakening user requestId semantics.
+          const displayChanged =
+            existing.title !== input.title ||
+            (existing.summary ?? null) !== (input.summary ?? null);
+          if (displayChanged) {
+            const displayUpdatedAt = new Date().toISOString();
+            await trx<ChangeRow>('lifecycle_changes')
+              .where({ id: existing.id })
+              .update({
+                title: input.title,
+                summary: input.summary ?? null,
+                updated_at: displayUpdatedAt,
+              });
+            existing = {
+              ...existing,
+              title: input.title,
+              summary: input.summary ?? null,
+              updated_at: displayUpdatedAt,
+            };
+          }
         }
         await this.insertAssociations(trx, existing.id, associations);
         return {
@@ -378,16 +199,40 @@ export class LifecycleStore {
         .returning('id');
 
       if (inserted.length === 0) {
-        const concurrentlyCreated = await trx<ChangeRow>('lifecycle_changes')
+        let concurrentlyCreated = await trx<ChangeRow>('lifecycle_changes')
           .where({ request_id: input.requestId })
           .first();
         if (!concurrentlyCreated) {
           throw new Error('Concurrent lifecycle change was not persisted');
         }
-        if (concurrentlyCreated.request_payload_json !== requestPayload) {
+        const isSystemIdentity = isSystemIdentityMatch(
+          concurrentlyCreated,
+          origin,
+          options.externalChangeKey,
+        );
+        if (
+          !isSystemIdentity &&
+          concurrentlyCreated.request_payload_json !== requestPayload
+        ) {
           throw new ConflictError(
             `requestId "${input.requestId}" was already used with different input`,
           );
+        }
+        if (isSystemIdentity) {
+          const displayUpdatedAt = new Date().toISOString();
+          await trx<ChangeRow>('lifecycle_changes')
+            .where({ id: concurrentlyCreated.id })
+            .update({
+              title: input.title,
+              summary: input.summary ?? null,
+              updated_at: displayUpdatedAt,
+            });
+          concurrentlyCreated = {
+            ...concurrentlyCreated,
+            title: input.title,
+            summary: input.summary ?? null,
+            updated_at: displayUpdatedAt,
+          };
         }
         await this.insertAssociations(
           trx,
@@ -519,123 +364,27 @@ export class LifecycleStore {
       >
     >;
   }): Promise<LifecycleSubject> {
-    const now = new Date().toISOString();
-    return this.db.transaction(async trx => {
-      const existing = await trx('lifecycle_subjects')
-        .where({ overlay_entity_ref: input.overlayEntityRef })
-        .first();
-      const subjectId = existing?.id ?? input.id ?? randomUUID();
-      await trx('lifecycle_subjects')
-        .insert({
-          id: subjectId,
-          overlay_entity_ref: input.overlayEntityRef,
-          workspace: input.workspace,
-          overlay_repository: input.overlayRepository,
-          source_repository: input.sourceRepository ?? null,
-          source_revision: input.sourceRevision ?? null,
-          mapping_status: input.mappingStatus,
-          mapping_hash: input.mappingHash,
-          first_observed_at: existing?.first_observed_at ?? now,
-          last_observed_at: now,
-        })
-        .onConflict('overlay_entity_ref')
-        .merge({
-          workspace: input.workspace,
-          overlay_repository: input.overlayRepository,
-          source_repository: input.sourceRepository ?? null,
-          source_revision: input.sourceRevision ?? null,
-          mapping_status: input.mappingStatus,
-          mapping_hash: input.mappingHash,
-          last_observed_at: now,
-        });
-      const existingBindings = await trx('lifecycle_subject_entities')
-        .where({ subject_id: subjectId })
-        .select(['entity_ref', 'role', 'first_observed_at']);
-      const expectedBindingKeys = new Set(
-        input.bindings.map(binding => `${binding.entityRef}:${binding.role}`),
-      );
-      for (const existingBinding of existingBindings) {
-        const key = `${existingBinding.entity_ref}:${existingBinding.role}`;
-        if (!expectedBindingKeys.has(key)) {
-          await trx('lifecycle_subject_entities')
-            .where({
-              subject_id: subjectId,
-              entity_ref: existingBinding.entity_ref,
-              role: existingBinding.role,
-            })
-            .delete();
-        }
-      }
-      for (const binding of input.bindings) {
-        await trx('lifecycle_subject_entities')
-          .insert({
-            subject_id: subjectId,
-            entity_ref: binding.entityRef,
-            role: binding.role,
-            binding_source: binding.bindingSource,
-            status: binding.status,
-            first_observed_at: now,
-            last_observed_at: now,
-          })
-          .onConflict(['subject_id', 'entity_ref', 'role'])
-          .merge({
-            binding_source: binding.bindingSource,
-            status: binding.status,
-            last_observed_at: now,
-          });
-      }
-      const row = await trx('lifecycle_subjects')
-        .where({ id: subjectId })
-        .first();
-      return this.subjectFromRow(row);
-    });
+    return this.subjects.upsert(input);
   }
 
   async getSubjectByEntity(
     entityRef: string,
   ): Promise<LifecycleSubject | undefined> {
-    const row = await this.db('lifecycle_subjects as s')
-      .join('lifecycle_subject_entities as e', 'e.subject_id', 's.id')
-      .where('e.entity_ref', entityRef)
-      .select('s.*')
-      .first();
-    return row ? this.subjectFromRow(row) : undefined;
+    return this.subjects.getByEntity(entityRef);
+  }
+
+  async getSubjectsByEntity(entityRef: string): Promise<LifecycleSubject[]> {
+    return this.subjects.listByEntity(entityRef);
   }
 
   async getSubjectBindings(
     subjectId: string,
   ): Promise<LifecycleSubjectBinding[]> {
-    const rows = await this.db('lifecycle_subject_entities').where({
-      subject_id: subjectId,
-    });
-    return rows.map(row => ({
-      subjectId,
-      entityRef: row.entity_ref,
-      role: row.role,
-      bindingSource: row.binding_source,
-      status: row.status,
-      firstObservedAt: toIso(row.first_observed_at),
-      lastObservedAt: toIso(row.last_observed_at),
-    }));
+    return this.subjects.getBindings(subjectId);
   }
 
   async getSyncState(subjectId: string): Promise<LifecycleSyncState> {
-    const row = await this.db('lifecycle_sync_state')
-      .where({ subject_id: subjectId })
-      .first();
-    return {
-      status: row?.status ?? 'never',
-      lastAttemptAt: row?.last_attempt_at
-        ? toIso(row.last_attempt_at)
-        : undefined,
-      lastSuccessAt: row?.last_success_at
-        ? toIso(row.last_success_at)
-        : undefined,
-      errorSummary: row?.error_summary ?? undefined,
-      rateLimitResetAt: row?.rate_limit_reset_at
-        ? toIso(row.rate_limit_reset_at)
-        : undefined,
-    };
+    return this.subjects.getSyncState(subjectId);
   }
 
   async getBootstrapStatus(
@@ -654,30 +403,11 @@ export class LifecycleStore {
     subjectId: string,
     state: LifecycleSyncState,
   ): Promise<void> {
-    await this.db('lifecycle_sync_state')
-      .insert({
-        subject_id: subjectId,
-        status: state.status,
-        last_attempt_at: state.lastAttemptAt ?? null,
-        last_success_at: state.lastSuccessAt ?? null,
-        error_summary: state.errorSummary ?? null,
-        rate_limit_reset_at: state.rateLimitResetAt ?? null,
-      })
-      .onConflict('subject_id')
-      .merge({
-        status: state.status,
-        last_attempt_at: state.lastAttemptAt ?? null,
-        last_success_at: state.lastSuccessAt ?? null,
-        error_summary: state.errorSummary ?? null,
-        rate_limit_reset_at: state.rateLimitResetAt ?? null,
-      });
+    return this.subjects.setSyncState(subjectId, state);
   }
 
   async listSubjects(): Promise<LifecycleSubject[]> {
-    const rows = await this.db('lifecycle_subjects').orderBy(
-      'overlay_entity_ref',
-    );
-    return rows.map(row => this.subjectFromRow(row));
+    return this.subjects.list();
   }
 
   async claimBootstrap(
@@ -746,21 +476,6 @@ export class LifecycleStore {
       });
   }
 
-  private subjectFromRow(row: any): LifecycleSubject {
-    return {
-      id: String(row.id),
-      overlayEntityRef: row.overlay_entity_ref,
-      workspace: row.workspace,
-      overlayRepository: row.overlay_repository,
-      sourceRepository: row.source_repository ?? undefined,
-      sourceRevision: row.source_revision ?? undefined,
-      mappingStatus: row.mapping_status,
-      mappingHash: row.mapping_hash,
-      firstObservedAt: toIso(row.first_observed_at),
-      lastObservedAt: toIso(row.last_observed_at),
-    };
-  }
-
   async getContext(
     entityRef: string,
     options: {
@@ -785,14 +500,13 @@ export class LifecycleStore {
             { column: 'id', order: 'desc' },
           ])
       : [];
-    const changes = rows.map(changeSummary);
-    if (changes.length === 0) {
+    if (rows.length === 0) {
       if (options.changeId) {
         throw new NotFoundError(
           `Lifecycle change "${options.changeId}" was not found for "${entityRef}"`,
         );
       }
-      return { changes, events: [] };
+      return { changes: [], events: [] };
     }
 
     const selected = options.changeId
@@ -801,7 +515,7 @@ export class LifecycleStore {
           row =>
             row.scope === 'pull_request' &&
             row.external_status === 'open' &&
-            !['succeeded', 'superseded'].includes(row.current_state),
+            row.current_state !== 'superseded',
         ) ??
         rows.find(
           row =>
@@ -814,6 +528,19 @@ export class LifecycleStore {
         `Lifecycle change "${options.changeId}" was not found for "${entityRef}"`,
       );
     }
+
+    // Keep the durable history complete, but keep the default context small
+    // enough for a human selector and an agent response. Mainline observations
+    // are summarized separately in delivery; expose only the newest branch
+    // record here (plus an explicitly selected historical record).
+    const visibleRows = rows.filter(row => row.scope !== 'branch');
+    const boundedRows = [
+      ...visibleRows.slice(0, MAX_CONTEXT_PR_CHANGES),
+      ...rows.filter(row => row.scope === 'branch').slice(0, 1),
+    ];
+    if (!boundedRows.some(row => row.id === selected.id))
+      boundedRows.push(selected);
+    const changes = boundedRows.map(changeSummary);
 
     const allEvents = await this.readEvents(
       this.db,
@@ -1031,6 +758,7 @@ export class LifecycleStore {
     trx: Knex.Transaction,
     changeId: string,
   ): Promise<LifecycleProjection> {
+    const change = await this.requireChange(trx, changeId);
     const events = await this.readEvents(trx, changeId);
     const projection = reduceLifecycleEvents(events);
     const now = new Date().toISOString();
@@ -1042,7 +770,12 @@ export class LifecycleStore {
       projected_at: now,
       last_occurred_at: projection.updatedAt,
     };
+    // A successful PR publication only proves that candidate images were
+    // produced; the PR can still be open and must remain an active candidate
+    // until GitHub reports its external state. Only a successful branch
+    // publication can advance the stored external status automatically.
     if (
+      change.scope === 'branch' &&
       projection.phase === 'publication' &&
       projection.state === 'succeeded'
     ) {

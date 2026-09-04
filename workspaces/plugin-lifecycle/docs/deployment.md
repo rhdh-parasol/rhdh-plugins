@@ -40,20 +40,36 @@ backend:
   actions:
     pluginSources:
       - plugin-lifecycle
+    filter:
+      include:
+        - id: 'plugin-lifecycle:get-context'
 
 mcpActions:
   name: RHDH
   description: Query current and historical lifecycle context for Catalog overlay workspace entities.
   instructions: Use plugin-lifecycle.get-context before making plugin release or remediation decisions. Cite lifecycle evidence from the returned context.
+
+pluginLifecycle:
+  actions:
+    exposeProducerActions: false
+    exposeRefreshAction: false
 ```
 
-The lifecycle action IDs use colons in the Actions Registry. On the default
-global MCP endpoint, the same handlers are exposed with namespaced dot names:
+The lifecycle action IDs use colons in the Actions Registry. The shared MCP
+Actions service is filtered to expose only the read entry point to agents:
 
-- `plugin-lifecycle:create-change` → `plugin-lifecycle.create-change`
-- `plugin-lifecycle:record-event` → `plugin-lifecycle.record-event`
 - `plugin-lifecycle:get-context` → `plugin-lifecycle.get-context`
-- `plugin-lifecycle:refresh` → `plugin-lifecycle.refresh`
+
+The producer and operator actions are not registered by default. A trusted
+replay or integration environment may explicitly enable them through
+`pluginLifecycle.actions.exposeProducerActions` and
+`pluginLifecycle.actions.exposeRefreshAction`. When enabled, they remain
+available through the plugin's Actions Registry endpoint but are not
+advertised as MCP tools:
+
+- `plugin-lifecycle:create-change` (producer/manual change registration)
+- `plugin-lifecycle:record-event` (producer evidence ingestion)
+- `plugin-lifecycle:refresh` (explicit operator synchronization)
 
 Use `/api/mcp-actions/v1`; a separate named server is unnecessary for this POC.
 The global server applies each action's visibility permission during discovery,
@@ -105,10 +121,13 @@ to GitOps should accompany a future chart-wrapper change.
 
 1. Confirm the dynamic-plugin init container installed both package paths.
 2. Confirm the backend migration created its plugin database tables.
-3. Run `backstage-cli actions list` and verify these actions are visible:
+3. Run `backstage-cli actions list` and verify the default read action is
+   visible:
+   - `plugin-lifecycle:get-context`
+     If producer or operator actions were explicitly enabled for a trusted
+     integration, verify those additional actions as well:
    - `plugin-lifecycle:create-change`
    - `plugin-lifecycle:record-event`
-   - `plugin-lifecycle:get-context`
    - `plugin-lifecycle:refresh`
      Configure `plugin-lifecycle` as an Actions CLI source first if it has not
      already been registered for the selected instance.
@@ -120,7 +139,15 @@ to GitOps should accompany a future chart-wrapper change.
    `/api/plugin-lifecycle/plugins/rhdh/global-header/context` for clients
    that address the Extension Plugin directly.
 5. Open `component:default/overlay-global-header` in the Catalog and select **Lifecycle**.
-6. Run the replay:
+6. Optionally run the legacy fixture replay. Enable both opt-in action flags
+   before starting the backend:
+
+   ```yaml
+   pluginLifecycle:
+     actions:
+       exposeProducerActions: true
+       exposeRefreshAction: true
+   ```
 
    ```sh
    node demo/replay-lifecycle.mjs --instance <configured-instance-name>

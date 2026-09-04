@@ -36,7 +36,12 @@ describe('Plugin Lifecycle actions', () => {
       }),
       getContext: jest.fn().mockResolvedValue(testContext),
     } as unknown as jest.Mocked<LifecycleService>;
-    createPluginLifecycleActions({ actionsRegistry, service });
+    createPluginLifecycleActions({
+      actionsRegistry,
+      service,
+      exposeProducerActions: true,
+      exposeRefreshAction: true,
+    });
 
     await actionsRegistry.invoke({
       id: 'test:create-change',
@@ -88,6 +93,19 @@ describe('Plugin Lifecycle actions', () => {
       ['get-context', pluginLifecycleChangeReadPermission.name],
       ['refresh', pluginLifecycleSyncRunPermission.name],
     ]);
+  });
+
+  it('can expose only the context action at runtime', async () => {
+    const actionsRegistry = actionsRegistryServiceMock();
+    createPluginLifecycleActions({
+      actionsRegistry,
+      service: {} as LifecycleService,
+      exposeProducerActions: false,
+      exposeRefreshAction: false,
+    });
+
+    const { actions } = await actionsRegistry.list();
+    expect(actions.map(action => action.name)).toEqual(['get-context']);
   });
 
   it('rejects input that does not satisfy the public action contract', async () => {

@@ -38,7 +38,9 @@ export interface PluginLifecycleApi {
 }
 
 export const pluginLifecycleApiRef = createApiRef<PluginLifecycleApi>().with({
-  id: 'service',
+  // Namespace the ref because NFS and Legacy modules share one runtime and
+  // generic ids can collide with another dynamic plugin.
+  id: 'plugin-lifecycle.service',
   pluginId: 'plugin-lifecycle',
 });
 

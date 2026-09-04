@@ -26,6 +26,9 @@ export function isLifecycleEntity(entity: {
   return (entity.relations ?? []).some(
     relation =>
       relation.type === RELATION_DEPENDENCY_OF &&
-      relation.targetRef.toLocaleLowerCase('en-US').includes('/overlay-'),
+      // Source Components are eligible through the generated reverse
+      // dependency relation. Do not assume overlay names use an `overlay-`
+      // prefix; workspace names are user-defined.
+      relation.targetRef.toLocaleLowerCase('en-US').startsWith('component:'),
   );
 }

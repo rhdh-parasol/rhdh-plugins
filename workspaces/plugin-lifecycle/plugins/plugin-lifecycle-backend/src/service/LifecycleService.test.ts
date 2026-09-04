@@ -487,4 +487,26 @@ describe('LifecycleService', () => {
       jest.useRealTimers();
     }
   });
+
+  it('returns cached context when a live refresh fails', async () => {
+    const service = new LifecycleService(
+      storeMock(),
+      catalogMock([overlay, source, plugin, packageEntity]),
+      allowedPermissions(),
+    );
+    service.setRefresher(async () => {
+      throw new Error('GitHub returned 403');
+    });
+
+    await expect(
+      service.refresh('component:default/overlay-example', credentials),
+    ).resolves.toEqual(
+      expect.objectContaining({
+        sync: expect.objectContaining({
+          refreshAttempted: true,
+          errorSummary: 'GitHub returned 403',
+        }),
+      }),
+    );
+  });
 });

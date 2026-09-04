@@ -57,6 +57,68 @@ describe('LifecycleStore', () => {
     ).rejects.toBeInstanceOf(ConflictError);
   });
 
+  it('keeps GitHub system changes idempotent when a PR title changes', async () => {
+    const base = {
+      requestId: 'github:example/overlays:pr:7:workspace:example',
+      subjectEntityRef: 'component:default/overlay-example',
+      title: 'PR #7 · example',
+      summary: 'Initial title',
+      initialReferences: [],
+    };
+    const first = await store.createChange(base, 'system:plugin-lifecycle', {
+      origin: 'github-actions',
+      externalChangeKey: base.requestId,
+    });
+    const retry = await store.createChange(
+      { ...base, title: 'PR #7 · example', summary: 'Edited title' },
+      'system:plugin-lifecycle',
+      {
+        origin: 'github-actions',
+        externalChangeKey: base.requestId,
+      },
+    );
+
+    expect(retry.summary.changeId).toBe(first.summary.changeId);
+    expect(retry.summary.summary).toBe('Edited title');
+    expect(
+      (
+        await store.getContext('component:default/overlay-example', {
+          changeId: first.summary.changeId,
+          eventLimit: 100,
+        })
+      ).events,
+    ).toHaveLength(1);
+  });
+
+  it('does not let a system identity bypass a user request-id conflict', async () => {
+    const requestId = 'github:example/overlays:pr:8:workspace:example';
+    await store.createChange(
+      {
+        requestId,
+        subjectEntityRef: 'component:default/overlay-example',
+        title: 'User-created change',
+        initialReferences: [],
+      },
+      'user:default/tester',
+    );
+
+    await expect(
+      store.createChange(
+        {
+          requestId,
+          subjectEntityRef: 'component:default/overlay-example',
+          title: 'Imported PR',
+          initialReferences: [],
+        },
+        'system:plugin-lifecycle',
+        {
+          origin: 'github-actions',
+          externalChangeKey: requestId,
+        },
+      ),
+    ).rejects.toBeInstanceOf(ConflictError);
+  });
+
   it('preserves the external occurrence time for system-imported changes', async () => {
     const occurredAt = '2026-09-01T08:00:00.000Z';
     const created = await store.createChange(
@@ -79,6 +141,44 @@ describe('LifecycleStore', () => {
       payload: { kind: 'change.created' },
     });
     expect(context.projection?.updatedAt).toBe(occurredAt);
+  });
+
+  it('preserves the last successful sync timestamp across failures', async () => {
+    await store.upsertSubject({
+      overlayEntityRef: 'component:default/overlay-example',
+      workspace: 'example',
+      overlayRepository: 'example/overlays',
+      mappingStatus: 'complete',
+      mappingHash: 'hash',
+      bindings: [
+        {
+          entityRef: 'component:default/overlay-example',
+          role: 'overlay',
+          bindingSource: 'subject',
+          status: 'available',
+        },
+      ],
+    });
+    const subject = await store.getSubjectByEntity(
+      'component:default/overlay-example',
+    );
+    expect(subject).toBeDefined();
+    await store.setSyncState(subject!.id, {
+      status: 'succeeded',
+      lastAttemptAt: '2026-09-01T10:00:00.000Z',
+      lastSuccessAt: '2026-09-01T10:00:00.000Z',
+    });
+    await store.setSyncState(subject!.id, {
+      status: 'failed',
+      lastAttemptAt: '2026-09-01T10:01:00.000Z',
+      errorSummary: 'GitHub unavailable',
+    });
+
+    await expect(store.getSyncState(subject!.id)).resolves.toMatchObject({
+      status: 'failed',
+      lastSuccessAt: '2026-09-01T10:00:00.000Z',
+      errorSummary: 'GitHub unavailable',
+    });
   });
 
   it('reprojects late events and reconstructs historical state', async () => {
@@ -529,5 +629,39 @@ describe('LifecycleStore', () => {
     });
     expect(context.changes).toHaveLength(2);
     expect(context.selectedChange?.changeId).toBe(second.summary.changeId);
+  });
+
+  it('keeps a successful open pull request ahead of an older publication', async () => {
+    const change = await store.createChange(
+      {
+        requestId: 'selection-open-success',
+        subjectEntityRef: 'plugin:default/example',
+        title: 'Open PR already built',
+        initialReferences: [],
+      },
+      'user:default/tester',
+      { scope: 'pull_request', externalStatus: 'open' },
+    );
+    await store.appendEvent(
+      {
+        eventId: 'selection-open-success-build',
+        changeId: change.summary.changeId,
+        occurredAt: '2026-09-03T12:00:00.000Z',
+        producer: 'test',
+        event: {
+          kind: 'phase.updated',
+          phase: 'publication',
+          state: 'succeeded',
+          summary: 'Candidate publication succeeded',
+        },
+      },
+      'user:default/tester',
+    );
+
+    const context = await store.getContext('plugin:default/example', {
+      eventLimit: 100,
+    });
+    expect(context.selectedChange?.changeId).toBe(change.summary.changeId);
+    expect(context.selectedChange?.externalStatus).toBe('open');
   });
 });

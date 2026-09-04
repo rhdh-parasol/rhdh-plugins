@@ -33,38 +33,49 @@ import type { LifecycleService } from '../service/LifecycleService';
 export function createPluginLifecycleActions(options: {
   actionsRegistry: ActionsRegistryService;
   service: LifecycleService;
+  /**
+   * Producer actions are an opt-in compatibility surface for trusted
+   * adapters and replay tooling. The backend plugin passes an explicit value
+   * from configuration; the factory default keeps isolated unit/integration
+   * tests backwards compatible.
+   */
+  exposeProducerActions?: boolean;
+  /** Explicit operator synchronization is also opt-in at runtime. */
+  exposeRefreshAction?: boolean;
 }): void {
-  options.actionsRegistry.register({
-    name: 'create-change',
-    title: 'Create Plugin Lifecycle Change',
-    description:
-      'Creates an idempotent lifecycle change for an RHDH overlay workspace Component.',
-    visibilityPermission: pluginLifecycleChangeCreatePermission,
-    attributes: { destructive: false, idempotent: true, readOnly: false },
-    schema: {
-      input: () => createChangeInputSchema,
-      output: () => createChangeOutputSchema,
-    },
-    action: async ({ input, credentials }) => ({
-      output: await options.service.createChange(input, credentials),
-    }),
-  });
+  if (options.exposeProducerActions ?? true) {
+    options.actionsRegistry.register({
+      name: 'create-change',
+      title: 'Create Plugin Lifecycle Change',
+      description:
+        'Creates an idempotent lifecycle change for an RHDH overlay workspace Component. Intended for trusted lifecycle producers, not agents.',
+      visibilityPermission: pluginLifecycleChangeCreatePermission,
+      attributes: { destructive: false, idempotent: true, readOnly: false },
+      schema: {
+        input: () => createChangeInputSchema,
+        output: () => createChangeOutputSchema,
+      },
+      action: async ({ input, credentials }) => ({
+        output: await options.service.createChange(input, credentials),
+      }),
+    });
 
-  options.actionsRegistry.register({
-    name: 'record-event',
-    title: 'Record Plugin Lifecycle Event',
-    description:
-      'Appends normalized CI, verification, artifact, reference, phase, or agent evidence to a lifecycle change.',
-    visibilityPermission: pluginLifecycleEventCreatePermission,
-    attributes: { destructive: false, idempotent: true, readOnly: false },
-    schema: {
-      input: () => recordEventInputSchema,
-      output: () => recordEventOutputSchema,
-    },
-    action: async ({ input, credentials }) => ({
-      output: await options.service.recordEvent(input, credentials),
-    }),
-  });
+    options.actionsRegistry.register({
+      name: 'record-event',
+      title: 'Record Plugin Lifecycle Event',
+      description:
+        'Appends normalized CI, verification, artifact, reference, phase, or agent evidence to a lifecycle change. Intended for trusted lifecycle producers, not agents.',
+      visibilityPermission: pluginLifecycleEventCreatePermission,
+      attributes: { destructive: false, idempotent: true, readOnly: false },
+      schema: {
+        input: () => recordEventInputSchema,
+        output: () => recordEventOutputSchema,
+      },
+      action: async ({ input, credentials }) => ({
+        output: await options.service.recordEvent(input, credentials),
+      }),
+    });
+  }
 
   options.actionsRegistry.register({
     name: 'get-context',
@@ -130,19 +141,21 @@ export function createPluginLifecycleActions(options: {
     },
   });
 
-  options.actionsRegistry.register({
-    name: 'refresh',
-    title: 'Refresh Plugin Lifecycle Context',
-    description:
-      'Explicitly synchronizes one Catalog plugin lifecycle subject from configured evidence sources.',
-    visibilityPermission: pluginLifecycleSyncRunPermission,
-    attributes: { destructive: false, idempotent: false, readOnly: false },
-    schema: {
-      input: () => refreshInputSchema,
-      output: () => refreshOutputSchema,
-    },
-    action: async ({ input, credentials }) => ({
-      output: await options.service.refresh(input.entityRef, credentials),
-    }),
-  });
+  if (options.exposeRefreshAction ?? true) {
+    options.actionsRegistry.register({
+      name: 'refresh',
+      title: 'Refresh Plugin Lifecycle Context',
+      description:
+        'Explicitly synchronizes one Catalog plugin lifecycle subject from configured evidence sources. Intended for trusted operators; normal agents use get-context with refreshPolicy=if_stale.',
+      visibilityPermission: pluginLifecycleSyncRunPermission,
+      attributes: { destructive: false, idempotent: false, readOnly: false },
+      schema: {
+        input: () => refreshInputSchema,
+        output: () => refreshOutputSchema,
+      },
+      action: async ({ input, credentials }) => ({
+        output: await options.service.refresh(input.entityRef, credentials),
+      }),
+    });
+  }
 }

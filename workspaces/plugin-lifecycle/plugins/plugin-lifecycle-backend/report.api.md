@@ -55,6 +55,7 @@ export class LifecycleService {
     permissions: PermissionsService,
     refreshWaitTimeoutMs?: number,
   );
+  // (undocumented)
   associationsForEntity(entity: Entity): Promise<ChangeAssociation[]>;
   // (undocumented)
   createChange(
@@ -77,6 +78,8 @@ export class LifecycleService {
   ): Promise<LifecycleContext>;
   // (undocumented)
   getSubjectForEntity(entityRef: string): Promise<LifecycleSubject | undefined>;
+  // (undocumented)
+  getSyncStateForEntity(entityRef: string): Promise<LifecycleSyncState>;
   reconcileCatalog(credentials: BackstageCredentials): Promise<number>;
   reconcileSubject(
     overlay: Entity,
@@ -98,7 +101,6 @@ export class LifecycleService {
   }): Promise<void>;
   // (undocumented)
   recordSystemEvent(input: RecordEventInput): Promise<RecordEventOutput>;
-  // (undocumented)
   refresh(
     entityRef: string,
     credentials: BackstageCredentials,
@@ -176,6 +178,8 @@ export class LifecycleStore {
   getSubjectBindings(subjectId: string): Promise<LifecycleSubjectBinding[]>;
   // (undocumented)
   getSubjectByEntity(entityRef: string): Promise<LifecycleSubject | undefined>;
+  // (undocumented)
+  getSubjectsByEntity(entityRef: string): Promise<LifecycleSubject[]>;
   // (undocumented)
   getSyncState(subjectId: string): Promise<LifecycleSyncState>;
   // (undocumented)

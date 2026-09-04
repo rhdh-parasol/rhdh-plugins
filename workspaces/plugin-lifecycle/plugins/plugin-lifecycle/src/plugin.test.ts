@@ -18,6 +18,7 @@ import { createTestEntityPage } from '@backstage/plugin-catalog-react/testUtils'
 import type { LifecycleContext } from '@red-hat-developer-hub/backstage-plugin-lifecycle-common';
 import { screen } from '@testing-library/react';
 import { pluginLifecycleApiRef, type PluginLifecycleApi } from './api';
+import { isLifecycleEntity } from './utils/isLifecycleEntity';
 import pluginLifecyclePlugin, {
   entityPluginLifecycleContent,
   pluginLifecycleApi,
@@ -95,5 +96,20 @@ describe('plugin-lifecycle', () => {
     });
 
     expect(await screen.findByTestId('empty-entity-page')).toBeInTheDocument();
+  });
+
+  it('recognizes source Components linked to any overlay workspace name', () => {
+    expect(
+      isLifecycleEntity({
+        kind: 'Component',
+        spec: { type: 'library' },
+        relations: [
+          {
+            type: 'dependencyOf',
+            targetRef: 'component:default/adoption-insights-export',
+          },
+        ],
+      }),
+    ).toBe(true);
   });
 });

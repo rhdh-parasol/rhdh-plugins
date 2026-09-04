@@ -266,15 +266,20 @@ The same domain service backs all interfaces:
 - `plugin-lifecycle:record-event`;
 - `plugin-lifecycle:get-context`;
 - `plugin-lifecycle:refresh`;
-- the global Backstage MCP Actions server, which exposes those actions as MCP
-  tools.
+- the global Backstage MCP Actions server, which exposes the context action as
+  an MCP tool.
 
 There is no lifecycle-specific MCP server. An MCP client authenticates through
 RHDH OAuth/CIMD and acts with the signed-in user's identity and RBAC
 permissions.
 
 The collector is an internal system writer and does not use a public human
-action. External unattended service-principal access is a later design problem.
+action. `create-change` and `record-event` remain producer-side Actions
+Registry contracts for trusted adapters and optional replay tooling; they are
+not registered by default and are never advertised to agents. `refresh` is an
+explicit operator action and is also opt-in at runtime, while `get-context` is
+the normal agent entry point and can refresh stale data when requested.
+External unattended service-principal access is a later design problem.
 
 ## 10. Catalog UI
 

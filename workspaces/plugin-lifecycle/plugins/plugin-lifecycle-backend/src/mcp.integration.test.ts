@@ -94,7 +94,12 @@ async function startBackend(
       mockServices.rootConfig.factory({
         data: {
           backend: {
-            actions: { pluginSources: ['plugin-lifecycle'] },
+            actions: {
+              pluginSources: ['plugin-lifecycle'],
+              filter: {
+                include: [{ id: 'plugin-lifecycle:get-context' }],
+              },
+            },
           },
           mcpActions: {
             name: 'Plugin Lifecycle integration test',
@@ -161,7 +166,7 @@ describe('global Backstage MCP Actions integration', () => {
     );
   });
 
-  it('discovers the registered lifecycle actions as namespaced MCP tools', async () => {
+  it('exposes only the context action as a namespaced MCP tool', async () => {
     const backend = await startBackend(AuthorizeResult.ALLOW);
     const response = await postMcp(
       backend.server,
@@ -170,20 +175,15 @@ describe('global Backstage MCP Actions integration', () => {
     const payload = parseMcpResponse(response.text);
 
     expect(payload.error).toBeUndefined();
-    expect(payload.result?.tools).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ name: 'plugin-lifecycle.create-change' }),
-        expect.objectContaining({ name: 'plugin-lifecycle.record-event' }),
-        expect.objectContaining({
-          name: 'plugin-lifecycle.get-context',
-          annotations: expect.objectContaining({
-            readOnlyHint: false,
-            idempotentHint: false,
-          }),
+    expect(payload.result?.tools).toEqual([
+      expect.objectContaining({
+        name: 'plugin-lifecycle.get-context',
+        annotations: expect.objectContaining({
+          readOnlyHint: false,
+          idempotentHint: false,
         }),
-        expect.objectContaining({ name: 'plugin-lifecycle.refresh' }),
-      ]),
-    );
+      }),
+    ]);
   });
 
   it('invokes the existing get-context action through MCP', async () => {

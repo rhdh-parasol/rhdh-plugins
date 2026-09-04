@@ -61,11 +61,16 @@ normal context reads remain database-backed.
 
 This repository does not implement a lifecycle-specific MCP server. The backend
 registers ordinary Actions Registry actions, and Backstage's global
-`mcp-actions` backend exposes those same handlers as namespaced MCP tools:
+`mcp-actions` backend exposes the read entry point as a namespaced MCP tool:
 
-- `plugin-lifecycle.create-change`
-- `plugin-lifecycle.record-event`
 - `plugin-lifecycle.get-context`
+
+`create-change` and `record-event` are producer-side ingestion actions, while
+`refresh` is an explicit operator action. They are not registered at runtime by
+default. A trusted replay or integration environment can opt into them with
+`pluginLifecycle.actions.exposeProducerActions` and
+`pluginLifecycle.actions.exposeRefreshAction`; they remain filtered out of the
+shared agent MCP tool list.
 
 The local development backend boots the shared server at
 `http://localhost:7007/api/mcp-actions/v1`. With the backend running, verify

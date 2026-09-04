@@ -40,6 +40,7 @@ export function useLifecycleContext(options: {
   const api = useApi(pluginLifecycleApiRef);
   const [reloadToken, setReloadToken] = useState(0);
   const refreshPollTimer = useRef<ReturnType<typeof setTimeout>>();
+  const dataRef = useRef<LifecycleContext>();
   const [state, setState] = useState<{
     loading: boolean;
     data?: LifecycleContext;
@@ -70,6 +71,7 @@ export function useLifecycleContext(options: {
           eventLimit: 500,
         });
         if (active) {
+          dataRef.current = data;
           setState(previous => ({
             loading: false,
             data,
@@ -113,7 +115,7 @@ export function useLifecycleContext(options: {
 
   const reload = useCallback(() => setReloadToken(value => value + 1), []);
   const refresh = useCallback(async () => {
-    const previousData = state.data;
+    const previousData = dataRef.current;
     setState(previous => ({
       ...previous,
       loading: true,
@@ -128,6 +130,7 @@ export function useLifecycleContext(options: {
       const previousEventIds = new Set(
         previousData?.events.map(event => event.eventId) ?? [],
       );
+      dataRef.current = data;
       setState({
         loading: false,
         data,
@@ -154,6 +157,6 @@ export function useLifecycleContext(options: {
         error: error instanceof Error ? error : new Error('Refresh failed'),
       }));
     }
-  }, [api, options.entityRef, state.data]);
+  }, [api, options.entityRef]);
   return { ...state, reload, refresh };
 }
