@@ -4,7 +4,7 @@
 # GitHub list-alerts JSON for --alerts-json (no token in the sandbox).
 #
 # Dependabot alerts (priority order):
-#   1. CVE schedule — plan job uploads .cve-schedule-alerts/<workspace>.json;
+#   1. CVE schedule — plan job uploads cve-schedule-alerts/<workspace>.json;
 #      pre-script downloads that file for this workspace only.
 #   2. Legacy — dependabot_alerts embedded in event-payload.json (deprecated).
 #   3. Fallback — DEPENDABOT_TOKEN or GH_TOKEN API fetch (local / legacy).
@@ -184,7 +184,7 @@ load_alerts_from_artifact() {
     rm -rf "${dest_dir}"
     return 1
   fi
-  for file in "${dest_dir}/${ws}.json" "${dest_dir}/.cve-schedule-alerts/${ws}.json"; do
+  for file in "${dest_dir}/${ws}.json" "${dest_dir}/cve-schedule-alerts/${ws}.json"; do
     if [[ -f "${file}" ]]; then
       jq -c '.' "${file}" > "${WORKSPACE_DIR}/dependabot-alerts.json"
       rm -rf "${dest_dir}"
