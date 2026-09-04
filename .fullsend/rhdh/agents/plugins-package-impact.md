@@ -45,8 +45,8 @@ Set by the pre-script / harness:
 - `/sandbox/workspace/package-impact-context.json` — repo, issue, workspace,
   packages from the comment, Dependabot fetch status, `alerts_json` path
 - `/sandbox/workspace/dependabot-alerts.json` — raw GitHub Dependabot
-  list-alerts array. CVE schedule runs receive workspace-filtered alerts
-  embedded in the dispatch payload (`dependabot_source: embedded`). May be
+  list-alerts array. CVE schedule runs download `cve-schedule-alerts/
+  <workspace>.json` from the plan job (`dependabot_source: artifact`). May be
   `[]` if the API 403'd or no workspace was resolved.
 
 If `ISSUE_URL` is missing, write an error result and stop.

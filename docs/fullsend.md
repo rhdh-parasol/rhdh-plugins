@@ -76,9 +76,10 @@ comment. It does not go through the managed `fullsend.yaml` shim.
 
 **Secret:** set repo Actions secret `DEPENDABOT_TOKEN` (Settings → Secrets
 and variables → Actions) to a PAT or GitHub App token with **Dependabot
-alerts: read**. The plan job uses it to list and embed alerts in each matrix
-cell (required unless you pass `workspace=`). Agent runs consume the embedded
-snapshot — no Dependabot token on the Fullsend runner. PR push uses the
+alerts: read**. The plan job uses it to list alerts and uploads one
+`cve-schedule-alerts/<workspace>.json` artifact per selected workspace
+(required unless you pass `workspace=`). Agent runs download only their
+workspace file — no Dependabot token on the Fullsend runner. PR push uses the
 minted **coder** token on the post-script.
 
 ### CVE / Dependabot lockfile bumps
@@ -89,8 +90,9 @@ is loaded three ways:
 
 - **CVE schedule agent (`cve-bump`)** — classify, `bump-workspace-packages.js`,
   commit, then post-script opens a PR on `chore/<workspace>-cve-bumps`.
-  Triggered only via **Fullsend CVE schedule**. Plan job embeds
-  workspace-filtered `dependabot_alerts` in the dispatch payload.
+  Triggered only via **Fullsend CVE schedule**. Plan job uploads per-workspace
+  `cve-schedule-alerts/<workspace>.json` artifacts; pre-script downloads one
+  file per matrix cell.
 - **Assess-only agent (`plugins-package-impact`)** — registered but not
   scheduled; classify + comment only (no slash command).
 - **Code / fix agents** — same pinned URL skill on `/fs-code` and `/fs-fix`

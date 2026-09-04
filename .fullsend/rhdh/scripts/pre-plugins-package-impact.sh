@@ -3,11 +3,11 @@
 # Runs on the trusted runner before the sandbox starts. Writes the raw
 # GitHub list-alerts JSON for --alerts-json (no token in the sandbox).
 #
-# Dependabot alerts (two paths):
-#   1. CVE schedule — plan job embeds workspace-filtered dependabot_alerts in
-#      .fullsend/dispatch/event-payload.json; copy to dependabot-alerts.json
-#      (no API call; agent runner does not need DEPENDABOT_TOKEN).
-#   2. Fallback — DEPENDABOT_TOKEN or GH_TOKEN API fetch (local / legacy).
+# Dependabot alerts (priority order):
+#   1. CVE schedule — plan job uploads .cve-schedule-alerts/<workspace>.json;
+#      pre-script downloads that file for this workspace only.
+#   2. Legacy — dependabot_alerts embedded in event-payload.json (deprecated).
+#   3. Fallback — DEPENDABOT_TOKEN or GH_TOKEN API fetch (local / legacy).
 #
 # Tokens:
 #   REVIEW_TOKEN / GH_TOKEN — issue/PR metadata and commenting (minted)
@@ -164,12 +164,45 @@ for candidate in target-repo .; do
   fi
 done
 
+load_alerts_from_artifact() {
+  local ws="$1"
+  local run_id artifact dest_dir file
+  if [[ ! -f "${EVENT_FILE}" ]]; then
+    return 1
+  fi
+  run_id="$(jq -r '.cve_schedule.alerts_run_id // empty' "${EVENT_FILE}" 2>/dev/null || true)"
+  artifact="$(jq -r '.cve_schedule.alerts_artifact // "cve-schedule-alerts"' "${EVENT_FILE}" 2>/dev/null || true)"
+  if [[ -z "${run_id}" || -z "${ws}" || ! "${ws}" =~ ^[A-Za-z0-9._-]+$ ]]; then
+    return 1
+  fi
+  if [[ -z "${REPO_FULL_NAME}" || -z "${GH_TOKEN:-}" ]]; then
+    return 1
+  fi
+  dest_dir="$(mktemp -d)"
+  if ! gh run download "${run_id}" --repo "${REPO_FULL_NAME}" \
+    --name "${artifact}" --dir "${dest_dir}" 2>/dev/null; then
+    rm -rf "${dest_dir}"
+    return 1
+  fi
+  for file in "${dest_dir}/${ws}.json" "${dest_dir}/.cve-schedule-alerts/${ws}.json"; do
+    if [[ -f "${file}" ]]; then
+      jq -c '.' "${file}" > "${WORKSPACE_DIR}/dependabot-alerts.json"
+      rm -rf "${dest_dir}"
+      return 0
+    fi
+  done
+  rm -rf "${dest_dir}"
+  return 1
+}
+
 DEPENDABOT_STATUS="skipped"
 DEPENDABOT_SOURCE="none"
 printf '%s\n' '[]' > "${WORKSPACE_DIR}/dependabot-alerts.json"
 if [[ -n "${WS}" ]]; then
-  # CVE schedule: plan job embeds workspace-filtered alerts in the payload.
-  if [[ -f "${EVENT_FILE}" ]] \
+  if load_alerts_from_artifact "${WS}"; then
+    DEPENDABOT_STATUS="embedded"
+    DEPENDABOT_SOURCE="artifact"
+  elif [[ -f "${EVENT_FILE}" ]] \
     && jq -e '.dependabot_alerts | type == "array"' "${EVENT_FILE}" >/dev/null 2>&1; then
     jq -c '.dependabot_alerts' "${EVENT_FILE}" > "${WORKSPACE_DIR}/dependabot-alerts.json"
     DEPENDABOT_STATUS="embedded"
@@ -179,7 +212,7 @@ if [[ -n "${WS}" ]]; then
     _ALERT_TOKEN="${DEPENDABOT_TOKEN:-${GH_TOKEN:-}}"
     if [[ -z "${_ALERT_TOKEN}" ]]; then
       DEPENDABOT_STATUS="missing_token"
-      echo "::warning::No embedded dependabot_alerts in dispatch payload and no DEPENDABOT_TOKEN/GH_TOKEN for API fetch."
+      echo "::warning::No CVE schedule alert artifact, embedded dependabot_alerts, or DEPENDABOT_TOKEN/GH_TOKEN for API fetch."
     else
       ERRFILE="$(mktemp)"
       if ALERTS_RAW="$(GH_TOKEN="${_ALERT_TOKEN}" gh api --paginate \
