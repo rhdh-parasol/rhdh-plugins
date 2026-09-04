@@ -14,6 +14,7 @@
 | Coder | `/fs-code` slash command, or `ready-to-code` label | Post on a triaged issue |
 | Review | Auto-triggers on PR open/update | Automatic for `workspaces/scorecard/` PRs |
 | Fix | `/fs-fix` slash command, or `changes_requested` review | Post on a PR, or request changes on a fullsend PR |
+| Package impact | `/fullsend-package-impact` slash command, Monday cron, or **Actions → Fullsend CVE schedule** | Post on an issue or same-repo PR; or run the workflow |
 
 ### Auto-trigger vs. manual trigger
 
@@ -56,6 +57,58 @@ Available commands:
 | `/fs-review` | Run review on a PR |
 | `/fs-fix` | Fix issues flagged in a review |
 | `/fs-fix-stop` | Disable fix agent for a PR (adds `fullsend-no-fix` label) |
+| `/fullsend-risk-rating` | Rate dependency-update risk on a PR (custom agent) |
+| `/fullsend-package-impact [workspace] [packages…]` | Classify Dependabot/CVE impact for a workspace and comment a table. Does not bump or dismiss. |
+
+**Scheduled / Actions fan-out** (`.github/workflows/fullsend-cve-schedule.yml`)
+follows the CVE schedule plan: a deterministic **plan** job, then one Fullsend
+`plugins-package-impact` cell per workspace (**max_parallel** from config),
+then a **summary** comment. It does not go through the managed `fullsend.yaml`
+shim.
+
+- **Config:** `.fullsend/rhdh/cve-schedule.yaml` — allowlisted `workspaces`,
+  `skip`, and `max_parallel`.
+- **Schedule:** Mondays 08:00 UTC.
+- **Manual:** Actions → **Fullsend CVE schedule** — optional `workspace`,
+  `issue_number`, and `dry_run` (plan + summary only).
+- **Skips:** no open Dependabot alerts under that workspace; open PR on
+  `chore/<workspace>-cve-bumps`; or open PR labeled `fullsend-cve-failed`.
+- **v1 cell:** classify + comment (no lockfile bump / PR yet). Slash-command
+  `/fullsend-package-impact` still works on any issue/PR and is not gated by
+  the schedule allowlist.
+
+**Secret:** set repo Actions secret `DEPENDABOT_TOKEN` (Settings → Secrets
+and variables → Actions) to a PAT or GitHub App token with **Dependabot
+alerts: read**. The plan job uses it to list alerts (required unless you
+pass `workspace=`). The `/fullsend-package-impact` pre-script expects the
+same env var on the Fullsend runner (mapped in the harness; never into the
+sandbox). Issue/PR APIs still use the minted `REVIEW_TOKEN` / `GH_TOKEN`.
+
+### CVE / Dependabot lockfile bumps
+
+`plugins-package-impact` from
+[kim-tsao/rhdh-security-skills](https://github.com/kim-tsao/rhdh-security-skills)
+is loaded two ways:
+
+- **Custom agent** (`/fullsend-package-impact`) — classify + patch-status,
+  then comment. Pass a workspace (`homepage` or `workspaces/homepage`) and
+  optional package names. If omitted, the pre-script uses a single
+  `workspace/<name>` label or a PR that only touches one workspace.
+  The runner dumps the raw Dependabot list-alerts JSON with
+  `DEPENDABOT_TOKEN`; the sandbox runs
+  `check-dependabot-patch-status.js --alerts-json` (no Dependabot token in
+  the sandbox).
+- **Code / fix agents** — same pinned URL skill on `/fs-code` and `/fs-fix`
+  so CVE lockfile bumps can follow the skill. Fullsend never dismisses
+  alerts.
+
+When the catalog changes, retarget the skill URL in
+`.fullsend/rhdh/harness/plugins-package-impact.yaml`, `code.yaml`, and
+`fix.yaml` (and the matching `allowed_remote_resources` prefixes).
+
+If `DEPENDABOT_TOKEN` is missing or cannot list alerts, name packages on
+the `/fullsend-package-impact` comment. Classification via `yarn why` still
+runs without that API. Fullsend never dismisses alerts.
 
 ## Coexistence with PR Agent
 
@@ -108,6 +161,8 @@ Fullsend uses GCP Workload Identity Federation (WIF) to authenticate GitHub Acti
 | `.fullsend/config.yaml` | Declares enabled roles (triage, coder, review, fix) |
 | `.fullsend/customized/` | Scaffold for future agent customization (agents, harness, policies, schemas, env, scripts, skills) |
 | `.github/workflows/fullsend.yaml` | Event shim — routes GitHub events to fullsend's reusable workflows, with auth gate on slash commands |
+| `.github/workflows/fullsend-cve-schedule.yml` | Monday cron + `workflow_dispatch` plan/matrix/summary for package-impact |
+| `.fullsend/rhdh/cve-schedule.yaml` | Allowlist, skip list, and `max_parallel` for the CVE schedule |
 
 ## Debugging
 

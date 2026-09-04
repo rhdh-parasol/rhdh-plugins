@@ -8,6 +8,7 @@ description: >-
 model: opus
 skills:
   - fix-review
+  - plugins-package-impact
 ---
 
 # Fix Agent
@@ -177,6 +178,22 @@ then direct the agent with `/fs-fix` commands up to `ITERATION_CAP_HUMAN`
 (default: 10) total iterations (bot + human combined). This ensures humans
 are never locked out of the agent after a bot loop exhausts its budget.
 
+## Dependabot / CVE lockfile bumps
+
+When a review finding or `/fs-fix` instruction is a Dependabot alert, CVE,
+or `yarn.lock` security bump, follow the `plugins-package-impact` skill for
+classify → bump. Then return to `fix-review` for the rest of the findings,
+tests, commit, and `fix-result.json`.
+
+Fullsend-specific constraints from that skill:
+
+- `prepare-workspace-bump.js --verify-only` (do not fetch or checkout).
+- Never call `close-dependabot-alerts.js`. Classify and bump only.
+- Never bump `@backstage/*` or `@backstage-community/*`.
+- Resolve `SKILL_DIR` to the mounted `plugins-package-impact` skill directory.
+
 ## Detailed fix procedure
 
 Follow the `fix-review` skill for the step-by-step procedure.
+On Dependabot/CVE lockfile findings, run `plugins-package-impact` for those
+items.

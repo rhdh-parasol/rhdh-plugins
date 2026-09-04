@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "plugins-package-impact-result.schema.json",
+  "title": "plugins-package-impact Result",
+  "description": "Structured output from plugins-package-impact. Validated before the post-script comments.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "comment"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["complete", "needs_input", "error"]
+    },
+    "workspace": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "comment": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "complete" } },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["workspace", "comment"]
+      }
+    }
+  ]
+}

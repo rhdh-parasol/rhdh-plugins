@@ -2,6 +2,13 @@
 
 Before working under `workspaces/`, invoke the `rhdh-workspace` skill.
 
+When the work is a Dependabot alert, CVE, or `yarn.lock` security bump,
+invoke the `plugins-package-impact` skill. Use
+`prepare-workspace-bump.js --verify-only` (the runner already cloned and
+set up the branch). Never call `close-dependabot-alerts.js` — classify and
+bump only; report dismiss candidates in the run summary. Never bump
+`@backstage/*` or `@backstage-community/*`.
+
 Run Jest tests non-interactively with `CI=true yarn test --watchAll=false`.
 If Claude auto-backgrounds a verification command, invoke `TaskStop` before
 finishing.

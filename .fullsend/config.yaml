@@ -17,6 +17,9 @@ agents:
     - name: dependabot-risk-rater
       source: rhdh/harness/dependabot-risk-rater.yaml
       model: claude-opus-4-6
+    - name: plugins-package-impact
+      source: rhdh/harness/plugins-package-impact.yaml
+      model: claude-opus-4-6
 roles:
     - triage
     - coder
@@ -29,6 +32,7 @@ allowed_remote_resources:
     - https://raw.githubusercontent.com/fullsend-ai/agents/
     - https://github.com/redhat-developer/rhdh-skill/
     - https://github.com/christoph-jerolimov/dependency-update-risk-rating/
+    - https://github.com/kim-tsao/rhdh-security-skills/
 create_issues:
     allow_targets:
         repos:
