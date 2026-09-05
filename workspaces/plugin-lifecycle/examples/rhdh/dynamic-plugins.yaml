@@ -1,0 +1,25 @@
+plugins:
+  # The shared Backstage MCP server is deployed once for the whole RHDH
+  # instance. Replace this placeholder with an artifact built for the exact
+  # Backstage version used by RHDH; do not bundle it into the lifecycle plugin.
+  - package: oci://<registry>/backstage-plugin-mcp-actions-backend@sha256:<mcp-actions-digest>!backstage-plugin-mcp-actions-backend
+    enabled: true
+    pluginConfig:
+      backend:
+        actions:
+          pluginSources:
+            - plugin-lifecycle
+      mcpActions:
+        name: RHDH
+        description: Query current and historical lifecycle context for Catalog overlay workspace entities.
+        instructions: Use plugin-lifecycle.get-context before making plugin release or remediation decisions. Cite lifecycle evidence from the returned context.
+
+  - package: oci://ghcr.io/rhdh-parasol/rhdh-plugin-lifecycle@sha256:<frontend-digest>!red-hat-developer-hub-backstage-plugin-lifecycle
+    enabled: true
+    pluginConfig:
+      app:
+        extensions:
+          - entity-content:plugin-lifecycle/lifecycle: true
+
+  - package: oci://ghcr.io/rhdh-parasol/rhdh-plugin-lifecycle@sha256:<backend-digest>!red-hat-developer-hub-backstage-plugin-lifecycle-backend
+    enabled: true

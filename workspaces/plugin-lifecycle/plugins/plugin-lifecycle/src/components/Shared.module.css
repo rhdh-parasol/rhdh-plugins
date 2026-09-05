@@ -1,0 +1,18 @@
+.actionRow,
+.badgeRow {
+  flex-wrap: wrap;
+}
+.breakable {
+  overflow-wrap: anywhere;
+}
+.eyebrow {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.minWidthZero {
+  min-width: 0;
+}
+.changeCopy {
+  flex: 1 1 0;
+  min-width: 0;
+}

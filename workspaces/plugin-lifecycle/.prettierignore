@@ -1,0 +1,11 @@
+node_modules
+data
+dist
+dist-dynamic
+dist-dynamic-packages
+dist-types
+coverage
+.mf
+**/src/**/*.d.ts
+**/dev/**/*.d.ts
+**/migrations/**/*.d.ts

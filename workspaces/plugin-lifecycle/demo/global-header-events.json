@@ -1,0 +1,298 @@
+{
+  "subjectEntityRef": "component:default/overlay-global-header",
+  "title": "Global Header 2.0 overlay upgrade",
+  "summary": "Upgrade Global Header and verify the legacy RHDH dynamic-plugin entrypoint before publication.",
+  "target": {
+    "backstageVersion": "1.52.1",
+    "pluginVersion": "2.0.0"
+  },
+  "initialReferences": [
+    {
+      "type": "issue",
+      "externalId": "#3099",
+      "title": "Retrospective: major-version config verification gap",
+      "url": "https://github.com/redhat-developer/rhdh-plugin-export-overlays/issues/3099"
+    },
+    {
+      "type": "source",
+      "externalId": "aabb85ef001ddae5af621ecf17e02f7bac9175e3",
+      "title": "rhdh-plugins source revision",
+      "url": "https://github.com/redhat-developer/rhdh-plugins/commit/aabb85ef001ddae5af621ecf17e02f7bac9175e3"
+    }
+  ],
+  "events": [
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "intent",
+        "state": "running",
+        "summary": "Upgrade request accepted and scoped to Global Header 2.0."
+      }
+    },
+    {
+      "producer": "github-fixture",
+      "event": {
+        "kind": "reference.linked",
+        "reference": {
+          "type": "pull_request",
+          "externalId": "#3059",
+          "title": "Initial Global Header 2.0 overlay change",
+          "url": "https://github.com/redhat-developer/rhdh-plugin-export-overlays/pull/3059"
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "implementation",
+        "state": "ready_for_human",
+        "summary": "Initial overlay change is ready for review."
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "build",
+        "state": "running",
+        "summary": "Building and exporting the initial dynamic plugin."
+      }
+    },
+    {
+      "producer": "github-actions",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "fullsend",
+          "runId": "30656004334",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/redhat-developer/rhdh-plugin-export-overlays/actions/runs/30656004334",
+          "commitSha": "90b96788685b84e7f18138cb54599a046f907bd9",
+          "fixture": false
+        }
+      }
+    },
+    {
+      "producer": "github-actions",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "fullsend",
+          "runId": "30679701066",
+          "attempt": 2,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/redhat-developer/rhdh-plugin-export-overlays/actions/runs/30679701066",
+          "commitSha": "83949aefe351c76b2af1df331fce06079f0c3e40",
+          "fixture": false
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "verification",
+        "state": "running",
+        "summary": "Running user-visible verification in RHDH."
+      }
+    },
+    {
+      "producer": "playwright-fixture",
+      "event": {
+        "kind": "verification.recorded",
+        "verification": {
+          "method": "playwright",
+          "state": "failed",
+          "summary": "The Legacy module was not mounted; module: Legacy was missing from the dynamic-plugin configuration."
+        }
+      }
+    },
+    {
+      "producer": "github-actions-fixture",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "End-to-end verification",
+          "runId": "fixture-e2e-3059",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "failure",
+          "fixture": true
+        }
+      }
+    },
+    {
+      "producer": "github-actions-fixture",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "End-to-end verification",
+          "runId": "fixture-e2e-3059",
+          "attempt": 2,
+          "status": "completed",
+          "conclusion": "failure",
+          "fixture": true
+        }
+      }
+    },
+    {
+      "producer": "github-actions-fixture",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "End-to-end verification",
+          "runId": "fixture-e2e-3059",
+          "attempt": 3,
+          "status": "completed",
+          "conclusion": "failure",
+          "fixture": true
+        }
+      }
+    },
+    {
+      "producer": "github-actions-fixture",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "End-to-end verification",
+          "runId": "fixture-e2e-3059",
+          "attempt": 4,
+          "status": "completed",
+          "conclusion": "failure",
+          "fixture": true
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "verification",
+        "state": "blocked",
+        "summary": "User-visible verification is blocked.",
+        "blocker": "The exported frontend exists, but RHDH cannot mount the Legacy module."
+      }
+    },
+    {
+      "producer": "github-fixture",
+      "event": {
+        "kind": "reference.linked",
+        "reference": {
+          "type": "pull_request",
+          "externalId": "#3096",
+          "title": "Replacement change with the Legacy module configuration",
+          "url": "https://github.com/redhat-developer/rhdh-plugin-export-overlays/pull/3096"
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "implementation",
+        "state": "running",
+        "summary": "Applying the corrected dynamic-plugin configuration."
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "build",
+        "state": "running",
+        "summary": "Rebuilding the corrected dynamic plugin."
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "verification",
+        "state": "running",
+        "summary": "Re-running user-visible verification."
+      }
+    },
+    {
+      "producer": "playwright-fixture",
+      "event": {
+        "kind": "verification.recorded",
+        "verification": {
+          "method": "playwright",
+          "state": "succeeded",
+          "summary": "Global Header mounted successfully through the Legacy module."
+        }
+      }
+    },
+    {
+      "producer": "github-actions-fixture",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "github-actions",
+          "workflow": "Dynamic plugin build and verification",
+          "runId": "fixture-winning-3096",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "commitSha": "aabb85ef001ddae5af621ecf17e02f7bac9175e3",
+          "winning": true,
+          "fixture": true
+        }
+      }
+    },
+    {
+      "producer": "overlay-publisher",
+      "event": {
+        "kind": "artifact.recorded",
+        "artifact": {
+          "artifactType": "npm",
+          "name": "@red-hat-developer-hub/backstage-plugin-global-header",
+          "version": "2.0.0",
+          "reference": "@red-hat-developer-hub/backstage-plugin-global-header@2.0.0"
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "verification",
+        "state": "succeeded",
+        "summary": "User-visible verification passed with the corrected Legacy module."
+      }
+    },
+    {
+      "producer": "overlay-publisher",
+      "event": {
+        "kind": "artifact.recorded",
+        "artifact": {
+          "artifactType": "oci",
+          "name": "Global Header dynamic plugin",
+          "version": "2.0.0",
+          "reference": "oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/red-hat-developer-hub-backstage-plugin-global-header:bs_1.52.0__2.0.0",
+          "digest": "sha256:58bf836bfcfb73e6866d3288db974218c059b226f6d4a8c6d776ac3b7df2f332"
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "publication",
+        "state": "succeeded",
+        "summary": "Global Header 2.0 is verified and published."
+      }
+    }
+  ]
+}
