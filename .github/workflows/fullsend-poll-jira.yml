@@ -29,7 +29,12 @@ jobs:
       matrix: ${{ steps.build-matrix.outputs.matrix }}
       has_dispatches: ${{ steps.build-matrix.outputs.has_dispatches }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Harden Runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Install fullsend
         env:
@@ -81,7 +86,7 @@ jobs:
           jq -c '.[] | {agent, event_type, status_number}' dispatches.json || true
 
       - name: Upload dispatches.json
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         if: always()
         with:
           name: dispatches
