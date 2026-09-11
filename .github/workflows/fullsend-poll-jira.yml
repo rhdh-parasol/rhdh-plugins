@@ -1,0 +1,136 @@
+# Poll Jira for Fullsend commands on feature-refinement issues.
+#
+# DEVREG issues require the `fullsend` label. RHIDP and RHDHPLAN issues must
+# also belong to the RHDH AI team. Projects are polled separately because
+# Fullsend resolves the triggering actor's Jira project role per project.
+
+name: fullsend Jira poll
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  actions: write
+  contents: write
+  id-token: write
+  issues: write
+  packages: read
+  pull-requests: write
+
+jobs:
+  poll:
+    runs-on: ubuntu-24.04
+    concurrency:
+      group: fullsend-jira-poll
+      cancel-in-progress: false
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+      has_dispatches: ${{ steps.build-matrix.outputs.has_dispatches }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install fullsend
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download v0.41.0 --repo fullsend-ai/fullsend \
+            -p 'fullsend_0.41.0_linux_amd64.tar.gz' -O - | tar xz
+          sudo mv fullsend /usr/local/bin/
+          fullsend --version
+
+      - name: Poll Jira
+        env:
+          JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_BASE_URL: ${{ vars.JIRA_BASE_URL }}
+          TARGET_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${JIRA_BASE_URL}" ]]; then
+            echo "::error::JIRA_BASE_URL variable is empty (must be an Actions variable, not a secret)"
+            exit 1
+          fi
+
+          poll_project() {
+            local project="$1"
+            local jql="$2"
+            local output="$3"
+            fullsend poll \
+              --input-driver jira-poll \
+              --jira-url "${JIRA_BASE_URL}" \
+              --jira-project "${project}" \
+              --jql "${jql}" \
+              --target-repo "${TARGET_REPO}" \
+              --output "${output}" \
+              --fullsend-dir .fullsend
+          }
+
+          poll_project DEVREG \
+            'project = DEVREG AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
+            dispatches-devreg.json
+          # Jira's Team field stores an Atlassian team ID. cf[10001] and this
+          # value identify the RHDH AI team.
+          poll_project RHDHPLAN \
+            'project = RHDHPLAN AND cf[10001] = "ec74d716-af36-4b3c-950f-f79213d08f71-1087" AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
+            dispatches-rhdhplan.json
+          poll_project RHIDP \
+            'project = RHIDP AND cf[10001] = "ec74d716-af36-4b3c-950f-f79213d08f71-1087" AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
+            dispatches-rhidp.json
+
+          jq -s 'add' \
+            dispatches-devreg.json \
+            dispatches-rhdhplan.json \
+            dispatches-rhidp.json > dispatches.json
+          echo "Dispatch count: $(jq 'length' dispatches.json)"
+          jq -c '.[] | {agent, event_type, status_number}' dispatches.json || true
+
+      - name: Upload dispatches.json
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dispatches
+          path: dispatches.json
+          if-no-files-found: ignore
+
+      - name: Build dispatch matrix
+        id: build-matrix
+        run: |
+          set -euo pipefail
+          if [[ ! -f dispatches.json ]] || ! jq -e 'length > 0' dispatches.json > /dev/null 2>&1; then
+            echo "No dispatches."
+            echo 'matrix={"include":[]}' >> "${GITHUB_OUTPUT}"
+            echo "has_dispatches=false" >> "${GITHUB_OUTPUT}"
+            exit 0
+          fi
+
+          MATRIX=$(jq -c '{include: .}' dispatches.json)
+          DELIM="MATRIX_$(openssl rand -hex 8)"
+          {
+            echo "matrix<<${DELIM}"
+            printf '%s' "${MATRIX}"
+            echo
+            echo "${DELIM}"
+          } >> "${GITHUB_OUTPUT}"
+          echo "has_dispatches=true" >> "${GITHUB_OUTPUT}"
+
+  harness:
+    name: Harness
+    needs: poll
+    if: needs.poll.outputs.has_dispatches == 'true'
+    uses: fullsend-ai/fullsend/.github/workflows/reusable-dispatch.yml@094191b0151e3261d65ce2b032a4586654eb44ab # v0.41.0
+    with:
+      matrix: ${{ needs.poll.outputs.matrix }}
+      install_mode: per-repo
+      mint_url: ${{ vars.FULLSEND_MINT_URL }}
+      gcp_region: ${{ vars.FULLSEND_GCP_REGION }}
+      jira_base_url: ${{ vars.JIRA_BASE_URL }}
+      runner_image: ubuntu-24.04
+    secrets:
+      FULLSEND_GCP_WIF_PROVIDER: ${{ secrets.FULLSEND_GCP_WIF_PROVIDER }}
+      FULLSEND_GCP_PROJECT_ID: ${{ secrets.FULLSEND_GCP_PROJECT_ID }}
+      OTEL_EXPORTER_OTLP_TRACES_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_TRACES_HEADERS }}
+      OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+      JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}

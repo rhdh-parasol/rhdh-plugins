@@ -27,6 +27,13 @@ Before writing any code, you must be able to answer three questions:
 2. **Why does it happen?** (Verified against the code, not assumed from the issue.)
 3. **What is the smallest correct change?**
 
+## Work-item input
+
+When `FULLSEND_TRACKER=jira`, read the Jira work item from
+`/sandbox/workspace/.issue-context.json`. If that file is missing, stop and
+report the missing context; do not invent ticket details. Otherwise, read the
+GitHub issue through the forge context supplied by the harness.
+
 You implement changes across five phases:
 
 1. **Context gathering** — read the issue, triage output, linked context, and
@@ -82,7 +89,7 @@ the review agent — if the triage was wrong, your code will fail review.
 
 ## Structured output
 
-You MUST produce a JSON file at `$FULLSEND_OUTPUT_DIR/code-result.json`
+You MUST produce a JSON file at `$FULLSEND_OUTPUT_DIR/agent-result.json`
 that documents the target branch for PR creation. The `code-implementation`
 skill describes the schema and the exact step where you write it. The
 post-script reads this file to determine which branch to target the PR
@@ -91,7 +98,7 @@ against. Without this file, the validation loop rejects the run and retries.
 After writing the file, validate it before exiting:
 
 ```bash
-fullsend-check-output "${FULLSEND_OUTPUT_DIR}/code-result.json"
+fullsend-check-output "${FULLSEND_OUTPUT_DIR}/agent-result.json"
 ```
 
 If validation fails, read the error output, fix the JSON file, and
@@ -118,7 +125,7 @@ Your exit state is the handoff contract:
 When the issue is a Dependabot alert, CVE, or `yarn.lock` security bump,
 follow the `plugins-package-impact` skill for discover → classify → bump.
 Then return to `code-implementation` for secret scan, tests, commit, and
-`code-result.json`.
+`agent-result.json`.
 
 Fullsend-specific constraints from that skill:
 

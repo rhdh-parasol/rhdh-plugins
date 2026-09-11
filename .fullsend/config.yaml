@@ -4,10 +4,14 @@
 # This file configures fullsend for per-repo installation mode.
 # See ADR 0033 for details.
 version: "1"
+runtime: claude
 # The reusable workflow overlays upstream defaults onto the standard layered
 # directories before every run. Keep repo-owned agents under rhdh/ so their
 # harnesses and resources remain intact.
 agents:
+    - name: triage
+      source: rhdh/harness/triage-jira.yaml
+      model: claude-opus-4-6
     - name: code
       source: rhdh/harness/code.yaml
       model: claude-opus-4-6

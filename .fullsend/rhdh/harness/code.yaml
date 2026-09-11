@@ -1,4 +1,4 @@
-base: https://raw.githubusercontent.com/fullsend-ai/agents/4bbe4f50ed8e33c60539eaa30ddc320edf8bcda0/harness/code.yaml#sha256=050382941bb4c4a3dad5f00253de854684c0d22dd8cc1ca0a548079774470aad
+base: https://raw.githubusercontent.com/fullsend-ai/agents/ba1d46fb30329283a092fc30d53cf68e99e5ce86/harness/code.yaml#sha256=4f0d9425d5ee1fa86e21d3b6d1ac9bd086da2f59de9d80a311f753c00d99303d
 agent: rhdh/agents/code.md
 policy: rhdh/policies/code.yaml
 skills:
@@ -18,5 +18,18 @@ host_files:
 # upstream env/code.env (read-only coder app token). GITHUB_REPOSITORY lets
 # plugins-package-impact scripts resolve the Dependabot API target without git.
 env:
+  runner:
+    # Jira dispatch has a work-item key rather than a GitHub issue number.
+    # Pin the only branch this automation may target.
+    CODE_ALLOWED_TARGET_BRANCHES: "main"
   sandbox:
     GITHUB_REPOSITORY: "${REPO_FULL_NAME}"
+
+# The Jira poller evaluates explicit harness triggers. GitHub /fs-code remains
+# on Fullsend's built-in stage router.
+trigger: >
+  event.source.system == "jira"
+    && event.transition.kind == "comment_added"
+    && has(event.transition.comment.command)
+    && event.transition.comment.command == "/fs-code"
+    && event.entity.kind == "work_item"
