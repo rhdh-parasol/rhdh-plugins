@@ -1,8 +1,8 @@
 # Poll Jira for Fullsend commands on feature-refinement issues.
 #
-# DEVREG issues require the `fullsend` label. RHIDP and RHDHPLAN issues must
-# also belong to the RHDH AI team. Projects are polled separately because
-# Fullsend resolves the triggering actor's Jira project role per project.
+# RHIDP and RHDHPLAN issues require the `fullsend` label. Projects are polled
+# separately because Fullsend resolves the triggering actor's Jira project
+# role per project.
 
 name: fullsend Jira poll
 
@@ -67,20 +67,14 @@ jobs:
               --fullsend-dir .fullsend
           }
 
-          poll_project DEVREG \
-            'project = DEVREG AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
-            dispatches-devreg.json
-          # Jira's Team field stores an Atlassian team ID. cf[10001] and this
-          # value identify the RHDH AI team.
           poll_project RHDHPLAN \
-            'project = RHDHPLAN AND cf[10001] = "ec74d716-af36-4b3c-950f-f79213d08f71-1087" AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
+            'project = RHDHPLAN AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
             dispatches-rhdhplan.json
           poll_project RHIDP \
-            'project = RHIDP AND cf[10001] = "ec74d716-af36-4b3c-950f-f79213d08f71-1087" AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
+            'project = RHIDP AND labels = "fullsend" AND statusCategory != Done ORDER BY updated DESC' \
             dispatches-rhidp.json
 
           jq -s 'add' \
-            dispatches-devreg.json \
             dispatches-rhdhplan.json \
             dispatches-rhidp.json > dispatches.json
           echo "Dispatch count: $(jq 'length' dispatches.json)"
