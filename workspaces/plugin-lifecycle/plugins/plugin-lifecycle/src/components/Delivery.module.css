@@ -1,0 +1,177 @@
+.deliveryCard {
+  border-top: 2px solid var(--bui-accent-bg);
+}
+
+.compactCardHeader {
+  padding: var(--bui-space-3) var(--bui-space-4);
+}
+
+.compactCardBody {
+  padding: 0 var(--bui-space-4) var(--bui-space-4);
+}
+
+.decisionPanel {
+  background: var(--bui-bg-neutral-1);
+  border-inline-start: 4px solid var(--bui-border-1);
+  padding: var(--bui-space-2) var(--bui-space-3);
+}
+
+.decisionPanel[data-status='attention_required'] {
+  border-inline-start-color: var(--bui-border-danger);
+}
+.decisionPanel[data-status='stable'],
+.decisionPanel[data-status='ready_to_merge'] {
+  border-inline-start-color: var(--bui-border-success);
+}
+.decisionPanel[data-status='in_progress'],
+.decisionPanel[data-status='ready_to_test'] {
+  border-inline-start-color: var(--bui-border-info);
+}
+
+.deliveryStatus {
+  border: 1px solid var(--bui-border-1);
+  flex-shrink: 0;
+}
+
+.deliveryStatus[data-status='stable'],
+.deliveryStatus[data-status='ready_to_merge'] {
+  background: var(--bui-bg-success);
+  border-color: var(--bui-border-success);
+  color: var(--bui-fg-success-on-bg);
+}
+.deliveryStatus[data-status='attention_required'] {
+  background: var(--bui-bg-danger);
+  border-color: var(--bui-border-danger);
+  color: var(--bui-fg-danger-on-bg);
+}
+.deliveryStatus[data-status='in_progress'],
+.deliveryStatus[data-status='ready_to_test'] {
+  background: var(--bui-bg-info);
+  border-color: var(--bui-border-info);
+  color: var(--bui-fg-info-on-bg);
+}
+
+.deliveryLanes {
+  display: grid;
+  gap: var(--bui-space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.deliveryLane {
+  border-top: 2px solid var(--bui-border-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bui-space-1);
+  min-width: 0;
+  padding-top: var(--bui-space-2);
+}
+
+.deliveryLane[data-lane='released'] {
+  border-top-color: var(--bui-border-success);
+}
+.deliveryLane[data-lane='candidate'] {
+  border-top-color: var(--bui-border-info);
+}
+
+.deliveryEmptySummary {
+  border-top: 1px solid var(--bui-border-1);
+  color: var(--bui-fg-secondary);
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  padding-top: var(--bui-space-2);
+}
+
+.deliveryItem {
+  border: 1px solid var(--bui-border-1);
+  border-radius: var(--bui-radius-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bui-space-1);
+  min-width: 0;
+  padding: var(--bui-space-2);
+}
+
+.packageTable {
+  max-height: 13rem;
+  min-width: 0;
+  overflow: auto;
+}
+
+.tableImage,
+.tableImageVersion {
+  overflow-wrap: anywhere;
+}
+
+.ociReference {
+  background: var(--bui-bg-neutral-2);
+  border: 1px solid var(--bui-border-1);
+  border-radius: var(--bui-radius-2);
+  min-width: 0;
+  padding: var(--bui-space-1) var(--bui-space-2);
+}
+
+.ociValue {
+  display: block;
+  font-family: var(--bui-font-monospace);
+  font-size: var(--bui-font-size-1);
+  line-height: 1.5;
+  margin-top: var(--bui-space-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.checkGrid {
+  display: grid;
+  gap: var(--bui-space-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.checkSummary {
+  align-items: flex-start;
+  border: 1px solid var(--bui-border-1);
+  border-radius: var(--bui-radius-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bui-space-2);
+  min-width: 0;
+  padding: var(--bui-space-3);
+}
+
+.compactEvidenceRow {
+  align-items: center;
+  border-bottom: 1px solid var(--bui-border-1);
+  display: flex;
+  justify-content: space-between;
+  padding-block: var(--bui-space-2);
+}
+
+.compactEvidenceRow:last-child {
+  border-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .deliveryLanes {
+    grid-template-areas: 'released released' 'candidate mainline';
+    grid-template-columns: minmax(0, 1.5fr) minmax(20rem, 1fr);
+  }
+  .deliveryLane[data-lane='released'] {
+    grid-area: released;
+  }
+  .deliveryLane[data-lane='candidate'] {
+    grid-area: candidate;
+  }
+  .deliveryLane[data-lane='mainline'] {
+    grid-area: mainline;
+  }
+  .deliveryLane[data-wide] {
+    grid-area: auto;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .checkGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

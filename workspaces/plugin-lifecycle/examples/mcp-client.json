@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "rhdh": {
+      "url": "https://<rhdh-host>/api/mcp-actions/v1"
+    }
+  }
+}

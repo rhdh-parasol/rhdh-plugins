@@ -1,0 +1,62 @@
+# Opt the example backend into live, read-only GitHub evidence collection.
+# The collector uses the configured GitHub integration/App credentials; the
+# normal context endpoint still serves persisted data and never calls GitHub.
+auth:
+  # This file is loaded only by the local development command. Production
+  # deployments must provide a real identity provider instead.
+  providers:
+    guest: {}
+
+pluginLifecycle:
+  githubActions:
+    enabled: true
+    # Both repositories are explicit test configuration. The plugin itself
+    # derives the repository for an on-demand refresh from each entity's
+    # github.com/project-slug annotation.
+    repositories:
+      - rhdh-parasol/rhdh-plugin-export-overlays
+      - redhat-developer/rhdh-plugin-export-overlays
+    workflow: publish-workspace-plugins.yaml
+    closedPullRequestsPerWorkspace: 3
+  refreshWaitTimeoutMs: 30000
+
+catalog:
+  locations:
+    # Explicit live comparison entity. This is intentionally separate from
+    # the generated Parasol overlay entities so both repository histories can
+    # be opened side by side.
+    - type: file
+      target: ../../examples/real-overlay-comparison.yaml
+      rules:
+        - allow: [Component]
+
+    # Real source Components from this rhdh-plugins checkout.
+    - type: file
+      target: ../../../../catalog-info.yaml
+      rules:
+        - allow: [Component]
+    - type: file
+      target: ../../../../workspaces/*/catalog-info.yaml
+      rules:
+        - allow: [Component]
+
+    # Real overlay Components from the conventional sibling checkout. Keep
+    # this non-recursive so e2e fixtures and scaffolder skeletons are excluded.
+    - type: file
+      target: ../../../../../rhdh-plugin-export-overlays/catalog-info.yaml
+      rules:
+        - allow: [Component]
+    - type: file
+      target: ../../../../../rhdh-plugin-export-overlays/workspaces/*/catalog-info.yaml
+      rules:
+        - allow: [Component]
+
+    # Real Extensions Catalog entities from the same overlay checkout.
+    - type: file
+      target: ../../../../../rhdh-plugin-export-overlays/catalog-entities/extensions/plugins/*.yaml
+      rules:
+        - allow: [Plugin]
+    - type: file
+      target: ../../../../../rhdh-plugin-export-overlays/workspaces/*/metadata/*.yaml
+      rules:
+        - allow: [Package]

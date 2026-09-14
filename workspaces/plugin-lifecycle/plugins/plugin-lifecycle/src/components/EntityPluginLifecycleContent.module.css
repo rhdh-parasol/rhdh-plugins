@@ -1,0 +1,62 @@
+.phaseBody {
+  border-top: 1px solid var(--bui-border-1);
+  padding: var(--bui-space-3);
+}
+
+.dashboardGrid {
+  align-items: start;
+  display: grid;
+  gap: var(--bui-space-5);
+  grid-template-areas: 'provenance' 'timeline';
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.evidenceAccordion {
+  margin-top: var(--bui-space-1);
+}
+
+.changeSelect {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.emptyPanel {
+  min-height: 15rem;
+  padding: var(--bui-space-6);
+  text-align: center;
+}
+
+.emptyDescription {
+  max-width: 38rem;
+}
+
+.loadingWide,
+.loadingNarrow {
+  flex: 1 1 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .changeSelect {
+    width: 15rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboardGrid {
+    grid-template-areas: 'timeline provenance';
+    grid-template-columns: minmax(0, 1.65fr) minmax(19rem, 1fr);
+  }
+
+  .loadingWide {
+    flex-grow: 1.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboardGrid {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,273 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: red-hat-developer-hub-global-header
+  namespace: default
+  title: Global Header source
+  description: Global Header source workspace
+spec:
+  type: library
+  lifecycle: active
+  owner: rhdh-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: overlay-global-header
+  namespace: default
+  title: Overlay workspace global-header
+  description: Fixture overlay workspace for the Global Header lifecycle demo
+  annotations:
+    github.com/project-slug: rhdh-parasol/rhdh-plugin-export-overlays
+    rhdh.io/overlay-workspace: global-header
+    rhdh.io/source-repository: https://github.com/rhdh-parasol/rhdh-plugins
+    rhdh.io/source-revision: aabb85ef001ddae5af621ecf17e02f7bac9175e3
+    rhdh.io/source-entity-ref: component:default/red-hat-developer-hub-global-header
+    rhdh.io/extensions-plugin-refs: plugin:rhdh/global-header
+    rhdh.io/extensions-package-refs: package:rhdh/red-hat-developer-hub-backstage-plugin-global-header
+spec:
+  type: rhdh-overlay-workspace
+  lifecycle: experimental
+  owner: rhdh-team
+  dependsOn:
+    - component:default/red-hat-developer-hub-global-header
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Plugin
+metadata:
+  name: global-header
+  namespace: rhdh
+  title: Global Header
+  description: Shared application header for Red Hat Developer Hub
+spec:
+  lifecycle: active
+  packages:
+    - package:rhdh/red-hat-developer-hub-backstage-plugin-global-header
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: red-hat-developer-hub-backstage-plugin-global-header
+  namespace: rhdh
+  title: '@red-hat-developer-hub/backstage-plugin-global-header'
+spec:
+  packageName: '@red-hat-developer-hub/backstage-plugin-global-header'
+  version: 2.0.0
+  backstage:
+    supportedVersions: '1.54.4'
+  support: generally-available
+  dynamicArtifact: 'oci://ghcr.io/rhdh/red-hat-developer-hub-backstage-plugin-global-header:2.0.0@sha256:58bf836bfcfb73e6866d3288db974218c059b226f6d4a8c6d776ac3b7df2f332'
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Plugin
+metadata:
+  name: example-analytics
+  namespace: rhdh
+  title: Example Analytics
+  description: Synthetic plugin used to prove generic lifecycle behavior
+spec:
+  lifecycle: experimental
+  packages:
+    - package:default/example-analytics
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: overlay-example-analytics
+  namespace: default
+  title: Overlay workspace example-analytics
+  description: Synthetic overlay workspace for generic lifecycle validation
+  annotations:
+    github.com/project-slug: rhdh-parasol/rhdh-plugin-export-overlays
+    rhdh.io/overlay-workspace: example-analytics
+    rhdh.io/source-repository: https://github.com/rhdh-parasol/rhdh-plugins
+    rhdh.io/source-revision: 0123456789abcdef0123456789abcdef01234567
+    rhdh.io/extensions-plugin-refs: plugin:rhdh/example-analytics
+    rhdh.io/extensions-package-refs: package:default/example-analytics
+spec:
+  type: rhdh-overlay-workspace
+  lifecycle: experimental
+  owner: rhdh-team
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: example-analytics
+  namespace: default
+  title: '@acme/backstage-plugin-example-analytics'
+spec:
+  packageName: '@acme/backstage-plugin-example-analytics'
+  version: 1.4.0
+  backstage:
+    supportedVersions: '1.54.4'
+  support: community
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: adoption-insights
+  namespace: default
+  title: Adoption Insights
+  description: Adoption and engagement analytics for Red Hat Developer Hub
+spec:
+  type: backstage-plugin
+  lifecycle: active
+  owner: rhdh-ui-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: overlay-adoption-insights
+  namespace: default
+  title: Overlay workspace adoption-insights
+  description: Fixture overlay workspace for Adoption Insights lifecycle validation
+  annotations:
+    github.com/project-slug: rhdh-parasol/rhdh-plugin-export-overlays
+    rhdh.io/overlay-workspace: adoption-insights
+    rhdh.io/source-repository: https://github.com/redhat-developer/rhdh-plugins
+    rhdh.io/source-revision: be7777a9a9c1e5b52d845eec1bc489df7f5582fd
+    rhdh.io/source-entity-ref: component:default/adoption-insights
+    rhdh.io/extensions-plugin-refs: plugin:rhdh/adoption-insights
+    rhdh.io/extensions-package-refs: package:rhdh/rhdh-bsp-adoption-insights, package:rhdh/rhdh-bsp-adoption-insights-backend, package:rhdh/rhdh-bsp-analytics-mod-adoption-insights
+spec:
+  type: rhdh-overlay-workspace
+  lifecycle: experimental
+  owner: rhdh-team
+  dependsOn:
+    - component:default/adoption-insights
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Plugin
+metadata:
+  name: adoption-insights
+  namespace: rhdh
+  title: Adoption Insights
+spec:
+  lifecycle: active
+  packages:
+    - rhdh-bsp-adoption-insights
+    - rhdh-bsp-adoption-insights-backend
+    - rhdh-bsp-analytics-mod-adoption-insights
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: rhdh-bsp-adoption-insights
+  namespace: rhdh
+  title: Adoption Insights Frontend
+spec:
+  packageName: '@red-hat-developer-hub/backstage-plugin-adoption-insights'
+  version: 0.9.1
+  partOf:
+    - adoption-insights
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: rhdh-bsp-adoption-insights-backend
+  namespace: rhdh
+  title: Adoption Insights Backend
+spec:
+  packageName: '@red-hat-developer-hub/backstage-plugin-adoption-insights-backend'
+  version: 0.9.1
+  partOf:
+    - adoption-insights
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: rhdh-bsp-analytics-mod-adoption-insights
+  namespace: rhdh
+  title: Adoption Insights Analytics Module
+spec:
+  packageName: '@red-hat-developer-hub/backstage-plugin-analytics-module-adoption-insights'
+  version: 0.9.1
+  partOf:
+    - adoption-insights
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: red-hat-developer-hub-bulk-import
+  namespace: default
+  title: Bulk Import
+  description: Import multiple repositories into the Software Catalog
+spec:
+  type: backstage-plugin
+  lifecycle: active
+  owner: rhdh-team
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: overlay-bulk-import
+  namespace: default
+  title: Overlay workspace bulk-import
+  description: Fixture overlay workspace for Bulk Import lifecycle validation
+  annotations:
+    github.com/project-slug: rhdh-parasol/rhdh-plugin-export-overlays
+    rhdh.io/overlay-workspace: bulk-import
+    rhdh.io/source-repository: https://github.com/redhat-developer/rhdh-plugins
+    rhdh.io/source-revision: 97a6e3a7c468a7624b62f957fc7c077127bf51c6
+    rhdh.io/source-entity-ref: component:default/red-hat-developer-hub-bulk-import
+    rhdh.io/extensions-plugin-refs: plugin:rhdh/bulk-import
+    rhdh.io/extensions-package-refs: package:rhdh/red-hat-developer-hub-backstage-plugin-bulk-import, package:rhdh/red-hat-developer-hub-backstage-plugin-bulk-import-backend
+spec:
+  type: rhdh-overlay-workspace
+  lifecycle: experimental
+  owner: rhdh-team
+  dependsOn:
+    - component:default/red-hat-developer-hub-bulk-import
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Plugin
+metadata:
+  name: bulk-import
+  namespace: rhdh
+  title: Bulk Import
+spec:
+  lifecycle: active
+  packages:
+    - red-hat-developer-hub-backstage-plugin-bulk-import
+    - red-hat-developer-hub-backstage-plugin-bulk-import-backend
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: red-hat-developer-hub-backstage-plugin-bulk-import
+  namespace: rhdh
+  title: Bulk Import Frontend
+spec:
+  packageName: '@red-hat-developer-hub/backstage-plugin-bulk-import'
+  version: 8.0.0
+  partOf:
+    - bulk-import
+
+---
+apiVersion: extensions.backstage.io/v1alpha1
+kind: Package
+metadata:
+  name: red-hat-developer-hub-backstage-plugin-bulk-import-backend
+  namespace: rhdh
+  title: Bulk Import Backend
+spec:
+  packageName: '@red-hat-developer-hub/backstage-plugin-bulk-import-backend'
+  version: 8.0.0
+  partOf:
+    - bulk-import

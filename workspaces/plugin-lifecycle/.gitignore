@@ -1,0 +1,17 @@
+node_modules/
+dist/
+dist-dynamic/
+dist-dynamic-packages/
+dist-types/
+coverage/
+data/
+.yarn/cache/
+.yarn/install-state.gz
+.pnp.*
+.mf/
+plugins/*/src/**/*.d.ts
+plugins/*/dev/**/*.d.ts
+plugins/*/migrations/**/*.d.ts
+*.log
+*.tsbuildinfo
+.DS_Store

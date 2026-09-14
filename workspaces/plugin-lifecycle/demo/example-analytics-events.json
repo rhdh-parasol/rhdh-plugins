@@ -1,0 +1,126 @@
+{
+  "subjectEntityRef": "component:default/overlay-example-analytics",
+  "title": "Example Analytics 1.4 release",
+  "summary": "Synthetic fixture proving the lifecycle contracts and projection are not specific to Global Header.",
+  "target": {
+    "backstageVersion": "1.54.4",
+    "pluginVersion": "1.4.0"
+  },
+  "initialReferences": [
+    {
+      "type": "documentation",
+      "externalId": "ANALYTICS-42",
+      "title": "Synthetic release request",
+      "url": "https://example.com/changes/ANALYTICS-42"
+    }
+  ],
+  "events": [
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "intent",
+        "state": "running",
+        "summary": "Synthetic analytics release accepted."
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "implementation",
+        "state": "ready_for_human",
+        "summary": "Implementation is ready for review."
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "build",
+        "state": "running",
+        "summary": "Building the synthetic dynamic plugin."
+      }
+    },
+    {
+      "producer": "ci-fixture",
+      "event": {
+        "kind": "ci.run.recorded",
+        "run": {
+          "provider": "synthetic-ci",
+          "workflow": "Build and test",
+          "runId": "fixture-example-analytics-42",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "commitSha": "0123456789abcdef0123456789abcdef01234567",
+          "winning": true,
+          "fixture": true
+        }
+      }
+    },
+    {
+      "producer": "package-fixture",
+      "event": {
+        "kind": "artifact.recorded",
+        "artifact": {
+          "artifactType": "npm",
+          "name": "@acme/backstage-plugin-example-analytics",
+          "version": "1.4.0",
+          "reference": "@acme/backstage-plugin-example-analytics@1.4.0"
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "verification",
+        "state": "running",
+        "summary": "Running a synthetic smoke check."
+      }
+    },
+    {
+      "producer": "smoke-fixture",
+      "event": {
+        "kind": "verification.recorded",
+        "verification": {
+          "method": "smoke",
+          "state": "succeeded",
+          "summary": "Synthetic plugin mounted and returned a healthy response."
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "verification",
+        "state": "succeeded",
+        "summary": "Synthetic smoke verification passed."
+      }
+    },
+    {
+      "producer": "package-fixture",
+      "event": {
+        "kind": "artifact.recorded",
+        "artifact": {
+          "artifactType": "oci",
+          "name": "Example Analytics dynamic plugin",
+          "version": "1.4.0",
+          "reference": "oci://example.invalid/plugins/example-analytics:1.4.0",
+          "digest": "sha256:9efcbb1967c96e029412715f91fd76b80b78443638affcae44622d6bf2285c5e"
+        }
+      }
+    },
+    {
+      "producer": "demo-fixture",
+      "event": {
+        "kind": "phase.updated",
+        "phase": "publication",
+        "state": "succeeded",
+        "summary": "Synthetic Example Analytics 1.4 release completed."
+      }
+    }
+  ]
+}

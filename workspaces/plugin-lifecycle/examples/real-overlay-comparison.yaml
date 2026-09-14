@@ -1,0 +1,33 @@
+# Live comparison entity for the Adoption Insights workspace.
+#
+# This is a Software Catalog Component only. It deliberately contains no
+# lifecycle events or delivery fixture data. The lifecycle backend uses the
+# repository annotation below when the entity is refreshed, so this can be
+# compared with the Parasol-backed overlay-adoption-insights entity.
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: overlay-adoption-insights-upstream
+  namespace: default
+  title: Adoption Insights (upstream overlay)
+  description: Adoption Insights overlay workspace from the upstream packaging repository.
+  annotations:
+    github.com/project-slug: redhat-developer/rhdh-plugin-export-overlays
+    rhdh.io/overlay-workspace: adoption-insights
+    rhdh.io/source-repository: https://github.com/redhat-developer/rhdh-plugins
+    rhdh.io/source-revision: be7777a9a9c1e5b52d845eec1bc489df7f5582fd
+    rhdh.io/source-entity-ref: component:default/adoption-insights
+    rhdh.io/extensions-plugin-refs: plugin:rhdh/adoption-insights
+    rhdh.io/extensions-package-refs: package:rhdh/rhdh-bsp-adoption-insights, package:rhdh/rhdh-bsp-adoption-insights-backend, package:rhdh/rhdh-bsp-analytics-mod-adoption-insights
+  links:
+    - title: Upstream overlay workspace
+      url: https://github.com/redhat-developer/rhdh-plugin-export-overlays/tree/main/workspaces/adoption-insights
+    - title: Upstream publish workflow
+      url: https://github.com/redhat-developer/rhdh-plugin-export-overlays/actions/workflows/publish-workspace-plugins.yaml
+spec:
+  type: rhdh-overlay-workspace
+  lifecycle: experimental
+  owner: rhdh-team
+  system: rhdh
+  dependsOn:
+    - component:default/adoption-insights
