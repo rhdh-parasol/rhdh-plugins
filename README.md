@@ -8,7 +8,7 @@ Plugins in this repository will be published to the `@red-hat-developer-hub` pub
 
 ## Contributing a plugin
 
-Contributions are welcome! To contribute a plugin, please follow the guidelines outlined in [CONTRIBUTING.md](https://github.com/redhat-developer/rhdh-plugins/blob/main/CONTRIBUTING.md). You can choose to either contribute to the shared repository or self-host your plugin for full autonomy.
+Contributions are welcome! To get started, see [CONTRIBUTING.md](./CONTRIBUTING.md) for how to propose changes and open pull requests.
 
 ## Plugins Workflow
 
