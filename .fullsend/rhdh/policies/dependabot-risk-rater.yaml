@@ -3,9 +3,9 @@ version: 1
 
 # Sandbox policy for dependabot-risk-rater.
 #
-# Same baseline as rhdh/policies/code.yaml (yarn-encoded npm URLs, GitHub,
-# Vertex). Extra endpoints are the hosts the dependency-update-risk-rating
-# skill scripts call via node fetch.
+# Shared baseline for dependency-update agents (yarn-encoded npm URLs,
+# GitHub, Vertex). Extra endpoints are the hosts the dependency-update-risk-
+# rating skill scripts call via node fetch.
 
 filesystem_policy:
   include_workdir: true
