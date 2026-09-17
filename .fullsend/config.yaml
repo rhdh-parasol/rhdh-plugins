@@ -18,6 +18,9 @@ agents:
     - name: fix
       source: rhdh/harness/fix.yaml
       model: claude-opus-4-6
+    - name: review
+      source: rhdh/harness/review.yaml
+      model: claude-opus-4-6
     - name: dependabot-risk-rater
       source: rhdh/harness/dependabot-risk-rater.yaml
       model: claude-opus-4-6
