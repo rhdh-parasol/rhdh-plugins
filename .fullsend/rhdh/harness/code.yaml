@@ -1,6 +1,11 @@
 base: https://raw.githubusercontent.com/fullsend-ai/agents/ba1d46fb30329283a092fc30d53cf68e99e5ce86/harness/code.yaml#sha256=4f0d9425d5ee1fa86e21d3b6d1ac9bd086da2f59de9d80a311f753c00d99303d
 agent: rhdh/agents/code.md
-policy: rhdh/policies/code.yaml
+# policy: inherited from base (policies/base.yaml + openshell providers/
+# profiles for vertex-ai, package-registries, gitleaks and, via the github
+# forge overlay, github-code). Our former rhdh/policies/code.yaml fork
+# existed only to allowlist the claude.exe binary for Vertex;
+# profiles/fullsend-vertex-ai.yaml now does that upstream (ADR 0065's
+# provider/profile network policy migration).
 skills:
   - https://github.com/redhat-developer/rhdh-skill/tree/e84109919ae6085e3dcfe568c695e6dda54874ce/skills/rhdh-coding#sha256=5a4bc35476108a215091ccf1180cee68547c7668c6b193de4402674bc7b6cded
   - https://github.com/kim-tsao/rhdh-security-skills/tree/6f28f949a73667cfc87d3eaf7f1c4edc961b3361/skills/cve/plugins-package-impact#sha256=a3bd41109800eaa78e52bc2fb0478f3079b871d0610b3c9e4d8d801ca2a14d32
