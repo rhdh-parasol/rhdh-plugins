@@ -68,6 +68,8 @@ export interface OgxAgentConfig {
   id: string;
   /** Human-readable agent name. */
   name: string;
+  /** Optional version string (semver, date, or commit hash). */
+  version?: string;
   /** Optional description. */
   description?: string;
   /** System prompt / instructions for the agent. */
@@ -98,6 +100,8 @@ export interface OgxEntityProviderConfig {
   baseUrl: string;
   /** Optional API key for authenticated endpoints. */
   apiKey?: string;
+  /** Optional version string for the model server (semver, date, or commit hash). */
+  serverVersion?: string;
   /** Upstream refresh interval in seconds for model entities (default: 60 = 1m). */
   modelRefreshIntervalSeconds?: number;
   /** Upstream refresh interval in seconds for agent entities (default: 300 = 5m). */
@@ -108,4 +112,8 @@ export interface OgxEntityProviderConfig {
   maxAgentTurns?: number;
   /** Static agent configurations from YAML/admin config. */
   agents?: OgxAgentConfig[];
+  /** PEM-encoded CA certificate or certificate bundle used to verify OGX. */
+  caData?: string;
+  /** Disable TLS certificate verification. Development use only. */
+  skipTLSVerify?: boolean;
 }

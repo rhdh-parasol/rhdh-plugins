@@ -39,12 +39,6 @@ The SDK MUST define TypeScript interfaces for AI asset entity providers covering
 - **AND** **WHEN** a provider implements the optional `delta(cursor?: string)` method
 - **THEN** it operates in incremental mode: yields only additions/updates/deletions since the cursor
 
-#### Scenario: Existing Kagenti and LlamaStack providers compile (RHIDP-15259)
-
-- **WHEN** the SDK package is published
-- **THEN** the Kagenti provider (`plugins/boost-backend-module-kagenti`) compiles against the SDK interface without errors
-- **AND** the LlamaStack provider (`plugins/boost-backend-module-llamastack`) compiles against the SDK interface without errors
-
 ### Requirement: Published SDK Package with Validation
 
 The SDK MUST be published as an installable npm package with shared validation utilities.
@@ -54,6 +48,7 @@ The SDK MUST be published as an installable npm package with shared validation u
 - **WHEN** a developer runs `npm install @red-hat-developer-hub/backstage-plugin-boost-entity-provider-sdk`
 - **THEN** the package installs successfully
 - **AND** the package exports: `AIAssetEntityProvider`, `AIAssetCategory`, annotation constants, `validateAIAssetEntity()`, `normalizeAIAssetVersion()`
+- **AND** the package exports the delta sync framework: `DeltaSyncManager`, `InMemoryCursorStore`, `CursorStore`, `CursorState`, `ApplyDeltaOptions`, `DeltaSyncManagerOptions`
 
 #### Scenario: Annotation constants exported (RHIDP-15260)
 
