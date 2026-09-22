@@ -1,5 +1,17 @@
 # @red-hat-developer-hub/backstage-plugin-catalog-backend-module-ai-resource-extensions
 
+## 0.5.2
+
+### Patch Changes
+
+- 3a75d3c: Add AiResource catalog discovery integration tests and remove unused test devDependencies.
+
+## 0.5.1
+
+### Patch Changes
+
+- dbce029: Bump ai-integrations workspace to Backstage v1.54.0
+
 ## 0.5.0
 
 ### Minor Changes

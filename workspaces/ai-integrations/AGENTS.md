@@ -49,6 +49,37 @@ mismatch.
 
 - When a task is driven by local implementation specs, check `openspec/changes/` for proposal, design, tasks, and behavioral requirements
 - Prefer local workspace OpenSpec materials over external copies when both exist
+- When implementing a feature that changes behavior documented in `openspec/changes/`, update the affected documentation as part of the same commit:
+  - If the change adds or modifies behavior covered by a spec.md (behavioral requirements with scenarios), update the spec to include new requirements and scenarios that reflect the implemented behavior
+  - If the change affects the data flow or architecture described in a design.md, update the relevant section to match the new implementation
+  - If the change adds user-facing configuration (new annotations, config keys, API surface), update the affected plugin's README with usage documentation
+
+### OpenSpec specification review
+
+When reviewing PRs that add or modify files under `openspec/changes/`:
+
+- **Audit freshness**: If any `design.md`, `tasks.md`, or
+  `proposal.md` file (at the change root) or any `spec.md` file (under
+  `specs/` subdirectories) was modified in the PR, verify that the
+  change-root `audit.md` was also updated. Check that the "Last
+  audited" timestamp in `audit.md` is not earlier than the most recent
+  changes to specification files within the same change area. If the
+  audit predates spec changes, flag it as stale.
+- **Audit summary accuracy**: Verify that the CRITICAL / WARNING /
+  SUGGESTION counts in `audit.md` summary tables match the number of
+  detailed findings listed below them. Check per-category rows and,
+  if present, a total row.
+- **Cross-document references**: Check that references between documents
+  within the same change area are accurate:
+  - `proposal.md` references to future work or sibling changes should
+    reflect what is actually in the PR branch
+  - Design decision IDs (D1, D2, ...) referenced in `spec.md` scenarios
+    must exist in `design.md`
+  - Task items in `tasks.md` should align with the design decisions and
+    spec capabilities they reference
+- **Journal alignment**: If `journal.jsonl` exists, its audit entries
+  (findings counts) should be consistent with the current `audit.md`
+  content
 
 ## Backstage Backend Conventions
 
