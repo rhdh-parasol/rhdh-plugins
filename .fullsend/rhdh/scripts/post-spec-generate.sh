@@ -53,7 +53,7 @@ if [[ ! "${SCRIPTS_SHA}" =~ ^[0-9a-f]{64}$ ]]; then
 fi
 
 WORKSPACE_DIR="${GITHUB_WORKSPACE:-${RUN_DIR}}"
-BASE_POST_SCRIPT="${WORKSPACE_DIR}/.fullsend-cache/resources/sha256/${SCRIPTS_SHA}/scripts/post-code.sh"
+BASE_POST_SCRIPT="${WORKSPACE_DIR}/.fullsend/.fullsend-cache/resources/sha256/${SCRIPTS_SHA}/scripts/post-code.sh"
 if [[ ! -f "${BASE_POST_SCRIPT}" ]]; then
   echo "::error::Pinned stock post-code.sh not found at ${BASE_POST_SCRIPT}"
   exit 1
@@ -104,7 +104,16 @@ fi
 
 SPEC_PATH="$(git -C "${REPO_DIR}" diff --name-only \
   "origin/${TARGET_BRANCH}...HEAD" \
-  | awk -F/ '$1 == "openspec" && $2 == "changes" && NF >= 4 { print $1 "/" $2 "/" $3; exit }')"
+  | awk -F/ '{
+      for (i = 1; i + 3 <= NF; i++) {
+        if ($i == "openspec" && $(i + 1) == "changes") {
+          path = $1
+          for (j = 2; j <= i + 2; j++) path = path "/" $j
+          print path
+          exit
+        }
+      }
+    }')"
 if [[ -z "${SPEC_PATH}" ]]; then
   echo "::error::Could not identify the generated OpenSpec change path" >&2
   exit 1

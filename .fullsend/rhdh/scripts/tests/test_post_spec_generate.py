@@ -67,7 +67,7 @@ if os.environ.get('TEST_COMMENT_FAILURE'):
 
         base_script = (
             self.workspace
-            / ".fullsend-cache/resources/sha256"
+            / ".fullsend/.fullsend-cache/resources/sha256"
             / SCRIPTS_SHA
             / "scripts/post-code.sh"
         )
@@ -101,6 +101,16 @@ if os.environ.get('TEST_COMMENT_FAILURE'):
         spec.write_text("spec\n")
         self.git("add", "openspec")
         self.git("commit", "-m", "feat(openspec): add generated spec")
+
+    def commit_workspace_change(self):
+        spec = (
+            self.repo
+            / "workspaces/boost/openspec/changes/rhdhplan-1745-generated/proposal.md"
+        )
+        spec.parent.mkdir(parents=True)
+        spec.write_text("spec\n")
+        self.git("add", "workspaces/boost/openspec")
+        self.git("commit", "-m", "feat(openspec): add generated workspace spec")
 
     def run_script(self, **env):
         return subprocess.run(
@@ -178,6 +188,19 @@ if os.environ.get('TEST_COMMENT_FAILURE'):
         self.assertIn("openspec/changes/rhdhplan-1745-generated", calls[0]["body"])
         self.assertIn("https://issues.example.test/browse/RHDHPLAN-1745", calls[0]["body"])
         self.assertIn("`/fs-code`", calls[0]["body"])
+
+    def test_comments_with_workspace_nested_openspec_path(self):
+        self.commit_workspace_change()
+
+        completed = self.run_script(
+            TEST_PR_URL="https://github.com/example/repo/pull/42"
+        )
+
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        self.assertIn(
+            "workspaces/boost/openspec/changes/rhdhplan-1745-generated",
+            self.published()[0]["body"],
+        )
 
     def test_does_not_comment_when_publisher_returns_no_pr(self):
         self.commit_change()
