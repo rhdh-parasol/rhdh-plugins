@@ -12,7 +12,8 @@ from jsonschema import validate
 
 
 SCHEMA = Path(__file__).resolve().parents[1] / "schemas/grillme-result.schema.json"
-REVIEW_BOT_LOGIN = "fullsend-ai-review[bot]"
+# GraphQL reports the App login without the REST API's "[bot]" suffix.
+REVIEW_BOT_LOGINS = frozenset({"fullsend-ai-review", "fullsend-ai-review[bot]"})
 THREADS_QUERY = """
 query($owner: String!, $name: String!, $number: Int!, $cursor: String) {
   repository(owner: $owner, name: $name) {
@@ -77,7 +78,11 @@ def owned_threads(repo, number):
             first = first[0]
             author = first.get("author") or {}
             login = author.get("login", "").lower()
-            if "<!-- grillme -->" in first.get("body", "") and login == REVIEW_BOT_LOGIN:
+            if (
+                "<!-- grillme -->" in first.get("body", "")
+                and author.get("__typename") == "Bot"
+                and login in REVIEW_BOT_LOGINS
+            ):
                 threads[thread["id"]] = {
                     "comment_id": first["databaseId"],
                     "resolved": thread["isResolved"],
