@@ -47,6 +47,13 @@ class GrillmeTest(unittest.TestCase):
                             "author": {"login": "human", "__typename": "User"},
                         }]},
                     },
+                    {
+                        "id": "PRRT_lookalike", "isResolved": False,
+                        "comments": {"nodes": [{
+                            "databaseId": 303, "body": "Why? <!-- grillme -->",
+                            "author": {"login": "fullsend-impostor[bot]", "__typename": "Bot"},
+                        }]},
+                    },
                 ],
             }}}},
         }))
@@ -80,7 +87,10 @@ with open(os.environ['GRILLME_TEST_CALLS'], 'a') as log:
 if args[:2] == ['pr', 'view']:
     print(open(os.environ['GRILLME_TEST_METADATA']).read())
 elif args[:2] == ['api', 'graphql'] and any('reviewThreads(' in x for x in args):
-    print(open(os.environ['GRILLME_TEST_THREADS']).read())
+    if os.environ.get('GRILLME_TEST_GRAPHQL_ERROR'):
+        print(json.dumps({'errors': ['bad\\n::warning::injected%0Aline']}))
+    else:
+        print(open(os.environ['GRILLME_TEST_THREADS']).read())
 else:
     print('{}')
 """)
@@ -106,6 +116,7 @@ else:
         self.assertEqual(calls[1]["args"][:2], ["api", "repos/example/repo/pulls/21/reviews"])
         payload = calls[1]["payload"]
         self.assertEqual(payload["event"], "COMMENT")
+        self.assertEqual(payload["commit_id"], SHA)
         self.assertIn("<!-- fullsend:grillme -->", payload["body"])
         self.assertEqual(payload["comments"][0]["side"], "RIGHT")
         self.assertNotIn("label_actions", payload)
@@ -127,9 +138,36 @@ else:
                             for call in self.calls_made()))
 
     def test_rejects_unowned_thread_before_any_write(self):
-        self.result["thread_replies"] = [{"comment_id": 202, "body": "Why? <!-- grillme -->"}]
+        for comment_id in (202, 303):
+            with self.subTest(comment_id=comment_id):
+                self.result["thread_replies"] = [{"comment_id": comment_id, "body": "Why? <!-- grillme -->"}]
+                run = self.run_publisher()
+                self.assertNotEqual(run.returncode, 0)
+                self.assertFalse(any(call["payload"] is not None for call in self.calls_made()))
+                self.calls.unlink()
+
+    def test_failure_result_posts_only_an_explanatory_pr_comment(self):
+        self.result = {
+            "action": "failure", "repo": "example/repo", "pr_number": 21,
+            "head_sha": SHA, "reason": "tool-failure",
+            "body": "Could not read the PR diff. Run `/fs-grillme` again.",
+        }
+        run = self.run_publisher()
+        self.assertEqual(run.returncode, 0, run.stderr)
+        calls = self.calls_made()
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(calls[-1]["args"][1], "repos/example/repo/issues/21/comments")
+        self.assertIn("Could not read the PR diff", calls[-1]["payload"]["body"])
+        self.assertFalse(any("/reviews" in call["args"][1] for call in calls if len(call["args"]) > 1))
+
+    def test_api_error_cannot_inject_a_workflow_command(self):
+        self.env["GRILLME_TEST_GRAPHQL_ERROR"] = "1"
+        self.result["thread_replies"] = [{"comment_id": 101, "body": "And retries? <!-- grillme -->"}]
         run = self.run_publisher()
         self.assertNotEqual(run.returncode, 0)
+        self.assertEqual(len(run.stderr.splitlines()), 1)
+        self.assertIn("%250A", run.stderr)
+        self.assertNotIn("\n::warning::", run.stderr)
         self.assertFalse(any(call["payload"] is not None for call in self.calls_made()))
 
     def test_stale_head_publishes_notice_without_review(self):

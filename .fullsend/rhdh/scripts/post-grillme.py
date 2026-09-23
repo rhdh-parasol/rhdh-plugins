@@ -12,6 +12,7 @@ from jsonschema import validate
 
 
 SCHEMA = Path(__file__).resolve().parents[1] / "schemas/grillme-result.schema.json"
+REVIEW_BOT_LOGIN = "fullsend-ai-review[bot]"
 THREADS_QUERY = """
 query($owner: String!, $name: String!, $number: Int!, $cursor: String) {
   repository(owner: $owner, name: $name) {
@@ -76,10 +77,7 @@ def owned_threads(repo, number):
             first = first[0]
             author = first.get("author") or {}
             login = author.get("login", "").lower()
-            if (
-                "<!-- grillme -->" in first.get("body", "")
-                and (login.startswith("fullsend") and login.endswith("[bot]"))
-            ):
+            if "<!-- grillme -->" in first.get("body", "") and login == REVIEW_BOT_LOGIN:
                 threads[thread["id"]] = {
                     "comment_id": first["databaseId"],
                     "resolved": thread["isResolved"],
@@ -152,7 +150,7 @@ def publish():
     ]
     gh(
         "api", f"repos/{repo}/pulls/{number}/reviews", "--method", "POST",
-        payload={"event": "COMMENT", "body": body, "comments": comments},
+        payload={"event": "COMMENT", "commit_id": result["head_sha"], "body": body, "comments": comments},
     )
     for reply in replies:
         gh(
@@ -175,5 +173,8 @@ if __name__ == "__main__":
     try:
         publish()
     except (KeyError, OSError, ValueError, subprocess.CalledProcessError) as exc:
-        print(f"::error::Could not publish grillme turn: {exc}", file=sys.stderr)
+        # Keep untrusted API error text on one GHA workflow-command line.
+        detail = str(exc).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+        detail = "".join(char if char.isprintable() else " " for char in detail)
+        print(f"::error::Could not publish grillme turn: {detail}", file=sys.stderr)
         sys.exit(1)

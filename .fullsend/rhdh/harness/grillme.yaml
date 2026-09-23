@@ -13,6 +13,7 @@ validation_loop:
   max_iterations: 2
 
 skills:
+  # This repo-owned skill is versioned with the harness on the default branch.
   - rhdh/skills/grilling
 
 allowed_remote_resources:
