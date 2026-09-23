@@ -27,6 +27,9 @@ agents:
     - name: spec-audit
       source: rhdh/harness/spec-audit.yaml
       model: claude-opus-4-6
+    - name: grillme
+      source: rhdh/harness/grillme.yaml
+      model: claude-opus-4-6
     - name: dependabot-risk-rater
       source: rhdh/harness/dependabot-risk-rater.yaml
       model: claude-opus-4-6
