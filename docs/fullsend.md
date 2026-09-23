@@ -8,24 +8,25 @@
 
 ### Enabled agents
 
-| Agent | Trigger | How to use |
-|-------|---------|------------|
-| Triage | `/fs-triage` slash command | Post on any issue |
-| Coder | `/fs-code` slash command, or `ready-to-code` label | Post on a triaged issue |
-| Review | Auto-triggers on PR open/update | Automatic for `workspaces/scorecard/` PRs |
-| Fix | `/fs-fix` slash command, or `changes_requested` review | Post on a PR, or request changes on a fullsend PR |
-| Package impact / CVE bump | Monday cron or **Actions → Fullsend CVE schedule** | Run the workflow (opens `chore/<workspace>-cve-bumps` PRs) |
+| Agent                     | Trigger                                                | How to use                                                               |
+| ------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Triage                    | `/fs-triage` slash command                             | Post on any issue                                                        |
+| Coder                     | `/fs-code` slash command, or `ready-to-code` label     | Post on a triaged issue                                                  |
+| Review                    | Auto-triggers on PR open/update                        | Automatic for `workspaces/scorecard/` PRs                                |
+| Grillme                   | `/fs-grillme` slash command                            | Post on a PR to ask design questions; engineers answer and update the PR |
+| Fix                       | `/fs-fix` slash command, or `changes_requested` review | Post on a PR, or request changes on a fullsend PR                        |
+| Package impact / CVE bump | Monday cron or **Actions → Fullsend CVE schedule**     | Run the workflow (opens `chore/<workspace>-cve-bumps` PRs)               |
 
 ### Auto-trigger vs. manual trigger
 
 Fullsend is designed to chain agents automatically (issue → triage → code → review → fix). In practice, most of that chain requires manual triggering. Here's what actually happens:
 
-| Agent | Designed auto-trigger | What actually happens | How to trigger manually |
-|-------|----------------------|----------------------|------------------------|
-| Triage | `issues/opened` | **Does not auto-trigger.** The upstream dispatcher only handles `issues/labeled`, not `issues/opened`. | `/fs-triage` on an issue |
-| Coder | `ready-to-code` label | **Does not auto-trigger from triage.** Triage labels issues `triaged`, not `ready-to-code`. | `/fs-code` on a triaged issue, or manually add `ready-to-code` label |
-| Review | `pull_request_target/opened\|synchronize` | **Auto-triggers on `workspaces/scorecard/` PRs.** This is the only agent that reliably auto-triggers. Scoped via `paths` filter. | `/fs-review` on any PR (auth-gated) |
-| Fix | `pull_request_review/submitted` with `changes_requested` | **Partially auto-triggers.** Only fires from bot reviews (e.g., fullsend-review requesting changes), not from human reviews. Effectively scoped to scorecard PRs because only scorecard PRs get auto-reviewed. | `/fs-fix` on a PR, `/fs-fix-stop` to disable |
+| Agent  | Designed auto-trigger                                    | What actually happens                                                                                                                                                                                          | How to trigger manually                                              |
+| ------ | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Triage | `issues/opened`                                          | **Does not auto-trigger.** The upstream dispatcher only handles `issues/labeled`, not `issues/opened`.                                                                                                         | `/fs-triage` on an issue                                             |
+| Coder  | `ready-to-code` label                                    | **Does not auto-trigger from triage.** Triage labels issues `triaged`, not `ready-to-code`.                                                                                                                    | `/fs-code` on a triaged issue, or manually add `ready-to-code` label |
+| Review | `pull_request_target/opened\|synchronize`                | **Auto-triggers on `workspaces/scorecard/` PRs.** This is the only agent that reliably auto-triggers. Scoped via `paths` filter.                                                                               | `/fs-review` on any PR (auth-gated)                                  |
+| Fix    | `pull_request_review/submitted` with `changes_requested` | **Partially auto-triggers.** Only fires from bot reviews (e.g., fullsend-review requesting changes), not from human reviews. Effectively scoped to scorecard PRs because only scorecard PRs get auto-reviewed. | `/fs-fix` on a PR, `/fs-fix-stop` to disable                         |
 
 The "autonomous pipeline" does not chain automatically. In practice: review auto-triggers on augment PRs, everything else is slash-command-driven.
 
@@ -39,9 +40,9 @@ The `paths` filter (`workspaces/scorecard/**`) only applies to the `pull_request
 
 ### What does NOT run
 
-| Agent | Why |
-|-------|-----|
-| Retro | Out of scope for initial pilot |
+| Agent      | Why                            |
+| ---------- | ------------------------------ |
+| Retro      | Out of scope for initial pilot |
 | Prioritize | Out of scope for initial pilot |
 
 ## Slash commands
@@ -50,14 +51,15 @@ Slash commands are **restricted to org members and collaborators** via an `autho
 
 Available commands:
 
-| Command | What it does |
-|---------|-------------|
-| `/fs-triage` | Run triage on an issue |
-| `/fs-code` | Generate code for a triaged issue |
-| `/fs-review` | Run review on a PR |
-| `/fs-fix` | Fix issues flagged in a review |
-| `/fs-fix-stop` | Disable fix agent for a PR (adds `fullsend-no-fix` label) |
-| `/fullsend-risk-rating` | Rate dependency-update risk on a PR (custom agent) |
+| Command                 | What it does                                                            |
+| ----------------------- | ----------------------------------------------------------------------- |
+| `/fs-triage`            | Run triage on an issue                                                  |
+| `/fs-code`              | Generate code for a triaged issue                                       |
+| `/fs-review`            | Run review on a PR                                                      |
+| `/fs-grillme`           | Ask design questions as inline PR comments; reply and rerun to continue |
+| `/fs-fix`               | Fix issues flagged in a review                                          |
+| `/fs-fix-stop`          | Disable fix agent for a PR (adds `fullsend-no-fix` label)               |
+| `/fullsend-risk-rating` | Rate dependency-update risk on a PR (custom agent)                      |
 
 **Scheduled / Actions fan-out** (`.github/workflows/fullsend-cve-schedule.yml`)
 follows the CVE schedule plan: a deterministic **plan** job, then one Fullsend
@@ -123,8 +125,8 @@ on:
   pull_request_target:
     types: [opened, synchronize, ready_for_review, closed]
     paths:
-      - "workspaces/scorecard/**"
-      - "workspaces/your-new-workspace/**"  # add here
+      - 'workspaces/scorecard/**'
+      - 'workspaces/your-new-workspace/**' # add here
 ```
 
 To enable review for ALL workspaces, remove the `paths` filter entirely.
@@ -151,13 +153,13 @@ Fullsend uses GCP Workload Identity Federation (WIF) to authenticate GitHub Acti
 
 ## Configuration files
 
-| Path | Purpose |
-|------|---------|
-| `.fullsend/config.yaml` | Declares enabled roles (triage, coder, review, fix) |
-| `.fullsend/customized/` | Scaffold for future agent customization (agents, harness, policies, schemas, env, scripts, skills) |
-| `.github/workflows/fullsend.yaml` | Event shim — routes GitHub events to fullsend's reusable workflows, with auth gate on slash commands |
-| `.github/workflows/fullsend-cve-schedule.yml` | Monday cron + `workflow_dispatch` plan/matrix/summary for package-impact |
-| `.fullsend/rhdh/cve-schedule.yaml` | Allowlist, skip list, and `max_parallel` for the CVE schedule |
+| Path                                          | Purpose                                                                                              |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `.fullsend/config.yaml`                       | Declares enabled roles (triage, coder, review, fix)                                                  |
+| `.fullsend/customized/`                       | Scaffold for future agent customization (agents, harness, policies, schemas, env, scripts, skills)   |
+| `.github/workflows/fullsend.yaml`             | Event shim — routes GitHub events to fullsend's reusable workflows, with auth gate on slash commands |
+| `.github/workflows/fullsend-cve-schedule.yml` | Monday cron + `workflow_dispatch` plan/matrix/summary for package-impact                             |
+| `.fullsend/rhdh/cve-schedule.yaml`            | Allowlist, skip list, and `max_parallel` for the CVE schedule                                        |
 
 ## Debugging
 
@@ -187,13 +189,13 @@ Available in the workflow run logs under the sandbox creation step. Look for `fu
 
 ### Common issues
 
-| Symptom | Likely cause |
-|---------|-------------|
-| Slash command ignored | Commenter is not OWNER/MEMBER/COLLABORATOR |
-| Review doesn't trigger | PR doesn't touch files in `workspaces/scorecard/` |
-| 403 from mint | Repo not in mint's `ALLOWED_ORGS` — contact fullsend team |
-| `aiplatform.endpoints.predict` denied | WIF IAM binding missing on GCP project |
-| Agent produces no output | Check transcript artifact for agent errors |
+| Symptom                               | Likely cause                                              |
+| ------------------------------------- | --------------------------------------------------------- |
+| Slash command ignored                 | Commenter is not OWNER/MEMBER/COLLABORATOR                |
+| Review doesn't trigger                | PR doesn't touch files in `workspaces/scorecard/`         |
+| 403 from mint                         | Repo not in mint's `ALLOWED_ORGS` — contact fullsend team |
+| `aiplatform.endpoints.predict` denied | WIF IAM binding missing on GCP project                    |
+| Agent produces no output              | Check transcript artifact for agent errors                |
 
 ## Reference
 
