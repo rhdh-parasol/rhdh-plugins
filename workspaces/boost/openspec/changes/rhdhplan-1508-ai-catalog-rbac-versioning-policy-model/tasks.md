@@ -1,4 +1,4 @@
-<!-- After each completed task, commit the changes. -->
+# Tasks: AI Catalog RBAC & Versioning Policy Model
 
 ## 1. Permission Registration & Backend Enforcement (RHDHPLAN-1652)
 

@@ -84,6 +84,13 @@ baseline. The model uses built-in `catalog.entity.read`, RHDH conditional
 policies, API-level field redaction where required, and the existing RBAC audit
 and administration surfaces. This is not part of the RHDH 2.1 release.
 
+The `rhdhplan-1508-ai-catalog-rbac-versioning-policy-model` change
+(RHDHPLAN-1508) records the full-feature RBAC and versioning policy model —
+graduated visibility, project-specific permissions, policy cascade, conditional
+rules, RBAC admin UI, SkillBundle filtering, and audit integration. It
+supersedes `ai-catalog-asset-governance`; reconciliation between the two
+approaches should happen during implementation planning.
+
 ## Status of the remaining OpenSpecs
 
 The child specs under these changes are planning material. They do not expand
@@ -109,10 +116,13 @@ listed below.
 | `mcp-registry-connector`             | Follow-on MCP Registry productization; not current-release behavior.                                                              |
 | `rhoai-connector`                    | Follow-on RHOAI MCP connector; not current-release behavior.                                                                      |
 | `upstream-schema-alignment`          | Follow-on upstream-kind alignment and migration-readiness work; not current-release behavior.                                     |
+| `rhdhplan-1508-ai-catalog-rbac-versioning-policy-model` | Full-feature RBAC and versioning policy model (RHDHPLAN-1508); supersedes `ai-catalog-asset-governance`. Not current-release behavior. |
 
-RBAC governance is tracked separately in `ai-catalog-asset-governance` as
-follow-on design work. Its examples build on the current Catalog/OGX model but
-do not add RBAC behavior to this release.
+RBAC governance is tracked separately in
+`rhdhplan-1508-ai-catalog-rbac-versioning-policy-model` (supersedes
+`ai-catalog-asset-governance`). It records the full RHDHPLAN-1508 feature
+requirements built on the current Catalog/OGX baseline but does not add
+RBAC behavior to this release.
 
 ## Cleanup progress
 

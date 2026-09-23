@@ -1,7 +1,8 @@
 # AI Catalog RBAC Admin UI
 
-> Dedicated RBAC admin section for the SMP Admin persona.
-> Sub-issue: RHDHPLAN-1655
+> **Status: Draft** — Dedicated RBAC admin section for the SMP Admin persona.
+
+**Jira:** RHDHPLAN-1655
 
 The RHDH RBAC admin UI MUST provide a dedicated section for AI Catalog policy
 management, accessible to users with `ai-catalog.admin`. This section enables

@@ -1,7 +1,9 @@
 # RBAC Audit Integration
 
-> Audit log emission for RBAC policy changes and ingestion sync events.
-> Sub-issue: RHDHPLAN-1657
+> **Status: Draft** — Audit log emission for RBAC policy changes and ingestion
+> sync events.
+
+**Jira:** RHDHPLAN-1657
 
 Two new categories of AI-Catalog-relevant events MUST be emitted to the
 existing RHDH Audit Log via `AuditorService`: RBAC policy changes affecting AI
@@ -44,6 +46,20 @@ Changing the `defaultPolicy` setting MUST produce an Audit Log entry.
   (or vice versa)
 - **THEN** an Audit Log entry is created recording the actor, timestamp, and
   the before/after values
+
+#### Scenario: Per-category default posture changed
+
+- **WHEN** an SMP Admin changes the default posture for a specific asset
+  category (e.g. `ai-skill` changed from `allow` to `deny`)
+- **THEN** an Audit Log entry is created recording the actor, timestamp, the
+  category affected, and the before/after values
+
+#### Scenario: Per-connector default posture changed
+
+- **WHEN** an SMP Admin changes the default posture for a specific connector
+  source (e.g. `ogx` changed from `deny` to `allow`)
+- **THEN** an Audit Log entry is created recording the actor, timestamp, the
+  connector source affected, and the before/after values
 
 ### Requirement: Ingestion sync event audit entries
 

@@ -1,7 +1,9 @@
 # Graduated Visibility Enforcement
 
-> Backend enforcement of the two-tier AI Catalog permission model.
-> Sub-issue: RHDHPLAN-1652
+> **Status: Draft** — Backend enforcement of the two-tier AI Catalog permission
+> model.
+
+**Jira:** RHDHPLAN-1652
 
 The backend MUST enforce graduated visibility using the existing
 `ai-catalog.asset.access` and `ai-catalog.asset.access.usage-docs` permissions

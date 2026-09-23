@@ -1,7 +1,9 @@
 # SkillBundle RBAC Filtering
 
-> Read-time permission-based filtering of bundle skill lists.
-> Sub-issue: RHDHPLAN-1656
+> **Status: Draft** — Read-time permission-based filtering of bundle skill
+> lists.
+
+**Jira:** RHDHPLAN-1656
 
 SkillBundle detail views MUST filter their contained skill lists at read time
 based on the current viewer's permissions. A user who lacks

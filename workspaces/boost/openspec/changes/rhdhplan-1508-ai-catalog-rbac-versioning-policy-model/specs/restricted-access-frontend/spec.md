@@ -1,7 +1,8 @@
 # Restricted-Access Frontend
 
-> Frontend components for graduated visibility placeholders.
-> Sub-issue: RHDHPLAN-1653
+> **Status: Draft** — Frontend components for graduated visibility placeholders.
+
+**Jira:** RHDHPLAN-1653
 
 The frontend MUST render a restricted-access placeholder when the authenticated
 user lacks `ai-catalog.asset.access.usage-docs` for a given asset, so that

@@ -1,8 +1,9 @@
 # Policy Cascade and Conditions
 
-> Asset-version policy cascade, conditional rules, default-policy configuration,
-> and multi-tenant filtering.
-> Sub-issue: RHDHPLAN-1654
+> **Status: Draft** — Asset-version policy cascade, conditional rules,
+> default-policy configuration, and multi-tenant filtering.
+
+**Jira:** RHDHPLAN-1654
 
 This capability covers the policy evaluation logic that governs how AI Catalog
 permissions are resolved across asset versions, conditional scopes, and tenant
@@ -32,6 +33,15 @@ version-specific override.
 - **THEN** the version-specific policy takes precedence for that version
 - **AND** other versions of the same asset continue to use the asset-level
   policy
+
+#### Scenario: Version-specific override with no asset-level policy
+
+- **WHEN** an admin creates a version-specific policy for a particular version
+  (matched by asset identifier plus `rhdh.io/ai-asset-version`)
+- **AND** no asset-level policy exists for the parent asset
+- **THEN** the version-specific policy governs only that version
+- **AND** sibling versions of the same asset fall back to the global
+  `defaultPolicy` setting
 
 ### Requirement: Category-scoped conditional policies
 
