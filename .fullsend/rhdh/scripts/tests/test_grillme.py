@@ -37,7 +37,8 @@ class GrillmeTest(unittest.TestCase):
                         "id": "PRRT_ours", "isResolved": False,
                         "comments": {"nodes": [{
                             "databaseId": 101, "body": "Why? <!-- grillme -->",
-                            "author": {"login": "fullsend-ai-review[bot]", "__typename": "Bot"},
+                            # GitHub GraphQL omits the REST API's [bot] suffix.
+                            "author": {"login": "fullsend-ai-review", "__typename": "Bot"},
                         }]},
                     },
                     {
