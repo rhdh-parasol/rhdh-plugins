@@ -91,19 +91,21 @@ for z-stream plugin CVEs (RHIDP-17207 / epic RHIDP-17206):
 1. **Poll** — Jira filter `21773` + `status = New` via REST (`JIRA_PROD_BASE_URL`,
    `JIRA_TOKEN`, `JIRA_USER_EMAIL`). Manual runs may pass a `jql`
    `workflow_dispatch` input to override (e.g. `key = RHIDP-17217`).
-2. **Group** — map `[rhdh/…]` container names from ticket summaries through
-   `workspace-mapping.json` (pinned with the `rhdh-cve-medic` skill).
-3. **Dispatch** — one `cve-medic` harness cell per mapped workspace. Each cell
-   uses a numeric GitHub **tracking issue** (`cve-medic-report` label) as
-   `status_number` / `issue.number`. Do **not** pass the literal `BATCH` —
-   fullsend CLI requires an integer (`--status-number`).
+2. **Group** — map `rhdh/…` container names from ticket summaries through
+   `workspace-mapping.json` (pinned with the `rhdh-cve-medic` skill). Require
+   a trailing `[rhdh-X.Y]` stream tag on the summary.
+3. **Dispatch** — one `cve-medic` harness cell per mapped workspace+stream.
+   Each cell uses a numeric GitHub **tracking issue** (`cve-medic-report` label)
+   as `status_number` / `issue.number`. Do **not** pass the literal `BATCH` —
+   fullsend CLI requires an integer (`--status-number`). Pre-script checks out
+   `chore/<workspace>-X.Y-cve-bumps` from `release-X.Y/<workspace>`.
 4. **Pre-script** (`pre-cve-bump.sh`) — resolves `CVE_WORKSPACE` from
-   `transition.comment.instruction`, checks out
-   `chore/<workspace>-cve-bumps` from the base branch.
+   `transition.comment.instruction`, `CVE_STREAM` / `CVE_BASE_BRANCH` from
+   `transition.comment.stream` (`[rhdh-X.Y]`).
 5. **Agent** — `scan-candidates.py --workspace $CVE_WORKSPACE`, bump, verify,
    write `cve-result.json` (`action`: `bump` | `partial` | `skip` | `error`).
-6. **Post-script** (`post-cve-bump.sh`) — push branch, open/update PR, comment
-   on the tracking issue.
+6. **Post-script** (`post-cve-bump.sh`) — push branch, open/update PR against
+   `CVE_BASE_BRANCH`, comment on the tracking issue.
 
 **Env the agent/scripts expect (fullsend CI):** `JIRA_TOKEN`, `JIRA_USER_EMAIL`,
 `JIRA_BASE_URL` / prod base URL, `GITHUB_REPOSITORY` / `REPO_FULL_NAME`,
