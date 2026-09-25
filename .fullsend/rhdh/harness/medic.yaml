@@ -29,6 +29,15 @@ host_files:
     dest: /sandbox/workspace/.env.d/yarn-proxy.env
   - src: rhdh/env/node-proxy.env
     dest: /sandbox/workspace/.env.d/node-proxy.env
+  - src: /tmp/workspace/package-impact-context.json
+    dest: /sandbox/workspace/package-impact-context.json
+    optional: true
+  - src: /tmp/workspace/dependabot-alerts.json
+    dest: /sandbox/workspace/dependabot-alerts.json
+    optional: true
+  - src: /tmp/workspace/cve-medic.env
+    dest: /sandbox/workspace/.env.d/cve-medic.env
+    optional: true
 
 pre_script: rhdh/scripts/pre-cve-bump.sh
 post_script: rhdh/scripts/post-cve-bump.sh
