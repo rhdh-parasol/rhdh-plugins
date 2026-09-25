@@ -89,7 +89,8 @@ minted **coder** token on the post-script.
 for z-stream plugin CVEs (RHIDP-17207 / epic RHIDP-17206):
 
 1. **Poll** — Jira filter `21773` + `status = New` via REST (`JIRA_PROD_BASE_URL`,
-   `JIRA_TOKEN`, `JIRA_USER_EMAIL`).
+   `JIRA_TOKEN`, `JIRA_USER_EMAIL`). Manual runs may pass a `jql`
+   `workflow_dispatch` input to override (e.g. `key = RHIDP-17217`).
 2. **Group** — map `[rhdh/…]` container names from ticket summaries through
    `workspace-mapping.json` (pinned with the `rhdh-cve-medic` skill).
 3. **Dispatch** — one `cve-medic` harness cell per mapped workspace. Each cell
@@ -185,7 +186,7 @@ Fullsend uses GCP Workload Identity Federation (WIF) to authenticate GitHub Acti
 | `.fullsend/customized/`                       | Scaffold for future agent customization (agents, harness, policies, schemas, env, scripts, skills)   |
 | `.github/workflows/fullsend.yaml`             | Event shim — routes GitHub events to fullsend's reusable workflows, with auth gate on slash commands |
 | `.github/workflows/fullsend-cve-schedule.yml` | Monday cron + `workflow_dispatch` plan/matrix/summary for package-impact                             |
-| `.github/workflows/fullsend-cve-medic.yml`    | 12h cron + `workflow_dispatch` Jira filter BATCH → per-workspace `cve-medic`                         |
+| `.github/workflows/fullsend-cve-medic.yml`    | 12h cron + `workflow_dispatch` (optional `jql`) → per-workspace `cve-medic`                          |
 | `.fullsend/rhdh/cve-schedule.yaml`            | Allowlist, skip list, and `max_parallel` for the CVE schedule                                        |
 | `.fullsend/rhdh/harness/medic.yaml`           | `cve-medic` harness (skills, pre/post scripts, sandbox env)                                          |
 
