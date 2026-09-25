@@ -98,10 +98,12 @@ for z-stream plugin CVEs (RHIDP-17207 / epic RHIDP-17206):
    Each cell uses a numeric GitHub **tracking issue** (`cve-medic-report` label)
    as `status_number` / `issue.number`. Do **not** pass the literal `BATCH` —
    fullsend CLI requires an integer (`--status-number`). Pre-script checks out
-   `chore/<workspace>-X.Y-cve-bumps` from `release-X.Y/<workspace>`.
+   `chore/<workspace>-X.Y-cve-bumps` from `release-X.Y/<workspace>` (or a
+   unique `…-<cve|jira-key>-cve-bumps` head when that branch already exists).
 4. **Pre-script** (`pre-cve-bump.sh`) — resolves `CVE_WORKSPACE` from
    `transition.comment.instruction`, `CVE_STREAM` / `CVE_BASE_BRANCH` from
-   `transition.comment.stream` (`[rhdh-X.Y]`).
+   `transition.comment.stream` (`[rhdh-X.Y]`). If the default head already
+   exists on the remote, appends `cve_id` / `jira_key` from the poll payload.
 5. **Agent** — `scan-candidates.py --workspace $CVE_WORKSPACE`, bump, verify,
    write `cve-result.json` (`action`: `bump` | `partial` | `skip` | `error`).
 6. **Post-script** (`post-cve-bump.sh`) — push branch, open/update PR against
