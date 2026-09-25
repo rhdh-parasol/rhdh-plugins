@@ -8,7 +8,7 @@ slug: rhdh-plugins-cve-medic
 
 skills:
   - https://github.com/redhat-developer/rhdh-skill/tree/e84109919ae6085e3dcfe568c695e6dda54874ce/skills/rhdh-coding#sha256=5a4bc35476108a215091ccf1180cee68547c7668c6b193de4402674bc7b6cded
-  - https://github.com/JessicaJHee/rhdh-security-skills/tree/cf2de609af3c34d0894f2348ae529765afe18ff7/skills/cve/rhdh-cve-medic#sha256=071aac39c138bff079a8263e7f9f359d524baede15ce50116d6e7582158661f4
+  - https://github.com/JessicaJHee/rhdh-security-skills/tree/d05dd9e64b7280ffa822eb557ff89a14611c7136/skills/cve/rhdh-cve-medic#sha256=691b323ad47a56b463789c3917694423cb62681fb5344c0573e34cd77e00656c
   - https://github.com/kim-tsao/rhdh-security-skills/tree/6f28f949a73667cfc87d3eaf7f1c4edc961b3361/skills/cve/plugins-package-impact#sha256=a3bd41109800eaa78e52bc2fb0478f3079b871d0610b3c9e4d8d801ca2a14d32
 
 allowed_remote_resources:
@@ -35,8 +35,12 @@ post_script: rhdh/scripts/post-cve-bump.sh
 
 timeout_minutes: 60
 
+# Same secret names as fullsend-poll-jira / fullsend-cve-medic workflows and
+# fullsend's Jira tracker (JIRA_TOKEN + JIRA_USER_EMAIL). JIRA_BASE_URL comes
+# from the reusable-dispatch jira_base_url input.
 secrets:
-  - JIRA_API_TOKEN
+  - JIRA_TOKEN
+  - JIRA_USER_EMAIL
   - RHDH_CVE_SLACK_WEBHOOK
 
 overlays:
@@ -61,3 +65,8 @@ overlays:
         CLOUD_ML_REGION: "${CLOUD_ML_REGION}"
         GOOGLE_APPLICATION_CREDENTIALS: /tmp/.gcp-credentials.json
         GOOGLE_CLOUD_PROJECT: "${GOOGLE_CLOUD_PROJECT}"
+        # Fullsend CI Jira auth (same as poll workflows / cve-bump-adjacent runners)
+        JIRA_TOKEN: "${JIRA_TOKEN}"
+        JIRA_USER_EMAIL: "${JIRA_USER_EMAIL}"
+        JIRA_BASE_URL: "${JIRA_BASE_URL}"
+        RHDH_CVE_SLACK_WEBHOOK: "${RHDH_CVE_SLACK_WEBHOOK}"
