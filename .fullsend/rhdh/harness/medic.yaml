@@ -35,13 +35,10 @@ post_script: rhdh/scripts/post-cve-bump.sh
 
 timeout_minutes: 60
 
-# Same secret names as fullsend-poll-jira / fullsend-cve-medic workflows and
-# fullsend's Jira tracker (JIRA_TOKEN + JIRA_USER_EMAIL). JIRA_BASE_URL comes
-# from the reusable-dispatch jira_base_url input.
-secrets:
-  - JIRA_TOKEN
-  - JIRA_USER_EMAIL
-  - RHDH_CVE_SLACK_WEBHOOK
+# Jira auth only — same secrets reusable-dispatch forwards for poll-jira.
+# Do not put custom secrets (e.g. RHDH_CVE_SLACK_WEBHOOK) here; the skill
+# skips Slack notify when the webhook is unset (same pattern as DEPENDABOT_TOKEN
+# staying in the schedule plan job, not in cve-bump).
 
 overlays:
   - when: 'runtime.forge == "github"'
@@ -65,8 +62,6 @@ overlays:
         CLOUD_ML_REGION: "${CLOUD_ML_REGION}"
         GOOGLE_APPLICATION_CREDENTIALS: /tmp/.gcp-credentials.json
         GOOGLE_CLOUD_PROJECT: "${GOOGLE_CLOUD_PROJECT}"
-        # Fullsend CI Jira auth (same as poll workflows / cve-bump-adjacent runners)
         JIRA_TOKEN: "${JIRA_TOKEN}"
         JIRA_USER_EMAIL: "${JIRA_USER_EMAIL}"
         JIRA_BASE_URL: "${JIRA_BASE_URL}"
-        RHDH_CVE_SLACK_WEBHOOK: "${RHDH_CVE_SLACK_WEBHOOK}"
