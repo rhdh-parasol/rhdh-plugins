@@ -29,6 +29,12 @@ run `yarn install` followed by `yarn dedupe` in the workspace directory.
 This produces a clean lockfile that incorporates both the base branch
 dependencies and your changes.
 
+When writing or modifying bash commands in agent definition files
+(`.fullsend/rhdh/agents/*.md`), ensure every command that can fail has
+explicit error handling (e.g., `cmd || { echo "cmd failed"; exit 1; }`).
+Agent definition bash snippets are instruction templates — other agents
+will follow them literally, so missing error handlers propagate silently.
+
 When creating a changeset, select the bump level based on the change
 type:
 
