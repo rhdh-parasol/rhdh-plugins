@@ -6,7 +6,7 @@ description: >-
   by the Fullsend CVE schedule workflow only. Does not bump lockfiles or
   dismiss alerts.
 tools: Bash(jq,node,yarn,mkdir,find,cat,ls), Skill
-model: opus
+model: claude-opus-4-6
 skills:
   - plugins-package-impact
 ---
