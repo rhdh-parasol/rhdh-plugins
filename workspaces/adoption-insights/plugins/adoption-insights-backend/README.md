@@ -16,9 +16,7 @@ Then add the plugin to your backend in `packages/backend/src/index.ts`:
 ```ts
 const backend = createBackend();
 // ...
-backend.add(
-  import('@rhdh-parasol/backstage-plugin-adoption-insights-backend'),
-);
+backend.add(import('@rhdh-parasol/backstage-plugin-adoption-insights-backend'));
 ```
 
 ## Configuration
