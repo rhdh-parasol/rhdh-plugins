@@ -1,5 +1,17 @@
 # Design: AI Catalog Asset Governance
 
+## Superseded
+
+This change is superseded by
+`rhdhplan-1508-ai-catalog-rbac-versioning-policy-model` (RHDHPLAN-1508), which
+records the full-feature RBAC and versioning policy model using the
+project-specific permissions already defined in the codebase. The decisions
+below took a conservative, decision-gated approach; the superseding spec adopts
+the project-specific permissions (`ai-catalog.asset.access`), a dedicated RBAC
+admin UI section, and a `defaultPolicy` setting as core requirements.
+Reconciliation between the two approaches should happen during implementation
+planning.
+
 ## Scope
 
 This is follow-on design work for RHDHPLAN-1508. The current Boost release

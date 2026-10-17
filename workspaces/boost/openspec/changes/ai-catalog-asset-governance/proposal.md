@@ -33,6 +33,12 @@ not a commitment to the future permission namespace or release contract.
 
 ## Not proposed by this change
 
+> **Note:** The items below are separately proposed as core requirements in the
+> `rhdhplan-1508-ai-catalog-rbac-versioning-policy-model` change (RHDHPLAN-1508),
+> which supersedes this change. That spec adopts the project-specific permissions,
+> a `defaultPolicy` setting, and a dedicated RBAC admin section based on the full
+> RHDHPLAN-1508 feature requirements.
+
 - A duplicate project-specific entity permission by default (for example,
   `ai-catalog.asset.access`); a concrete Catalog limitation would require a
   separate permission-design decision.
