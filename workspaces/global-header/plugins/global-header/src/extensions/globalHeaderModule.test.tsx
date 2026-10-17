@@ -1,0 +1,126 @@
+/*
+ * Copyright Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { render, screen } from '@testing-library/react';
+import { configApiRef } from '@backstage/core-plugin-api';
+import { TestApiProvider, mockApis } from '@backstage/test-utils';
+import { GlobalHeaderWrapper, HEADER_HEIGHT } from './globalHeaderModule';
+
+jest.mock('@backstage/core-components', () => ({
+  ErrorBoundary: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+}));
+
+const mockConfig = mockApis.config({ data: {} });
+
+function renderWrapper(children?: React.ReactNode) {
+  return render(
+    <TestApiProvider apis={[[configApiRef, mockConfig]]}>
+      <GlobalHeaderWrapper extensionComponents={[]} extensionMenuItems={[]}>
+        {children}
+      </GlobalHeaderWrapper>
+    </TestApiProvider>,
+  );
+}
+
+describe('GlobalHeaderWrapper', () => {
+  afterEach(() => {
+    document.documentElement.style.removeProperty('--global-header-height');
+  });
+
+  it('renders the global header and children', () => {
+    renderWrapper(<div data-testid="app-content">App content</div>);
+
+    expect(document.getElementById('global-header')).toBeInTheDocument();
+    expect(screen.getByTestId('app-content')).toBeInTheDocument();
+  });
+
+  it('renders the header before children in DOM order', () => {
+    renderWrapper(<div data-testid="app-content">App content</div>);
+
+    const header = document.getElementById('global-header')!;
+    const content = screen.getByTestId('app-content');
+
+    // eslint-disable-next-line no-bitwise
+    expect(
+      header.compareDocumentPosition(content) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it('wraps children in a layout container separate from the header', () => {
+    renderWrapper(<div data-testid="app-content">App content</div>);
+
+    const header = document.getElementById('global-header')!;
+    const content = screen.getByTestId('app-content');
+
+    // The header (nav) sits inside a measurement wrapper Box.
+    // Children sit inside an inner Box. Both the measurement wrapper
+    // and inner Box are direct children of the outer flex-column Box.
+    const headerWrapper = header.parentElement!;
+    const outerBox = headerWrapper.parentElement!;
+    const innerBox = content.parentElement!;
+    expect(headerWrapper).not.toBe(outerBox);
+    expect(headerWrapper.parentElement).toBe(outerBox);
+    expect(innerBox).not.toBe(outerBox);
+    expect(innerBox.parentElement).toBe(outerBox);
+  });
+
+  it('exports HEADER_HEIGHT as the fallback matching the MUI Toolbar default', () => {
+    expect(HEADER_HEIGHT).toBe(64);
+  });
+
+  it('sets the --global-header-height CSS variable on documentElement', () => {
+    renderWrapper(<div data-testid="app-content">App content</div>);
+
+    const value = document.documentElement.style.getPropertyValue(
+      '--global-header-height',
+    );
+    // JSDOM returns 0 from getBoundingClientRect, so the fallback (64px)
+    // is published by the effect rather than a measured value.
+    expect(value).toBe('64px');
+  });
+
+  it('publishes measured height when getBoundingClientRect returns non-zero', () => {
+    const originalGetBCR = HTMLElement.prototype.getBoundingClientRect;
+    HTMLElement.prototype.getBoundingClientRect = jest.fn(
+      () =>
+        ({
+          height: 72,
+          width: 1024,
+          top: 0,
+          left: 0,
+          bottom: 72,
+          right: 1024,
+          x: 0,
+          y: 0,
+          toJSON: () => ({}),
+        } as DOMRect),
+    );
+
+    try {
+      renderWrapper(<div data-testid="app-content">App content</div>);
+
+      const value = document.documentElement.style.getPropertyValue(
+        '--global-header-height',
+      );
+      expect(value).toBe('72px');
+    } finally {
+      HTMLElement.prototype.getBoundingClientRect = originalGetBCR;
+    }
+  });
+});
