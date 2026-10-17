@@ -1,0 +1,72 @@
+{
+  "name": "@red-hat-developer-hub/backstage-plugin-lifecycle-backend",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "description": "Backend for durable RHDH plugin lifecycle context",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.cjs.js",
+    "types": "dist/index.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhdh-parasol/rhdh-plugins",
+    "directory": "workspaces/plugin-lifecycle/plugins/plugin-lifecycle-backend"
+  },
+  "backstage": {
+    "role": "backend-plugin",
+    "pluginId": "plugin-lifecycle",
+    "pluginPackages": [
+      "@red-hat-developer-hub/backstage-plugin-lifecycle",
+      "@red-hat-developer-hub/backstage-plugin-lifecycle-backend",
+      "@red-hat-developer-hub/backstage-plugin-lifecycle-common"
+    ]
+  },
+  "scripts": {
+    "start": "backstage-cli package start",
+    "build": "backstage-cli package build",
+    "clean": "backstage-cli package clean",
+    "export-dynamic": "rhdh-cli plugin export --clean --embed-package @red-hat-developer-hub/backstage-plugin-lifecycle-common",
+    "package-dynamic": "rhdh-cli plugin package --export-to ../../dist-dynamic-packages/backend",
+    "lint": "backstage-cli package lint",
+    "test": "backstage-cli package test",
+    "prepack": "backstage-cli package prepack",
+    "postpack": "backstage-cli package postpack"
+  },
+  "dependencies": {
+    "@backstage/backend-defaults": "^0.17.7",
+    "@backstage/backend-plugin-api": "^1.10.0",
+    "@backstage/catalog-model": "^1.10.0",
+    "@backstage/errors": "^1.3.1",
+    "@backstage/integration": "^2.1.1",
+    "@backstage/plugin-catalog-common": "^1.1.10",
+    "@backstage/plugin-catalog-node": "^2.2.4",
+    "@backstage/plugin-permission-common": "^0.9.10",
+    "@red-hat-developer-hub/backstage-plugin-lifecycle-common": "workspace:^",
+    "express": "^4.21.2",
+    "express-promise-router": "^4.1.1",
+    "jszip": "^3.10.1",
+    "knex": "^3.0.0",
+    "zod": "^3.25.76 || ^4.0.0"
+  },
+  "devDependencies": {
+    "@backstage/backend-test-utils": "^1.11.6",
+    "@backstage/cli": "^0.36.5",
+    "@backstage/plugin-mcp-actions-backend": "0.2.1",
+    "@red-hat-developer-hub/cli": "2.0.3",
+    "@types/express": "^4.17.21",
+    "@types/supertest": "^6.0.3",
+    "better-sqlite3": "^12.0.0",
+    "pg": "^8.11.3",
+    "supertest": "^7.1.1",
+    "ts-morph": "28.0.0"
+  },
+  "files": [
+    "dist",
+    "dist-dynamic/*.*",
+    "dist-dynamic/dist/**",
+    "migrations"
+  ]
+}

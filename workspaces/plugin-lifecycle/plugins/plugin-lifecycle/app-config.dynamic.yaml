@@ -1,0 +1,20 @@
+dynamicPlugins:
+  frontend:
+    rhdh-parasol.backstage-plugin-lifecycle:
+      # The NFS export registers its entity content directly. The legacy
+      # frontend requires an explicit tab and card mount using the Legacy
+      # Scalprum module.
+      entityTabs:
+        - path: /lifecycle
+          title: Lifecycle
+          mountPoint: entity.page.lifecycle
+      mountPoints:
+        - mountPoint: entity.page.lifecycle/cards
+          importName: EntityPluginLifecycleContent
+          module: Legacy
+          config:
+            layout:
+              gridColumn: 1 / -1
+            if:
+              allOf:
+                - isKind: component

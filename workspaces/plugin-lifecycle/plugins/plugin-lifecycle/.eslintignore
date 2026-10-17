@@ -1,0 +1,5 @@
+src/**/*.d.ts
+dev/**/*.d.ts
+.mf
+dist
+dist-dynamic
