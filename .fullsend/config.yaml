@@ -55,6 +55,7 @@ allowed_remote_resources:
     - https://github.com/redhat-developer/rhdh-skill/
     - https://github.com/redhat-developer/rhdh-skills/
     - https://github.com/christoph-jerolimov/dependency-update-risk-rating/
+    - https://github.com/JessicaJHee/rhdh-skills/
     - https://github.com/JessicaJHee/rhdh-security-skills/
     - https://github.com/rhdh-parasol/rhdh-security-skills/
     - https://github.com/kim-tsao/rhdh-security-skills/

@@ -12,12 +12,12 @@ agent: rhdh/agents/fix.md
 # provider/profile network policy migration).
 skills:
   - https://github.com/redhat-developer/rhdh-skill/tree/e84109919ae6085e3dcfe568c695e6dda54874ce/skills/rhdh-coding#sha256=5a4bc35476108a215091ccf1180cee68547c7668c6b193de4402674bc7b6cded
-  - https://github.com/kim-tsao/rhdh-security-skills/tree/6f28f949a73667cfc87d3eaf7f1c4edc961b3361/skills/cve/plugins-package-impact#sha256=a3bd41109800eaa78e52bc2fb0478f3079b871d0610b3c9e4d8d801ca2a14d32
+  - https://github.com/JessicaJHee/rhdh-skills/tree/567202c2c725b72729e76b44d5df1e51a7250a18/skills/security/rhdh-package-impact#sha256=f08d5e32f4293a37a1da3294fbb735da544b812a806338611997a41bc08d8f86
 # Harness-level allowlist required for URL skills (not inherited from base or
 # config.yaml). Must also be covered by config.yaml allowed_remote_resources.
 allowed_remote_resources:
   - https://github.com/redhat-developer/rhdh-skill/
-  - https://github.com/kim-tsao/rhdh-security-skills/
+  - https://github.com/JessicaJHee/rhdh-skills/
 host_files:
   - src: rhdh/bin/yarn
     dest: /sandbox/workspace/bin/yarn

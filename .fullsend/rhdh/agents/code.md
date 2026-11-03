@@ -7,7 +7,7 @@ description: >-
 model: claude-opus-4-6
 skills:
   - code-implementation
-  - plugins-package-impact
+  - rhdh-package-impact
 ---
 
 # Code Agent
@@ -123,7 +123,7 @@ Your exit state is the handoff contract:
 ## Dependabot / CVE lockfile bumps
 
 When the issue is a Dependabot alert, CVE, or `yarn.lock` security bump,
-follow the `plugins-package-impact` skill for discover → classify → bump.
+follow the `rhdh-package-impact` skill for discover → classify → bump.
 Then return to `code-implementation` for secret scan, tests, commit, and
 `agent-result.json`.
 
@@ -134,9 +134,9 @@ Fullsend-specific constraints from that skill:
 - Never call `close-dependabot-alerts.js`. Classify and bump only; report
   dismiss candidates in the run summary. Dismissal stays human/out-of-band.
 - Never bump `@backstage/*` or `@backstage-community/*`.
-- Resolve `SKILL_DIR` to the mounted `plugins-package-impact` skill directory.
+- Resolve `SKILL_DIR` to the mounted `rhdh-package-impact` skill directory.
 
 ## Detailed implementation procedure
 
 Follow the `code-implementation` skill for the step-by-step procedure.
-On Dependabot/CVE lockfile work, run `plugins-package-impact` first.
+On Dependabot/CVE lockfile work, run `/rhdh-package-impact` first.
