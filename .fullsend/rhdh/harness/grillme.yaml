@@ -1,0 +1,68 @@
+# One read-only grilling turn on a PR comment. The runner publishes only
+# comment-only reviews and replies after validating the agent's result.
+base: https://raw.githubusercontent.com/fullsend-ai/agents/7ab05564b3c9c0ab20197e0c8572b5905ffd75ca/harness/review.yaml#sha256=c259d94e7c50e5e01cb0fa38df2b70765f8e35beb7ad8bf006c9193a05589917
+
+agent: rhdh/agents/grillme.md
+model: claude-opus-4-6
+pre_script: rhdh/scripts/pre-grillme.sh
+post_script: rhdh/scripts/post-grillme.py
+
+validation_loop:
+  script: rhdh/scripts/validate-grillme.py
+  schema: rhdh/schemas/grillme-result.schema.json
+  max_iterations: 2
+
+skills:
+  # This repo-owned skill is versioned with the harness on the default branch.
+  - rhdh/skills/grilling
+
+allowed_remote_resources:
+  - https://raw.githubusercontent.com/fullsend-ai/agents/
+allow_runtime_fetch: true
+
+host_files:
+  - src: dispatch/event-payload.json
+    dest: /sandbox/workspace/.fullsend-event.json
+    optional: true
+  - src: ${RUNNER_TEMP}/grillme-context.json
+    dest: /sandbox/workspace/.grillme-context.json
+
+env:
+  runner:
+    TARGET_REPO_DIR: "${TARGET_REPO_DIR}"
+    GRILLME_CONTEXT_FILE: "${RUNNER_TEMP}/grillme-context.json"
+    PRIOR_REVIEW_SHA: ""
+    PRIOR_REVIEW_PROVENANCE: "none"
+  sandbox:
+    PRIOR_REVIEW_SHA: ""
+    PRIOR_REVIEW_PROVENANCE: "none"
+
+forge:
+  github:
+    env:
+      runner:
+        REVIEW_TOKEN: "${REVIEW_TOKEN}"
+        PR_NUMBER: "${ISSUE_NUMBER}"
+        PR_URL: "${GITHUB_ISSUE_URL}"
+        GH_TOKEN: "${GH_TOKEN}"
+        FULLSEND_FORGE: github
+        REVIEW_RISK_ASSESSMENT_ENABLED: "false"
+      sandbox:
+        PR_NUMBER: "${ISSUE_NUMBER}"
+        PR_URL: "${GITHUB_ISSUE_URL}"
+        GH_TOKEN: "${GH_TOKEN}"
+        FULLSEND_FORGE: github
+        REVIEW_RISK_ASSESSMENT_ENABLED: "false"
+
+timeout_minutes: 30
+
+# An issue_comment on a PR is a work_item with a linked change proposal.
+# change_proposal state can be absent when GitHub enrichment is unavailable.
+trigger: >
+  event.source.system == "github"
+    && event.transition.kind == "comment_added"
+    && has(event.transition.comment.command)
+    && event.transition.comment.command == "/fs-grillme"
+    && event.entity.kind == "work_item"
+    && has(event.entity.linked_change_proposal)
+    && event.actor.kind != "bot"

@@ -1,0 +1,73 @@
+# CVE schedule agent: plugins-package-impact (classify + comment).
+# Invoked only via fullsend-cve-schedule.yml matrix dispatch — no slash
+# command (minted tokens cannot read Dependabot alerts for pre-fetch).
+# Does not bump, commit, or dismiss alerts — that stays /fs-code and humans.
+#
+# Reuses the code sandbox (yarn, node) and the review mint role so the
+# post-script can comment. Does not inherit review/code pre/post scripts.
+agent: rhdh/agents/plugins-package-impact.md
+model: claude-opus-4-6
+image: ghcr.io/fullsend-ai/fullsend-code:latest
+policy: rhdh/policies/plugins-package-impact.yaml
+
+role: review
+slug: rhdh-plugins-package-impact
+
+# No trigger — schedule-only via .github/workflows/fullsend-cve-schedule.yml
+# (pre-computed matrix). Slash command disabled: runner cannot access
+# DEPENDABOT_TOKEN and minted GH_TOKEN lacks Dependabot alerts read.
+
+skills:
+  - https://github.com/kim-tsao/rhdh-security-skills/tree/6f28f949a73667cfc87d3eaf7f1c4edc961b3361/skills/cve/plugins-package-impact#sha256=a3bd41109800eaa78e52bc2fb0478f3079b871d0610b3c9e4d8d801ca2a14d32
+
+# Harness-level allowlist required for URL skills (not inherited from
+# config.yaml). Must also be covered by config.yaml allowed_remote_resources.
+allowed_remote_resources:
+  - https://github.com/kim-tsao/rhdh-security-skills/
+
+host_files:
+  - src: ${GOOGLE_APPLICATION_CREDENTIALS}
+    dest: /tmp/.gcp-credentials.json
+  - src: ${GCP_OIDC_TOKEN_FILE}
+    dest: /sandbox/workspace/.gcp-oidc-token
+    optional: true
+  - src: rhdh/bin/yarn
+    dest: /sandbox/workspace/bin/yarn
+  - src: rhdh/env/yarn-proxy.env
+    dest: /sandbox/workspace/.env.d/yarn-proxy.env
+  - src: rhdh/env/node-proxy.env
+    dest: /sandbox/workspace/.env.d/node-proxy.env
+  - src: /tmp/workspace/package-impact-context.json
+    dest: /sandbox/workspace/package-impact-context.json
+    optional: true
+  - src: /tmp/workspace/dependabot-alerts.json
+    dest: /sandbox/workspace/dependabot-alerts.json
+    optional: true
+
+pre_script: rhdh/scripts/pre-plugins-package-impact.sh
+post_script: rhdh/scripts/post-plugins-package-impact.sh
+
+timeout_minutes: 30
+
+overlays:
+  - when: 'runtime.forge == "github"'
+    env:
+      runner:
+        GH_TOKEN: "${GH_TOKEN}"
+        REVIEW_TOKEN: "${REVIEW_TOKEN}"
+        REPO_FULL_NAME: "${REPO_FULL_NAME}"
+        ISSUE_NUMBER: "${ISSUE_NUMBER}"
+        ISSUE_URL: "${GITHUB_ISSUE_URL}"
+        GITHUB_ISSUE_URL: "${GITHUB_ISSUE_URL}"
+        FULLSEND_OUTPUT_FILE: agent-result.json
+      sandbox:
+        ISSUE_URL: "${GITHUB_ISSUE_URL}"
+        REPO_FULL_NAME: "${REPO_FULL_NAME}"
+        GITHUB_REPOSITORY: "${REPO_FULL_NAME}"
+        NODE_USE_ENV_PROXY: "1"
+        FULLSEND_OUTPUT_FILE: agent-result.json
+        CLAUDE_CODE_USE_VERTEX: "1"
+        ANTHROPIC_VERTEX_PROJECT_ID: "${ANTHROPIC_VERTEX_PROJECT_ID}"
+        CLOUD_ML_REGION: "${CLOUD_ML_REGION}"
+        GOOGLE_APPLICATION_CREDENTIALS: /tmp/.gcp-credentials.json
+        GOOGLE_CLOUD_PROJECT: "${GOOGLE_CLOUD_PROJECT}"

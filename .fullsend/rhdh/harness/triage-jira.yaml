@@ -1,0 +1,20 @@
+# Make the stock triage agent eligible for Jira polling.
+#
+# The upstream harness intentionally has no trigger; GitHub dispatch uses the
+# built-in stage router. Jira polling instead evaluates only explicit harness
+# CEL triggers, so this wrapper is necessary for /fs-triage Jira comments.
+# The pin matches the Vertex profile used by the custom agents.
+base: https://raw.githubusercontent.com/fullsend-ai/agents/ba1d46fb30329283a092fc30d53cf68e99e5ce86/harness/triage.yaml#sha256=b9097b6042444f80db826fe96a044cb0d94eb6562265daa5782f4a6c5eb42772
+
+# Do not allow the `opus` alias to resolve to a newer Vertex model.
+model: claude-opus-4-6
+
+allowed_remote_resources:
+  - https://raw.githubusercontent.com/fullsend-ai/agents/
+
+trigger: >
+  event.source.system == "jira"
+    && event.transition.kind == "comment_added"
+    && has(event.transition.comment.command)
+    && event.transition.comment.command == "/fs-triage"
+    && event.entity.kind == "work_item"

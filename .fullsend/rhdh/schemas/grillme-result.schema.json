@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Comment-only grillme turn",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action", "repo", "pr_number", "head_sha", "body"],
+  "properties": {
+    "action": { "enum": ["comment", "failure"] },
+    "repo": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$"
+    },
+    "pr_number": { "type": "integer", "minimum": 1 },
+    "head_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "body": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000,
+      "pattern": "\\S"
+    },
+    "reason": { "enum": ["missing-context", "tool-failure", "token-limit"] },
+    "new_comments": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "line", "body"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "pattern": "^[^/]"
+          },
+          "line": { "type": "integer", "minimum": 1 },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "pattern": "<!-- grillme -->\\s*$"
+          }
+        }
+      }
+    },
+    "thread_replies": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["comment_id", "body"],
+        "properties": {
+          "comment_id": { "type": "integer", "minimum": 1 },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "pattern": "<!-- grillme -->\\s*$"
+          }
+        }
+      }
+    },
+    "resolve_threads": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^PRRT_[A-Za-z0-9_-]+$" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "action": { "const": "failure" } } },
+      "then": {
+        "required": ["reason"],
+        "not": {
+          "anyOf": [
+            { "required": ["new_comments"] },
+            { "required": ["thread_replies"] },
+            { "required": ["resolve_threads"] }
+          ]
+        }
+      }
+    },
+    {
+      "if": { "properties": { "action": { "const": "comment" } } },
+      "then": { "not": { "required": ["reason"] } }
+    }
+  ]
+}
