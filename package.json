@@ -25,6 +25,7 @@
     "@red-hat-developer-hub/rhdh-repo-tools": "portal:./workspaces/repo-tools/packages/cli",
     "@spotify/eslint-plugin": "^15.0.0",
     "@spotify/prettier-config": "^15.0.0",
+    "@types/uuid": "^10.0.0",
     "array-to-table": "^1.0.1",
     "eslint": "^8.6.0",
     "eslint-plugin-notice": "^0.9.10",
