@@ -25,6 +25,21 @@ on:
     types: [created]
   pull_request_target:
     types: [labeled, unlabeled]
+    # Monorepo: only auto-dispatch on workspaces enrolled for fullsend
+    # (RHDH-owned plugins covered by cve-reviewer and related agents).
+    # Slash commands on other workspaces still work via issue_comment.
+    paths:
+      - "workspaces/adoption-insights/**"
+      - "workspaces/ai-integrations/**"
+      - "workspaces/app-defaults/**"
+      - "workspaces/boost/**"
+      - "workspaces/bulk-import/**"
+      - "workspaces/global-header/**"
+      - "workspaces/homepage/**"
+      - "workspaces/intelligent-assistant/**"
+      - "workspaces/orchestrator/**"
+      - "workspaces/quickstart/**"
+      - "workspaces/scorecard/**"
 
 permissions: {}
 
@@ -43,7 +58,7 @@ jobs:
       issues: write
       packages: read
       pull-requests: write
-    uses: fullsend-ai/fullsend/.github/workflows/reusable-dispatch.yml@d5f36921ac754705619f38c637ef692873809fbc # v0.43.0
+    uses: fullsend-ai/fullsend/.github/workflows/reusable-dispatch.yml@3454a2e4ee2b667e2ed71fa9d384edc6de3d4f74 # v0.45.0
     with:
       event_action: ${{ github.event.action }}
       install_mode: per-repo
@@ -56,6 +71,10 @@ jobs:
       FULLSEND_GCP_PROJECT_ID: ${{ secrets.FULLSEND_GCP_PROJECT_ID }}
       OTEL_EXPORTER_OTLP_TRACES_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_TRACES_HEADERS }}
       OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+      # Required for cve-reviewer / Jira-based harnesses (pull_request_target
+      # always loads this shim from the default branch as of Dec 2025).
+      JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
 
   stop-fix:
     if: >-

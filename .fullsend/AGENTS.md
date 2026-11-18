@@ -2,6 +2,12 @@
 
 Before working under `workspaces/`, invoke the `rhdh-workspace` skill.
 
+CVE dependency-bump PR assessment is owned by the `cve-reviewer` harness
+(`rhdh/harness/cve-review.yaml`): label `cve-fix` or comment
+`/fs-cve-pr-review`. It stages Jira/CVE → GHSA floors, `yarn why -R`, and
+`verification.json`, then posts an advisory PASS/FAIL/PARTIAL/ERROR comment.
+It does not `/lgtm` or merge.
+
 When the work is a Dependabot alert, CVE, or `yarn.lock` security bump,
 invoke the `plugins-package-impact` skill. Use
 `prepare-workspace-bump.js --verify-only` (the runner already cloned and

@@ -42,6 +42,12 @@ agents:
     - name: cve-medic
       source: rhdh/harness/medic.yaml
       model: claude-opus-4-6
+    # CVE dependency-bump assessment (RHIDP-17209). Trigger: cve-fix label
+    # or /fs-cve-pr-review on a PR. Posts advisory PASS/FAIL/PARTIAL; no merge.
+    # Aligned with redhat-developer/rhdh-plugins#5543.
+    - name: cve-reviewer
+      source: rhdh/harness/cve-review.yaml
+      model: claude-opus-4-6
 roles:
     - triage
     - coder
