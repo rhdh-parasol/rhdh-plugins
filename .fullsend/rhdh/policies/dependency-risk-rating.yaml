@@ -1,11 +1,11 @@
 ---
 version: 1
 
-# Sandbox policy for dependabot-risk-rater.
+# Sandbox policy for dependency-risk-rating.
 #
 # Shared baseline for dependency-update agents (yarn-encoded npm URLs,
-# GitHub, Vertex). Extra endpoints are the hosts the dependency-update-risk-
-# rating skill scripts call via node fetch.
+# GitHub, Vertex). Extra endpoints are the hosts the dependency-risk-rating
+# skill scripts call via node fetch.
 
 filesystem_policy:
   include_workdir: true
@@ -36,6 +36,8 @@ network_policies:
       - path: "**/claude.exe"
       - path: "**/node"
 
+  # api.github.com: Omar skill check-backstage fallback (Contents API mirror
+  # of backstage/versions). Agent does not run Mode C / raw.githubusercontent.com.
   github_api:
     name: github-api
     endpoints:
@@ -49,14 +51,7 @@ network_policies:
         protocol: rest
         enforcement: enforce
         access: read-write
-      - host: "raw.githubusercontent.com"
-        port: 443
-        protocol: rest
-        enforcement: enforce
-        access: read-only
     binaries:
-      - path: "**/gh"
-      - path: "**/git"
       - path: "**/node"
 
   package_registries:
@@ -89,11 +84,13 @@ network_policies:
         enforcement: enforce
         access: read-only
         allow_encoded_slash: true
+      # read-write: collect-metrics POSTs /v1/querybatch (GET /v1/vulns/<id> alone
+      # is not enough under OpenShell read-only).
       - host: "api.osv.dev"
         port: 443
         protocol: rest
         enforcement: enforce
-        access: read-only
+        access: read-write
       - host: "api.securityscorecards.dev"
         port: 443
         protocol: rest
