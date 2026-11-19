@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "dependabot-risk-rater-result.schema.json",
-  "title": "Dependabot Risk Rater Result",
-  "description": "Structured output from dependabot-risk-rater. Validated before the post-script comments on the PR.",
+  "$id": "dependency-risk-rating-result.schema.json",
+  "title": "Dependency Risk Rating Result",
+  "description": "Structured output from dependency-risk-rating. Validated before the post-script comments on the PR.",
   "type": "object",
   "additionalProperties": false,
   "required": ["status", "comment"],

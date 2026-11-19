@@ -51,15 +51,15 @@ Slash commands are **restricted to org members and collaborators** via an `autho
 
 Available commands:
 
-| Command                 | What it does                                                            |
-| ----------------------- | ----------------------------------------------------------------------- |
-| `/fs-triage`            | Run triage on an issue                                                  |
-| `/fs-code`              | Generate code for a triaged issue                                       |
-| `/fs-review`            | Run review on a PR                                                      |
-| `/fs-grillme`           | Ask design questions as inline PR comments; reply and rerun to continue |
-| `/fs-fix`               | Fix issues flagged in a review                                          |
-| `/fs-fix-stop`          | Disable fix agent for a PR (adds `fullsend-no-fix` label)               |
-| `/fullsend-risk-rating` | Rate dependency-update risk on a PR (custom agent)                      |
+| Command           | What it does                                                            |
+| ----------------- | ----------------------------------------------------------------------- |
+| `/fs-triage`      | Run triage on an issue                                                  |
+| `/fs-code`        | Generate code for a triaged issue                                       |
+| `/fs-review`      | Run review on a PR                                                      |
+| `/fs-grillme`     | Ask design questions as inline PR comments; reply and rerun to continue |
+| `/fs-fix`         | Fix issues flagged in a review                                          |
+| `/fs-fix-stop`    | Disable fix agent for a PR (adds `fullsend-no-fix` label)               |
+| `/fs-risk-rating` | Rate dependency-update risk on a PR (`dependency-risk-rating` agent)    |
 
 **Scheduled / Actions fan-out** (`.github/workflows/fullsend-cve-schedule.yml`)
 follows the CVE schedule plan: a deterministic **plan** job, then one Fullsend
