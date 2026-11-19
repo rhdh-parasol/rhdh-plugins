@@ -109,9 +109,8 @@ jq '{
 BASE_SHA="$(jq -r '.base_sha' "${WORKSPACE}/pr-context.json")"
 HEAD_SHA="$(jq -r '.head_sha' "${WORKSPACE}/pr-context.json")"
 
-# Skill Mode C would fetch these via raw.githubusercontent.com from the
-# sandbox. OpenShell has no DNS; do it here instead (same blobs, same skill
-# scripts — compare-manifests.ts / collect-metrics.ts — no skill fork).
+# Skill Mode C would fetch these via GitHub from the sandbox. OpenShell has
+# no DNS; do it here instead (same blobs → compare-manifests.ts locally).
 PR_DATA="${WORKSPACE}/pr-data"
 mkdir -p "${PR_DATA}/base" "${PR_DATA}/head"
 cp "${WORKSPACE}/pr-context.json" "${PR_DATA}/pr-context.json"
