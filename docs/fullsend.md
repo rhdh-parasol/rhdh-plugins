@@ -63,18 +63,21 @@ Available commands:
 
 **Scheduled / Actions fan-out** (`.github/workflows/fullsend-cve-schedule.yml`)
 follows the CVE schedule plan: a deterministic **plan** job, then one Fullsend
-`cve-bump` cell per workspace (**max_parallel** from config), then a **summary**
-comment. It does not go through the managed `fullsend.yaml` shim.
+`cve-bump` cell per **workspace × base** (**max_parallel** from config), then a
+**summary** comment. It does not go through the managed `fullsend.yaml` shim.
 
 - **Config:** `.fullsend/rhdh/cve-schedule.yaml` — allowlisted `workspaces`,
-  `skip`, and `max_parallel`.
+  `bases` (e.g. `release-2.1`, `main`), `skip`, and `max_parallel`.
 - **Schedule:** Mondays 08:00 UTC.
 - **Manual:** Actions → **Fullsend CVE schedule** — optional `workspace`,
-  `issue_number`, and `dry_run` (plan + summary only).
-- **Skips:** no open Dependabot alerts under that workspace; open PR on
-  `chore/<workspace>-cve-bumps`; or open PR labeled `fullsend-cve-failed`.
-- **Cell:** classify + lockfile bump + PR (`chore/<workspace>-cve-bumps`).
-  Gated by the schedule allowlist.
+  `bases` (comma-separated override), `issue_number`, and `dry_run`.
+- **Skips:** no open Dependabot alerts under that workspace; open CVE PR for
+  the same head+base; or open PR labeled `fullsend-cve-failed`.
+- **Cell:** classify + lockfile bump + PR. Head branch is
+  `chore/<workspace>-cve-bumps` for `main`, or
+  `chore/<workspace>-cve-bumps-<base>` for `release-*`. All bases in a wave
+  share the same open-alerts artifact. **Main** PRs get `do-not-merge/hold`
+  (merge z-stream PRs first, then remove the hold).
 
 **Secret:** set repo Actions secret `DEPENDABOT_TOKEN` (Settings → Secrets
 and variables → Actions) to a PAT or GitHub App token with **Dependabot
@@ -91,10 +94,10 @@ minted **coder** token on the post-script.
 is loaded three ways:
 
 - **CVE schedule agent (`cve-bump`)** — classify, `bump-workspace-packages.js`,
-  commit, then post-script opens a PR on `chore/<workspace>-cve-bumps`.
+  commit, then post-script opens a PR against the cell’s `base_branch`.
   Triggered only via **Fullsend CVE schedule**. Plan job uploads per-workspace
   `cve-schedule-alerts/<workspace>.json` artifacts; pre-script downloads one
-  file per matrix cell.
+  file per matrix cell and checks out that base.
 - **Assess-only agent (`plugins-package-impact`)** — registered but not
   scheduled; classify + comment only (no slash command).
 - **Code / fix agents** — same pinned URL skill on `/fs-code` and `/fs-fix`
