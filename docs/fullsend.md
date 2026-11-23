@@ -15,7 +15,7 @@
 | Review                    | Auto-triggers on PR open/update                        | Automatic for `workspaces/scorecard/` PRs                                |
 | Grillme                   | `/fs-grillme` slash command                            | Post on a PR to ask design questions; engineers answer and update the PR |
 | Fix                       | `/fs-fix` slash command, or `changes_requested` review | Post on a PR, or request changes on a fullsend PR                        |
-| Package impact / CVE bump | Monday cron or **Actions → Fullsend CVE schedule**     | Run the workflow (opens `chore/<workspace>-cve-bumps` PRs)               |
+| Package impact / CVE bump | Monday cron or **Actions → Fullsend CVE schedule**     | Run the workflow (opens `chore/<workspace>-cve-bumps-<base>` PRs)        |
 
 ### Auto-trigger vs. manual trigger
 
@@ -73,11 +73,12 @@ follows the CVE schedule plan: a deterministic **plan** job, then one Fullsend
   `bases` (comma-separated override), `issue_number`, and `dry_run`.
 - **Skips:** no open Dependabot alerts under that workspace; open CVE PR for
   the same head+base; or open PR labeled `fullsend-cve-failed`.
-- **Cell:** classify + lockfile bump + PR. Head branch is
-  `chore/<workspace>-cve-bumps` for `main`, or
-  `chore/<workspace>-cve-bumps-<base>` for `release-*`. All bases in a wave
-  share the same open-alerts artifact. **Main** PRs get `do-not-merge/hold`
-  (merge z-stream PRs first, then remove the hold).
+- **Cell:** classify + lockfile bump + PR. Head branch is always
+  `chore/<workspace>-cve-bumps-<base>` (`…-main`, `…-release-2.1`, …).
+  Post-script pushes with `--force-with-lease` so a stale tip from a prior
+  run does not reject the push. All bases in a wave share the same
+  open-alerts artifact. **Main** PRs get `do-not-merge/hold` (merge
+  z-stream PRs first, then remove the hold).
 
 **Secret:** set repo Actions secret `DEPENDABOT_TOKEN` (Settings → Secrets
 and variables → Actions) to a PAT or GitHub App token with **Dependabot
