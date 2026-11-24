@@ -2,7 +2,7 @@
 name: dependency-risk-rating
 description: Rate the risk of a dependency update on an issue or pull request.
 tools: Bash(jq,node,tar,mkdir,find,cat,ls), Skill
-model: claude-opus-4-6
+model: sonnet
 skills:
   - dependency-risk-rating
 ---
