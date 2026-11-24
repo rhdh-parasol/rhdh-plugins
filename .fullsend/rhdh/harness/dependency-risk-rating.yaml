@@ -7,7 +7,7 @@
 # 5d776d0fe4d3d9011d06d35dc0d3a12f5743fed5 (ComputeTreeHash of
 # skills/security/dependency-risk-rating).
 agent: rhdh/agents/dependency-risk-rating.md
-model: sonnet
+model: claude-opus-4-6
 image: ghcr.io/fullsend-ai/fullsend-code:latest
 policy: rhdh/policies/dependency-risk-rating.yaml
 

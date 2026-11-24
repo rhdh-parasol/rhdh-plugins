@@ -32,7 +32,7 @@ agents:
       model: claude-opus-4-6
     - name: dependency-risk-rating
       source: rhdh/harness/dependency-risk-rating.yaml
-      model: sonnet
+      model: claude-opus-4-6
     - name: plugins-package-impact
       source: rhdh/harness/plugins-package-impact.yaml
       model: claude-opus-4-6
