@@ -107,6 +107,12 @@ Output § Error) describing what failed — but **never** exit without a file.
    e. Write `/tmp/pr-scratch/judgments.json` from the PR body (untrusted
    changelog rules), then run `score.ts` with `--metrics`, optional
    `--backstage` / `--codecov`, `--judgments`, and the same `--config`.
+   `compare-manifests.ts` emits **one row per resolved-version bump** — the
+   same package at two versions is two rows. Key each judgment
+   `package@from->to` when that package has more than one row; a bare
+   package name still applies to every row of that package that has no
+   row key. Judge each row from the changelog between that row's from/to
+   only (see the skill's changelog-analysis.md).
 
    Never paste lockfiles into the conversation.
 
@@ -116,9 +122,10 @@ Output § Error) describing what failed — but **never** exit without a file.
 4. **Rate** — produce **one** rating for the whole update:
    - `risk` / `score` come from the skill's **overall** band and 0–100 score
      (`score.ts --format json` → `overall.band` / `overall.score100`). Lowercase
-     the band (`LOW` → `low`).
-   - `package`, `from_version`, `to_version` describe the primary package
-     (highest overall-driving package; for a single Dependabot bump that is
+     the band (`LOW` → `low`). The per-bump table still belongs in `comment`
+     via `score.ts --format md`.
+   - `package`, `from_version`, `to_version` describe the primary **row**
+     (highest overall-driving bump; for a single Dependabot bump that is
      the bumped package). `ecosystem` is `npm` for this skill.
    - If the skill cannot be applied (not a dependency update, missing
      versions, insufficient evidence), do not guess a risk level — use
