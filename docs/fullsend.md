@@ -98,7 +98,9 @@ is loaded three ways:
   commit, then post-script opens a PR against the cell’s `base_branch`.
   Triggered only via **Fullsend CVE schedule**. Plan job uploads per-workspace
   `cve-schedule-alerts/<workspace>.json` artifacts; pre-script downloads one
-  file per matrix cell and checks out that base.
+  file per matrix cell and checks out that base. Sandbox sets
+  `YARN_ENABLE_SCRIPTS=false` so lockfile bumps skip native postinstalls
+  (PR CI still does a full install).
 - **Assess-only agent (`plugins-package-impact`)** — registered but not
   scheduled; classify + comment only (no slash command).
 - **Code / fix agents** — same pinned URL skill on `/fs-code` and `/fs-fix`
