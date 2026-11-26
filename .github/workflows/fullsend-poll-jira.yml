@@ -40,15 +40,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download v0.41.0 --repo fullsend-ai/fullsend \
-            -p 'fullsend_0.41.0_linux_amd64.tar.gz' -O - | tar xz
+          gh release download v0.57.1 --repo fullsend-ai/fullsend \
+            -p 'fullsend_0.57.1_linux_amd64.tar.gz' -O - | tar xz
           sudo mv fullsend /usr/local/bin/
           fullsend --version
 
       - name: Poll Jira
         env:
-          JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
-          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          FULLSEND_JIRA_TOKEN: ${{ secrets.FULLSEND_JIRA_TOKEN || secrets.JIRA_TOKEN }}
+          FULLSEND_JIRA_EMAIL: ${{ secrets.FULLSEND_JIRA_EMAIL || secrets.JIRA_USER_EMAIL }}
           JIRA_BASE_URL: ${{ vars.JIRA_BASE_URL }}
           TARGET_REPO: ${{ github.repository }}
         run: |
@@ -58,15 +58,31 @@ jobs:
             exit 1
           fi
 
+          # Use a job-local config for each existing Jira query. The repo's
+          # generated config resumes after polling, and dispatch still uses it.
+          poll_config=.fullsend/config.yaml
+          poll_base=$(mktemp)
+          cp "$poll_config" "$poll_base"
+          trap 'cp "$poll_base" "$poll_config"; rm -f "$poll_base"' EXIT
+
+          set_poll_config() {
+            local project="$1"
+            local query="$2"
+            # Fullsend adds the project clause from tracker.jira.project.
+            query="${query#"project = $project AND "}"
+            JIRA_POLL_PROJECT="$project" JIRA_POLL_QUERY="$query" yq '
+              .tracker = {"jira": {"base_url": strenv(JIRA_BASE_URL), "project": strenv(JIRA_POLL_PROJECT), "poll": {"enabled": true, "query": strenv(JIRA_POLL_QUERY)}}}
+              | .authorization = (((.authorization // []) + [{"provider": "jira", "labels": "project_roles"}]) | unique_by(.provider))
+            ' "$poll_base" > "$poll_config"
+          }
+
           poll_project() {
             local project="$1"
             local jql="$2"
             local output="$3"
+            set_poll_config "$project" "$jql"
             fullsend poll \
               --input-driver jira-poll \
-              --jira-url "${JIRA_BASE_URL}" \
-              --jira-project "${project}" \
-              --jql "${jql}" \
               --target-repo "${TARGET_REPO}" \
               --output "${output}" \
               --fullsend-dir .fullsend
