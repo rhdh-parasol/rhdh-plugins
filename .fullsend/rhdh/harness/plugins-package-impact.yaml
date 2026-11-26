@@ -7,7 +7,7 @@
 # post-script can comment. Does not inherit review/code pre/post scripts.
 agent: rhdh/agents/plugins-package-impact.md
 model: claude-opus-4-6
-image: ghcr.io/fullsend-ai/fullsend-code:latest
+image: ghcr.io/fullsend-ai/fullsend-code:0.57.1
 policy: rhdh/policies/plugins-package-impact.yaml
 
 role: review
