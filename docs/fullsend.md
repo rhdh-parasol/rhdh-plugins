@@ -84,6 +84,46 @@ alerts: read**. The plan job uses it to list alerts and uploads one
 workspace file — no Dependabot token on the Fullsend runner. PR push uses the
 minted **coder** token on the post-script.
 
+### Grillme workflow
+
+Grillme is a design-question agent that stress-tests the decisions behind a PR through inline review comments. It focuses on **architectural alignment and explicit decisions** — not code correctness, style, security, or lint (those belong to `/fs-review`).
+
+#### How to invoke
+
+Post `/fs-grillme` as a comment on any open pull request. The commenter must be an `OWNER`, `MEMBER`, or `COLLABORATOR` (the same auth gate that applies to all fullsend slash commands). Grillme checks out the PR head in a read-only sandbox and reviews the diff.
+
+#### The interaction loop
+
+Each `/fs-grillme` invocation is **one turn**:
+
+1. **Agent reads the PR** — diff, description, and any files referenced by the change.
+2. **Agent posts 2–5 inline questions** as review comments on distinct decision points in the diff. Questions without a diff anchor go in the review body. Each question ends with `<!-- grillme -->` so the agent can identify its own threads on the next turn.
+3. **Engineer answers** — reply to the inline comments explaining the reasoning behind each decision.
+4. **Engineer runs `/fs-grillme` again** — the agent reads the new replies, resolves threads whose answers are satisfactory, asks follow-up questions where the answer needs more depth, and pins new questions on any remaining decision points.
+5. **Repeat** until all threads are resolved and no new decision points remain. The agent posts a closing summary with the decisions reached, any remaining gaps, and suggested next steps.
+
+Grillme never edits files, commits, pushes, creates PRs, approves, or requests changes. The engineer applies any resulting changes.
+
+#### What grillme probes
+
+Grillme adapts to whatever the PR actually changes. It prefers high-leverage decision branches over trivia. Typical dimensions include:
+
+- **Problem and scope** — what problem is being solved, non-goals, success criteria
+- **Design choices** — architecture, API surface, alternatives considered and rejected
+- **Trade-offs and edge cases** — failure modes, compatibility, migration impact
+- **Operability** — rollout/rollback plan, observability, testing strategy
+- **Follow-through** — missing work, sequencing, documentation, ownership
+
+#### When to use it
+
+- **Pre-review** — run grillme before requesting a formal review to surface design gaps early.
+- **Self-review** — use grillme on your own PR to pressure-test decisions before others see the code.
+- **Architectural concerns** — when a change touches shared interfaces, introduces new patterns, or makes trade-offs that affect other teams, grillme forces those decisions to be explicit.
+
+#### Configuration
+
+The grillme harness config lives at `.fullsend/rhdh/harness/grillme.yaml`. The grilling skill that defines the question strategy is at `.fullsend/rhdh/skills/grilling/SKILL.md`. Both are versioned on the default branch and protected via CODEOWNERS.
+
 ### CVE / Dependabot lockfile bumps
 
 `plugins-package-impact` from
