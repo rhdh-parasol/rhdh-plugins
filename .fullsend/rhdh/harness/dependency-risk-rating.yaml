@@ -8,7 +8,7 @@
 # skills/security/dependency-risk-rating).
 agent: rhdh/agents/dependency-risk-rating.md
 model: claude-sonnet-5-5
-image: ghcr.io/fullsend-ai/fullsend-code:latest
+image: ghcr.io/fullsend-ai/fullsend-code:0.57.1
 policy: rhdh/policies/dependency-risk-rating.yaml
 
 # providers: vertex-ai.yaml removed — the fullsend-vertex-ai provider type is
