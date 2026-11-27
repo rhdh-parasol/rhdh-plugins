@@ -62,11 +62,12 @@ allowed_remote_resources:
     - https://github.com/JessicaJHee/rhdh-security-skills/
     - https://github.com/rhdh-parasol/rhdh-security-skills/
     - https://github.com/kim-tsao/rhdh-security-skills/
-create_issues:
-    allow_targets:
-        repos:
-            - rhdh-parasol/rhdh-plugins
-            - fullsend-ai/fullsend
+tracker:
+    github:
+        allowed_targets:
+            repos:
+                - rhdh-parasol/rhdh-plugins
+                - fullsend-ai/fullsend
 mint_url: https://mint.fullsend.sh
 inference:
     project: rhdh-sidekick-167988
