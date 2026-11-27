@@ -4,7 +4,7 @@
 # built-in stage router. Jira polling instead evaluates only explicit harness
 # CEL triggers, so this wrapper is necessary for /fs-triage Jira comments.
 # The pin matches the Vertex profile used by the custom agents.
-base: https://raw.githubusercontent.com/fullsend-ai/agents/ba1d46fb30329283a092fc30d53cf68e99e5ce86/harness/triage.yaml#sha256=b9097b6042444f80db826fe96a044cb0d94eb6562265daa5782f4a6c5eb42772
+base: https://raw.githubusercontent.com/fullsend-ai/agents/ea29de9bb8b1729b04c0597b48a5c7aae62deb71/harness/triage.yaml#sha256=ce30d5eea5c13c7cf33a7feffa9342d33cb918d485d0587c1030e04766884a0d
 
 # Do not allow the `opus` alias to resolve to a newer Vertex model.
 model: claude-opus-4-6

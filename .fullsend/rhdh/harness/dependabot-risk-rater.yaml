@@ -8,7 +8,7 @@
 # 3ce2d475c6041fcf930241e5bdd43bb8122692c1 before the first real run.
 agent: rhdh/agents/dependabot-risk-rater.md
 model: claude-opus-4-6
-image: ghcr.io/fullsend-ai/fullsend-code:latest
+image: ghcr.io/fullsend-ai/fullsend-code:0.57.1
 policy: rhdh/policies/dependabot-risk-rater.yaml
 
 # providers: vertex-ai.yaml removed — the fullsend-vertex-ai provider type is

@@ -1,6 +1,6 @@
 agent: rhdh/agents/cve-medic.md
 model: claude-opus-4-6
-image: ghcr.io/fullsend-ai/fullsend-code:latest
+image: ghcr.io/fullsend-ai/fullsend-code:0.57.1
 policy: rhdh/policies/medic.yaml
 
 role: coder
